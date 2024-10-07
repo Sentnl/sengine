@@ -1,0 +1,4968 @@
+
+> wax-monitoring-backend@1.0.0 dev
+> nodemon src/index.js
+
+[33m[nodemon] 3.1.7[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/index.js`[39m
+{"level":30,"time":1728297685148,"pid":57053,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://[::1]:3000"}
+{"level":30,"time":1728297685149,"pid":57053,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://127.0.0.1:3000"}
+Updating producers for mainnet
+Mainnet node: https://wax.eosdublin.io
+Retrieved endpoint for mainnet: https://wax.eosdublin.io
+Retrieved 135 producers for mainnet
+producerJson {
+  producer_account_name: '3dkrenderwax',
+  org: {
+    candidate_name: '3DKRender',
+    website: 'https://3dkrender.com',
+    code_of_conduct: 'https://3dkrender.com/3dk-render-wax-disclaimer',
+    ownership_disclosure: 'https://3dkrender.com/3dk-render-wax-disclaimer/#ownership',
+    email: 'info@3dkrender.com',
+    github_user: '3dkrender',
+    phone: '',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://3dkrender.com/wp-content/uploads/2020/11/3DK_LOGO_ICON_250.png',
+      logo_1024: 'https://3dkrender.com/wp-content/uploads/2020/11/3DK_LOGO_ICON_1024.png',
+      logo_svg: 'https://3dkrender.com/3dkrender.svg'
+    },
+    location: {
+      name: 'Spain',
+      country: 'ES',
+      latitude: 42.52473,
+      longitude: -5.88286
+    },
+    social: {
+      steemit: 'marcosdk',
+      twitter: 'MarcoS3DK',
+      youtube: 'MarcosDK',
+      keybase: 'marcosdk',
+      telegram: 'Marcos_DK'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'peer.3dkrender.com:9880',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://apiwax.3dkrender.com',
+      ssl_endpoint: 'https://apiwax.3dkrender.com',
+      p2p_endpoint: '',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://atomic.3dkrender.com',
+      ssl_endpoint: 'https://atomic.3dkrender.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://query.3dkrender.com',
+      ssl_endpoint: 'https://query.3dkrender.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      api_endpoint: 'http://ipfs.3dkrender.com',
+      ssl_endpoint: 'https://ipfs.3dkrender.com'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: 3dkrenderwax on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://apiwax.3dkrender.com https://apiwax.3dkrender.com
+Node add:: http://atomic.3dkrender.com https://atomic.3dkrender.com
+Node add:: http://query.3dkrender.com https://query.3dkrender.com
+Node add:: http://ipfs.3dkrender.com https://ipfs.3dkrender.com
+producerJson {
+  producer_account_name: 'alohaeosprod',
+  org: {
+    candidate_name: 'Aloha EOS',
+    website: 'https://www.alohaeos.com',
+    code_of_conduct: 'https://www.alohaeos.com/conduct',
+    ownership_disclosure: 'https://www.alohaeos.com/ownership',
+    email: 'info@alohaeos.com',
+    github_user: [ 'n8d', 'artcorvelay' ],
+    other_resources: [
+      'https://www.alohaeos.com/vote/waxmain',
+      'https://www.alohaeos.com/vote/proxy/waxmain',
+      'https://www.alohaeos.com/tools/reliability#networkId=11&timeframeId=8&sort=rank&sortDir=asc',
+      'https://t.me/WAX_Mainnet_Aloha_Tracker',
+      'https://www.alohaeos.com/tools/blockstats#networkId=11&timeframeId=6',
+      'https://www.tokenhead.io',
+      'https://droppp.io'
+    ],
+    branding: {
+      logo_256: 'https://www.alohaeos.com/images/bpinfo/aeos-circle-256.png',
+      logo_1024: 'https://www.alohaeos.com/images/bpinfo/aeos-circle-1024.png',
+      logo_svg: 'https://www.alohaeos.com/images/bpinfo/aeos-circle.svg'
+    },
+    location: {
+      name: 'United States',
+      country: 'US',
+      latitude: 39.5,
+      longitude: -98.35
+    },
+    social: {
+      steemit: 'alohaeos',
+      twitter: 'eosaloha',
+      reddit: 'alohaeos',
+      keybase: 'alohaeos',
+      telegram: 'AlohaEOS',
+      github: 'AlohaEOS',
+      medium: 'alohaeos'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://api.wax.alohaeos.com',
+      ssl_endpoint: 'https://api.wax.alohaeos.com',
+      p2p_endpoint: 'peer.wax.alohaeos.com:9876',
+      features: [Array],
+      full: true
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: alohaeosprod on mainnet 
+: ---------------------------------------- 
+Node add:: http://api.wax.alohaeos.com https://api.wax.alohaeos.com
+producerJson {
+  producer_account_name: 'amsterdamwax',
+  org: {
+    candidate_name: 'EOSAmsterdam',
+    website: 'https://eosamsterdam.net',
+    code_of_conduct: 'https://steemit.com/eos/@eosamsterdam/eos-amsterdam-code-of-conduct',
+    ownership_disclosure: 'https://eosamsterdam.net#partners',
+    email: 'contact@eosamsterdam.net',
+    branding: {
+      logo_256: 'https://eosamsterdam.net/branding/logo_256.png',
+      logo_1024: 'https://eosamsterdam.net/branding/logo_1024.png',
+      logo_svg: 'https://eosamsterdam.net/branding/logo_svg.svg'
+    },
+    location: {
+      name: 'Amsterdam',
+      country: 'NL',
+      latitude: 52.3548445,
+      longitude: 4.9600367
+    },
+    social: {
+      steemit: 'eosamsterdam',
+      twitter: 'eosamsterdam',
+      facebook: 'EOS-Amsterdam-1586544661442120',
+      github: 'eosamsterdam',
+      reddit: 'eosamsterdam',
+      keybase: 'monetashi',
+      telegram: 'EOS_Amsterdam',
+      wechat: 'eosamsterdam'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax.eu.eosamsterdam.net',
+      ssl_endpoint: 'https://wax.eu.eosamsterdam.net',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'wax.eu.eosamsterdam.net:9101'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      ssl_endpoint: 'https://wax-aa.eu.eosamsterdam.net',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: amsterdamwax on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.eu.eosamsterdam.net https://wax.eu.eosamsterdam.net
+Node add:: undefined 
+Node add:: undefined https://wax-aa.eu.eosamsterdam.net
+producerJson {
+  producer_account_name: 'blacklusionx',
+  org: {
+    candidate_name: 'Blacklusion',
+    website: 'https://blacklusion.io',
+    code_of_conduct: 'https://blacklusion.io/code-of-conduct.html',
+    ownership_disclosure: 'https://blacklusion.io/ownership-disclosure.html',
+    email: 'support@blacklusion.io',
+    github_user: 'leonardofficial',
+    other_resources: [ 'https://t.me/WaxPagerBot', 'https://ipfs.blacklusion.cloud' ],
+    branding: {
+      logo_256: 'https://blacklusion.io/resources/blacklusion_logo_256.png',
+      logo_1024: 'https://blacklusion.io/resources/blacklusion_logo_1024.png',
+      logo_svg: 'https://blacklusion.io/resources/blacklusion_logo.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 48.773885,
+      longitude: 9.181698
+    },
+    social: {
+      twitter: 'blacklusion',
+      github: 'Blacklusion',
+      keybase: 'blacklusion',
+      telegram: 'Blacklusion'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'peer1-emea.wax.blacklusion.io:4646'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://wax.blacklusion.io',
+      ssl_endpoint: 'https://wax.blacklusion.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://aa.wax.blacklusion.io',
+      ssl_endpoint: 'https://aa.wax.blacklusion.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.blacklusion.cloud',
+      ssl_endpoint: 'https://ipfs.blacklusion.cloud'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: blacklusionx on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://wax.blacklusion.io https://wax.blacklusion.io
+Node add:: http://aa.wax.blacklusion.io https://aa.wax.blacklusion.io
+Node add:: http://ipfs.blacklusion.cloud https://ipfs.blacklusion.cloud
+producerJson {
+  producer_account_name: 'blokcrafters',
+  org: {
+    candidate_name: 'BlokCrafters',
+    website: 'https://blokcrafters.com',
+    code_of_conduct: 'https://blokcrafters.com/code_of_conduct.html',
+    ownership_disclosure: 'https://blokcrafters.com/ownership_disclosure.html',
+    chain_resources: 'https://wax-snapshots.blokcrafters.io',
+    email: 'bc@blokcrafters.com',
+    branding: {
+      logo_256: 'https://blokcrafters.com/images/blokcrafters1_256.png',
+      logo_1024: 'https://blokcrafters.com/images/blokcrafters1_1024.png',
+      logo_svg: 'https://blokcrafters.com/images/blokcrafters_logo.svg'
+    },
+    location: {
+      name: 'Clearwater, Florida',
+      country: 'US',
+      latitude: 27.9736,
+      longitude: -82.7642
+    },
+    social: {
+      twitter: 'blokcrafters',
+      github: 'blokcrafters',
+      reddit: 'blokcrafters',
+      telegram: 'blokcrafters',
+      medium: 'blokcrafters21'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'wax-peer-ca.blokcrafters.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'wax-peer-eu.blokcrafters.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax.blokcrafters.io',
+      ssl_endpoint: 'https://wax.blokcrafters.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: blokcrafters on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: undefined 
+Node add:: http://wax.blokcrafters.io https://wax.blokcrafters.io
+producerJson {
+  producer_account_name: 'bountyblokbp',
+  org: {
+    candidate_name: 'bountyblok.io',
+    website: 'https://www.bountyblok.io',
+    code_of_conduct: 'https://www.bountyblok.io/coc.html',
+    ownership_disclosure: 'https://www.bountyblok.io/ownership.html',
+    email: 'dimitri@bountyblok.io',
+    github_user: [ 'diminiko' ],
+    branding: {
+      logo_256: 'https://www.bountyblok.io/img/logo_256x256.png',
+      logo_1024: 'https://www.bountyblok.io/img/logo_1024x1024.png',
+      logo_svg: 'https://www.bountyblok.io/img/logo_128x128.svg'
+    },
+    location: {
+      name: 'Montreal',
+      country: 'CA',
+      latitude: 45.495921,
+      longitude: -73.757817
+    },
+    social: {
+      medium: 'bountyblok',
+      twitter: 'bountyblok',
+      github: 'bountyblok',
+      keybase: 'bountyblokio',
+      telegram: 'bountyblok'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://api.wax.bountyblok.io',
+      ssl_endpoint: 'https://api.wax.bountyblok.io',
+      node_type: 'query',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'p2p.wax.bountyblok.io:29876',
+      node_type: 'seed'
+    },
+    {
+      location: [Object],
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: '',
+      node_type: 'producer'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      api_endpoint: 'http://ipfs.wax.bountyblok.io',
+      ssl_endpoint: 'https://ipfs.wax.bountyblok.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bountyblokbp on mainnet 
+: ---------------------------------------- 
+Node add:: http://api.wax.bountyblok.io https://api.wax.bountyblok.io
+Node add:: undefined 
+Node add:: http://ipfs.wax.bountyblok.io https://ipfs.wax.bountyblok.io
+producerJson {
+  producer_account_name: 'bp.adex',
+  org: {
+    candidate_name: 'A-DEX BP',
+    website: 'https://wax.a-dex.io',
+    code_of_conduct: 'https://wax.a-dex.io/code-of-conduct',
+    ownership_disclosure: 'https://wax.a-dex.io/ownership',
+    email: 'support@a-dex.io',
+    github_user: 'avm07',
+    branding: {
+      logo_256: 'https://wax.a-dex.io/logo256.png',
+      logo_1024: 'https://wax.a-dex.io/logo1024.png',
+      logo_svg: 'https://wax.a-dex.io/logo.svg'
+    },
+    location: {
+      name: 'Dubai,UAE',
+      country: 'AE',
+      latitude: 25.0657,
+      longitude: 55.17128
+    },
+    social: {
+      steemit: 'a-dex',
+      github: 'a-dex',
+      twitter: 'a_dex_official',
+      telegram: 'a_dex_official',
+      medium: 'a-dex'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://wax.a-dex.xyz',
+      ssl_endpoint: 'https://wax.a-dex.xyz',
+      node_type: 'query',
+      full: false,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'p2p-wax.a-dex.xyz:9876',
+      node_type: 'seed',
+      full: false
+    },
+    { location: [Object], node_type: 'producer', full: false },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.a-dex.xyz',
+      ssl_endpoint: 'https://ipfs.a-dex.xyz'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic-wax.a-dex.xyz',
+      ssl_endpoint: 'https://atomic-wax.a-dex.xyz'
+    },
+    {
+      location: [Object],
+      api_endpoint: 'http://hyperion-wax.a-dex.xyz',
+      ssl_endpoint: 'https://hyperion-wax.a-dex.xyz',
+      node_type: 'query',
+      full: false,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://light-api-wax.a-dex.xyz',
+      ssl_endpoint: 'https://light-api-wax.a-dex.xyz'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.adex on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.a-dex.xyz https://wax.a-dex.xyz
+Node add:: undefined 
+Node add:: http://ipfs.a-dex.xyz https://ipfs.a-dex.xyz
+Node add:: http://atomic-wax.a-dex.xyz https://atomic-wax.a-dex.xyz
+Node add:: http://hyperion-wax.a-dex.xyz https://hyperion-wax.a-dex.xyz
+Node add:: http://light-api-wax.a-dex.xyz https://light-api-wax.a-dex.xyz
+producerJson {
+  producer_account_name: 'bp.alcor',
+  org: {
+    candidate_name: 'AlcorExchange',
+    website: 'https://bp.alcor.exchange',
+    code_of_conduct: 'https://telegra.ph/Alcor-Exchange-Code-of-Conduct-07-26',
+    ownership_disclosure: 'https://bp.alcor.exchange',
+    email: 'admin@alcor.exchange',
+    github_user: [ 'alcorexchange' ],
+    branding: {
+      logo_256: 'https://alcor.exchange/android-chrome-256x256.png',
+      logo_1024: 'https://alcor.exchange/logo_1024.png',
+      logo_svg: 'https://alcor.exchange/safari-pinned-tab.svg'
+    },
+    location: {
+      name: 'Finland',
+      country: 'FI',
+      latitude: 60.1719,
+      longitude: 24.9347
+    },
+    social: {
+      telegram: 'alcorexchange',
+      twitter: 'alcorexchange',
+      github: 'alcorexchange',
+      medium: 'alcorexchange'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'wax-p2p.alcor.exchange:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: false,
+      api_endpoint: 'http://wax-api.alcor.exchange',
+      ssl_endpoint: 'https://wax-api.alcor.exchange',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://wax-atomic.alcor.exchange',
+      ssl_endpoint: 'https://wax-atomic.alcor.exchange',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax-hyperion.alcor.exchange',
+      ssl_endpoint: 'https://wax-hyperion.alcor.exchange',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.alcor on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://wax-api.alcor.exchange https://wax-api.alcor.exchange
+Node add:: http://wax-atomic.alcor.exchange https://wax-atomic.alcor.exchange
+Node add:: http://wax-hyperion.alcor.exchange https://wax-hyperion.alcor.exchange
+producerJson {
+  producer_account_name: 'bp.box',
+  org: {
+    candidate_name: 'Defibox BP',
+    website: 'https://wax.defibox.io',
+    code_of_conduct: 'https://wax.defibox.io/conduct.html',
+    ownership_disclosure: 'https://wax.defibox.io/disclosure.html',
+    email: 'bd@defibox.io',
+    github_user: 'DefiboxTeam',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://wax.defibox.io/static/img/256.png',
+      logo_1024: 'https://wax.defibox.io/static/img/1024.png',
+      logo_svg: 'https://wax.defibox.io/static/img/logo.svg'
+    },
+    location: {
+      name: 'Cayman Islands',
+      country: 'KY',
+      latitude: 19.313299,
+      longitude: -81.254601
+    },
+    social: {
+      steemit: 'defibox',
+      twitter: 'DefiboxOfficial',
+      keybase: 'defibox',
+      telegram: 'Defibox_official'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      full: true,
+      node_type: [Array],
+      api_endpoint: 'http://wax.defibox.xyz',
+      ssl_endpoint: 'https://wax.defibox.xyz',
+      p2p_endpoint: 'wax.defibox.xyz:9966',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.box on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.defibox.xyz https://wax.defibox.xyz
+producerJson {
+  producer_account_name: 'bp.wecan',
+  org: {
+    candidate_name: 'WeCan',
+    website: 'https://wecan.dev',
+    code_of_conduct: 'https://wecan.dev/code-of-conduct',
+    ownership_disclosure: 'https://wecan.dev/ownership-disclosure',
+    email: 'contact@wecan.dev',
+    github_user: 'We-Can-dev',
+    chain_resources: 'https://backup.wecan.dev',
+    other_resources: [
+      'https://prospectors.io',
+      'https://rplanet.io',
+      'https://tribalbooks.io',
+      'https://waxscan.wecan.dev',
+      'https://pepperstake.online',
+      'https://ipfs.wecan.dev/ipfs/QmW4XxaEg8cWsYisfjnjqLFi1MbHMYjt7nbCh8ZHwgg9c2'
+    ],
+    branding: {
+      logo_256: 'https://wecan.dev/logo_256.png',
+      logo_1024: 'https://wecan.dev/logo_1024.png',
+      logo_svg: 'https://wecan.dev/logo.svg'
+    },
+    location: {
+      name: 'Ukraine',
+      country: 'UA',
+      latitude: 49.8397,
+      longitude: 24.0297
+    },
+    social: {
+      keybase: 'wecan_dev',
+      twitter: 'devwecan',
+      reddit: 'WeCan-dev',
+      youtube: 'channel/UCJ07CHIqC2LBS3al0G7s0dA',
+      medium: 'wecandev'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api-wax-mainnet.wecan.dev',
+      ssl_endpoint: 'https://api-wax-mainnet.wecan.dev',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://hyperion-wax-mainnet.wecan.dev',
+      ssl_endpoint: 'https://hyperion-wax-mainnet.wecan.dev',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://history-wax-mainnet.wecan.dev',
+      ssl_endpoint: 'https://history-wax-mainnet.wecan.dev',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic-wax-mainnet.wecan.dev',
+      ssl_endpoint: 'https://atomic-wax-mainnet.wecan.dev'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.wecan.dev',
+      ssl_endpoint: 'https://ipfs.wecan.dev'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://light-api-wax-main.wecan.dev',
+      ssl_endpoint: 'https://light-api-wax-main.wecan.dev'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'seed1-wax-mainnet.wecan.dev:14998'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'seed2-wax-mainnet.wecan.dev:14998'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.wecan on mainnet 
+: ---------------------------------------- 
+Node add:: http://api-wax-mainnet.wecan.dev https://api-wax-mainnet.wecan.dev
+Node add:: http://hyperion-wax-mainnet.wecan.dev https://hyperion-wax-mainnet.wecan.dev
+Node add:: http://history-wax-mainnet.wecan.dev https://history-wax-mainnet.wecan.dev
+Node add:: http://atomic-wax-mainnet.wecan.dev https://atomic-wax-mainnet.wecan.dev
+Node add:: http://ipfs.wecan.dev https://ipfs.wecan.dev
+Node add:: http://light-api-wax-main.wecan.dev https://light-api-wax-main.wecan.dev
+Node add:: undefined 
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'cryptolions1',
+  org: {
+    candidate_name: 'CryptoLions🦁',
+    website: 'https://cryptolions.io',
+    code_of_conduct: 'https://cryptolions.io/code-of-conduct',
+    ownership_disclosure: 'https://cryptolions.io/ownership-disclosure',
+    email: 'roar@cryptolions.io',
+    github_user: 'ansigroup',
+    chain_resources: 'https://wax-backup.cryptolions.io/WAX',
+    other_resources: [
+      'https://eosnetworkmonitor.io',
+      'https://wax.tools.simpleassets.io',
+      'https://wax.certs.cryptolions.io',
+      'https://wax.kolobok.io',
+      'https://wax.simplemarket.io',
+      'https://simpleassets.io',
+      'https://redemptionbank.io',
+      'https://waxy.io'
+    ],
+    branding: {
+      logo_256: 'https://imgs.cryptolions.io/logo_256.png',
+      logo_1024: 'https://imgs.cryptolions.io/logo_1024.png',
+      logo_svg: 'https://imgs.cryptolions.io/logo.svg'
+    },
+    location: {
+      name: 'Ukraine',
+      country: 'UA',
+      latitude: 49.8397,
+      longitude: 24.0297
+    },
+    social: {
+      keybase: 'cryptolions',
+      telegram: 'CryptoLions_io',
+      twitter: 'EOS_CryptoLions',
+      github: 'CryptoLions',
+      youtube: 'channel/UCB7F-KO0mmZ1yVBCq0_1gtA'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: 'wax.cryptolions.io:9876',
+      api_endpoint: 'http://wax.cryptolions.io',
+      ssl_endpoint: 'https://wax.cryptolions.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic-api.wax.cryptolions.io',
+      ssl_endpoint: 'https://atomic-api.wax.cryptolions.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs-wax.cryptolions.io',
+      ssl_endpoint: 'https://ipfs-wax.cryptolions.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://lightapi.wax.cryptolions.io',
+      ssl_endpoint: 'https://lightapi.wax.cryptolions.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: cryptolions1 on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.cryptolions.io https://wax.cryptolions.io
+Node add:: http://atomic-api.wax.cryptolions.io https://atomic-api.wax.cryptolions.io
+Node add:: http://ipfs-wax.cryptolions.io https://ipfs-wax.cryptolions.io
+Node add:: http://lightapi.wax.cryptolions.io https://lightapi.wax.cryptolions.io
+producerJson {
+  producer_account_name: 'dapplica',
+  org: {
+    candidate_name: 'dapplica',
+    website: 'https://dapplica.io',
+    code_of_conduct: 'https://dapplica.io/code-of-conduct',
+    ownership_disclosure: 'https://dapplica.io/wax-guild-application',
+    email: 'contact@dapplica.io',
+    github_user: 'freezepro',
+    chain_resources: 'https://atomicbackup.dapplica.io',
+    other_resources: [
+      'https://darkcountry.io',
+      'https://nest.dapplica.io',
+      'https://collect.social',
+      'https://alchemyswap.xyz'
+    ],
+    branding: {
+      logo_256: 'https://cdn.dapplica.io/logo_256x256-01.png',
+      logo_1024: 'https://cdn.dapplica.io/logo_1024x1024-01.png',
+      logo_svg: 'https://cdn.dapplica.io/logo_128x128.svg'
+    },
+    location: {
+      name: 'Ukraine',
+      country: 'UA',
+      latitude: 49.8397,
+      longitude: 24.0297
+    },
+    social: {
+      keybase: 'dapplica',
+      telegram: 'dapplica',
+      twitter: 'dapplica1',
+      steemit: 'dapplica',
+      github: 'dapplicaio'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: 'wax.dapplica.io:9876',
+      api_endpoint: 'http://wax.dapplica.io',
+      ssl_endpoint: 'https://wax.dapplica.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://aa.dapplica.io',
+      ssl_endpoint: 'https://aa.dapplica.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs-wax.dapplica.io',
+      ssl_endpoint: 'https://ipfs-wax.dapplica.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://lightapi-wax.dapplica.io',
+      ssl_endpoint: 'https://lightapi-wax.dapplica.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: dapplica on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.dapplica.io https://wax.dapplica.io
+Node add:: http://aa.dapplica.io https://aa.dapplica.io
+Node add:: http://ipfs-wax.dapplica.io https://ipfs-wax.dapplica.io
+Node add:: http://lightapi-wax.dapplica.io https://lightapi-wax.dapplica.io
+producerJson {
+  producer_account_name: 'eosarabianet',
+  org: {
+    candidate_name: 'EOSArabia',
+    website: 'https://eosarabia.net',
+    code_of_conduct: 'https://eosarabia.net/code-conduct',
+    ownership_disclosure: 'https://eosarabia.net/ownership',
+    email: 'info@eosarabia.net',
+    github_user: 'EOS-Arabia',
+    chain_resources: 'https://snapshots.eosarabia.net',
+    other_resources: [
+      'https://wax.courses.eosarabia.net',
+      'https://vstate.eosarabia.net',
+      'https://nodestate.eosarabia.net'
+    ],
+    branding: {
+      logo_256: 'https://eosarabia.net/EOSArabia-Logo256.png',
+      logo_1024: 'https://eosarabia.net/EOSArabia-Logo1024.png',
+      logo_svg: 'https://eosarabia.net/EOS-Arabia-Logo-SVG.svg'
+    },
+    location: {
+      name: 'UAE,Dubai',
+      country: 'AE',
+      latitude: 25.0929383,
+      longitude: 55.1901911
+    },
+    social: {
+      steemit: 'eos.arabia',
+      twitter: 'eos_arabia',
+      youtube: 'channel/UCku8FY8kPuJ7asKw5LKTDIg',
+      telegram: 'EOS_Arabia'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://api-wax.eosarabia.net',
+      ssl_endpoint: 'https://api-wax.eosarabia.net'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: false,
+      p2p_endpoint: 'p2p-wax.eosarabia.net:9876'
+    },
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://api-wax-aa.eosarabia.net',
+      ssl_endpoint: 'https://api-wax-aa.eosarabia.net'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.eosarabia.net',
+      ssl_endpoint: 'https://ipfs.eosarabia.net'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosarabianet on mainnet 
+: ---------------------------------------- 
+Node add:: http://api-wax.eosarabia.net https://api-wax.eosarabia.net
+Node add:: undefined 
+Node add:: http://api-wax-aa.eosarabia.net https://api-wax-aa.eosarabia.net
+Node add:: http://ipfs.eosarabia.net https://ipfs.eosarabia.net
+producerJson {
+  producer_account_name: 'eosauthority',
+  org: {
+    candidate_name: 'EOS Authority',
+    website: 'https://eosauthority.com',
+    email: 'hello@eosauthority.com',
+    github_user: 'eosauthority',
+    branding: {
+      logo_256: 'https://eosauthority.com/common/bp-standard-info/EOS-AUTHORITY-256.jpg',
+      logo_1024: 'https://eosauthority.com/common/bp-standard-info/EOS-AUTHORITY-1024.jpg',
+      logo_svg: 'https://eosauthority.com/common/bp-standard-info/eosauthority.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.512838,
+      longitude: -0.087177
+    },
+    social: {
+      steemit: 'eosauthority',
+      twitter: 'eosauthority',
+      youtube: 'eosauthority',
+      facebook: '',
+      github: 'eosauthority',
+      reddit: 'eosauthority',
+      keybase: 'eosauthority',
+      telegram: 'eosauthority',
+      wechat: 'eosauthority'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://api-wax.eosauthority.com',
+      ssl_endpoint: 'https://api-wax.eosauthority.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'node-wax.eosauthority.com:10301'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'node-wax-p2p.eosauthority.com:10301'
+    },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://aa-api-wax.eosauthority.com',
+      ssl_endpoint: 'https://aa-api-wax.eosauthority.com'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs-wax.eosauthority.com',
+      ssl_endpoint: 'https://ipfs-wax.eosauthority.com'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://lightapi-wax.eosauthority.com',
+      ssl_endpoint: 'https://lightapi-wax.eosauthority.com'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosauthority on mainnet 
+: ---------------------------------------- 
+Node add:: http://api-wax.eosauthority.com https://api-wax.eosauthority.com
+Node add:: undefined 
+Node add:: undefined 
+Node add:: http://aa-api-wax.eosauthority.com https://aa-api-wax.eosauthority.com
+Node add:: http://ipfs-wax.eosauthority.com https://ipfs-wax.eosauthority.com
+Node add:: http://lightapi-wax.eosauthority.com https://lightapi-wax.eosauthority.com
+producerJson {
+  producer_account_name: 'eosbarcelona',
+  org: {
+    candidate_name: 'eosBarcelonaWaxGuild',
+    website: 'https://waxguild.eos.barcelona',
+    ownership_disclosure: 'https://medium.com/eosbarcelona/eos-barcelona-wax-guild-9f771fc1ba33',
+    code_of_conduct: 'https://medium.com/@jrosich/eos-barcelona-code-of-conduct-aff8a832fdf7',
+    email: 'contact@eos.barcelona',
+    github_user: 'blocksbarcelona',
+    phone: '',
+    branding: {
+      logo_256: 'https://eos.barcelona/images/eosLogo-256.png',
+      logo_1024: 'https://eos.barcelona/images/eosLogo-1024.png',
+      logo_svg: 'https://eos.barcelona/images/Eos.svg'
+    },
+    location: {
+      name: 'Barcelona',
+      country: 'ES',
+      latitude: 41.3667,
+      longitude: 2.0667
+    },
+    social: {
+      steemit: '',
+      twitter: 'eosbarcelona',
+      youtube: '',
+      facebook: '',
+      github: 'blocksbarcelona',
+      reddit: 'eosbarcelona',
+      keybase: 'eosbarcelona',
+      telegram: 'eosbarcelona',
+      wechat: ''
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'wax-p2p.eos.barcelona:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://wax.eos.barcelona',
+      ssl_endpoint: 'https://wax.eos.barcelona',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosbarcelona on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://wax.eos.barcelona https://wax.eos.barcelona
+producerJson {
+  producer_account_name: 'eosdacserver',
+  org: {
+    candidate_name: 'eosDAC',
+    website: 'https://eosdac.io',
+    code_of_conduct: 'https://eosdac.io#core-principles',
+    ownership_disclosure: 'https://github.com/eosdac/constitution/blob/master/constitution.md',
+    email: 'hello@eosdac.io',
+    github_user: 'michaeljyeates',
+    branding: {
+      logo_256: 'https://eosdac.io/assets/bpjson/eosdaclogo_256.png',
+      logo_1024: 'https://eosdac.io/assets/bpjson/eosdaclogo_1024.png',
+      logo_svg: 'https://eosdac.io/assets/bpjson/eosDAC_logo.svg'
+    },
+    location: {
+      name: 'Switzerland',
+      country: 'CH',
+      latitude: 47.166168,
+      longitude: 8.515495
+    },
+    social: {
+      steemit: 'eosdac',
+      twitter: 'eosdac',
+      youtube: 'eosdac',
+      facebook: 'eosdac',
+      github: 'eosdac',
+      reddit: 'eosdac',
+      keybase: '',
+      telegram: 'eosdacio',
+      wechat: ''
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://wax.eosdac.io',
+      ssl_endpoint: 'https://wax.eosdac.io',
+      p2p_endpoint: 'wax-p2p.eosdac.io:29876',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: false,
+      p2p_endpoint: 'wax-p2p.uk.eosdac.io:29873'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: 'wax-p2p.fi.eosdac.io:19876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://wax-aa.eosdac.io',
+      ssl_endpoint: 'https://wax-aa.eosdac.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax-history.eosdac.io',
+      ssl_endpoint: 'https://wax-history.eosdac.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://wax-lightapi.eosdac.io',
+      ssl_endpoint: 'https://wax-lightapi.eosdac.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.eosdac.io',
+      ssl_endpoint: 'https://ipfs.eosdac.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosdacserver on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.eosdac.io https://wax.eosdac.io
+Node add:: undefined 
+Node add:: undefined 
+Node add:: http://wax-aa.eosdac.io https://wax-aa.eosdac.io
+Node add:: http://wax-history.eosdac.io https://wax-history.eosdac.io
+Node add:: http://wax-lightapi.eosdac.io https://wax-lightapi.eosdac.io
+Node add:: http://ipfs.eosdac.io https://ipfs.eosdac.io
+producerJson {
+  producer_account_name: 'eosdublinwow',
+  org: {
+    candidate_name: 'eosDublin',
+    website: 'https://www.eosdublin.com',
+    code_of_conduct: 'https://www.eosdublin.com/#values',
+    ownership_disclosure: 'https://www.eosdublin.com/disclosures/#ownership',
+    github_user: [ 'i-love-to-code', 'sbouktila', 'Soorajeos', 'mcicu' ],
+    phone: 'WAX_Registry',
+    email: 'hello@eosdublin.com',
+    branding: {
+      logo_256: 'https://raw.githubusercontent.com/eosdublin/eosdublin/master/images/eosdublin-icon-256.png',
+      logo_1024: 'https://raw.githubusercontent.com/eosdublin/eosdublin/master/images/eosdublin-icon-1024.png',
+      logo_svg: 'https://eosdublin.com/icons/icon.svg'
+    },
+    location: {
+      name: 'Dublin',
+      country: 'IE',
+      latitude: 53.3498,
+      longitude: -6.2603
+    },
+    social: {
+      steemit: 'eosdublin',
+      twitter: 'eosdublin',
+      github: 'eosdublin',
+      reddit: 'EOSDublin',
+      keybase: 'eosdublin',
+      telegram: 'eosdublin'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://wax.eosdublin.io',
+      ssl_endpoint: 'https://wax.eosdublin.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      ssl_endpoint: 'https://wax-aa.eosdublin.io'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'wax.p2p.eosdublin.io:9876'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosdublinwow on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.eosdublin.io https://wax.eosdublin.io
+Node add:: undefined https://wax-aa.eosdublin.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'eosiodetroit',
+  org: {
+    candidate_name: 'Detroit Ledger Technologies',
+    website: 'https://detroitledger.tech/',
+    ownership_disclosure: 'https://detroitledger.tech/about',
+    code_of_conduct: 'https://steemit.com/eos/@eos.detroit/eos-detroit-membership-guidelines',
+    email: 'ask@detroitledger.tech',
+    github_user: [ 'wakeupjohnny' ],
+    chain_resources: '',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://detroitledger.tech/images/logos/EOSD_logo_transparent_256.png',
+      logo_1024: 'https://detroitledger.tech/images/logos/EOSD_logo_transparent.png',
+      logo_svg: 'https://detroitledger.tech/images/logos/EOSD_logo.svg'
+    },
+    location: {
+      name: 'Detroit',
+      country: 'US',
+      latitude: 42.3314,
+      longitude: -83.0458
+    },
+    social: {
+      steemit: 'eos.detroit',
+      twitter: 'detledgertech',
+      youtube: 'detroitledgertechnologies',
+      facebook: 'detroitledgertech',
+      github: 'eosdetroit',
+      reddit: 'eosdetroit',
+      keybase: 'wakeupjohnny',
+      telegram: 'detroitledgertech',
+      wechat: 'robrigo_eosdetroit'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.wax.detroitledger.tech:1337',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      p2p_endpoint: '',
+      api_endpoint: 'http://chain.wax.detroitledger.tech',
+      ssl_endpoint: 'https://chain.wax.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      p2p_endpoint: '',
+      api_endpoint: 'http://api.wax.detroitledger.tech',
+      ssl_endpoint: 'https://api.wax.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      p2p_endpoint: '',
+      api_endpoint: 'http://ipfs.gateway.detroitledger.tech',
+      ssl_endpoint: 'https://ipfs.gateway.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      p2p_endpoint: '',
+      api_endpoint: 'http://atomic.wax.detroitledger.tech',
+      ssl_endpoint: 'https://atomic.wax.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      p2p_endpoint: '',
+      api_endpoint: 'http://hyperion.wax.detroitledger.tech',
+      ssl_endpoint: 'https://hyperion.wax.detroitledger.tech',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosiodetroit on mainnet 
+: ---------------------------------------- 
+Node add::  
+Node add:: http://chain.wax.detroitledger.tech https://chain.wax.detroitledger.tech
+Node add:: http://api.wax.detroitledger.tech https://api.wax.detroitledger.tech
+Node add:: http://ipfs.gateway.detroitledger.tech https://ipfs.gateway.detroitledger.tech
+Node add:: http://atomic.wax.detroitledger.tech https://atomic.wax.detroitledger.tech
+Node add:: http://hyperion.wax.detroitledger.tech https://hyperion.wax.detroitledger.tech
+producerJson {
+  producer_account_name: 'eosphereiobp',
+  org: {
+    candidate_name: 'EOSphere Guild',
+    website: 'https://www.eosphere.io',
+    code_of_conduct: 'https://www.eosphere.io/code-of-conduct',
+    ownership_disclosure: 'https://www.eosphere.io/ownership',
+    email: 'info@eosphere.io',
+    github_user: 'rossco99',
+    chain_resources: 'https://snapshots.eosphere.io',
+    branding: {
+      logo_256: 'https://www.eosphere.io/eospherelogosquare256.png',
+      logo_1024: 'https://www.eosphere.io/eospherelogosquare1024.png',
+      logo_svg: 'https://www.eosphere.io/eospherelogosquare.svg'
+    },
+    location: {
+      name: 'Australia',
+      country: 'AU',
+      latitude: -31.953512,
+      longitude: 115.857048
+    },
+    social: {
+      steemit: 'eosphere',
+      twitter: 'eosphere_io',
+      youtube: 'eosphere',
+      facebook: 'eosphereio',
+      github: 'eosphere',
+      reddit: 'eosphere',
+      keybase: 'eosphere',
+      telegram: 'eosphere_io',
+      wechat: 'ross-eosphere'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'peer1-wax.eosphere.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'peer2-wax.eosphere.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax-atomic-api.eosphere.io',
+      ssl_endpoint: 'https://wax-atomic-api.eosphere.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax.eosphere.io',
+      ssl_endpoint: 'https://wax.eosphere.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosphereiobp on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: undefined 
+Node add:: http://wax-atomic-api.eosphere.io https://wax-atomic-api.eosphere.io
+Node add:: http://wax.eosphere.io https://wax.eosphere.io
+producerJson {
+  org: {
+    candidate_name: 'EOS Rio 💙 ',
+    website: 'https://eosrio.io',
+    code_of_conduct: 'https://eosrio.io/code-of-conduct',
+    ownership_disclosure: 'https://eosrio.io/ownership-disclosure',
+    email: 'contact@eosrio.io',
+    github_user: 'igorls',
+    branding: {
+      logo_256: 'https://eosrio.io/wp-content/uploads/2018/06/logo-eosrio-square-bgblack-1.jpg',
+      logo_1024: 'https://eosrio.io/logo-eosrio1024.png',
+      logo_svg: 'https://eosrio.io/logo-eosrio-black-square-01.svg'
+    },
+    location: {
+      name: 'Rio de Janeiro',
+      country: 'BR',
+      latitude: -22.9068,
+      longitude: -43.1729
+    },
+    social: {
+      steemit: 'eosrio',
+      twitter: 'rioblocks',
+      facebook: 'EOSRioBP',
+      youtube: 'channel/UC5aslySB2QP_v8dyMMBcTxw',
+      github: 'eosrio',
+      reddit: 'eosrio',
+      telegram: 'eosrio',
+      medium: 'eosriobrazil'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://wax.eosrio.io',
+      ssl_endpoint: 'https://wax.eosrio.io',
+      features: [Array],
+      full: false
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://atomic.wax.eosrio.io',
+      ssl_endpoint: 'https://atomic.wax.eosrio.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p-1.wax.eosrio.io:8032',
+      full: false
+    },
+    { location: [Object], node_type: 'producer' }
+  ],
+  producer_account_name: 'eosriobrazil'
+}
+: ---------------------------------------- 
+: Adding: eosriobrazil on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.eosrio.io https://wax.eosrio.io
+Node add:: http://atomic.wax.eosrio.io https://atomic.wax.eosrio.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'greeneosiobp',
+  org: {
+    candidate_name: 'GreenEOSIO',
+    website: 'https://greeneosio.com',
+    code_of_conduct: 'https://greeneosio.com/coc.html',
+    ownership_disclosure: 'https://greeneosio.com/ownership.html',
+    email: 'contact@telosgreen.com',
+    github_user: 'sukeshtedla',
+    other_resources: [
+      'https://battlesofhumanity.com',
+      'https://kryptoskatt.com',
+      'https://unbiased.ml',
+      'https://gpkbattles.com'
+    ],
+    branding: {
+      logo_256: 'https://greeneosio.com/images/logo_256x256.png',
+      logo_1024: 'https://greeneosio.com/images/logo_1024x1024.png',
+      logo_svg: 'https://greeneosio.com/images/logo_128x128.svg'
+    },
+    location: {
+      name: 'Göteborg',
+      country: 'SE',
+      latitude: 57.728435,
+      longitude: 11.971045
+    },
+    social: {
+      twitter: 'greeneosio',
+      youtube: 'channel/UCKWClh6yFuswj0pIoIvaU7g',
+      github: 'greeneosio',
+      reddit: 'greeneosio',
+      keybase: 'greeneosio',
+      telegram: 'TelosGreen'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: 'p2p1.wax.greeneosio.com:9876',
+      api_endpoint: 'http://api.wax.greeneosio.com',
+      ssl_endpoint: 'https://api.wax.greeneosio.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://api.atomic.greeneosio.com',
+      ssl_endpoint: 'https://api.atomic.greeneosio.com',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: greeneosiobp on mainnet 
+: ---------------------------------------- 
+Node add:: http://api.wax.greeneosio.com https://api.wax.greeneosio.com
+Node add:: http://api.atomic.greeneosio.com https://api.atomic.greeneosio.com
+producerJson {
+  producer_account_name: 'guild.nefty',
+  org: {
+    candidate_name: 'NeftyGuild',
+    website: 'https://bp.neftyblocks.com',
+    email: 'info@neftyblocks.com',
+    github_user: 'jandrad',
+    branding: {
+      logo_256: 'https://bp.neftyblocks.com/imgs/logo-256.png',
+      logo_1024: 'https://bp.neftyblocks.com/imgs/logo-1024.png',
+      logo_svg: 'https://bp.neftyblocks.com/imgs/logo.svg'
+    },
+    location: {
+      name: 'Guatemala',
+      country: 'GT',
+      latitude: 14.628434,
+      longitude: -90.522713
+    },
+    social: {
+      telegram: 'neftyblocks',
+      twitter: 'neftyblocks',
+      github: 'neftyblocks',
+      youtube: 'channel/UCAOiiR1k9uF6zvvsmfnws3w'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      p2p_endpoint: 'p2p-node1.neftyblocks.com:9876',
+      api_endpoint: 'http://wax-public1.neftyblocks.com',
+      ssl_endpoint: 'https://wax-public1.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      p2p_endpoint: 'p2p-node2.neftyblocks.com:9876',
+      api_endpoint: 'http://wax-public2.neftyblocks.com',
+      ssl_endpoint: 'https://wax-public2.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://aa-wax-public1.neftyblocks.com',
+      ssl_endpoint: 'https://aa-wax-public1.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      api_endpoint: '',
+      ssl_endpoint: 'https://ipfs.neftyblocks.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://lightapi-mainnet.neftyblocks.com',
+      ssl_endpoint: 'https://lightapi-mainnet.neftyblocks.com'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: guild.nefty on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax-public1.neftyblocks.com https://wax-public1.neftyblocks.com
+Node add:: http://wax-public2.neftyblocks.com https://wax-public2.neftyblocks.com
+Node add:: http://aa-wax-public1.neftyblocks.com https://aa-wax-public1.neftyblocks.com
+Node add::  https://ipfs.neftyblocks.io
+Node add:: http://lightapi-mainnet.neftyblocks.com https://lightapi-mainnet.neftyblocks.com
+producerJson {
+  producer_account_name: 'guild.taco',
+  org: {
+    candidate_name: 'Taco',
+    website: 'https://tacostudios.io',
+    code_of_conduct: 'https://tacostudios.io/code-of-conduct',
+    ownership_disclosure: 'https://tacostudios.io/ownership-disclosure',
+    email: 'info@tacocrypto.io',
+    github_user: 'FedeGens',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://tacostudios.io/wp-content/uploads/2024/04/taco_logo_256.png',
+      logo_1024: 'https://tacostudios.io/wp-content/uploads/2024/04/taco_logo_1024.png',
+      logo_svg: 'https://tacostudios.io/wp-content/uploads/2024/04/taco_logo_256.svg'
+    },
+    location: {
+      name: 'Italy',
+      country: 'IT',
+      latitude: 41.9028,
+      longitude: 12.4964
+    },
+    social: {
+      twitter: 'tacowax',
+      telegram: 'tacowax',
+      github: 'tacocompany',
+      medium: 'taco.wax'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'seed',
+      p2p_endpoint: 'peer.wax.tacocrypto.io:9999'
+    },
+    {
+      location: [Object],
+      full: false,
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://api-wax.tacocrypto.io',
+      ssl_endpoint: 'https://api-wax.tacocrypto.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.tacocrypto.io',
+      ssl_endpoint: 'https://ipfs.tacocrypto.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic-wax.tacocrypto.io',
+      ssl_endpoint: 'https://atomic-wax.tacocrypto.io'
+    },
+    {
+      location: [Object],
+      full: false,
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://api-wax.tacocrypto.io/hyperion',
+      ssl_endpoint: 'https://api-wax.tacocrypto.io/hyperion'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://lightapi-wax.tacocrypto.io',
+      ssl_endpoint: 'https://lightapi-wax.tacocrypto.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: guild.taco on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://api-wax.tacocrypto.io https://api-wax.tacocrypto.io
+Node add:: http://ipfs.tacocrypto.io https://ipfs.tacocrypto.io
+Node add:: http://atomic-wax.tacocrypto.io https://atomic-wax.tacocrypto.io
+Node add:: http://api-wax.tacocrypto.io/hyperion https://api-wax.tacocrypto.io/hyperion
+Node add:: http://lightapi-wax.tacocrypto.io https://lightapi-wax.tacocrypto.io
+producerJson {
+  producer_account_name: 'guild.waxdao',
+  org: {
+    candidate_name: 'WaxDAO BP',
+    website: 'https://waxdaobp.io',
+    code_of_conduct: 'https://waxdaobp.io/code-of-conduct',
+    ownership_disclosure: 'https://waxdaobp.io/team',
+    email: 'mikedcryptocurrency@gmail.com',
+    github_user: 'mdcryptonfts',
+    branding: {
+      logo_256: 'https://waxdaobp.io/logo256.png',
+      logo_1024: 'https://waxdaobp.io/logo1024.png',
+      logo_svg: 'https://waxdaobp.io/logo.svg'
+    },
+    location: {
+      name: 'United States',
+      country: 'US',
+      latitude: 37.0902,
+      longitude: 95.7129
+    },
+    social: {
+      telegram: 'MikeD_Crypto',
+      twitter: 'MikeD_Crypto',
+      github: 'mdcryptonfts',
+      youtube: '@MikeDCrypto',
+      hive: 'mikedcrypto'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      full: false,
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.waxdaobp.io:9876',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      p2p_endpoint: '',
+      api_endpoint: 'http://aa.waxdaobp.io',
+      ssl_endpoint: 'https://aa.waxdaobp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://api.waxdaobp.io',
+      ssl_endpoint: 'https://api.waxdaobp.io'
+    },
+    {
+      location: [Object],
+      full: false,
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://hyperion.waxdaobp.io',
+      ssl_endpoint: 'https://hyperion.waxdaobp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: 'ipfs',
+      api_endpoint: 'http://ipfs.waxdaobp.io',
+      ssl_endpoint: 'https://ipfs.waxdaobp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: 'light-api',
+      api_endpoint: 'http://light-api.waxdaobp.io',
+      ssl_endpoint: 'https://light-api.waxdaobp.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: guild.waxdao on mainnet 
+: ---------------------------------------- 
+Node add::  
+Node add:: http://aa.waxdaobp.io https://aa.waxdaobp.io
+Node add:: http://api.waxdaobp.io https://api.waxdaobp.io
+Node add:: http://hyperion.waxdaobp.io https://hyperion.waxdaobp.io
+Node add:: http://ipfs.waxdaobp.io https://ipfs.waxdaobp.io
+Node add:: http://light-api.waxdaobp.io https://light-api.waxdaobp.io
+producerJson {
+  producer_account_name: 'ivote4waxusa',
+  org: {
+    candidate_name: 'WAXUSA',
+    website: 'https://eosusa.io',
+    ownership_disclosure: 'https://eosusa.news/ownership',
+    code_of_conduct: 'https://eosusa.news/code-of-conduct',
+    email: 'eosusa.michael@gmail.com',
+    github_user: 'eosusa-michael',
+    branding: {
+      logo_256: 'https://eosusa.io/img/eosusa_256.png',
+      logo_1024: 'https://eosusa.io/img/eosusa_1024.png',
+      logo_svg: 'https://eosusa.io/img/eosusa.svg'
+    },
+    location: {
+      name: 'Greenville,SC',
+      country: 'US',
+      latitude: 34.86196,
+      longitude: -82.23466
+    },
+    social: {
+      steemit: 'realitybytes',
+      twitter: 'ivote4_eos_usa',
+      youtube: 'user/calbright4',
+      facebook: 'ivote4eosusa',
+      github: 'eosusa',
+      keybase: 'eosusa',
+      telegram: 'eosusa'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://wax.eosusa.io',
+      ssl_endpoint: 'https://wax.eosusa.io',
+      snapshot_endpoint: 'https://snapshots.eosusa.io/snaps/wax',
+      node_type: 'query',
+      full: false,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'wax.p2p.eosusa.io:9875',
+      node_type: 'seed',
+      full: false
+    },
+    {
+      location: [Object],
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: '',
+      node_type: 'producer'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: ivote4waxusa on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.eosusa.io https://wax.eosusa.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'ledgerwiseio',
+  org: {
+    candidate_name: 'LedgerWise',
+    website: 'https://ledgerwise.io',
+    code_of_conduct: 'https://ledgerwise.io/conduct.html',
+    ownership_disclosure: 'https://ledgerwise.io/ownership.html',
+    email: 'hello@ledgerwise.io',
+    github_user: 'jorfermo',
+    phone: '',
+    branding: {
+      logo_256: 'https://ledgerwise.io/img/icon256.png',
+      logo_1024: 'https://ledgerwise.io/img/icon1024.png',
+      logo_svg: 'https://ledgerwise.io/img/icon.svg'
+    },
+    location: {
+      name: 'India',
+      country: 'IN',
+      latitude: 27.806298,
+      longitude: 77.3805321
+    },
+    social: {
+      telegram: 'ledgerwiseio',
+      twitter: 'ledgerwise',
+      keybase: 'tanishv',
+      github: 'ledgerwise'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://waxapi.ledgerwise.io',
+      ssl_endpoint: 'https://waxapi.ledgerwise.io',
+      p2p_endpoint: 'waxp2p.ledgerwise.io:21877',
+      features: [Array],
+      full: true
+    },
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomicassets.ledgerwise.io',
+      ssl_endpoint: 'https://atomicassets.ledgerwise.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.ledgerwise.io',
+      ssl_endpoint: 'https://ipfs.ledgerwise.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://wax-lightapi.ledgerwise.io',
+      ssl_endpoint: 'https://wax-lightapi.ledgerwise.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: ledgerwiseio on mainnet 
+: ---------------------------------------- 
+Node add:: http://waxapi.ledgerwise.io https://waxapi.ledgerwise.io
+Node add:: http://atomicassets.ledgerwise.io https://atomicassets.ledgerwise.io
+Node add:: http://ipfs.ledgerwise.io https://ipfs.ledgerwise.io
+Node add:: http://wax-lightapi.ledgerwise.io https://wax-lightapi.ledgerwise.io
+producerJson {
+  producer_account_name: 'liquidstudio',
+  org: {
+    candidate_name: 'LiquidStudios',
+    website: 'https://liquiid.io',
+    code_of_conduct: 'https://liquiid.io/code-of-conduct',
+    ownership_disclosure: 'https://liquiid.io/ownership-disclosure',
+    email: 'info@liquiid.io',
+    github_user: [ 'cmadh', 'kthamm' ],
+    branding: { logo_256: '', logo_1024: '', logo_svg: '' },
+    location: { name: 'Germany', country: 'DE', latitude: 52, longitude: 10 },
+    social: {
+      steemit: '',
+      twitter: 'beliquiid',
+      youtube: '',
+      facebook: '',
+      github: 'liquiidio',
+      keybase: 'cmadh',
+      reddit: 'liquidstudios',
+      telegram: 'liquidstudios',
+      wechat: ''
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.wax.liquidstudios.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api.wax.liquidstudios.io',
+      ssl_endpoint: 'https://api.wax.liquidstudios.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api.wax.liquidstudios.io',
+      ssl_endpoint: 'https://api.wax.liquidstudios.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api.wax.liquidstudios.io',
+      ssl_endpoint: 'https://api.wax.liquidstudios.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: liquidstudio on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://api.wax.liquidstudios.io https://api.wax.liquidstudios.io
+Node add:: http://api.wax.liquidstudios.io https://api.wax.liquidstudios.io
+Node add:: http://api.wax.liquidstudios.io https://api.wax.liquidstudios.io
+producerJson {
+  producer_account_name: 'nation.wax',
+  org: {
+    candidate_name: 'EOS Nation',
+    website: 'https://eosnation.io',
+    ownership_disclosure: 'https://eosnation.io/ownership-disclosure',
+    code_of_conduct: 'https://steemit.com/eos/@eosnation/eos-nation-roadmap-on-values-community-project-timeline-finances-and-transparency',
+    email: 'info@eosnation.io',
+    github_user: [ 'deniscarriere', 'matthewdarwin' ],
+    chain_resources: 'https://snapshots.eosnation.io',
+    branding: {
+      logo_256: 'https://eosnation.io/logos/logo_256.png',
+      logo_1024: 'https://eosnation.io/logos/logo_1024.png',
+      logo_svg: 'https://eosnation.io/logos/logo.svg'
+    },
+    location: {
+      name: 'Canada',
+      country: 'CA',
+      latitude: 45.425532,
+      longitude: -75.700269
+    },
+    social: {
+      medium: 'eosnationbp',
+      hive: 'eosnation',
+      steemit: 'eosnation',
+      twitter: 'EOS_Nation',
+      facebook: 'groups/EOSNation',
+      github: 'EOS-Nation',
+      telegram: 'EOSNation',
+      youtube: 'channel/UCXgAY9DyooykrubRXw3xK1g',
+      reddit: 'EOSNation',
+      keybase: 'eosnation',
+      wechat: 'Eosnation'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://wax.api.eosnation.io',
+      ssl_endpoint: 'https://wax.api.eosnation.io'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'wax.seed.eosnation.io:9876'
+    },
+    { location: [Object], node_type: 'producer', full: false },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      ssl_endpoint: 'https://wax.firehose.pinax.network'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      ssl_endpoint: 'https://wax.substreams.pinax.network'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: nation.wax on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.api.eosnation.io https://wax.api.eosnation.io
+Node add:: undefined 
+Node add:: undefined https://wax.firehose.pinax.network
+Node add:: undefined https://wax.substreams.pinax.network
+producerJson {
+  producer_account_name: 'oneinacilian',
+  org: {
+    candidate_name: 'OIAC',
+    website: 'https://www.oiac.io',
+    code_of_conduct: 'https://oiac.io/coc-oiac.html',
+    ownership_disclosure: 'https://oiac.io/coc-oiac.html',
+    email: 'cillian@oiac.io',
+    github_user: [ 'oneinacilian' ],
+    branding: {
+      logo_256: 'https://www.oiac.io/images/oiac_256.png',
+      logo_1024: 'https://www.oiac.io/images/oiac_1024.png',
+      logo_svg: 'https://www.oiac.io/images/oiac-svg.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.5286208,
+      longitude: -0.1716373
+    },
+    social: {
+      steemit: '',
+      twitter: 'OIACWAX',
+      facebook: '',
+      github: 'oneinacillian',
+      reddit: '',
+      keybase: 'oneinacillian',
+      telegram: 'Cillian_Maye'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://hyperion.oiac.io',
+      ssl_endpoint: 'https://hyperion.oiac.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://hyperion.oiac.io',
+      ssl_endpoint: 'https://hyperion.oiac.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.oiac.io:9876',
+      full: true
+    },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://atomic.oiac.io/',
+      ssl_endpoint: 'https://atomic.oiac.io/',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://ipfs-gateway.oiac.io',
+      ssl_endpoint: 'https://ipfs-gateway.oiac.io',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://light-api.oiac.io',
+      ssl_endpoint: 'https://light-api.oiac.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: oneinacilian on mainnet 
+: ---------------------------------------- 
+Node add:: http://hyperion.oiac.io https://hyperion.oiac.io
+Node add:: http://hyperion.oiac.io https://hyperion.oiac.io
+Node add:: undefined 
+Node add:: http://atomic.oiac.io/ https://atomic.oiac.io/
+Node add:: http://ipfs-gateway.oiac.io https://ipfs-gateway.oiac.io
+Node add:: http://light-api.oiac.io https://light-api.oiac.io
+producerJson {
+  producer_account_name: 'pink.gg',
+  org: {
+    candidate_name: 'pink.gg',
+    website: 'https://pink.gg',
+    code_of_conduct: 'https://bp.pink.gg/code-of-conduct.html',
+    ownership_disclosure: 'https://bp.pink.gg/ownership-disclosure.html',
+    email: 'business@pink.gg',
+    github_user: [ 'fabian-emilius', 'jona-wilmsmann' ],
+    branding: {
+      logo_256: 'https://bp.pink.gg/image/guild/logo_256.png',
+      logo_1024: 'https://bp.pink.gg/image/guild/logo_1024.png',
+      logo_svg: 'https://bp.pink.gg/image/guild/logo.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 48.262556,
+      longitude: 11.668231
+    },
+    social: {
+      medium: 'pinkgg',
+      twitter: 'atomichub',
+      github: 'pinknetworkx',
+      telegram: 'atomicassets',
+      keybase: 'pinknetwork'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'peer1.wax.pink.gg:36715'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'peer2.wax.pink.gg:36715'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://wax.pink.gg',
+      ssl_endpoint: 'https://wax.pink.gg'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://wax.api.atomicassets.io',
+      ssl_endpoint: 'https://wax.api.atomicassets.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: pink.gg on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: undefined 
+Node add:: http://wax.pink.gg https://wax.pink.gg
+Node add:: http://wax.api.atomicassets.io https://wax.api.atomicassets.io
+producerJson {
+  producer_account_name: 'qaraqolblock',
+  org: {
+    candidate_name: 'QaraqolBlock',
+    website: 'https://www.qaraqol.com',
+    code_of_conduct: 'https://qaraqol.com/?p=58',
+    ownership_disclosure: 'https://qaraqol.com/?p=58',
+    email: 'info@qaraqol.com',
+    github_user: 'qaraqol',
+    chain_resources: 'https://snapshots.qaraqol.com',
+    branding: {
+      logo_256: 'https://qaraqol.com/qaraqol_256.png',
+      logo_1024: 'https://qaraqol.com/qaraqol_1024.png',
+      logo_svg: 'https://qaraqol.com/qaraqol_svg.svg'
+    },
+    location: {
+      name: 'Afghanistan',
+      country: 'AF',
+      latitude: 34.5553,
+      longitude: 69.2075
+    },
+    social: {
+      twitter: 'qaraqol_',
+      github: 'qaraqol',
+      keybase: 'qaraqol',
+      telegram: 'qaraqolblock'
+    },
+    other_resources: [
+      'https://strategist.qaraqol.com',
+      'https://ipfs.qaraqol.com/ipfs/QmW7xsd1a6ap6HZ3AeZhbbZvCLK3KCkybS3XStpqQvopGi'
+    ]
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'p2p-wax.qaraqol.com:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax.qaraqol.com',
+      ssl_endpoint: 'https://wax.qaraqol.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://atomic-wax.qaraqol.com',
+      ssl_endpoint: 'https://atomic-wax.qaraqol.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://lightapi-wax.qaraqol.com',
+      ssl_endpoint: 'https://lightapi-wax.qaraqol.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://ipfs.qaraqol.com',
+      ssl_endpoint: 'https://ipfs.qaraqol.com',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: qaraqolblock on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://wax.qaraqol.com https://wax.qaraqol.com
+Node add:: http://atomic-wax.qaraqol.com https://atomic-wax.qaraqol.com
+Node add:: http://lightapi-wax.qaraqol.com https://lightapi-wax.qaraqol.com
+Node add:: http://ipfs.qaraqol.com https://ipfs.qaraqol.com
+producerJson {
+  producer_account_name: 'sentnlagents',
+  org: {
+    candidate_name: 'Sentnl',
+    website: 'https://www.sentnl.io',
+    code_of_conduct: 'https://medium.com/@charles.holtzkampf/wax-code-of-conduct-c135050c49a4',
+    ownership_disclosure: 'https://medium.com/@charles.holtzkampf/wax-code-of-conduct-c135050c49a4#2dd3',
+    email: 'charles@sentnl.io',
+    github_user: [ 'ankh2054' ],
+    branding: {
+      logo_256: 'https://www.sentnl.io/sentnl_256.png',
+      logo_1024: 'https://www.sentnl.io/sentnl_1024.png',
+      logo_svg: 'https://www.sentnl.io/sentnl.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.51118829,
+      longitude: -0.09617353
+    },
+    social: {
+      steemit: '',
+      twitter: 'sentnl_io',
+      facebook: '',
+      github: 'ankh2054',
+      reddit: '',
+      keybase: 'ankh2054',
+      telegram: 'ankh2054'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://hyperion7.sentnl.io',
+      ssl_endpoint: 'https://hyperion7.sentnl.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'waxp2p.sentnl.io:9876'
+    },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://atomic.sentnl.io/',
+      ssl_endpoint: 'https://atomic.sentnl.io/',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://ipfs-gateway.sentnl.io/',
+      ssl_endpoint: 'https://ipfs-gateway.sentnl.io/',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://light-api.sentnl.io/',
+      ssl_endpoint: 'https://light-api.sentnl.io/',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: sentnlagents on mainnet 
+: ---------------------------------------- 
+Node add:: http://hyperion7.sentnl.io https://hyperion7.sentnl.io
+Node add:: undefined 
+Node add:: http://atomic.sentnl.io/ https://atomic.sentnl.io/
+Node add:: http://ipfs-gateway.sentnl.io/ https://ipfs-gateway.sentnl.io/
+Node add:: http://light-api.sentnl.io/ https://light-api.sentnl.io/
+producerJson {
+  producer_account_name: 'teamgreymass',
+  org: {
+    candidate_name: 'Greymass',
+    website: 'https://greymass.com',
+    chain_resources: 'https://snapshots.greymass.network/',
+    ownership_disclosure: 'https://greymass.com/ownership_disclosure',
+    code_of_conduct: 'https://greymass.com/code_of_conduct',
+    email: 'hello@greymass.com',
+    branding: {
+      logo_256: 'https://greymass.com/greymass_logo_256X256.png',
+      logo_1024: 'https://greymass.com/greymass_logo_1024X1024.png',
+      logo_svg: 'https://greymass.com/greymass_logo.svg'
+    },
+    location: {
+      name: 'Vancouver',
+      country: 'CA',
+      latitude: 49.2827,
+      longitude: -123.1207
+    },
+    social: {
+      steemit: 'greymass',
+      twitter: 'greymass',
+      youtube: '',
+      facebook: '',
+      github: 'greymass',
+      reddit: 'greymass',
+      keybase: 'team/greymass',
+      telegram: 'teamgreymass',
+      wechat: ''
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://wax.greymass.com',
+      ssl_endpoint: 'https://wax.greymass.com',
+      node_type: 'query',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      api_endpoint: 'http://wax.greymass.com',
+      ssl_endpoint: 'https://wax.greymass.com',
+      node_type: 'query',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      api_endpoint: 'http://wax.greymass.com',
+      ssl_endpoint: 'https://wax.greymass.com',
+      node_type: 'query',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'wax.greymass.com:35777',
+      node_type: 'seed'
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'wax.greymass.com:35777',
+      node_type: 'seed'
+    },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: teamgreymass on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax.greymass.com https://wax.greymass.com
+Node add:: http://wax.greymass.com https://wax.greymass.com
+Node add:: http://wax.greymass.com https://wax.greymass.com
+Node add:: undefined 
+Node add:: undefined 
+Retrying request to https://blokcrafters.com/chains.json. Attempts left: 2. Error: Request timed out: undefined 
+Retrying request to https://blokcrafters.com/chains.json. Attempts left: 1. Error: Request timed out: undefined 
+producerJson {
+  producer_account_name: 'wax.eastern',
+  org: {
+    candidate_name: 'WAX.Eastern',
+    website: 'https://waxeastern.cn',
+    code_of_conduct: 'https://waxeastern.cn/conduct.html',
+    ownership_disclosure: 'https://waxeastern.cn/conduct.html#ownership',
+    email: 'monica92@yeah.net',
+    github_user: [ 'waxeastern' ],
+    branding: {
+      logo_256: 'https://waxeastern.cn/media/logo-256.png',
+      logo_512: 'https://waxeastern.cn/media/logo-512.png',
+      logo_1024: 'https://waxeastern.cn/media/logo-1024.png',
+      logo_svg: 'https://waxeastern.cn/media/logo.svg'
+    },
+    location: {
+      name: 'Chengdu',
+      country: 'CN',
+      latitude: 30.5911,
+      longitude: 104.0761
+    },
+    social: {
+      twitter: 'NFTGAMERCHINA',
+      github: '',
+      telegram: 'NFTGamerChina',
+      wechat: 'waxeastern',
+      medium: 'easternwax'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.waxeastern.cn:9876'
+    },
+    {
+      location: [Object],
+      full: false,
+      node_type: 'query',
+      api_endpoint: 'http://api.waxeastern.cn',
+      ssl_endpoint: 'https://api.waxeastern.cn',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: wax.eastern on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://api.waxeastern.cn https://api.waxeastern.cn
+producerJson {
+  producer_account_name: 'waxhiveguild',
+  org: {
+    candidate_name: 'Hive BP',
+    website: 'https://hivebp.io',
+    code_of_conduct: 'https://hivebp.io/#code',
+    ownership_disclosure: 'https://hivebp.io/#team',
+    email: 'ben@hivebp.io',
+    github_user: [ 'hiveben', 'hivenils' ],
+    branding: {
+      logo_256: 'https://hivebp.io/hivebp-logo256.png',
+      logo_1024: 'https://hivebp.io/hivebp-logo1024.png',
+      logo_svg: 'https://hivebp.io/hivebp-logo.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 53.6118716,
+      longitude: 10.322786
+    },
+    social: {
+      keybase: 'ben616',
+      telegram: 'Ben616',
+      twitter: 'nfthiveio',
+      github: 'hivebp',
+      medium: 'hivebp'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: '',
+      full: false
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'seed',
+      p2p_endpoint: 'peer1.hivebp.io:9876',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      full: false,
+      node_type: 'seed',
+      p2p_endpoint: 'peer2.hivebp.io:9876',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      full: true,
+      api_endpoint: 'http://api.hivebp.io',
+      ssl_endpoint: 'https://api.hivebp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      full: true,
+      api_endpoint: 'http://api2.hivebp.io',
+      ssl_endpoint: 'https://api2.hivebp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic.hivebp.io',
+      ssl_endpoint: 'https://atomic.hivebp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      full: false,
+      api_endpoint: 'http://wax.hivebp.io',
+      ssl_endpoint: 'https://wax.hivebp.io'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      api_endpoint: 'http://ipfs.hivebp.io',
+      ssl_endpoint: 'https://ipfs.hivebp.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxhiveguild on mainnet 
+: ---------------------------------------- 
+Node add::  
+Node add::  
+Node add:: http://api.hivebp.io https://api.hivebp.io
+Node add:: http://api2.hivebp.io https://api2.hivebp.io
+Node add:: http://atomic.hivebp.io https://atomic.hivebp.io
+Node add:: http://wax.hivebp.io https://wax.hivebp.io
+Node add:: http://ipfs.hivebp.io https://ipfs.hivebp.io
+producerJson {
+  producer_account_name: 'waxswedenorg',
+  org: {
+    candidate_name: 'Sw/eden🌿',
+    website: 'https://waxsweden.org',
+    code_of_conduct: 'https://waxsweden.org/code-of-conduct',
+    ownership_disclosure: 'https://waxsweden.org/code-of-conduct/#ownership',
+    chain_resources: 'https://snapshots.eossweden.org',
+    email: 'contact@waxsweden.org',
+    github_user: [ 'xebb82', 'coachbjork', 'pnx' ],
+    branding: {
+      logo_256: 'https://waxsweden.org/logo/logo-256.png',
+      logo_1024: 'https://waxsweden.org/logo/logo-1024.png',
+      logo_svg: 'https://waxsweden.org/logo/sw-eden-teal.svg'
+    },
+    location: {
+      name: 'Sweden',
+      country: 'SE',
+      latitude: 59.6268,
+      longitude: 16.544
+    },
+    social: {
+      steemit: 'eossweden',
+      twitter: 'waxsweden',
+      youtube: 'channel/UCsqfZJRzNitVnWrWqlfIs6A',
+      facebook: 'EOS-sweden-554084258304426',
+      github: 'eosswedenorg',
+      reddit: 'eossweden',
+      keybase: 'xebb',
+      telegram: 'eossweden',
+      wechat: 'xebb82',
+      medium: 'waxsweden'
+    }
+  },
+  nodes: [
+    { location: [Object], full: false, node_type: 'producer' },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.waxsweden.org:35777'
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      api_endpoint: 'http://api.waxsweden.org',
+      ssl_endpoint: 'https://api.waxsweden.org',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxswedenorg on mainnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://api.waxsweden.org https://api.waxsweden.org
+producerJson {
+  producer_account_name: 'wombatblockx',
+  org: {
+    candidate_name: 'Spielworks',
+    website: 'https://www.spielworks.com',
+    code_of_conduct: 'https://www.spielworks.com/wombat-guild-coc',
+    ownership_disclosure: 'https://www.spielworks.com/wombat-guild-coc',
+    email: 'ops@spielworks.com',
+    github_user: 'dimi-sw',
+    other_resources: [
+      'https://womplay.io',
+      'https://www.wombat.app',
+      'https://blend.wombat.app',
+      'https://staking.wombat.app',
+      'https://defi.getwombat.io',
+      'https://dungeon.wombat.app',
+      'https://worlds.wombat.app',
+      'https://wax.atomichub.io'
+    ],
+    branding: {
+      logo_256: 'https://d3iv0zhjq207ej.cloudfront.net/logos/wombat-logo-256x256.png',
+      logo_1024: 'https://d3iv0zhjq207ej.cloudfront.net/logos/wombat-logo-1024x1024.png',
+      logo_svg: 'https://d3iv0zhjq207ej.cloudfront.net/logos/wombat-logo-svg.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 52.5048,
+      longitude: 13.3734
+    },
+    social: {
+      telegram: 'getwombat',
+      twitter: 'adoptwombat',
+      github: 'wombat-tech',
+      youtube: 'channel/UC9TSQ2aLOWlcorcvfOsfFiQ',
+      facebook: 'WomPlaytoEarn',
+      medium: 'wombat',
+      discord: 'wombatgamers'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'wax-rpc.wombat.app:9876',
+      api_endpoint: 'http://wax-rpc.wombat.app',
+      ssl_endpoint: 'https://wax-rpc.wombat.app',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'wax-p2p.wombat.app:9876'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: wombatblockx on mainnet 
+: ---------------------------------------- 
+Node add:: http://wax-rpc.wombat.app https://wax-rpc.wombat.app
+Node add:: undefined 
+Updating producers for testnet
+Testnet node: https://wax.testnet.eosdublin.io
+Retrieved endpoint for testnet: https://wax.testnet.eosdublin.io
+Retrieved 106 producers for testnet
+producerJson {
+  producer_account_name: '3dkrenderwax',
+  org: {
+    candidate_name: '3DKRender',
+    website: 'https://3dkrender.com',
+    code_of_conduct: 'https://3dkrender.com/3dk-render-wax-disclaimer',
+    ownership_disclosure: 'https://3dkrender.com/3dk-render-wax-disclaimer/#ownership',
+    email: 'info@3dkrender.com',
+    github_user: '3dkrender',
+    phone: '',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://3dkrender.com/wp-content/uploads/2020/11/3DK_LOGO_ICON_250.png',
+      logo_1024: 'https://3dkrender.com/wp-content/uploads/2020/11/3DK_LOGO_ICON_1024.png',
+      logo_svg: 'https://3dkrender.com/3dkrender.svg'
+    },
+    location: {
+      name: 'Spain',
+      country: 'ES',
+      latitude: 42.52473,
+      longitude: -5.88286
+    },
+    social: {
+      steemit: 'marcosdk',
+      twitter: 'MarcoS3DK',
+      youtube: 'MarcosDK',
+      keybase: 'marcosdk',
+      telegram: 'Marcos_DK'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://testnet-wax.3dkrender.com',
+      ssl_endpoint: 'https://testnet-wax.3dkrender.com',
+      p2p_endpoint: 'testnet-p2p.3dkrender.com:9876',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://testatomic.3dkrender.com',
+      ssl_endpoint: 'https://testatomic.3dkrender.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://tapiwax.3dkrender.com',
+      ssl_endpoint: 'https://tapiwax.3dkrender.com',
+      p2p_endpoint: '',
+      features: [Array],
+      full: true
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: 3dkrenderwax on testnet 
+: ---------------------------------------- 
+Node add:: http://testnet-wax.3dkrender.com https://testnet-wax.3dkrender.com
+Node add:: http://testatomic.3dkrender.com https://testatomic.3dkrender.com
+Node add:: http://tapiwax.3dkrender.com https://tapiwax.3dkrender.com
+producerJson {
+  producer_account_name: 'alohaeosprod',
+  org: {
+    candidate_name: 'Aloha EOS',
+    website: 'https://www.alohaeos.com',
+    code_of_conduct: 'https://www.alohaeos.com/conduct',
+    ownership_disclosure: 'https://www.alohaeos.com/ownership',
+    email: 'info@alohaeos.com',
+    github_user: 'n8d',
+    other_resources: [
+      'https://www.alohaeos.com/tools/reliability#networkId=16&timeframeId=8&sort=rank&sortDir=asc',
+      'https://t.me/WAX_Testnet_Aloha_Tracker'
+    ],
+    branding: {
+      logo_256: 'https://www.alohaeos.com/images/bpinfo/aeos-circle-256.png',
+      logo_1024: 'https://www.alohaeos.com/images/bpinfo/aeos-circle-1024.png',
+      logo_svg: 'https://www.alohaeos.com/images/bpinfo/aeos-circle.svg'
+    },
+    location: {
+      name: 'Honolulu, HI',
+      country: 'US',
+      latitude: 21.315603,
+      longitude: -157.858093
+    },
+    social: {
+      steemit: 'alohaeos',
+      twitter: 'eosaloha',
+      reddit: 'alohaeos',
+      keybase: 'alohaeos',
+      telegram: 'AlohaEOS'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://api.waxtest.alohaeos.com',
+      ssl_endpoint: 'https://api.waxtest.alohaeos.com',
+      p2p_endpoint: 'peer.waxtest.alohaeos.com:9876',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: alohaeosprod on testnet 
+: ---------------------------------------- 
+Node add:: http://api.waxtest.alohaeos.com https://api.waxtest.alohaeos.com
+producerJson {
+  producer_account_name: 'amsterdamwax',
+  org: {
+    candidate_name: 'EOSAmsterdam',
+    website: 'https://eosamsterdam.net',
+    code_of_conduct: 'https://steemit.com/eos/@eosamsterdam/eos-amsterdam-code-of-conduct',
+    ownership_disclosure: 'https://eosamsterdam.net#partners',
+    email: 'contact@eosamsterdam.net',
+    branding: {
+      logo_256: 'https://eosamsterdam.net/branding/logo_256.png',
+      logo_1024: 'https://eosamsterdam.net/branding/logo_1024.png',
+      logo_svg: 'https://eosamsterdam.net/branding/logo_svg.svg'
+    },
+    location: {
+      name: 'Amsterdam',
+      country: 'NL',
+      latitude: 52.3548445,
+      longitude: 4.9600367
+    },
+    social: {
+      steemit: 'eosamsterdam',
+      twitter: 'eosamsterdam',
+      facebook: 'EOS-Amsterdam-1586544661442120',
+      github: 'eosamsterdam',
+      reddit: 'eosamsterdam',
+      telegram: 'EOS_Amsterdam',
+      wechat: 'eosamsterdam'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'waxtest.eu.eosamsterdam.net:9912'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://waxtest.eu.eosamsterdam.net',
+      ssl_endpoint: 'https://waxtest.eu.eosamsterdam.net',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: amsterdamwax on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://waxtest.eu.eosamsterdam.net https://waxtest.eu.eosamsterdam.net
+producerJson {
+  producer_account_name: 'blacklusionx',
+  org: {
+    candidate_name: 'Blacklusion',
+    website: 'https://blacklusion.io',
+    code_of_conduct: 'https://blacklusion.io/code-of-conduct.html',
+    ownership_disclosure: 'https://blacklusion.io/ownership-disclosure.html',
+    email: 'support@blacklusion.io',
+    github_user: 'leonardofficial',
+    other_resources: [ 'https://t.me/WaxPagerBot' ],
+    branding: {
+      logo_256: 'https://blacklusion.io/resources/blacklusion_logo_256.png',
+      logo_1024: 'https://blacklusion.io/resources/blacklusion_logo_1024.png',
+      logo_svg: 'https://blacklusion.io/resources/blacklusion_logo.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 48.773885,
+      longitude: 9.181698
+    },
+    social: {
+      twitter: 'blacklusion',
+      github: 'Blacklusion',
+      keybase: 'blacklusion',
+      telegram: 'Blacklusion'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'peer1.testnet.wax.blacklusion.io:5757'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: 'true',
+      features: [Array],
+      api_endpoint: 'http://testnet.wax.blacklusion.io',
+      ssl_endpoint: 'https://testnet.wax.blacklusion.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: blacklusionx on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://testnet.wax.blacklusion.io https://testnet.wax.blacklusion.io
+Retrying request to https://blokcrafters.com/chains.json. Attempts left: 2. Error: Request timed out: undefined 
+Retrying request to https://blokcrafters.com/chains.json. Attempts left: 1. Error: Request timed out: undefined 
+producerJson {
+  producer_account_name: 'blokcrafters',
+  org: {
+    candidate_name: 'BlokCrafters',
+    website: 'https://blokcrafters.com',
+    code_of_conduct: 'https://blokcrafters.com/code_of_conduct.html',
+    ownership_disclosure: 'https://blokcrafters.com/ownership_disclosure.html',
+    chain_resources: 'https://wax-snapshots.blokcrafters.io',
+    email: 'bc@blokcrafters.com',
+    branding: {
+      logo_256: 'https://blokcrafters.com/images/blokcrafters1_256.png',
+      logo_1024: 'https://blokcrafters.com/images/blokcrafters1_1024.png',
+      logo_svg: 'https://blokcrafters.com/images/blokcrafters_logo.svg'
+    },
+    location: {
+      name: 'Clearwater, Florida',
+      country: 'US',
+      latitude: 27.9736,
+      longitude: -82.7642
+    },
+    social: {
+      twitter: 'blokcrafters',
+      github: 'blokcrafters',
+      reddit: 'blokcrafters',
+      telegram: 'blokcrafters',
+      medium: 'blokcrafters21'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'waxtest-peer-us.blokcrafters.io:19876'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'waxtest-peer-eu.blokcrafters.io:19876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax-test.blokcrafters.io',
+      ssl_endpoint: 'https://wax-test.blokcrafters.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: blokcrafters on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: undefined 
+Node add:: http://wax-test.blokcrafters.io https://wax-test.blokcrafters.io
+producerJson {
+  producer_account_name: 'bountyblokbp',
+  org: {
+    candidate_name: 'bountyblok.io',
+    website: 'https://www.bountyblok.io',
+    code_of_conduct: 'https://www.bountyblok.io/coc.html',
+    ownership_disclosure: 'https://www.bountyblok.io/ownership.html',
+    email: 'dimitri@bountyblok.io',
+    github_user: [ 'diminiko' ],
+    branding: {
+      logo_256: 'https://www.bountyblok.io/img/logo_256x256.png',
+      logo_1024: 'https://www.bountyblok.io/img/logo_1024x1024.png',
+      logo_svg: 'https://www.bountyblok.io/img/logo_128x128.svg'
+    },
+    location: {
+      name: 'Montreal',
+      country: 'CA',
+      latitude: 45.495921,
+      longitude: -73.757817
+    },
+    social: {
+      medium: 'bountyblok',
+      twitter: 'bountyblok',
+      github: 'bountyblok',
+      keybase: 'bountyblokio',
+      telegram: 'bountyblok'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://api.wax-test.bountyblok.io',
+      ssl_endpoint: 'https://api.wax-test.bountyblok.io',
+      node_type: 'query',
+      full: true,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'p2p.wax-test.bountyblok.io:9874',
+      node_type: 'seed'
+    },
+    {
+      location: [Object],
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: '',
+      node_type: 'producer'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bountyblokbp on testnet 
+: ---------------------------------------- 
+Node add:: http://api.wax-test.bountyblok.io https://api.wax-test.bountyblok.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'bp.adex',
+  org: {
+    candidate_name: 'A-DEX BP',
+    website: 'https://wax.a-dex.io',
+    code_of_conduct: 'https://wax.a-dex.io/code-of-conduct',
+    ownership_disclosure: 'https://wax.a-dex.io/ownership',
+    email: 'support@a-dex.io',
+    github_user: 'avm07',
+    branding: {
+      logo_256: 'https://wax.a-dex.io/logo256.png',
+      logo_1024: 'https://wax.a-dex.io/logo1024.png',
+      logo_svg: 'https://wax.a-dex.io/logo.svg'
+    },
+    location: {
+      name: 'Dubai,UAE',
+      country: 'AE',
+      latitude: 25.0657,
+      longitude: 55.17128
+    },
+    social: {
+      steemit: 'a-dex',
+      github: 'a-dex',
+      twitter: 'a_dex_official',
+      telegram: 'a_dex_official',
+      medium: 'a-dex'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://wax-testnet.a-dex.xyz',
+      ssl_endpoint: 'https://wax-testnet.a-dex.xyz',
+      node_type: 'query',
+      full: false,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'p2p-wax-testnet.a-dex.xyz:9878',
+      node_type: 'seed',
+      full: false
+    },
+    { location: [Object], node_type: 'producer', full: false },
+    {
+      location: [Object],
+      api_endpoint: 'http://hyperion-wax-testnet.a-dex.xyz',
+      ssl_endpoint: 'https://hyperion-wax-testnet.a-dex.xyz',
+      node_type: 'query',
+      full: true,
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.adex on testnet 
+: ---------------------------------------- 
+Node add:: http://wax-testnet.a-dex.xyz https://wax-testnet.a-dex.xyz
+Node add:: undefined 
+Node add:: http://hyperion-wax-testnet.a-dex.xyz https://hyperion-wax-testnet.a-dex.xyz
+producerJson {
+  producer_account_name: 'bp.alcor',
+  org: {
+    candidate_name: 'AlcorExchange',
+    website: 'https://bp.alcor.exchange',
+    code_of_conduct: 'https://telegra.ph/Alcor-Exchange-Code-of-Conduct-07-26',
+    ownership_disclosure: 'https://bp.alcor.exchange',
+    email: 'admin@alcor.exchange',
+    github_user: [ 'alcorexchange' ],
+    branding: {
+      logo_256: 'https://alcor.exchange/android-chrome-256x256.png',
+      logo_1024: 'https://alcor.exchange/logo_1024.png',
+      logo_svg: 'https://alcor.exchange/safari-pinned-tab.svg'
+    },
+    location: {
+      name: 'Finland',
+      country: 'FI',
+      latitude: 60.1719,
+      longitude: 24.9347
+    },
+    social: {
+      telegram: 'alcorexchange',
+      twitter: 'alcorexchange',
+      github: 'alcorexchange',
+      medium: 'alcorexchange'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'waxtest-p2p.alcor.exchange:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: false,
+      api_endpoint: 'http://waxtest-api.alcor.exchange',
+      ssl_endpoint: 'https://waxtest-api.alcor.exchange',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://waxtest-hyperion.alcor.exchange',
+      ssl_endpoint: 'https://waxtest-hyperion.alcor.exchange',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.alcor on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://waxtest-api.alcor.exchange https://waxtest-api.alcor.exchange
+Node add:: http://waxtest-hyperion.alcor.exchange https://waxtest-hyperion.alcor.exchange
+producerJson {
+  producer_account_name: 'bp.box',
+  org: {
+    candidate_name: 'Defibox BP',
+    website: 'https://wax.defibox.io',
+    code_of_conduct: 'https://wax.defibox.io/conduct.html',
+    ownership_disclosure: 'https://wax.defibox.io/disclosure.html',
+    email: 'bd@defibox.io',
+    github_user: 'DefiboxTeam',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://wax.defibox.io/static/img/256.png',
+      logo_1024: 'https://wax.defibox.io/static/img/1024.png',
+      logo_svg: 'https://wax.defibox.io/static/img/logo.svg'
+    },
+    location: {
+      name: 'Cayman Islands',
+      country: 'KY',
+      latitude: 19.313299,
+      longitude: -81.254601
+    },
+    social: {
+      steemit: 'defibox',
+      twitter: 'DefiboxOfficial',
+      keybase: 'defibox',
+      telegram: 'Defibox_official'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      full: true,
+      node_type: [Array],
+      api_endpoint: 'http://waxtest.defibox.xyz',
+      ssl_endpoint: 'https://waxtest.defibox.xyz',
+      p2p_endpoint: 'waxtest.defibox.xyz:19876',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: bp.box on testnet 
+: ---------------------------------------- 
+Node add:: http://waxtest.defibox.xyz https://waxtest.defibox.xyz
+producerJson {
+  producer_account_name: 'cryptolions1',
+  org: {
+    candidate_name: 'CryptoLions🦁',
+    website: 'https://cryptolions.io',
+    code_of_conduct: 'https://cryptolions.io/code-of-conduct',
+    ownership_disclosure: 'https://cryptolions.io/ownership-disclosure',
+    email: 'roar@cryptolions.io',
+    github_user: 'ansigroup',
+    chain_resources: 'https://wax-backup.cryptolions.io/waxTestNet',
+    other_resources: [
+      'https://eosnetworkmonitor.io',
+      'https://wax.tools.simpleassets.io',
+      'https://wax.certs.cryptolions.io',
+      'https://wax.kolobok.io',
+      'https://wax.simplemarket.io',
+      'https://simpleassets.io',
+      'https://redemptionbank.io',
+      'https://wax.api.simpleassets.io'
+    ],
+    branding: {
+      logo_256: 'https://imgs.cryptolions.io/logo_256.png',
+      logo_1024: 'https://imgs.cryptolions.io/logo_1024.png',
+      logo_svg: 'https://imgs.cryptolions.io/logo.svg'
+    },
+    location: {
+      name: 'Ukraine',
+      country: 'UA',
+      latitude: 49.8397,
+      longitude: 24.0297
+    },
+    social: {
+      keybase: 'cryptolions',
+      telegram: 'CryptoLions_io',
+      twitter: 'EOS_CryptoLions',
+      github: 'CryptoLions',
+      youtube: 'channel/UCB7F-KO0mmZ1yVBCq0_1gtA'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: 'wax-testnet.cryptolions.io:7987',
+      api_endpoint: 'http://wax-testnet.cryptolions.io',
+      ssl_endpoint: 'https://wax-testnet.cryptolions.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: cryptolions1 on testnet 
+: ---------------------------------------- 
+Node add:: http://wax-testnet.cryptolions.io https://wax-testnet.cryptolions.io
+producerJson {
+  producer_account_name: 'dapplicawaxt',
+  org: {
+    candidate_name: 'dapplica',
+    website: 'https://dapplica.io',
+    code_of_conduct: 'https://dapplica.io/code-of-conduct',
+    ownership_disclosure: 'https://dapplica.io/wax-guild-application',
+    email: 'contact@dapplica.io',
+    github_user: 'freezepro',
+    chain_resources: '',
+    other_resources: [
+      'https://darkcountry.io',
+      'https://nest.dapplica.io',
+      'https://collect.social'
+    ],
+    branding: {
+      logo_256: 'https://cdn.dapplica.io/logo_256x256-01.png',
+      logo_1024: 'https://cdn.dapplica.io/logo_1024x1024-01.png',
+      logo_svg: 'https://cdn.dapplica.io/logo_128x128.svg'
+    },
+    location: {
+      name: 'Ukraine',
+      country: 'UA',
+      latitude: 49.8397,
+      longitude: 24.0297
+    },
+    social: {
+      keybase: 'dapplica',
+      telegram: 'dapplica',
+      twitter: 'dapplica1',
+      steemit: 'dapplica',
+      github: 'dapplicaio'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'wax-testnet.dapplica.io:9877',
+      api_endpoint: 'http://wax-testnet.dapplica.io',
+      ssl_endpoint: 'https://wax-testnet.dapplica.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: dapplicawaxt on testnet 
+: ---------------------------------------- 
+Node add:: http://wax-testnet.dapplica.io https://wax-testnet.dapplica.io
+producerJson {
+  producer_account_name: 'eosphereiobp',
+  org: {
+    candidate_name: 'EOSphere Guild',
+    website: 'https://www.eosphere.io',
+    code_of_conduct: 'https://www.eosphere.io/code-of-conduct',
+    ownership_disclosure: 'https://www.eosphere.io/ownership',
+    email: 'info@eosphere.io',
+    branding: {
+      logo_256: 'https://www.eosphere.io/eospherelogosquare256.png',
+      logo_1024: 'https://www.eosphere.io/eospherelogosquare1024.png',
+      logo_svg: 'https://www.eosphere.io/eospherelogosquare.svg'
+    },
+    location: {
+      name: 'Australia',
+      country: 'AU',
+      latitude: -31.953512,
+      longitude: 115.857048
+    },
+    social: {
+      steemit: 'eosphere',
+      twitter: 'eosphere_io',
+      youtube: 'eosphere',
+      facebook: 'eosphereio',
+      github: 'eosphere',
+      reddit: 'eosphere',
+      keybase: 'eosphere',
+      telegram: 'eosphere_io',
+      wechat: 'ross-eosphere'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'peer1-wax-testnet.eosphere.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax-testnet.eosphere.io',
+      ssl_endpoint: 'https://wax-testnet.eosphere.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: efkayatnoapp on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://wax-testnet.eosphere.io https://wax-testnet.eosphere.io
+producerJson {
+  producer_account_name: 'eosarabianet',
+  org: {
+    candidate_name: 'EOSArabia',
+    website: 'https://eosarabia.net',
+    code_of_conduct: 'https://eosarabia.net/code-conduct',
+    ownership_disclosure: 'https://eosarabia.net/ownership',
+    email: 'info@eosarabia.net',
+    github_user: 'EOS-Arabia',
+    chain_resources: 'https://snapshots.eosarabia.net',
+    branding: {
+      logo_256: 'https://eosarabia.net/EOSArabia-Logo256.png',
+      logo_1024: 'https://eosarabia.net/EOSArabia-Logo1024.png',
+      logo_svg: 'https://eosarabia.net/EOS-Arabia-Logo-SVG.svg'
+    },
+    location: {
+      name: 'UAE,Dubai',
+      country: 'AE',
+      latitude: 25.0929383,
+      longitude: 55.1901911
+    },
+    social: {
+      steemit: 'eos.arabia',
+      twitter: 'eos_arabia',
+      youtube: 'channel/UCku8FY8kPuJ7asKw5LKTDIg',
+      telegram: 'EOS_Arabia'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://api-testnet-wax.eosarabia.net',
+      ssl_endpoint: 'https://api-testnet-wax.eosarabia.net'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: false,
+      p2p_endpoint: 'p2p-testnet-wax.eosarabia.net:9876'
+    },
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosarabianet on testnet 
+: ---------------------------------------- 
+Node add:: http://api-testnet-wax.eosarabia.net https://api-testnet-wax.eosarabia.net
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'eosdacserver',
+  org: {
+    candidate_name: 'eosDAC',
+    website: 'https://eosdac.io',
+    code_of_conduct: 'https://eosdac.io#core-principles',
+    ownership_disclosure: 'https://github.com/eosdac/constitution/blob/master/constitution.md',
+    email: 'hello@eosdac.io',
+    github_user: 'michaeljyeates',
+    branding: {
+      logo_256: 'https://eosdac.io/assets/bpjson/eosdaclogo_256.png',
+      logo_1024: 'https://eosdac.io/assets/bpjson/eosdaclogo_1024.png',
+      logo_svg: 'https://eosdac.io/assets/bpjson/eosDAC_logo.svg'
+    },
+    location: {
+      name: 'Switzerland',
+      country: 'CH',
+      latitude: 47.166168,
+      longitude: 8.515495
+    },
+    social: {
+      steemit: 'eosdac',
+      twitter: 'eosdac',
+      youtube: 'eosdac',
+      facebook: 'eosdac',
+      github: 'eosdac',
+      reddit: 'eosdac',
+      keybase: '',
+      telegram: 'eosdacio',
+      wechat: ''
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://waxtest.eosdac.io',
+      ssl_endpoint: 'https://waxtest.eosdac.io',
+      p2p_endpoint: 'waxtest-p2p.eosdac.io:49876',
+      full: true,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://waxtest-aa.eosdac.io',
+      ssl_endpoint: 'https://waxtest-aa.eosdac.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosdacserver on testnet 
+: ---------------------------------------- 
+Node add:: http://waxtest.eosdac.io https://waxtest.eosdac.io
+Node add:: http://waxtest-aa.eosdac.io https://waxtest-aa.eosdac.io
+producerJson {
+  producer_account_name: 'eosdublinwow',
+  org: {
+    candidate_name: 'eosDublin',
+    website: 'https://www.eosdublin.com',
+    code_of_conduct: 'https://www.eosdublin.com/#values',
+    ownership_disclosure: 'https://www.eosdublin.com/disclosures/#ownership',
+    github_user: [ 'i-love-to-code', 'sbouktila', 'mcicu' ],
+    phone: 'WAX_Registry',
+    email: 'hello@eosdublin.com',
+    branding: {
+      logo_256: 'https://raw.githubusercontent.com/eosdublin/eosdublin/master/images/eosdublin-icon-256.png',
+      logo_1024: 'https://raw.githubusercontent.com/eosdublin/eosdublin/master/images/eosdublin-icon-1024.png',
+      logo_svg: 'https://eosdublin.com/icons/icon.svg'
+    },
+    location: {
+      name: 'Dublin',
+      country: 'IE',
+      latitude: 53.3498,
+      longitude: -6.2603
+    },
+    social: {
+      steemit: 'eosdublin',
+      twitter: 'eosdublin',
+      github: 'eosdublin',
+      reddit: 'EOSDublin',
+      keybase: 'eosdublin',
+      telegram: 'eosdublin'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://wax.testnet.eosdublin.io',
+      ssl_endpoint: 'https://wax.testnet.eosdublin.io'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: false,
+      p2p_endpoint: 'wax.p2p.eosdublin.io:9877'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosdublinwax on testnet 
+: ---------------------------------------- 
+Node add:: http://wax.testnet.eosdublin.io https://wax.testnet.eosdublin.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'eosdublinwow',
+  org: {
+    candidate_name: 'eosDublin',
+    website: 'https://www.eosdublin.com',
+    code_of_conduct: 'https://www.eosdublin.com/#values',
+    ownership_disclosure: 'https://www.eosdublin.com/disclosures/#ownership',
+    github_user: [ 'i-love-to-code', 'sbouktila', 'mcicu' ],
+    phone: 'WAX_Registry',
+    email: 'hello@eosdublin.com',
+    branding: {
+      logo_256: 'https://raw.githubusercontent.com/eosdublin/eosdublin/master/images/eosdublin-icon-256.png',
+      logo_1024: 'https://raw.githubusercontent.com/eosdublin/eosdublin/master/images/eosdublin-icon-1024.png',
+      logo_svg: 'https://eosdublin.com/icons/icon.svg'
+    },
+    location: {
+      name: 'Dublin',
+      country: 'IE',
+      latitude: 53.3498,
+      longitude: -6.2603
+    },
+    social: {
+      steemit: 'eosdublin',
+      twitter: 'eosdublin',
+      github: 'eosdublin',
+      reddit: 'EOSDublin',
+      keybase: 'eosdublin',
+      telegram: 'eosdublin'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://wax.testnet.eosdublin.io',
+      ssl_endpoint: 'https://wax.testnet.eosdublin.io'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: false,
+      p2p_endpoint: 'wax.p2p.eosdublin.io:9877'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosdublinwow on testnet 
+: ---------------------------------------- 
+Node add:: http://wax.testnet.eosdublin.io https://wax.testnet.eosdublin.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'eosiodetroit',
+  org: {
+    candidate_name: 'Detroit Ledger Technologies',
+    website: 'https://detroitledger.tech/',
+    ownership_disclosure: 'https://detroitledger.tech/about',
+    code_of_conduct: 'https://steemit.com/eos/@eos.detroit/eos-detroit-membership-guidelines',
+    email: 'ask@detroitledger.tech',
+    github_user: [ 'robrigo', 'wakeupjohnny' ],
+    chain_resources: '',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://detroitledger.tech/images/eos_detroit_logo_transparent_256.png',
+      logo_1024: 'https://detroitledger.tech/images/eos_detroit_logo_transparent.png',
+      logo_svg: 'https://detroitledger.tech/images/eos-detroit.svg'
+    },
+    location: {
+      name: 'Detroit',
+      country: 'US',
+      latitude: 42.3314,
+      longitude: -83.0458
+    },
+    social: {
+      steemit: 'eos.detroit',
+      twitter: 'detledgertech',
+      youtube: 'detroitledgertechnologies',
+      facebook: 'detroitledgertech',
+      github: 'eosdetroit',
+      reddit: 'eosdetroit',
+      keybase: 'wakeupjohnny',
+      telegram: 'detroitledgertech',
+      wechat: 'robrigo_eosdetroit'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: '',
+      api_endpoint: 'http://testnet.wax.detroitledger.tech',
+      ssl_endpoint: 'https://testnet.wax.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: '',
+      api_endpoint: 'http://hyperion.testnet.wax.detroitledger.tech',
+      ssl_endpoint: 'https://hyperion.testnet.wax.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: '',
+      api_endpoint: 'http://atomic.testnet.wax.detroitledger.tech',
+      ssl_endpoint: 'https://atomic.testnet.wax.detroitledger.tech',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'p2p.testnet.wax.detroitledger.tech:1337',
+      api_endpoint: '',
+      ssl_endpoint: '',
+      features: []
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosiodetroit on testnet 
+: ---------------------------------------- 
+Node add:: http://testnet.wax.detroitledger.tech https://testnet.wax.detroitledger.tech
+Node add:: http://hyperion.testnet.wax.detroitledger.tech https://hyperion.testnet.wax.detroitledger.tech
+Node add:: http://atomic.testnet.wax.detroitledger.tech https://atomic.testnet.wax.detroitledger.tech
+Node add::  
+producerJson {
+  producer_account_name: 'eosphereiobp',
+  org: {
+    candidate_name: 'EOSphere Guild',
+    website: 'https://www.eosphere.io',
+    code_of_conduct: 'https://www.eosphere.io/code-of-conduct',
+    ownership_disclosure: 'https://www.eosphere.io/ownership',
+    email: 'info@eosphere.io',
+    branding: {
+      logo_256: 'https://www.eosphere.io/eospherelogosquare256.png',
+      logo_1024: 'https://www.eosphere.io/eospherelogosquare1024.png',
+      logo_svg: 'https://www.eosphere.io/eospherelogosquare.svg'
+    },
+    location: {
+      name: 'Australia',
+      country: 'AU',
+      latitude: -31.953512,
+      longitude: 115.857048
+    },
+    social: {
+      steemit: 'eosphere',
+      twitter: 'eosphere_io',
+      youtube: 'eosphere',
+      facebook: 'eosphereio',
+      github: 'eosphere',
+      reddit: 'eosphere',
+      keybase: 'eosphere',
+      telegram: 'eosphere_io',
+      wechat: 'ross-eosphere'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'peer1-wax-testnet.eosphere.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://wax-testnet.eosphere.io',
+      ssl_endpoint: 'https://wax-testnet.eosphere.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosphereiobp on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://wax-testnet.eosphere.io https://wax-testnet.eosphere.io
+producerJson {
+  producer_account_name: 'eosriobrazil',
+  org: {
+    candidate_name: 'EOS Rio 💙 ',
+    website: 'https://eosrio.io',
+    code_of_conduct: 'https://eosrio.io/code-of-conduct',
+    ownership_disclosure: 'https://eosrio.io/ownership-disclosure',
+    email: 'contact@eosrio.io',
+    github_user: 'igorls',
+    branding: {
+      logo_256: 'https://eosrio.io/wp-content/uploads/2018/06/logo-eosrio-square-bgblack-1.jpg',
+      logo_1024: 'https://eosrio.io/logo-eosrio1024.png',
+      logo_svg: 'https://eosrio.io/logo-eosrio-black-square-01.svg'
+    },
+    location: {
+      name: 'Rio de Janeiro',
+      country: 'BR',
+      latitude: -22.9068,
+      longitude: -43.1729
+    },
+    social: {
+      steemit: 'eosrio',
+      twitter: 'eosriobrazil',
+      facebook: 'EOSRioBP',
+      youtube: 'channel/UC5aslySB2QP_v8dyMMBcTxw',
+      github: 'eosrio',
+      reddit: 'eosrio',
+      keybase: 'igorls',
+      telegram: 'eosrio',
+      wechat: 'igorls_eosrio',
+      medium: 'eosriobrazil'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://testnet.wax.eosrio.io',
+      ssl_endpoint: 'https://testnet.wax.eosrio.io',
+      features: [Array]
+    },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: eosriobrazil on testnet 
+: ---------------------------------------- 
+Node add:: http://testnet.wax.eosrio.io https://testnet.wax.eosrio.io
+producerJson {
+  producer_account_name: 'greeneosiobp',
+  org: {
+    candidate_name: 'Wax Galaxy',
+    website: 'https://waxgalaxy.io',
+    code_of_conduct: 'https://greeneosio.com/coc.html',
+    ownership_disclosure: 'https://greeneosio.com/ownership.html',
+    email: 'contact@waxgalaxy.io',
+    github_user: 'sukeshtedla',
+    other_resources: [
+      'https://kryptoskatt.com',
+      'https://unbiased.ml',
+      'https://gpkbattles.com'
+    ],
+    branding: {
+      logo_256: 'https://greeneosio.com/images/logo_256x256.png',
+      logo_1024: 'https://greeneosio.com/images/logo_1024x1024.png',
+      logo_svg: 'https://greeneosio.com/images/logo_128x128.svg'
+    },
+    location: {
+      name: 'Göteborg',
+      country: 'SE',
+      latitude: 57.728435,
+      longitude: 11.971045
+    },
+    social: {
+      twitter: 'greeneosio',
+      youtube: 'channel/UCKWClh6yFuswj0pIoIvaU7g',
+      github: 'greeneosio',
+      reddit: 'greeneosio',
+      keybase: 'greeneosio',
+      telegram: 'TelosGreen'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      full: true,
+      p2p_endpoint: 'p2p.waxtest.waxgalaxy.io:9878',
+      api_endpoint: 'http://api.waxtest.waxgalaxy.io',
+      ssl_endpoint: 'https://api.waxtest.waxgalaxy.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: greeneosiobp on testnet 
+: ---------------------------------------- 
+Node add:: http://api.waxtest.waxgalaxy.io https://api.waxtest.waxgalaxy.io
+producerJson {
+  producer_account_name: 'guild.nefty',
+  org: {
+    candidate_name: 'NeftyGuild',
+    website: 'https://bp.neftyblocks.com',
+    email: 'info@neftyblocks.com',
+    github_user: 'jandrad',
+    branding: {
+      logo_256: 'https://bp.neftyblocks.com/imgs/logo-256.png',
+      logo_1024: 'https://bp.neftyblocks.com/imgs/logo-1024.png',
+      logo_svg: 'https://bp.neftyblocks.com/imgs/logo.svg'
+    },
+    location: {
+      name: 'Guatemala',
+      country: 'GT',
+      latitude: 14.628434,
+      longitude: -90.522713
+    },
+    social: {
+      telegram: 'neftyblocks',
+      twitter: 'neftyblocks',
+      github: 'neftyblocks',
+      youtube: 'channel/UCAOiiR1k9uF6zvvsmfnws3w'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p-testnet.neftyblocks.com:19876',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://wax-public-testnet.neftyblocks.com',
+      ssl_endpoint: 'https://wax-public-testnet.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      full: true,
+      api_endpoint: 'http://wax-testnet-hyperion.neftyblocks.com',
+      ssl_endpoint: 'https://wax-testnet-hyperion.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      features: [Array],
+      full: true,
+      api_endpoint: 'http://wax-testnet-history.neftyblocks.com',
+      ssl_endpoint: 'https://wax-testnet-history.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://aa-testnet-public.neftyblocks.com',
+      ssl_endpoint: 'https://aa-testnet-public.neftyblocks.com'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://lightapi-testnet.neftyblocks.com',
+      ssl_endpoint: 'https://lightapi-testnet.neftyblocks.com'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: guild.nefty on testnet 
+: ---------------------------------------- 
+Node add::  
+Node add:: http://wax-public-testnet.neftyblocks.com https://wax-public-testnet.neftyblocks.com
+Node add:: http://wax-testnet-hyperion.neftyblocks.com https://wax-testnet-hyperion.neftyblocks.com
+Node add:: http://wax-testnet-history.neftyblocks.com https://wax-testnet-history.neftyblocks.com
+Node add:: http://aa-testnet-public.neftyblocks.com https://aa-testnet-public.neftyblocks.com
+Node add:: http://lightapi-testnet.neftyblocks.com https://lightapi-testnet.neftyblocks.com
+producerJson {
+  producer_account_name: 'guild.taco',
+  org: {
+    candidate_name: 'Taco',
+    website: 'https://tacostudios.io',
+    code_of_conduct: 'https://tacostudios.io/code-of-conduct',
+    ownership_disclosure: 'https://tacostudios.io/ownership-disclosure',
+    email: 'info@tacocrypto.io',
+    github_user: 'FedeGens',
+    other_resources: [],
+    branding: {
+      logo_256: 'https://tacostudios.io/wp-content/uploads/2024/04/taco_logo_256.png',
+      logo_1024: 'https://tacostudios.io/wp-content/uploads/2024/04/taco_logo_1024.png',
+      logo_svg: 'https://tacostudios.io/wp-content/uploads/2024/04/taco_logo_256.svg'
+    },
+    location: {
+      name: 'Italy',
+      country: 'IT',
+      latitude: 41.9028,
+      longitude: 12.4964
+    },
+    social: {
+      twitter: 'tacowax',
+      telegram: 'tacowax',
+      github: 'tacocompany',
+      medium: 'taco.wax'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'seed',
+      p2p_endpoint: 'peer.wax-test.tacocrypto.io:9999'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic-wax-test.tacocrypto.io',
+      ssl_endpoint: 'https://atomic-wax-test.tacocrypto.io'
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://wax-test.tacocrypto.io',
+      ssl_endpoint: 'https://wax-test.tacocrypto.io'
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://wax-test.tacocrypto.io/hyperion',
+      ssl_endpoint: 'https://wax-test.tacocrypto.io/hyperion'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: guild.taco on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://atomic-wax-test.tacocrypto.io https://atomic-wax-test.tacocrypto.io
+Node add:: http://wax-test.tacocrypto.io https://wax-test.tacocrypto.io
+Node add:: http://wax-test.tacocrypto.io/hyperion https://wax-test.tacocrypto.io/hyperion
+producerJson {
+  producer_account_name: 'ivote4waxusa',
+  org: {
+    candidate_name: 'WAXUSA',
+    website: 'https://eosusa.io',
+    ownership_disclosure: 'https://eosusa.io/ownership',
+    code_of_conduct: 'https://eosusa.io/code-of-conduct',
+    email: 'eosusa.michael@gmail.com',
+    github_user: 'eosusa-michael',
+    branding: {
+      logo_256: 'https://eosusa.io/img/eosusa_256.png',
+      logo_1024: 'https://eosusa.io/img/eosusa_1024.png',
+      logo_svg: 'https://eosusa.io/img/eosusa.svg'
+    },
+    location: {
+      name: 'Greenville,SC',
+      country: 'US',
+      latitude: 34.86196,
+      longitude: -82.23466
+    },
+    social: {
+      steemit: 'realitybytes',
+      twitter: 'ivote4_eos_usa',
+      youtube: 'user/calbright4',
+      facebook: 'ivote4eosusa',
+      github: 'eosusa',
+      keybase: 'eosusa',
+      telegram: 'eosusa'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      api_endpoint: 'http://test.wax.eosusa.io',
+      ssl_endpoint: 'https://test.wax.eosusa.io',
+      snapshot_endpoint: 'https://snapshots.eosusa.io/snaps/waxtest',
+      node_type: 'query',
+      full: true,
+      features: [Array]
+    },
+    {
+      location: [Object],
+      p2p_endpoint: 'test.wax.p2p.eosusa.io:19875',
+      node_type: 'seed',
+      full: true
+    },
+    {
+      location: [Object],
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: '',
+      node_type: 'producer'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: ivote4waxusa on testnet 
+: ---------------------------------------- 
+Node add:: http://test.wax.eosusa.io https://test.wax.eosusa.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'ledgerwiseio',
+  org: {
+    candidate_name: 'LedgerWise',
+    website: 'https://ledgerwise.io',
+    code_of_conduct: 'https://ledgerwise.io/conduct.html',
+    ownership_disclosure: 'https://ledgerwise.io/ownership.html',
+    email: 'hello@ledgerwise.io',
+    github_user: 'jorfermo',
+    phone: '',
+    branding: {
+      logo_256: 'https://ledgerwise.io/img/icon256.png',
+      logo_1024: 'https://ledgerwise.io/img/icon1024.png',
+      logo_svg: 'https://ledgerwise.io/img/icon.svg'
+    },
+    location: {
+      name: 'India',
+      country: 'IN',
+      latitude: 27.806298,
+      longitude: 77.3805321
+    },
+    social: {
+      telegram: 'ledgerwiseio',
+      twitter: 'ledgerwise',
+      keybase: 'tanishv',
+      github: 'ledgerwise'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: [Array],
+      api_endpoint: 'http://waxtestnet.ledgerwise.io',
+      ssl_endpoint: 'https://waxtestnet.ledgerwise.io',
+      p2p_endpoint: 'waxp2ptestnet.ledgerwise.io:20876',
+      features: [Array],
+      full: true
+    },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: ledgerwiseio on testnet 
+: ---------------------------------------- 
+Node add:: http://waxtestnet.ledgerwise.io https://waxtestnet.ledgerwise.io
+producerJson {
+  producer_account_name: 'liquidgaming',
+  org: {
+    candidate_name: 'LiquidStudios',
+    website: 'https://liquiid.io',
+    code_of_conduct: 'https://liquiid.io/code-of-conduct',
+    ownership_disclosure: 'https://liquiid.io/ownership-disclosure',
+    email: 'info@liquiid.io',
+    github_user: [ 'cmadh', 'kthamm' ],
+    branding: { logo_256: '', logo_1024: '', logo_svg: '' },
+    location: { name: 'Germany', country: 'DE', latitude: 52, longitude: 10 },
+    social: {
+      steemit: '',
+      twitter: 'beliquiid',
+      youtube: '',
+      facebook: '',
+      github: 'liquiidio',
+      keybase: 'cmadh',
+      reddit: 'liquidstudios',
+      telegram: 'liquidstudios',
+      wechat: ''
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.wax-test.liquidstudios.io:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api.wax-test.liquidstudios.io',
+      ssl_endpoint: 'https://api.wax-test.liquidstudios.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api.wax-test.liquidstudios.io',
+      ssl_endpoint: 'https://api.wax-test.liquidstudios.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: liquidgaming on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://api.wax-test.liquidstudios.io https://api.wax-test.liquidstudios.io
+Node add:: http://api.wax-test.liquidstudios.io https://api.wax-test.liquidstudios.io
+producerJson {
+  producer_account_name: 'nation.wax',
+  org: {
+    candidate_name: 'EOS Nation',
+    website: 'https://eosnation.io',
+    ownership_disclosure: 'https://eosnation.io/ownership-disclosure',
+    code_of_conduct: 'https://steemit.com/eos/@eosnation/eos-nation-roadmap-on-values-community-project-timeline-finances-and-transparency',
+    email: 'info@eosnation.io',
+    github_user: [ 'deniscarriere', 'matthewdarwin' ],
+    chain_resources: 'https://snapshots.eosnation.io',
+    branding: {
+      logo_256: 'https://eosnation.io/logos/logo_256.png',
+      logo_1024: 'https://eosnation.io/logos/logo_1024.png',
+      logo_svg: 'https://eosnation.io/logos/logo.svg'
+    },
+    location: {
+      name: 'Canada',
+      country: 'CA',
+      latitude: 45.425532,
+      longitude: -75.700269
+    },
+    social: {
+      medium: 'eosnationbp',
+      hive: 'eosnation',
+      steemit: 'eosnation',
+      twitter: 'EOS_Nation',
+      facebook: 'groups/EOSNation',
+      github: 'EOS-Nation',
+      telegram: 'EOSNation',
+      youtube: 'channel/UCXgAY9DyooykrubRXw3xK1g',
+      reddit: 'EOSNation',
+      keybase: 'eosnation',
+      wechat: 'Eosnation'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      api_endpoint: 'http://waxtest.api.eosnation.io',
+      ssl_endpoint: 'https://waxtest.api.eosnation.io'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'waxtest.seed.eosnation.io:9876'
+    },
+    { location: [Object], node_type: 'producer', full: false },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      ssl_endpoint: 'https://waxtest.firehose.pinax.network'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      features: [Array],
+      ssl_endpoint: 'https://waxtest.substreams.pinax.network'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: nation.wax on testnet 
+: ---------------------------------------- 
+Node add:: http://waxtest.api.eosnation.io https://waxtest.api.eosnation.io
+Node add:: undefined 
+Node add:: undefined https://waxtest.firehose.pinax.network
+Node add:: undefined https://waxtest.substreams.pinax.network
+producerJson {
+  producer_account_name: 'oneinacilian',
+  org: {
+    candidate_name: 'OIAC',
+    website: 'https://www.oiac.io',
+    code_of_conduct: 'https://oiac.io/coc-oiac.html',
+    ownership_disclosure: 'https://oiac.io/coc-oiac.html',
+    email: 'cillian@oiac.io',
+    github_user: [ 'oneinacillian' ],
+    branding: {
+      logo_256: 'https://www.oiac.io/images/oiac_256.png',
+      logo_1024: 'https://www.oiac.io/images/oiac_1024.png',
+      logo_svg: 'https://www.oiac.io/images/oiac-svg.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.5286208,
+      longitude: -0.1716373
+    },
+    social: {
+      steemit: '',
+      twitter: 'OIACWAX',
+      facebook: '',
+      github: 'oneinacillian',
+      reddit: '',
+      keybase: 'oneinacillian',
+      telegram: 'Cillian_Maye'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://hyperion-test.oiac.io',
+      ssl_endpoint: 'https://hyperion-test.oiac.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2ptest.oiac.io:19877',
+      full: true
+    },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://atomic-test.oiac.io',
+      ssl_endpoint: 'https://atomic-test.oiac.io',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: oneinacilian on testnet 
+: ---------------------------------------- 
+Node add:: http://hyperion-test.oiac.io https://hyperion-test.oiac.io
+Node add:: undefined 
+Node add:: http://atomic-test.oiac.io https://atomic-test.oiac.io
+producerJson {
+  producer_account_name: 'pink.gg',
+  org: {
+    candidate_name: 'pink.gg',
+    website: 'https://pink.gg',
+    code_of_conduct: 'https://bp.pink.gg/code-of-conduct.html',
+    ownership_disclosure: 'https://bp.pink.gg/ownership-disclosure.html',
+    email: 'business@pink.gg',
+    github_user: [ 'fabian-emilius', 'jona-wilmsmann' ],
+    branding: {
+      logo_256: 'https://bp.pink.gg/image/guild/logo_256.png',
+      logo_1024: 'https://bp.pink.gg/image/guild/logo_1024.png',
+      logo_svg: 'https://bp.pink.gg/image/guild/logo.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 48.262556,
+      longitude: 11.668231
+    },
+    social: {
+      medium: 'pinkgg',
+      twitter: 'atomichub',
+      github: 'pinknetworkx',
+      telegram: 'atomicassets',
+      keybase: 'pinknetwork'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'peer1.testnet.wax.pink.gg:16714'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://testnet.wax.pink.gg',
+      ssl_endpoint: 'https://testnet.wax.pink.gg'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://test.wax.api.atomicassets.io',
+      ssl_endpoint: 'https://test.wax.api.atomicassets.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: pink.gg on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://testnet.wax.pink.gg https://testnet.wax.pink.gg
+Node add:: http://test.wax.api.atomicassets.io https://test.wax.api.atomicassets.io
+producerJson {
+  producer_account_name: 'qaraqolblock',
+  org: {
+    candidate_name: 'Qaraqol Block',
+    website: 'https://www.qaraqol.com',
+    code_of_conduct: 'https://qaraqol.com/?p=58',
+    ownership_disclosure: 'https://qaraqol.com/?p=58',
+    email: 'info@qaraqol.com',
+    github_user: 'qaraqol',
+    branding: {
+      logo_256: 'https://qaraqol.com/qaraqol_256.png',
+      logo_1024: 'https://qaraqol.com/qaraqol_1024.png',
+      logo_svg: 'https://qaraqol.com/qaraqol_svg.svg'
+    },
+    location: {
+      name: 'Afghanistan',
+      country: 'AF',
+      latitude: 34.5553,
+      longitude: 69.2075
+    },
+    social: {
+      twitter: 'qaraqol_',
+      github: 'qaraqol',
+      keybase: 'qaraqol',
+      telegram: 'qaraqolblock'
+    },
+    other_resources: [
+      'https://strategist.qaraqol.com',
+      'https://ipfs.qaraqol.com/ipfs/QmW7xsd1a6ap6HZ3AeZhbbZvCLK3KCkybS3XStpqQvopGi'
+    ]
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      full: true,
+      p2p_endpoint: 'p2p-waxtest.qaraqol.com:9004'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://waxtest.qaraqol.com',
+      ssl_endpoint: 'https://waxtest.qaraqol.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://atomic-waxtest.qaraqol.com',
+      ssl_endpoint: 'https://atomic-waxtest.qaraqol.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.qaraqol.com',
+      ssl_endpoint: 'https://ipfs.qaraqol.com'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: qaraqolblock on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://waxtest.qaraqol.com https://waxtest.qaraqol.com
+Node add:: http://atomic-waxtest.qaraqol.com https://atomic-waxtest.qaraqol.com
+Node add:: http://ipfs.qaraqol.com https://ipfs.qaraqol.com
+producerJson {
+  producer_account_name: 'sentnlagents',
+  org: {
+    candidate_name: 'Sentnl',
+    website: 'https://www.sentnl.io',
+    code_of_conduct: 'https://medium.com/@charles.holtzkampf/wax-code-of-conduct-c135050c49a4',
+    ownership_disclosure: 'https://medium.com/@charles.holtzkampf/wax-code-of-conduct-c135050c49a4#2dd3',
+    email: 'charles@sentnl.io',
+    branding: {
+      logo_256: 'https://www.sentnl.io/sentnl_256.png',
+      logo_1024: 'https://www.sentnl.io/sentnl_1024.png',
+      logo_svg: 'https://www.sentnl.io/sentnl.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.51118829,
+      longitude: -0.09617353
+    },
+    social: {
+      steemit: '',
+      twitter: 'sentnl_io',
+      facebook: '',
+      github: 'ankh2054',
+      reddit: '',
+      keybase: 'ankh2054',
+      telegram: 'ankh2054'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://hyperion-test.sentnl.io',
+      ssl_endpoint: 'https://hyperion-test.sentnl.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'waxtest.sentnl.io:9877'
+    },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: sentnlagents on testnet 
+: ---------------------------------------- 
+Node add:: http://hyperion-test.sentnl.io https://hyperion-test.sentnl.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'sentnlagents',
+  org: {
+    candidate_name: 'Sentnl',
+    website: 'https://www.sentnl.io',
+    code_of_conduct: 'https://medium.com/@charles.holtzkampf/wax-code-of-conduct-c135050c49a4',
+    ownership_disclosure: 'https://medium.com/@charles.holtzkampf/wax-code-of-conduct-c135050c49a4#2dd3',
+    email: 'charles@sentnl.io',
+    branding: {
+      logo_256: 'https://www.sentnl.io/sentnl_256.png',
+      logo_1024: 'https://www.sentnl.io/sentnl_1024.png',
+      logo_svg: 'https://www.sentnl.io/sentnl.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.51118829,
+      longitude: -0.09617353
+    },
+    social: {
+      steemit: '',
+      twitter: 'sentnl_io',
+      facebook: '',
+      github: 'ankh2054',
+      reddit: '',
+      keybase: 'ankh2054',
+      telegram: 'ankh2054'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://hyperion-test.sentnl.io',
+      ssl_endpoint: 'https://hyperion-test.sentnl.io',
+      features: [Array],
+      full: true
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'waxtest.sentnl.io:9877'
+    },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: sentnltestin on testnet 
+: ---------------------------------------- 
+Node add:: http://hyperion-test.sentnl.io https://hyperion-test.sentnl.io
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'wax.eastern',
+  org: {
+    candidate_name: 'WAX.Eastern',
+    website: 'https://waxeastern.cn',
+    code_of_conduct: 'https://waxeastern.cn/conduct.html',
+    ownership_disclosure: 'https://waxeastern.cn/conduct.html',
+    email: 'monica92@yeah.net',
+    github_user: [ 'waxeastern' ],
+    branding: {
+      logo_256: 'https://waxeastern.cn/media/logo-256.png',
+      logo_512: 'https://waxeastern.cn/media/logo-512.png',
+      logo_1024: 'https://waxeastern.cn/media/logo-1024.png',
+      logo_svg: 'https://waxeastern.cn/media/logo.svg'
+    },
+    location: {
+      name: 'Chengdu',
+      country: 'CN',
+      latitude: 30.5911,
+      longitude: 104.0761
+    },
+    social: {
+      twitter: 'easternwax',
+      github: '',
+      telegram: 'wax_eastern',
+      wechat: 'waxeastern',
+      medium: 'easternwax'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.testnet.waxeastern.cn:9876'
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      api_endpoint: 'http://api.testnet.waxeastern.cn',
+      ssl_endpoint: 'https://api.testnet.waxeastern.cn',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: wax.eastern on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://api.testnet.waxeastern.cn https://api.testnet.waxeastern.cn
+producerJson {
+  producer_account_name: 'waxauthority',
+  org: {
+    candidate_name: 'EOS Authority',
+    website: 'https://eosauthority.com',
+    email: 'hello@eosauthority.com',
+    github_user: 'eosauthority',
+    branding: {
+      logo_256: 'https://eosauthority.com/common/bp-standard-info/EOS-AUTHORITY-256.jpg',
+      logo_1024: 'https://eosauthority.com/common/bp-standard-info/EOS-AUTHORITY-1024.jpg',
+      logo_svg: 'https://eosauthority.com/common/bp-standard-info/eosauthority.svg'
+    },
+    location: {
+      name: 'London',
+      country: 'GB',
+      latitude: 51.512838,
+      longitude: -0.087177
+    },
+    social: {
+      steemit: 'eosauthority',
+      twitter: 'eosauthority',
+      youtube: 'eosauthority',
+      facebook: '',
+      github: 'eosauthority',
+      reddit: 'eosauthority',
+      keybase: 'eosauthority',
+      telegram: 'eosauthority',
+      wechat: 'eosauthority'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://api-waxtest.eosauthority.com',
+      ssl_endpoint: 'https://api-waxtest.eosauthority.com',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'node-waxtest.eosauthority.com:9302'
+    },
+    { location: [Object], node_type: 'producer' }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxauthority on testnet 
+: ---------------------------------------- 
+Node add:: http://api-waxtest.eosauthority.com https://api-waxtest.eosauthority.com
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'waxdaoguild1',
+  org: {
+    candidate_name: 'WaxDAO BP',
+    website: 'https://waxdaobp.io',
+    code_of_conduct: 'https://waxdaobp.io/code-of-conduct',
+    ownership_disclosure: 'https://waxdaobp.io/team',
+    email: 'mikedcryptocurrency@gmail.com',
+    github_user: 'mdcryptonfts',
+    branding: {
+      logo_256: 'https://waxdaobp.io/logo256.png',
+      logo_1024: 'https://waxdaobp.io/logo1024.png',
+      logo_svg: 'https://waxdaobp.io/logo.svg'
+    },
+    location: {
+      name: 'United States',
+      country: 'US',
+      latitude: 37.0902,
+      longitude: 95.7129
+    },
+    social: {
+      telegram: 'MikeD_Crypto',
+      twitter: 'MikeD_Crypto',
+      github: 'mdcryptonfts',
+      youtube: '@MikeDCrypto',
+      hive: 'mikedcrypto'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'p2p-test.waxdaobp.io:9876',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://test-api.waxdaobp.io',
+      ssl_endpoint: 'https://test-api.waxdaobp.io'
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://history-test.waxdaobp.io',
+      ssl_endpoint: 'https://history-test.waxdaobp.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxdaoguild1 on testnet 
+: ---------------------------------------- 
+Node add::  
+Node add:: http://test-api.waxdaobp.io https://test-api.waxdaobp.io
+Node add:: http://history-test.waxdaobp.io https://history-test.waxdaobp.io
+producerJson {
+  producer_account_name: 'waxhiveguild',
+  org: {
+    candidate_name: 'Hive BP',
+    website: 'https://hivebp.io',
+    code_of_conduct: 'https://hivebp.io/#code',
+    ownership_disclosure: 'https://hivebp.io/#team',
+    email: 'ben@nfthive.io',
+    github_user: 'finetunes-bpetersen',
+    branding: {
+      logo_256: 'https://hivebp.io/hivebp-logo256.png',
+      logo_1024: 'https://hivebp.io/hivebp-logo1024.png',
+      logo_svg: 'https://hivebp.io/hivebp-logo.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 53.6118716,
+      longitude: 10.322786
+    },
+    social: {
+      keybase: 'ben616',
+      telegram: 'Ben616',
+      twitter: 'nfthiveio',
+      github: 'hiveben'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'peer-test.hivebp.io:9876',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://api-test.hivebp.io',
+      ssl_endpoint: 'https://api-test.hivebp.io'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      full: true,
+      api_endpoint: 'http://hyperion-test.hivebp.io',
+      ssl_endpoint: 'https://hyperion-test.hivebp.io'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxhiveguild on testnet 
+: ---------------------------------------- 
+Node add::  
+Node add:: http://api-test.hivebp.io https://api-test.hivebp.io
+Node add:: http://hyperion-test.hivebp.io https://hyperion-test.hivebp.io
+producerJson {
+  producer_account_name: 'waxnodeonebp',
+  org: {
+    candidate_name: 'nodeONE☝️',
+    website: 'http://www.nodeone.io',
+    code_of_conduct: 'https://steemit.com/eos/@eosnodeone/eos-nodeone-roadmap-and-stance-on-vote-buying',
+    ownership_disclosure: 'https://steemit.com/nodeone/@eosnodeone/eosnodeone-ownership-disclosure',
+    email: 'contact@eosnodeone.io',
+    github_user: 'hahnryu',
+    branding: {
+      logo_256: 'http://www.nodeone.io/resources/images/eosnodeone_logo_256.png',
+      logo_1024: 'http://www.nodeone.io/resources/images/eosnodeone_logo_1024.png',
+      logo_svg: 'http://www.nodeone.io/resources/images/eosnodeone_logo.svg'
+    },
+    location: {
+      name: 'Seoul',
+      country: 'KR',
+      latitude: 37.5326,
+      longitude: 127.024612
+    },
+    social: {
+      steemit: 'eosnodeone',
+      twitter: 'eosnodeone',
+      github: 'eosnodeone',
+      keybase: 'hahn_eosnodeone',
+      telegram: 'nodeone_group'
+    }
+  },
+  nodes: [
+    {
+      location: [Object],
+      node_type: 'producer',
+      p2p_endpoint: '',
+      api_endpoint: '',
+      ssl_endpoint: ''
+    },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'peer-waxtest.nodeone.network:9875',
+      api_endpoint: 'http://api-waxtest.nodeone.network:8888',
+      ssl_endpoint: 'https://api-waxtest.nodeone.network:8344'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxnodeonebp on testnet 
+: ---------------------------------------- 
+Node add:: http://api-waxtest.nodeone.network:8888 https://api-waxtest.nodeone.network:8344
+producerJson {
+  producer_account_name: 'waxswedenorg',
+  org: {
+    candidate_name: 'Sw/eden🌿',
+    website: 'https://waxsweden.org',
+    code_of_conduct: 'https://waxsweden.org/code-of-conduct/',
+    ownership_disclosure: 'https://waxsweden.org/code-of-conduct/#ownership',
+    chain_resources: 'https://snapshots.eossweden.org',
+    email: 'contact@waxsweden.org',
+    github_user: [ 'xebb82', 'coachbjork', 'pnx' ],
+    branding: {
+      logo_256: 'https://waxsweden.org/logo/logo-256.png',
+      logo_1024: 'https://waxsweden.org/logo/logo-1024.png',
+      logo_svg: 'https://waxsweden.org/logo/sw-eden-teal.svg'
+    },
+    location: {
+      name: 'Sweden',
+      country: 'SE',
+      latitude: 59.6268,
+      longitude: 16.544
+    },
+    social: {
+      steemit: 'eossweden',
+      twitter: 'waxsweden',
+      youtube: 'channel/UCsqfZJRzNitVnWrWqlfIs6A',
+      facebook: 'EOS-sweden-554084258304426',
+      github: 'eosswedenorg',
+      reddit: 'eossweden',
+      keybase: 'xebb',
+      telegram: 'eossweden',
+      wechat: 'xebb82',
+      medium: 'waxsweden'
+    }
+  },
+  nodes: [
+    { location: [Object], full: false, node_type: 'producer' },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'seed',
+      p2p_endpoint: 'p2p.testnet.waxsweden.org:59676'
+    },
+    {
+      location: [Object],
+      full: true,
+      node_type: 'query',
+      api_endpoint: 'http://testnet.waxsweden.org',
+      ssl_endpoint: 'https://testnet.waxsweden.org',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: waxswedenorg on testnet 
+: ---------------------------------------- 
+Node add:: undefined 
+Node add:: http://testnet.waxsweden.org https://testnet.waxsweden.org
+producerJson {
+  producer_account_name: 'wecan',
+  org: {
+    candidate_name: 'WeCan',
+    website: 'https://wecan.dev',
+    code_of_conduct: 'https://wecan.dev/code-of-conduct',
+    ownership_disclosure: 'https://wecan.dev/ownership-disclosure',
+    email: 'contact@wecan.dev',
+    github_user: 'We-Can-dev',
+    chain_resources: 'https://backup.wecan.dev',
+    other_resources: [
+      'https://prospectors.io',
+      'https://rplanet.io',
+      'https://tribalbooks.io',
+      'https://waxscan.wecan.dev',
+      'https://ipfs.wecan.dev/ipfs/QmW4XxaEg8cWsYisfjnjqLFi1MbHMYjt7nbCh8ZHwgg9c2'
+    ],
+    branding: {
+      logo_256: 'https://wecan.dev/logo_256.png',
+      logo_1024: 'https://wecan.dev/logo_1024.png',
+      logo_svg: 'https://wecan.dev/logo.svg'
+    },
+    location: {
+      name: 'Ukraine',
+      country: 'UA',
+      latitude: 49.8397,
+      longitude: 24.0297
+    },
+    social: {
+      keybase: 'wecan_dev',
+      twitter: 'devwecan',
+      reddit: 'WeCan-dev',
+      youtube: 'channel/UCJ07CHIqC2LBS3al0G7s0dA',
+      medium: 'wecandev'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: 'query',
+      api_endpoint: 'http://api-wax-testnet.wecan.dev',
+      ssl_endpoint: 'https://api-wax-testnet.wecan.dev',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      full: true,
+      api_endpoint: 'http://hyperion-wax-testnet.wecan.dev',
+      ssl_endpoint: 'https://hyperion-wax-testnet.wecan.dev',
+      features: [Array]
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://atomic-wax-testnet.wecan.dev',
+      ssl_endpoint: 'https://atomic-wax-testnet.wecan.dev'
+    },
+    {
+      location: [Object],
+      node_type: 'query',
+      features: [Array],
+      api_endpoint: 'http://ipfs.wecan.dev',
+      ssl_endpoint: 'https://ipfs.wecan.dev'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'seed1-wax-testnet.wecan.dev:9876'
+    },
+    {
+      location: [Object],
+      node_type: 'seed',
+      p2p_endpoint: 'seed2-wax-testnet.wecan.dev:9876'
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: wecan on testnet 
+: ---------------------------------------- 
+Node add:: http://api-wax-testnet.wecan.dev https://api-wax-testnet.wecan.dev
+Node add:: http://hyperion-wax-testnet.wecan.dev https://hyperion-wax-testnet.wecan.dev
+Node add:: http://atomic-wax-testnet.wecan.dev https://atomic-wax-testnet.wecan.dev
+Node add:: http://ipfs.wecan.dev https://ipfs.wecan.dev
+Node add:: undefined 
+Node add:: undefined 
+producerJson {
+  producer_account_name: 'wombatblockx',
+  org: {
+    candidate_name: 'Spielworks',
+    website: 'https://www.spielworks.com',
+    code_of_conduct: 'https://www.spielworks.com/wombat-guild-coc',
+    ownership_disclosure: 'https://www.spielworks.com/wombat-guild-coc',
+    email: 'ops@spielworks.com',
+    github_user: 'dimi-sw',
+    other_resources: [
+      'https://womplay.io',
+      'https://www.wombat.app',
+      'https://blend.wombat.app',
+      'https://staking.wombat.app',
+      'https://defi.getwombat.io',
+      'https://dungeon.wombat.app',
+      'https://worlds.wombat.app'
+    ],
+    branding: {
+      logo_256: 'https://d3iv0zhjq207ej.cloudfront.net/logos/wombat-logo-256x256.png',
+      logo_1024: 'https://d3iv0zhjq207ej.cloudfront.net/logos/wombat-logo-1024x1024.png',
+      logo_svg: 'https://d3iv0zhjq207ej.cloudfront.net/logos/wombat-logo-svg.svg'
+    },
+    location: {
+      name: 'Germany',
+      country: 'DE',
+      latitude: 52.5048,
+      longitude: 13.3734
+    },
+    social: {
+      telegram: 'getwombat',
+      twitter: 'adoptwombat',
+      github: 'wombat-tech',
+      youtube: 'channel/UC9TSQ2aLOWlcorcvfOsfFiQ',
+      facebook: 'WomPlaytoEarn',
+      medium: 'wombat',
+      discord: 'wombatgamers'
+    }
+  },
+  nodes: [
+    { location: [Object], node_type: 'producer' },
+    { location: [Object], node_type: 'producer' },
+    {
+      location: [Object],
+      node_type: [Array],
+      p2p_endpoint: 'wax-p2p-testnet.wombat.app:9876',
+      api_endpoint: 'http://wax-testnet.wombat.app',
+      ssl_endpoint: 'https://wax-testnet.wombat.app',
+      features: [Array]
+    }
+  ]
+}
+: ---------------------------------------- 
+: Adding: wombatblockx on testnet 
+: ---------------------------------------- 
+Node add:: http://wax-testnet.wombat.app https://wax-testnet.wombat.app

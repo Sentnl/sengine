@@ -1,0 +1,32 @@
+
+> wax-monitoring-backend@1.0.0 start
+> node src/index.js
+
+{"level":30,"time":1728026586214,"pid":6792,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://[::1]:3000"}
+{"level":30,"time":1728026586214,"pid":6792,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://127.0.0.1:3000"}
+Updating producers for mainnet
+Retrieved 135 producers for mainnet
+Processing producer: 3dkrenderwax for mainnet
+Saving producer: {
+  name: '3dkrenderwax',
+  website: 'https://3dkrender.com',
+  chain_json_url: 'https://3dkrender.com/chains.json',
+  json_url: 'https://3dkrender.com/bp.json',
+  logo_svg: 'https://3dkrender.com/3dkrender.svg',
+  chain: 'mainnet'
+}
+Producer saved successfully: 3dkrenderwax mainnet
+Saving producer service: {
+  node_type: 'producer',
+  api_endpoint: undefined,
+  ssl_endpoint: undefined,
+  p2p_endpoint: undefined,
+  features: undefined,
+  is_full: false,
+  location: {
+    name: 'Germany',
+    country: 'DE',
+    latitude: 52.520008,
+    longitude: 13.404954
+  }
+}
