@@ -1,10 +1,10 @@
-import ky from 'ky';
+import got from 'got';
 import http2 from 'http2';
 import { getHyperionNodes } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 import { Logger } from '../helpers/Logger.js';
-import { generateCurlCommandFromKyConfig } from '../helpers/curlGenerator.js';
+import { generateCurlCommandFromGotConfig } from '../helpers/curlGenerator.js';
 import { measureResponseTime } from '../helpers/measureResponseTime.js';
 import { saveTestResultWrapper } from './validateCore.js';
 
@@ -12,17 +12,19 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
 
   // 1. Node is correctly marked as full
   console.log(endpoint, isFull);
-  const fullNodeCurl = generateCurlCommandFromKyConfig(endpoint);
+  const fullNodeCurl = generateCurlCommandFromGotConfig(endpoint);
   await saveTestResultWrapper(producerId, chain, TEST_TYPES.HYPERION.FULL_NODE, isFull, endpoint, 0, 200, isFull ? null : 'Node is not marked as full', fullNodeCurl, nodeType);
 
   // 2. Combined health, HTTP, and CORS check
   const healthUrl = `${endpoint}/v2/health`;
   const corsConfig = { headers: { 'Origin': 'https://wax.sengine.co' } };
-  const healthCurl = generateCurlCommandFromKyConfig(healthUrl, corsConfig);
+  const healthCurl = generateCurlCommandFromGotConfig(healthUrl, corsConfig);
 
   try {
-    const { result: response, responseTime } = await measureResponseTime(() => ky.get(healthUrl, corsConfig));
-    const healthResponse = await response.json();
+    const { result: response, responseTime } = await measureResponseTime(() => 
+      got(healthUrl, { headers: corsConfig.headers })
+    );
+    const healthResponse = JSON.parse(response.body);
     
     // Health check
     const healthOk = healthResponse.health && Array.isArray(healthResponse.health);
@@ -32,7 +34,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTP, true, healthUrl, responseTime, 200, null, healthCurl, nodeType);
 
     // CORS check
-    const corsHeader = response.headers.get('access-control-allow-origin');
+    const corsHeader = response.headers['access-control-allow-origin'];
     const corsValues = corsHeader ? corsHeader.split(',').map(v => v.trim()) : [];
     const corsOk = corsValues.includes('*') || corsValues.includes('https://wax.sengine.co');
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.CORS, corsOk, healthUrl, responseTime, 200, corsOk ? null : 'CORS not properly configured', healthCurl, nodeType);
@@ -56,7 +58,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
 
   // HTTP2 check with timeout
   const http2Endpoint = endpoint.replace('http://', 'https://');
-  const http2Curl = generateCurlCommandFromKyConfig(`${http2Endpoint}/v2/health`, { headers: { ':method': 'GET' } });
+  const http2Curl = generateCurlCommandFromGotConfig(`${http2Endpoint}/v2/health`, { headers: { ':method': 'GET' } });
 
   try {
     const { responseTime } = await measureResponseTime(() => 
@@ -103,9 +105,9 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
 
   // 3. HTTPS is available (keep this separate as it's testing a different protocol)
   const httpsEndpoint = endpoint.replace('http://', 'https://');
-  const httpsCurl = generateCurlCommandFromKyConfig(`${httpsEndpoint}/v2/health`);
+  const httpsCurl = generateCurlCommandFromGotConfig(`${httpsEndpoint}/v2/health`);
   try {
-    const { responseTime } = await measureResponseTime(() => ky.get(`${httpsEndpoint}/v2/health`));
+    const { responseTime } = await measureResponseTime(() => got(`${httpsEndpoint}/v2/health`));
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTPS, true, `${httpsEndpoint}/v2/health`, responseTime, 200, null, httpsCurl, nodeType);
   } catch (error) {
     const errorStatus = error.response?.status || 500;
@@ -113,10 +115,12 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
   }
 
   // 4. get_transaction test
-  const transactionCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/history/get_transaction`, { searchParams: { id: validationData.transaction } });
+  const transactionCurl = generateCurlCommandFromGotConfig(`${endpoint}/v2/history/get_transaction`, { searchParams: { id: validationData.transaction } });
   try {
     const { result: transactionResponse, responseTime } = await measureResponseTime(() => 
-      ky.get(`${endpoint}/v2/history/get_transaction`, { searchParams: { id: validationData.transaction } }).json()
+      got(`${endpoint}/v2/history/get_transaction`, { 
+        searchParams: { id: validationData.transaction }
+      }).json()
     );
     const transactionOk = transactionResponse.query_time_ms !== undefined;
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.HYPERION.GET_TRANSACTION, transactionOk, `${endpoint}/v2/history/get_transaction`, responseTime, 200, transactionOk ? null : 'Invalid transaction response', transactionCurl, nodeType);
@@ -126,10 +130,12 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
   }
 
   // 5. get_actions test
-  const actionsCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/history/get_actions`, { searchParams: { limit: 1 } });
+  const actionsCurl = generateCurlCommandFromGotConfig(`${endpoint}/v2/history/get_actions`, { searchParams: { limit: 1 } });
   try {
     const { result: actionsResponse, responseTime } = await measureResponseTime(() => 
-      ky.get(`${endpoint}/v2/history/get_actions`, { searchParams: { limit: 1 } }).json()
+      got(`${endpoint}/v2/history/get_actions`, { 
+        searchParams: { limit: 1 }
+      }).json()
     );
     const actionsOk = actionsResponse.actions && Array.isArray(actionsResponse.actions);
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.HYPERION.GET_ACTIONS, actionsOk, `${endpoint}/v2/history/get_actions`, responseTime, 200, actionsOk ? null : 'Invalid actions response', actionsCurl, nodeType);
@@ -139,10 +145,12 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
   }
 
   // 6. get_key_accounts test
-  const keyAccountsCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } });
+  const keyAccountsCurl = generateCurlCommandFromGotConfig(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } });
   try {
     const { result: keyAccountsResponse, responseTime } = await measureResponseTime(() => 
-      ky.get(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } }).json()
+      got(`${endpoint}/v2/state/get_key_accounts`, { 
+        searchParams: { public_key: config.publicKey }
+      }).json()
     );
     const keyAccountsOk = keyAccountsResponse.account_names !== undefined;
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.HYPERION.GET_KEY_ACCOUNTS, keyAccountsOk, `${endpoint}/v2/state/get_key_accounts`, responseTime, 200, keyAccountsOk ? null : 'Invalid key accounts response', keyAccountsCurl, nodeType);
@@ -155,7 +163,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
   if (!isFull) {
     const timestamp42DaysAgo = new Date(config.timestamp42DaysAgo);
     const timestamp41DaysAgo = new Date(timestamp42DaysAgo.getTime() + 24 * 60 * 60 * 1000);
-    const partialCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/history/get_actions`, {
+    const partialCurl = generateCurlCommandFromGotConfig(`${endpoint}/v2/history/get_actions`, {
       searchParams: {
         limit: 1,
         before: timestamp41DaysAgo.toISOString(),
@@ -164,7 +172,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     });
     try {
       const { result: partialResponse, responseTime } = await measureResponseTime(() => 
-        ky.get(`${endpoint}/v2/history/get_actions`, {
+        got(`${endpoint}/v2/history/get_actions`, { 
           searchParams: {
             limit: 1,
             before: timestamp41DaysAgo.toISOString(),

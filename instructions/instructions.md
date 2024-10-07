@@ -257,6 +257,7 @@ Services to Check
             2. Atomicassets templates test - GET /atomicassets/v1/templates?collection_name=kogsofficial&has_assets=true&page=1&limit=1&order=desc&sort=created
             3. Atomicassets schema test - GET /atomicassets/v1/schemas/kogsofficial/2ndedition
             3  Atomicassets assets test - GET  atomicassets/v1/assets/{Atomic AssetID}   (Use the Atomic Asset ID we obtained during core checks)
+        5. Also test AtomicMarket endpoints.
 
     6. Oracle Feed
         Each producer should publish price feeds to chain. I have provided some python code as an example in DOC.

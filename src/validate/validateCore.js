@@ -1,6 +1,6 @@
 import { JsonRpc } from 'eosjs';
 import fetch from 'node-fetch';
-import ky from 'ky';
+import got from 'got';
 import NodePulse from '@sentnl/nodepulse';
 import { getDatabase } from '../models/db.js';
 import { Logger } from '../helpers/Logger.js';
@@ -67,7 +67,7 @@ export const getValidationData = async (chain) => {
       if (chain === 'mainnet') {
         // 3. Get an Atomic AssetId (only for mainnet)
         const atomicEndpoint = await mainnetAtomicNodePulse.getNode();
-        const atomicAssetResponse = await ky.get(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
+        const atomicAssetResponse = await got(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
         atomicAssetId = atomicAssetResponse.data[0]?.asset_id || null;
 
         // 4. Get delphioracle actions (only for mainnet)
@@ -101,7 +101,7 @@ export const saveTestResult = async (
   statusCode,
   errorMessage,
   curlCmd,
-  type // Added new parameter
+  type
 ) => {
   const db = getDatabase();
   const query = `
@@ -129,7 +129,7 @@ export const saveTestResult = async (
     statusCode,
     errorMessage,
     curlCmd,
-    type, // Added new value
+    type,
   ]);
 };
 

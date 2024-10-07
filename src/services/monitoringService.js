@@ -27,14 +27,17 @@ const updateProducers = async (chain) => {
     const chainJsonUrl = joinUrl(website, 'chains.json');
 
     try {
-      const chainJsonResponse = await httpRequest(chainJsonUrl, {}, failedRequests, website);
-      const chainJson = await chainJsonResponse.json();
+      const chainJson = await httpRequest(chainJsonUrl, {}, failedRequests, website);
 
-      if (!chainJson || !chainJson.chains) continue;
+      if (!chainJson || !chainJson.chains) {
+        continue;
+      }
 
       const chainId = config.chains[chain].chainId;
       const jsonUrl = chainJson.chains[chainId];
-      if (!jsonUrl) continue;
+      if (!jsonUrl) {
+        continue;
+      }
 
       let producerJsonUrl;
       if (isAbsoluteUrl(jsonUrl)) {
@@ -43,10 +46,11 @@ const updateProducers = async (chain) => {
         producerJsonUrl = joinUrl(website, jsonUrl);
       }
 
-      const producerJsonResponse = await httpRequest(producerJsonUrl, {}, failedRequests, website);
-      const producerJson = await producerJsonResponse.json();
-      console.log('producerJson', producerJson);
-      if (!producerJson) continue;
+      const producerJson = await httpRequest(producerJsonUrl, {}, failedRequests, website);
+
+      if (!producerJson) {
+        continue;
+      }
 
       const logoSvg = producerJson.org?.branding?.logo_svg || null;
 
@@ -64,12 +68,10 @@ const updateProducers = async (chain) => {
         await saveProducerService(producerId, service);
       }
     } catch (error) {
-      console.error(`Error processing producer ${producer.owner}:`, error);
       failedRequests++;
     }
   }
 };
-
 
 const runAllTests = async (chain) => {
   console.log(`Running all tests for ${chain}`);
@@ -93,7 +95,7 @@ const runAllTests = async (chain) => {
     Logger.log('', '----------------------------------------');
     await runAllApiTests(row.id, chain, validationData);
     Logger.log('', '----------------------------------------');
-    await runAllP2PTests(row.id, chain, validationData);
+    //await runAllP2PTests(row.id, chain, validationData);
     
     // Run other tests here...
   }
@@ -115,7 +117,7 @@ export const startMonitoring = async () => {
   await updateAllProducers();
 
   // Run all tests after producer updates have completed
-  //await runAllTestsForBothChains();
+  await runAllTestsForBothChains();
 
   // Set intervals for periodic runs
   setInterval(updateAllProducers, 15 * 60 * 1000);

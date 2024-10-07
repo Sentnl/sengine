@@ -1,11 +1,11 @@
-import ky from 'ky';
+import got from 'got';
 import { saveTestResultWrapper } from './validateCore.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 
 const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, errorMessageOnFailure) => {
   const startTime = Date.now();
   try {
-    const response = await ky.get(jsonUrl).json();
+    const response = await got(jsonUrl).json();
     const responseTime = Date.now() - startTime;
     const isSuccessful = checkSuccess(response);
 

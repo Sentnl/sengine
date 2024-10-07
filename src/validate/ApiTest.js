@@ -1,9 +1,9 @@
-import ky from 'ky';
+import got from 'got';
 import { saveTestResultWrapper, getApiNodes } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 import { Logger } from '../helpers/Logger.js';
-import { generateCurlCommandFromKyConfig } from '../helpers/curlGenerator.js';
+import { generateCurlCommandFromGotConfig } from '../helpers/curlGenerator.js';
 import { checkTls } from '../utils/tlsChecker.js';
 import { measureResponseTime } from '../helpers/measureResponseTime.js';
 
@@ -32,9 +32,9 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
 
   // HTTPS check
   const httpsGetInfoUrl = `${httpsEndpoint}/v1/chain/get_info`;
-  const httpsCurl = generateCurlCommandFromKyConfig(httpsGetInfoUrl);
+  const httpsCurl = generateCurlCommandFromGotConfig(httpsGetInfoUrl);
   try {
-    const { responseTime } = await measureResponseTime(() => ky.get(httpsGetInfoUrl));
+    const { responseTime } = await measureResponseTime(() => got(httpsGetInfoUrl));
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTPS, true, httpsEndpoint, responseTime, 200, null, httpsCurl, nodeType);
   } catch (error) {
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTPS, false, httpsEndpoint, error.responseTime || 0, error.response?.status || 500, error.message, httpsCurl, nodeType);
@@ -42,10 +42,10 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
 
   // GET /v1/chain/get_info (including HTTP check)
   const getInfoUrl = `${endpoint}/v1/chain/get_info`;
-  const getInfoCurl = generateCurlCommandFromKyConfig(getInfoUrl);
+  const getInfoCurl = generateCurlCommandFromGotConfig(getInfoUrl);
   try {
     const { result: response, responseTime } = await measureResponseTime(() => 
-      ky.post(getInfoUrl, { json: {} }).json()
+      got.post(getInfoUrl, { json: {} }).json()
     );
 
     await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTP, true, getInfoUrl, responseTime, 200, null, getInfoCurl, nodeType);
@@ -84,12 +84,12 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
   ];
 
   for (const { url, testType } of invalidEndpoints) {
-    const curlCmd = generateCurlCommandFromKyConfig(url);
+    const curlCmd = generateCurlCommandFromGotConfig(url);
     try {
-      const { result: response, responseTime } = await measureResponseTime(() => ky.get(url));
+      const { result: response, responseTime } = await measureResponseTime(() => got(url));
       
       try {
-        const jsonResponse = await response.json();
+        const jsonResponse = JSON.parse(response.body);
         // If we can parse the response as JSON, it's a fail
         await saveTestResultWrapper(producerId, chain, testType, false, url, responseTime, response.status, JSON.stringify(jsonResponse), curlCmd, nodeType);
       } catch {

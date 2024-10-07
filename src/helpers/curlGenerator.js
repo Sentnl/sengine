@@ -24,16 +24,16 @@ export function generateCurlCommand(url, method = 'GET', headers = {}, queryPara
     return curlCommand;
   }
   
-  /**
-   * Generates a curl command string from a ky request configuration.
-   * @param {string} url - The base URL for the request.
-   * @param {Object} kyConfig - The ky request configuration object.
-   * @returns {string} The generated curl command.
-   */
-  export function generateCurlCommandFromKyConfig(url, kyConfig = {}) {
-    const method = kyConfig.method || 'GET';
-    const headers = kyConfig.headers || {};
-    const searchParams = kyConfig.searchParams || {};
-  
-    return generateCurlCommand(url, method, headers, searchParams);
-  }
+/**
+ * Generates a curl command string from a got request configuration.
+ * @param {string} url - The base URL for the request.
+ * @param {Object} gotConfig - The got request configuration object.
+ * @returns {string} The generated curl command.
+ */
+export function generateCurlCommandFromGotConfig(url, gotConfig = {}) {
+  const method = gotConfig.method || 'GET';
+  const headers = gotConfig.headers || {};
+  const searchParams = gotConfig.searchParams || {};
+
+  return generateCurlCommand(url, method, headers, searchParams);
+}

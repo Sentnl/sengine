@@ -1,6 +1,6 @@
 import { JsonRpc } from 'eosjs';
 import fetch from 'node-fetch';
-import ky from 'ky';
+import got from 'got';
 import config from '../config.js';
 
 const getProducers = async (chain) => {
@@ -33,7 +33,7 @@ const getProducers = async (chain) => {
 
 const fetchChainJson = async (url) => {
   try {
-    const response = await ky.get(url).json();
+    const response = await got(url).json();
     return response;
   } catch (error) {
     console.error(`Error fetching chain.json from ${url}:`, error);
@@ -43,7 +43,7 @@ const fetchChainJson = async (url) => {
 
 const fetchProducerJson = async (url) => {
   try {
-    const response = await ky.get(url).json();
+    const response = await got(url).json();
     return response;
   } catch (error) {
     console.error(`Error fetching producer JSON from ${url}:`, error);
