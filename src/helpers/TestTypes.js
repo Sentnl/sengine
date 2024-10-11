@@ -15,6 +15,7 @@ export const TEST_TYPES = {
       GET_TRANSACTION: 'Get transaction test',
       GET_ACTIONS: 'Get actions test',
       GET_KEY_ACCOUNTS: 'Get key accounts test',
+      GET_CONTROLLED_ACCOUNTS: 'Get controlled accounts test',
       PARTIAL: 'Partial Hyperion test',
     },
     GUILD: {
@@ -29,11 +30,17 @@ export const TEST_TYPES = {
       CHECK_WAX_SYMBOL: 'Check WAX Symbol',
       PRODUCER_API: 'Producer api is not accessible',
       DBSIZE_API: 'Db_size api is not accessible',
-      NET_API: 'Net api is not accessible'
+      NET_API: 'Net api is not accessible',
+      BLOCK_ONE_TEST: 'Block one test passed',
+      LATEST_BLOCK_TEST: 'Latest block test passed',
+      BASIC_SYMBOL_TEST: 'Basic symbol test passed',
     },
     P2P: {
-      CONNECTION_POSSIBLE: 'p2p_connection_possible',
-      BLOCK_TRANSMISSION_SPEED: 'p2p_block_transmission_speed',
+      CONNECTION_POSSIBLE: 'P2P Connection was possible',
+      BLOCK_TRANSMISSION_SPEED: 'P2P Block Transmission Speed',
+      CHAIN_ID_MATCH: 'P2P Chain ID Matches',
+      P2P_NOT_AVAILABLE: 'No P2P nodes found for this producer',
+      
     },
     // You can add other test types here, e.g.:
     // ATOMIC: { ... }

@@ -2,7 +2,9 @@ import { getProducers, fetchChainJson, fetchProducerJson, parseProducerServices 
 import { saveProducer, saveProducerService } from './dataService.js';
 import { runGuildTests } from '../validate/guildTest.js';
 import { runAllHyperionTests } from '../validate/hyperionTest.js';
+import { runAllHistoryTests } from '../validate/HistoryTest.js';
 import { runAllApiTests } from '../validate/ApiTest.js';
+import { runAllP2PTests } from '../validate/P2PTest.js';
 import { getValidationData, getProducerName } from '../validate/validateCore.js';
 import config from '../config.js';
 import { isUrlIgnored, joinUrl } from '../helpers/Urls.js';
@@ -71,53 +73,62 @@ const updateProducers = async (chain) => {
 };
 
 
-const runAllTests = async (chain) => {
-  console.log(`Running all tests for ${chain}`);
+const runAllTests = async (chain, producerName = null) => {
+  console.log(`Running tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
   const validationData = await getValidationData(chain);
 
-  
   const db = getDatabase();
-  const query = "SELECT id, chain, json_url FROM producers WHERE chain = $1";
-  const { rows } = await db.query(query, [chain]);
+  let query = "SELECT id, chain, json_url, name FROM producers WHERE chain = $1";
+  let params = [chain];
+
+  if (producerName) {
+    query += " AND name = $2";
+    params.push(producerName);
+  }
+
+  const { rows } = await db.query(query, params);
 
   for (const row of rows) {
-    const producerName = await getProducerName(row.id);
-
     Logger.log('', '----------------------------------------');
-    Logger.log('', `Testing producer: ${producerName} on ${chain}`);
+    Logger.log('', `Testing producer: ${row.name} on ${chain}`);
     Logger.log('', '----------------------------------------');
 
-    await runGuildTests(row.id, row.chain, row.json_url);
+    //await runGuildTests(row.id, row.chain, row.json_url);
     Logger.log('', '----------------------------------------');
-    await runAllHyperionTests(row.id, chain, validationData);
+    //await runAllHyperionTests(row.id, chain, validationData);
     Logger.log('', '----------------------------------------');
     await runAllApiTests(row.id, chain, validationData);
     Logger.log('', '----------------------------------------');
-    await runAllP2PTests(row.id, chain, validationData);
+     //await runAllP2PTests(row.id, chain, validationData);
+    Logger.log('', '----------------------------------------');
+    //await runAllHistoryTests(row.id, chain, validationData);
     
     // Run other tests here...
   }
-  console.log(`Completed all tests for ${chain}`);
+  console.log(`Completed tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
 };
 
-export const startMonitoring = async () => {
+export const startMonitoring = async (producerName = null) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
   };
 
   const runAllTestsForBothChains = async () => {
-    await runAllTests('mainnet');
-    await runAllTests('testnet');
+    // To test a single producer, use the producerName parameter
+    await runAllTests('mainnet', producerName);
+    await runAllTests('testnet', producerName);
   };
 
   // Run producer updates immediately and wait for it to finish
-  await updateAllProducers();
+  //await updateAllProducers();
 
   // Run all tests after producer updates have completed
-  //await runAllTestsForBothChains();
+  await runAllTestsForBothChains();
 
-  // Set intervals for periodic runs
-  setInterval(updateAllProducers, 15 * 60 * 1000);
-  setInterval(runAllTestsForBothChains, 60 * 60 * 1000);
+  // Only set intervals if we're not testing a single producer
+  if (!producerName) {
+    setInterval(updateAllProducers, 15 * 60 * 1000);
+    setInterval(runAllTestsForBothChains, 60 * 60 * 1000);
+  }
 };

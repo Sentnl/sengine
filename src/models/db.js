@@ -49,7 +49,10 @@ export const setupDatabase = async () => {
       error_message TEXT,
       curl_command TEXT,
       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      type VARCHAR(50) NOT NULL
+      type VARCHAR(50) NOT NULL,
+      request_type VARCHAR(10),
+      payload TEXT,
+      version VARCHAR(20)
     );
   `);
 };

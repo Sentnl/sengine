@@ -14,6 +14,9 @@ const testnetNodePulse = new NodePulse({
 });
 
 export default {
+  general: {
+    logging_level: 'silly',
+  },
   database: {
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 5432,
@@ -50,5 +53,14 @@ export default {
     performance_mode_threshold: 2, // Threshold for failed requests to trigger performance mode
     request_retry_count: 2, // Number of retries for HTTP requests
     retry_delay_ms: 1000, // Delay between retries in milliseconds
+  },
+  p2p: {
+    seedBlockCount: 10, // or whatever value you're using
+    blocks_per_second: 5, // or whatever value you're using
+  },
+  api:{
+    testAccount: 'sentnlagents',
+    testSymbol: 'WAX',
+    controllingAccount: 'a4v5y.waa',
   },
 };

@@ -1,106 +1,263 @@
 import ky from 'ky';
-import { saveTestResultWrapper, getApiNodes } from './validateCore.js';
+import { getApiNodes,  runTlsSecurityTest, runHttpsCheckTest } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 import { Logger } from '../helpers/Logger.js';
 import { generateCurlCommandFromKyConfig } from '../helpers/curlGenerator.js';
-import { checkTls } from '../utils/tlsChecker.js';
 import { measureResponseTime } from '../helpers/measureResponseTime.js';
+import { runTest, saveMultipleFailedResults } from '../helpers/testRunner.js'; 
+import { getUserFriendlyMessage } from '../helpers/errorHandler.js';
+
 
 const runApiTest = async (producerId, chain, endpoint, validationData, nodeType = 'api') => {
   const httpsEndpoint = endpoint.replace(/^http:/, 'https:');
+  const { hostname } = new URL(httpsEndpoint);
+  let combinedError = null; // Initialize combinedErr
 
   // TLS security test
-  try {
-    const { hostname } = new URL(httpsEndpoint);
-    const { responseTime, result: { version, status } } = await measureResponseTime(() => checkTls(hostname, 443));
-    await saveTestResultWrapper(
-      producerId,
-      chain,
-      TEST_TYPES.CORE.TLS_SECURITY,
-      !!version,
-      `${hostname}:443`,
-      responseTime,
-      version ? 200 : 0,
-      version ? `TLS Version: ${version}` : status,
-      'TLS security test',
-      nodeType
-    );
-  } catch (error) {
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.TLS_SECURITY, false, `${httpsEndpoint}:443`, error.responseTime || 0, 0, error.message, 'TLS security test encountered an error', nodeType);
-  }
+  await runTlsSecurityTest({
+    producerId,
+    chain,
+    hostname,
+    nodeType,
+  });
 
   // HTTPS check
   const httpsGetInfoUrl = `${httpsEndpoint}/v1/chain/get_info`;
-  const httpsCurl = generateCurlCommandFromKyConfig(httpsGetInfoUrl);
-  try {
-    const { responseTime } = await measureResponseTime(() => ky.get(httpsGetInfoUrl));
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTPS, true, httpsEndpoint, responseTime, 200, null, httpsCurl, nodeType);
-  } catch (error) {
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTPS, false, httpsEndpoint, error.responseTime || 0, error.response?.status || 500, error.message, httpsCurl, nodeType);
-  }
+  await runHttpsCheckTest({
+    producerId,
+    chain,
+    url: httpsGetInfoUrl,
+    nodeType,
+  });
 
   // GET /v1/chain/get_info (including HTTP check)
   const getInfoUrl = `${endpoint}/v1/chain/get_info`;
   const getInfoCurl = generateCurlCommandFromKyConfig(getInfoUrl);
+
   try {
     const { result: response, responseTime } = await measureResponseTime(() => 
-      ky.post(getInfoUrl, { json: {} }).json()
+      ky.get(getInfoUrl, { throwHttpErrors: false }).then(async res => ({
+        status: res.status,
+        body: await res.json().catch(() => ({}))
+      }))
     );
 
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTP, true, getInfoUrl, responseTime, 200, null, getInfoCurl, nodeType);
-    
+    let error = null;
+
+    // HTTP check
+    const httpCheckResult = await runTest({
+      producerId,
+      chain,
+      testType: TEST_TYPES.CORE.HTTP,
+      url: getInfoUrl,
+      method: 'GET',
+      curlCmd: getInfoCurl,
+      nodeType,
+      existingResult: response,
+      existingResponseTime: responseTime,
+      successCondition: (result) => 
+        result.status === 200 && 
+        typeof result.body === 'object' && 
+        result.body !== null && 
+        !Array.isArray(result.body),
+      onErrorMessage: (error) => 
+        response.status === 200
+          ? 'HTTP request successful but response is not a JSON object'
+          : getUserFriendlyMessage(error),
+    });
+
+    if (error) {
+      console.log(`Throwing error ${error}`)
+      throw error;
+    }
+
     const expectedChainId = config.chains[chain].chainId;
-    const correctChain = response.chain_id === expectedChainId;
-    await saveTestResultWrapper(
-      producerId, 
-      chain, 
-      TEST_TYPES.API.GET_INFO_CORRECT_CHAIN, 
-      correctChain, 
-      getInfoUrl, 
-      responseTime, 
-      200, 
-      correctChain ? null : `Chain ID mismatch. Expected: ${expectedChainId}, Got: ${response.chain_id}`, 
-      getInfoCurl, 
-      nodeType
-    );
-    
-    const headBlockUpToDate = response.head_block_num >= validationData.latestHeadBlock - 10;
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.API.GET_INFO_UP_TO_DATE, headBlockUpToDate, getInfoUrl, responseTime, 200, headBlockUpToDate ? null : 'Head block not up-to-date', getInfoCurl, nodeType);
-    
+    const correctChain = response.body.chain_id === expectedChainId;
+
+    await runTest({
+      producerId,
+      chain,
+      testType: TEST_TYPES.API.GET_INFO_CORRECT_CHAIN,
+      url: getInfoUrl,
+      method: 'GET',
+      curlCmd: getInfoCurl,
+      nodeType,
+      existingResponseTime: responseTime,
+      testFunction: () => Promise.resolve({ response }),
+      successCondition: () => correctChain,
+      onErrorMessage: `Chain ID mismatch. Expected: ${expectedChainId}, Got: ${response.body.chain_id}`,
+    });
+
+    const headBlockUpToDate = response.body.head_block_num >= validationData.latestHeadBlock - 10;
+
+    await runTest({
+      producerId,
+      chain,
+      testType: TEST_TYPES.API.GET_INFO_UP_TO_DATE,
+      url: getInfoUrl,
+      method: 'GET',
+      curlCmd: getInfoCurl,
+      nodeType,
+      existingResponseTime: responseTime,
+      testFunction: () => Promise.resolve({ response, }),
+      successCondition: () => headBlockUpToDate,
+      onErrorMessage: 'Head block not up-to-date',
+    });
+
   } catch (error) {
-    const errorStatus = error.response?.status || 500;
-    
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.CORE.HTTP, false, getInfoUrl, error.responseTime || 0, errorStatus, error.message, getInfoCurl, nodeType);
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.API.GET_INFO_CORRECT_CHAIN, false, getInfoUrl, error.responseTime || 0, errorStatus, error.message, getInfoCurl, nodeType);
-    await saveTestResultWrapper(producerId, chain, TEST_TYPES.API.GET_INFO_UP_TO_DATE, false, getInfoUrl, error.responseTime || 0, errorStatus, error.message, getInfoCurl, nodeType);
+    await saveMultipleFailedResults({
+      producerId,
+      chain,
+      testTypes: [
+        TEST_TYPES.CORE.HTTP,
+        TEST_TYPES.API.GET_INFO_CORRECT_CHAIN,
+        TEST_TYPES.API.GET_INFO_UP_TO_DATE,
+      ],
+      url: getInfoUrl,
+      error,
+      curlCmd: getInfoCurl,
+      nodeType,
+      method: 'GET',
+    });
   }
 
-  // 6. Ensure specific links do not return 200
+  // Invalid endpoints test
   const invalidEndpoints = [
     { url: `${endpoint}/v1/producer/get_integrity_hash`, testType: TEST_TYPES.API.PRODUCER_API },
     { url: `${endpoint}/v1/db_size/get`, testType: TEST_TYPES.API.DBSIZE_API },
-    { url: `${endpoint}/v1/net/connections`, testType: TEST_TYPES.API.NET_API }
+    { url: `${endpoint}/v1/net/connections`, testType: TEST_TYPES.API.NET_API },
   ];
 
   for (const { url, testType } of invalidEndpoints) {
     const curlCmd = generateCurlCommandFromKyConfig(url);
-    try {
-      const { result: response, responseTime } = await measureResponseTime(() => ky.get(url));
-      
-      try {
-        const jsonResponse = await response.json();
-        // If we can parse the response as JSON, it's a fail
-        await saveTestResultWrapper(producerId, chain, testType, false, url, responseTime, response.status, JSON.stringify(jsonResponse), curlCmd, nodeType);
-      } catch {
-        // If we can't parse as JSON, it's a pass
-        await saveTestResultWrapper(producerId, chain, testType, true, url, responseTime, response.status, null, curlCmd, nodeType);
-      }
-    } catch (error) {
-      // Network error or non-200 status, considered a pass
-      await saveTestResultWrapper(producerId, chain, testType, true, url, error.responseTime || 0, error.response?.status || 500, null, curlCmd, nodeType);
-    }
+    
+    await runTest({
+      producerId,
+      chain,
+      testType,
+      url,
+      method: 'GET',
+      curlCmd,
+      nodeType,
+      testFunction: async () => {
+        const response = await ky.get(url, { 
+          throwHttpErrors: false,
+          followRedirect: false  // Disable automatic redirect following
+        });
+        const contentType = response.headers.get('content-type');
+        const isJson = contentType && contentType.includes('application/json');
+         let responseBody;
+        try {
+          responseBody = await response.text();
+        } catch (error) {
+          //console.log(`Error reading response body: ${error.message}`);
+        }
+        return { response, responseBody, isJson, contentType };
+      },
+      successCondition: (result) => {
+        const status = result.response.status;
+        return status >= 300 || !result.isJson;
+      },
+      expectedStatusCode: (result) => result.response.status, // Log the actual status code
+      onSuccessMessage: (result) => {
+        if (result.response.status >= 300) {
+          return `Endpoint not available (status ${result.response.status})`;
+        } else if (!result.isJson) {
+          return `Endpoint not serving JSON response as expected (Content-Type: ${result.contentType})`;
+        }
+      },
+      onErrorMessage: 'Endpoint unexpectedly available and serving JSON',
+    });
   }
+
+/*   // Block one test
+  const blockOneUrl = `${endpoint}/v1/chain/get_block`;
+  const blockOnePayload = { "block_num_or_id": 1, "json": true };
+  const blockOneCurl = generateCurlCommandFromKyConfig(blockOneUrl, { method: 'POST', json: blockOnePayload });
+
+  await runTest({
+    producerId,
+    chain,
+    testType: TEST_TYPES.API.BLOCK_ONE_TEST,
+    url: blockOneUrl,
+    method: 'POST',
+    payload: blockOnePayload,
+    curlCmd: blockOneCurl,
+    nodeType,
+    testFunction: async () => {
+      const response = await ky.post(blockOneUrl, { 
+        json: blockOnePayload, 
+        throwHttpErrors: false 
+      }).json();
+      return response;
+    },
+    successCondition: (result) => 
+      result && typeof result === 'object' && !result.code,
+    onErrorMessage: (result) => 
+      result.message || `Invalid block one response. Received: ${JSON.stringify(result)}`,
+  }); */
+
+  // Latest block test
+  const latestBlockUrl = `${endpoint}/v1/chain/get_block`;
+  const latestBlockPayload = { "block_num_or_id": validationData.head_block_num, "json": true };
+  const latestBlockCurl = generateCurlCommandFromKyConfig(latestBlockUrl, { method: 'POST', json: latestBlockPayload });
+
+  await runTest({
+    producerId,
+    chain,
+    testType: TEST_TYPES.API.LATEST_BLOCK_TEST,
+    url: latestBlockUrl,
+    method: 'POST',
+    payload: latestBlockPayload,
+    curlCmd: latestBlockCurl,
+    nodeType,
+    testFunction: () => ky.post(latestBlockUrl, { json: latestBlockPayload }).json(),
+    successCondition: (result) =>
+      result &&
+      typeof result === 'object' &&
+      Array.isArray(result.transactions),
+    onErrorMessage: (error) => getUserFriendlyMessage(error), 
+  });
+
+  // Basic symbol test
+  const currencyBalanceUrl = `${endpoint}/v1/chain/get_currency_balance`;
+  const currencyBalancePayload = {
+    "json": true,
+    "account": config.api.testAccount,
+    "code": "eosio.token",
+    "symbol": config.api.testSymbol,
+  };
+  const currencyBalanceCurl = generateCurlCommandFromKyConfig(currencyBalanceUrl, { method: 'POST', json: currencyBalancePayload });
+
+  await runTest({
+    producerId,
+    chain,
+    testType: TEST_TYPES.API.BASIC_SYMBOL_TEST,
+    url: currencyBalanceUrl,
+    method: 'POST',
+    payload: currencyBalancePayload,
+    curlCmd: currencyBalanceCurl,
+    nodeType,
+    testFunction: async () => {
+      const response = await ky.post(currencyBalanceUrl, { 
+        json: currencyBalancePayload,
+        throwHttpErrors: false
+      });
+      const result = await response.json();
+      return { status: response.status, result };
+    },
+    successCondition: ({ status, result }) =>
+      status === 200 &&
+      Array.isArray(result) &&
+      result.length === 1 &&
+      typeof result[0] === 'string' &&
+      result[0].endsWith(` ${config.api.testSymbol}`),
+    onErrorMessage: ({ status, result }) => 
+      status === 200
+        ? `Invalid currency balance response: ${JSON.stringify(result)}`
+        : getUserFriendlyMessage(result),
+  });
 };
 
 export const runAllApiTests = async (producerId, chain, validationData) => {

@@ -1,13 +1,14 @@
-import ky from 'ky';
+import { httpRequest } from '../helpers/performanceHelper.js';
 import { saveTestResultWrapper } from './validateCore.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 
 const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, errorMessageOnFailure) => {
   const startTime = Date.now();
   try {
-    const response = await ky.get(jsonUrl).json();
+    const response = await httpRequest(jsonUrl, {}, 0, 'guildTest');
     const responseTime = Date.now() - startTime;
-    const isSuccessful = checkSuccess(response);
+    const responseData = await response.json();
+    const isSuccessful = checkSuccess(responseData);
 
     await saveTestResultWrapper(
       producerId,
@@ -16,10 +17,11 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       isSuccessful,
       jsonUrl,
       responseTime,
-      200,
+      response.status,
       isSuccessful ? null : errorMessageOnFailure,
       null,
-      'guild'
+      'guild',
+      'GET'
     );
   } catch (error) {
     await saveTestResultWrapper(
@@ -32,7 +34,8 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       error.response?.status || 0,
       error.message,
       null,
-      'guild'
+      'guild',
+      'GET'
     );
   }
 };
@@ -45,9 +48,10 @@ const testGithubUsername = async (producerId, chain, jsonUrl) => {
     TEST_TYPES.GUILD.GITHUB_USERNAME,
     (response) => {
       const githubUser = response.org?.github_user;
-      return Array.isArray(githubUser) ? githubUser.length > 0 : Boolean(githubUser);
+      const socialGithub = response.org?.social?.github;
+      return (Array.isArray(githubUser) ? githubUser.length > 0 : Boolean(githubUser)) || Boolean(socialGithub);
     },
-    'No GitHub username specified'
+    'No GitHub username specified in either org.github_user or org.social.github'
   );
 };
 

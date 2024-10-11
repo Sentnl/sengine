@@ -1,204 +1,302 @@
-import { EOSIOP2PClientConnection, HandshakeMessage, SyncRequestMessage } from 'eosio-protocol';
+import {
+  EOSIOStreamDeserializer,
+  EOSIOStreamTokenizer,
+  EOSIOStreamConsoleDebugger,
+  EOSIOP2PClientConnection,
+  GoAwayMessage,
+  HandshakeMessage,
+  SyncRequestMessage,
+  sleep,
+} from "eosio-protocol";
 import { saveTestResultWrapper, getSeedNodes } from './validateCore.js';
-import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 import { Logger } from '../helpers/Logger.js';
-import { measureResponseTime } from '../helpers/measureResponseTime.js';
-import ky from 'ky';
+import config from '../config.js';
 
-class BlockTransmissionTestRunner {
-  constructor(node, numBlocks) {
+const logger = {
+  getChildLogger: (options) => ({
+    debug: console.log,
+    warn: console.warn,
+    fatal: console.error,
+  }),
+};
+
+const childLogger = logger.getChildLogger({
+  name: "P2P-Validation",
+});
+
+const configLoggingLevel = process.env.LOGGING_LEVEL || "info";
+const debug = configLoggingLevel === "silly" || configLoggingLevel === "trace";
+
+class TestRunner {
+  constructor(node, numBlocks, chainId) {
     this.node = node;
-    this.numBlocks = numBlocks;
+    this.lastBlockTime = BigInt(0);
     this.blockCount = 0;
-    this.latencies = [];
     this.killed = false;
-    this.killedReason = '';
-    this.killedDetail = '';
-    this.p2p = new EOSIOP2PClientConnection({ ...this.node, debug: false });
+    this.killedReason = "";
+    this.killedDetail = "";
+    this.latencies = [];
+    this.blockTimeout = 10000; // 10 seconds
+    this.numBlocks = numBlocks;
+    this.chainId = chainId;
+
+    const p2p = new EOSIOP2PClientConnection({ ...this.node, debug });
+    this.p2p = p2p;
   }
 
-  async run() {
-    try {
-      const client = await this.p2p.connect();
-
-      client.on('data', (data) => {
-        if (data[0] === 7) { // Signed block
-          this.onSignedBlock(data[2]);
-        } else if (data[0] === 2) { // Go away message
-          this.killed = true;
-          this.killedReason = 'go_away';
-          this.killedDetail = `Received go away message: ${data[2].reason}`;
-        }
-      });
-
-      const info = await ky.get(`${this.node.api}/v1/chain/get_info`).json();
-      const prevInfo = await this.getPrevInfo(info, this.numBlocks);
-
-      await this.sendHandshake(info, prevInfo);
-      await this.sendSyncRequest(prevInfo);
-
-      return await this.waitForTests();
-    } catch (error) {
-      this.killed = true;
-      this.killedReason = 'error';
-      this.killedDetail = error.message;
-      return this.getResultJson();
-    } finally {
-      this.p2p.disconnect();
-    }
-  }
-
-  async sendHandshake(info, prevInfo) {
-    const msg = new HandshakeMessage({
+  async sendHandshake(override) {
+    const msg = new HandshakeMessage();
+    msg.copy({
       network_version: 1206,
-      chain_id: info.chain_id,
-      node_id: '0585cab37823404b8c82d6fcc66c4faf20b0f81b2483b2b0f186dd47a1230fdc',
-      key: 'PUB_K1_11111111111111111111111111111111149Mr2R',
-      time: '1574986199433946000',
-      token: '0000000000000000000000000000000000000000000000000000000000000000',
-      sig: 'SIG_K1_111111111111111111111111111111111111111111111111111111111111111116uk5ne',
-      p2p_address: 'validationcore.blacklusion.io:9876 - a6f45b4',
-      last_irreversible_block_num: prevInfo.last_irreversible_block_num,
-      last_irreversible_block_id: prevInfo.last_irreversible_block_id,
-      head_num: prevInfo.head_block_num,
-      head_id: prevInfo.head_block_id,
-      os: 'linux',
-      agent: 'NodePulse',
+      chain_id: this.chainId,
+      node_id: "0585cab37823404b8c82d6fcc66c4faf20b0f81b2483b2b0f186dd47a1230fdc",
+      key: "PUB_K1_11111111111111111111111111111111149Mr2R",
+      time: "1574986199433946000",
+      token: "0000000000000000000000000000000000000000000000000000000000000000",
+      sig: "SIG_K1_111111111111111111111111111111111111111111111111111111111111111116uk5ne",
+      p2p_address: `eosdac-p2p-client:9876 - a6f45b4`,
+      last_irreversible_block_num: 0,
+      last_irreversible_block_id: "0000000000000000000000000000000000000000000000000000000000000000",
+      head_num: 0,
+      head_id: "0000000000000000000000000000000000000000000000000000000000000000",
+      os: "linux",
+      agent: "Dream Ghost",
       generation: 1,
     });
-    await this.p2p.send_message(msg);
-  }
 
-  async sendSyncRequest(prevInfo) {
-    const msg = new SyncRequestMessage({
-      start_block: prevInfo.last_irreversible_block_num,
-      end_block: prevInfo.last_irreversible_block_num + this.numBlocks,
-    });
-    await this.p2p.send_message(msg);
-  }
-
-  onSignedBlock(msg) {
-    this.blockCount++;
-    const now = process.hrtime.bigint();
-    if (this.lastBlockTime) {
-      const latency = Number(now - this.lastBlockTime);
-      this.latencies.push(latency);
+    if (override) {
+      msg.copy(override);
     }
-    this.lastBlockTime = now;
-  }
 
-  async getPrevInfo(info, num) {
-    info.head_block_num -= num;
-    info.last_irreversible_block_num -= num;
-    info.head_block_id = await this.getBlockId(info.head_block_num);
-    info.last_irreversible_block_id = await this.getBlockId(info.last_irreversible_block_num);
-    return info;
-  }
-
-  async getBlockId(blockNum) {
-    const response = await ky.post(`${this.node.api}/v1/chain/get_block`, {
-      json: { block_num_or_id: blockNum },
-    }).json();
-    return response.id;
-  }
-
-  async waitForTests() {
-    return new Promise((resolve) => {
-      const checkInterval = setInterval(() => {
-        if (this.blockCount >= this.numBlocks || this.killed) {
-          clearInterval(checkInterval);
-          resolve(this.getResultJson());
-        }
-      }, 1000);
-    });
-  }
-
-  getResultJson() {
-    const totalTime = this.latencies.reduce((sum, latency) => sum + latency, 0) / 1e9;
-    const speed = this.blockCount / totalTime;
-
-    return {
-      host: `${this.node.host}:${this.node.port}`,
-      status: this.killed ? 'error' : 'success',
-      error_code: this.killedReason,
-      error_detail: this.killedDetail,
-      blocks_received: this.blockCount,
-      total_test_time: totalTime,
-      speed: speed.toFixed(10),
-    };
+    await this.p2p.send_message(msg);
   }
 }
 
-const runP2PTest = async (producerId, chain, endpoint, validationData, nodeType = 'seed') => {
-  const [host, port] = endpoint.split(':');
-  const node = {
-    api: config.chains[chain].apiEndpoint,
-    host,
-    port: parseInt(port, 10),
-  };
-
-  const runner = new BlockTransmissionTestRunner(node, config.validation.seedBlockCount);
-  
-  try {
-    const { responseTime, result } = await measureResponseTime(() => runner.run());
-
-    // Test 1: P2P Connection Possible
-    await saveTestResultWrapper(
-      producerId,
-      chain,
-      TEST_TYPES.P2P.CONNECTION_POSSIBLE,
-      result.status === 'success',
-      endpoint,
-      responseTime,
-      result.status === 'success' ? 200 : 500,
-      result.error_detail || null,
-      'P2P connection test',
-      nodeType
-    );
-
-    // Test 2: Block Transmission Speed
-    if (result.status === 'success') {
-      const speedOk = parseFloat(result.speed) > config.validation.seedOkSpeed;
-      await saveTestResultWrapper(
-        producerId,
-        chain,
-        TEST_TYPES.P2P.BLOCK_TRANSMISSION_SPEED,
-        speedOk,
-        endpoint,
-        responseTime,
-        200,
-        speedOk ? null : `Slow block transmission: ${result.speed} blocks/s`,
-        'P2P block transmission test',
-        nodeType
-      );
-    }
-  } catch (error) {
-    await saveTestResultWrapper(
-      producerId,
-      chain,
-      TEST_TYPES.P2P.CONNECTION_POSSIBLE,
-      false,
-      endpoint,
-      0,
-      500,
-      error.message,
-      'P2P connection test failed',
-      nodeType
-    );
+class BlockTransmissionTestRunner extends TestRunner {
+  constructor(node, numBlocks, chainId) {
+    super(node, numBlocks, chainId);
+    this.killTimer = null;
   }
-};
+
+  async onSignedBlock(msg) {
+    clearTimeout(this.killTimer);
+    this.killTimer = setTimeout(this.kill.bind(this), this.blockTimeout);
+
+    this.blockCount++;
+    const tm = process.hrtime.bigint();
+    if (this.lastBlockTime > 0) {
+      const latency = Number(tm - this.lastBlockTime);
+      this.latencies.push(latency);
+      const blocksPerSecond = 1 / (latency / 1e9);
+      // console.log(
+      //   `Received block signed by ${msg.producer} with latency ${latency} ns - ${this.blockCount} received from ${this.node.host} - Blocks/s: ${blocksPerSecond.toFixed(2)}`
+      // );
+    }
+    this.lastBlockTime = tm;
+  }
+
+  async onError(e) {
+    this.killed = true;
+    this.killedReason = e.code || "unknown_error";
+    this.killedDetail = e.message || String(e);
+  }
+
+  async run(debugMode = false) {
+    this.killTimer = setTimeout(this.kill.bind(this), this.blockTimeout);
+
+    const numBlocks = this.numBlocks;
+    const p2p = this.p2p;
+
+    p2p.on("net_error", (e) => {
+      this.killed = true;
+      this.killedReason = "net_error";
+      this.killedDetail = e.message;
+    });
+
+    try {
+      const client = await p2p.connect();
+
+      const deserializedStream = client
+        .pipe(new EOSIOStreamTokenizer({}))
+        .pipe(new EOSIOStreamDeserializer({}))
+        .on("data", (obj) => {
+          if (obj[0] === 7) {
+            this.onSignedBlock(obj[2]);
+          }
+          if (obj[0] === 2) {
+            this.killed = true;
+            this.killedReason = "go_away";
+            this.killedDetail = `Received go away message: ${GoAwayMessage.reasons[obj[2].reason]}`;
+          }
+        });
+
+      if (debugMode) {
+        deserializedStream.pipe(
+          new EOSIOStreamConsoleDebugger({ prefix: "<<<" })
+        );
+      }
+
+      const override = {
+        chain_id: this.chainId,
+        p2p_address: "wax.sentnl.io:9876 - a6f45b4",
+        last_irreversible_block_num: this.validationData.last_irreversible_block_num,
+        last_irreversible_block_id: this.validationData.last_irreversible_block_id,
+        head_num: this.validationData.head_block_num,
+        head_id: this.validationData.head_block_id,
+      };
+      await this.sendHandshake(override);
+
+      const msg = new SyncRequestMessage();
+      msg.start_block = this.validationData.last_irreversible_block_num;
+      msg.end_block = this.validationData.last_irreversible_block_num + numBlocks;
+      await p2p.send_message(msg);
+    } catch (e) {
+      this.onError(e);
+    }
+
+    const results = await this.waitForTests(numBlocks);
+
+    try {
+      console.log('disconnecting');
+      await p2p.disconnect();
+    } catch (disconnectError) {
+      childLogger.warn("Error while disconnecting P2P client:", disconnectError);
+    }
+
+    return results;
+  }
+
+  async getResultJson() {
+    const raw = {
+      status: "success",
+      block_count: this.blockCount,
+      latencies: this.latencies,
+      error_code: this.killedReason,
+      error_detail: this.killedDetail,
+    };
+
+    raw.status = !this.killedReason ? "success" : "error";
+
+    let sum = 0;
+    if (raw.latencies.length > 0) {
+      sum = raw.latencies.reduce((previous, current) => current + previous, 0);
+    }
+
+    const nsDivisor = Math.pow(10, 9);
+    const totalTime = sum / nsDivisor;
+    const blocksPerNs = raw.block_count / sum;
+    let speed = (blocksPerNs * nsDivisor).toFixed(10);
+    if (speed === "NaN") {
+      speed = "";
+    }
+
+    const results = {
+      host: `${this.node.host}:${this.node.port}`,
+      status: raw.status,
+      error_code: raw.error_code,
+      error_detail: raw.error_detail,
+      blocks_received: raw.block_count,
+      total_test_time: totalTime,
+      speed: speed,
+    };
+
+    return results;
+  }
+
+  async waitForTests(num) {
+    return new Promise(async (resolve) => {
+      while (true) {
+        if (this.blockCount >= num) {
+          clearTimeout(this.killTimer);
+          resolve(await this.getResultJson());
+          break;
+        }
+
+        if (this.killed) {
+          clearTimeout(this.killTimer);
+          resolve(await this.getResultJson());
+          break;
+        }
+        await sleep(1000);
+      }
+    });
+  }
+
+  kill() {
+    this.killed = true;
+    this.killedReason = "timeout";
+    this.killedDetail = "Timed out while receiving blocks";
+  }
+}
 
 export const runAllP2PTests = async (producerId, chain, validationData) => {
   const seedNodes = await getSeedNodes(producerId);
 
   if (seedNodes.length === 0) {
-    Logger.log('No seed nodes found for this producer', 'Passed');
+    Logger.log('No P2P nodes found for this producer', 'Passed');
+    await saveTestResultWrapper(
+      producerId,
+      chain,
+      TEST_TYPES.P2P.P2P_NOT_AVAILABLE,
+      false,
+      null,
+      0,
+      200,
+      TEST_TYPES.P2P.P2P_NOT_AVAILABLE,
+      TEST_TYPES.P2P.P2P_NOT_AVAILABLE,
+      'p2p'
+    );
     return;
   }
 
-  for (const endpoint of seedNodes) {
-    Logger.log('', `P2P: ${endpoint}`);
-    await runP2PTest(producerId, chain, endpoint, validationData, 'seed');
+  for (const seedNode of seedNodes) {
+    Logger.log('', `P2P: ${seedNode.p2p_endpoint}`);
+    await runP2PTest(producerId, chain, seedNode.p2p_endpoint, validationData);
   }
+};
+
+const runP2PTest = async (producerId, chain, endpoint, validationData) => {
+  const [host, portStr] = endpoint.split(':');
+  const port = parseInt(portStr, 10);
+  const node = {
+    api: validationData.api,
+    host: host,
+    port: port,
+  };
+
+  const runner = new BlockTransmissionTestRunner(node, 10, validationData.chain_id);
+  runner.validationData = validationData;
+  const result = await runner.run(debug);
+
+  // Test 1: P2P connection was possible
+  await saveTestResultWrapper(
+    producerId,
+    chain,
+    TEST_TYPES.P2P.CONNECTION_POSSIBLE,
+    result.status === 'success',
+    endpoint,
+    Math.round(result.total_test_time * 1000), // Round to nearest integer
+    result.status === 'success' ? 200 : 500,
+    result.error_detail || null,
+    TEST_TYPES.P2P.CONNECTION_POSSIBLE,
+    'p2p'
+  );
+
+  // Test 2: Block transmission speed is OK
+  const speedOk = parseFloat(result.speed) >= config.p2p.blocks_per_second;
+  await saveTestResultWrapper(
+    producerId,
+    chain,
+    TEST_TYPES.P2P.BLOCK_TRANSMISSION_SPEED,
+    speedOk,
+    endpoint,
+    Math.round(result.total_test_time * 1000),
+    result.status === 'success' ? 200 : 500,
+    result.status === 'success' 
+      ? (speedOk ? null : `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
+      : 'Block transmission not possible',
+    parseFloat(result.speed),
+    'p2p'
+  );
 };

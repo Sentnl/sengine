@@ -4,6 +4,11 @@ import ky from 'ky';
 import NodePulse from '@sentnl/nodepulse';
 import { getDatabase } from '../models/db.js';
 import { Logger } from '../helpers/Logger.js';
+import { TEST_TYPES } from '../helpers/TestTypes.js';
+import { checkTls } from '../utils/tlsChecker.js';
+import { runTest } from '../helpers/testRunner.js';
+import { generateCurlCommandFromKyConfig } from '../helpers/curlGenerator.js';
+import { getUserFriendlyMessage } from '../helpers/errorHandler.js';
 
 const mainnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
@@ -32,13 +37,22 @@ export const getValidationData = async (chain) => {
 
   while (nodeAttempts < maxNodeAttempts) {
     try {
-      const { endpoint, rpc } = await getNodeAndRpc(nodePulse);
-      console.log(`Using ${chain} endpoint:`, endpoint);
+      const { endpoint: api, rpc } = await getNodeAndRpc(nodePulse);
+      console.log(`Using ${chain} endpoint:`, api);
 
-      // 1. Get the latest headblock
+      // 1. Get the latest headblock and additional info
       const info = await rpc.get_info();
       let latestHeadBlock = info.head_block_num;
 
+      // Extract additional information
+      const {
+        last_irreversible_block_num,
+        last_irreversible_block_id,
+        head_block_num,
+        head_block_id,
+        chain_id
+      } = info;
+ 
       // 2. Get a transaction from the latest headblock or previous blocks
       let transaction = null;
       let blockAttempts = 0;
@@ -76,10 +90,16 @@ export const getValidationData = async (chain) => {
       }
 
       return {
+        api, // Renamed from endpoint to api
         latestHeadBlock,
         transaction,
         atomicAssetId,
-        delphioracleActions
+        delphioracleActions,
+        last_irreversible_block_num,
+        last_irreversible_block_id,
+        head_block_num,
+        head_block_id,
+        chain_id
       };
     } catch (error) {
       console.error(`Error with ${chain} node, attempt ${nodeAttempts + 1}:`, error);
@@ -91,6 +111,7 @@ export const getValidationData = async (chain) => {
   }
 };
 
+// SHARED SAVE TO DB RESULTS
 export const saveTestResult = async (
   producerId,
   chain,
@@ -101,7 +122,10 @@ export const saveTestResult = async (
   statusCode,
   errorMessage,
   curlCmd,
-  type // Added new parameter
+  type,
+  requestType,
+  payload,
+  version = null // Added version with default null
 ) => {
   const db = getDatabase();
   const query = `
@@ -115,9 +139,12 @@ export const saveTestResult = async (
       status_code,
       error_message,
       curl_command,
-      type
+      type,
+      request_type,
+      payload,
+      version
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
   `;
   await db.query(query, [
     producerId,
@@ -129,15 +156,48 @@ export const saveTestResult = async (
     statusCode,
     errorMessage,
     curlCmd,
-    type, // Added new value
+    type,
+    requestType,
+    payload,
+    version, // New value
   ]);
 };
 
-export const saveTestResultWrapper = async (producerId, chain, testType, passed, url, responseTime, statusCode, errorMessage, curlCommand, nodeType) => {
+export const saveTestResultWrapper = async (
+  producerId,
+  chain,
+  testType,
+  passed,
+  url,
+  responseTime,
+  statusCode,
+  errorMessage,
+  curlCommand,
+  nodeType,
+  requestType = 'GET', // Default to GET
+  payload = null,      // Default to null
+  version = null       // Added version parameter with default null
+) => {
   Logger.log(testType, passed ? 'Passed' : 'Failed', errorMessage || '');
-  await saveTestResult(producerId, chain, testType, passed, url, responseTime, statusCode, passed ? null : errorMessage, curlCommand, nodeType);
+  await saveTestResult(
+    producerId,
+    chain,
+    testType,
+    passed,
+    url,
+    responseTime,
+    statusCode,
+    errorMessage,
+    curlCommand,
+    nodeType,
+    requestType,
+    payload,
+    version // Pass version
+  );
 };
 
+
+// SHARED DB GET QUERIES
 export const getHyperionNodes = async (producerId) => {
   const db = getDatabase();
   const query = `
@@ -149,6 +209,19 @@ export const getHyperionNodes = async (producerId) => {
   `;
   const result = await db.query(query, [producerId, 'query', 'hyperion-v2']);
   return result.rows.map(row => ({ endpoint: row.api_endpoint, isFull: row.is_full }));
+};
+
+export const getHistoryNodes = async (producerId) => {
+  const db = getDatabase();
+  const query = `
+    SELECT api_endpoint 
+    FROM producer_services 
+    WHERE producer_id = $1 
+    AND $2 = ANY(node_type)
+    AND $3 = ANY(features)
+  `;
+  const result = await db.query(query, [producerId, 'query', 'history-v1']);
+  return result.rows.map(row => row.api_endpoint);
 };
 
 export const getProducerName = async (producerId) => {
@@ -179,12 +252,73 @@ export const getApiNodes = async (producerId) => {
 export const getSeedNodes = async (producerId) => {
   const db = getDatabase();
   const query = `
-    SELECT api_endpoint 
+    SELECT p2p_endpoint 
     FROM producer_services 
     WHERE producer_id = $1 
     AND $2 = ANY(node_type)
-    AND $3 = ANY(features)
   `;
-  const result = await db.query(query, [producerId, 'seed', 'seed']);
-  return result.rows.map(row => row.api_endpoint);
+  const result = await db.query(query, [producerId, 'seed']);
+  return result.rows.map(row => ({ p2p_endpoint: row.p2p_endpoint }));
 };
+
+
+// Shared  Validation TESTS
+export const runTlsSecurityTest = async ({
+  producerId,
+  chain,
+  hostname,
+  nodeType = 'core',
+}) => {
+  await runTest({
+    producerId,
+    chain,
+    testType: TEST_TYPES.CORE.TLS_SECURITY,
+    url: `${hostname}:443`,
+    method: 'GET',
+    curlCmd: 'TLS security test',
+    nodeType,
+    testFunction: () => checkTls(hostname, 443),
+    successCondition: (result) => result.isSecure,
+    onSuccessMessage: (result) => result.status,
+    onErrorMessage: (result) => result.status,
+    expectedStatusCode: (result) => (result.isSecure ? 200 : 0),
+    saveErrorMessageOnSuccess: true,
+  });
+};
+
+export const runHttpsCheckTest = async ({
+  producerId,
+  chain,
+  url,
+  nodeType = 'core',
+}) => {
+  const curlCmd = generateCurlCommandFromKyConfig(url);
+  
+  await runTest({
+    producerId,
+    chain,
+    testType: TEST_TYPES.CORE.HTTPS,
+    url,
+    method: 'GET',
+    curlCmd,
+    nodeType,
+    testFunction: async () => {
+      try {
+        const response = await ky.get(url);
+        return { success: true, response };
+      } catch (error) {
+        return { success: false, error };
+      }
+    },
+    successCondition: ({ success }) => success,
+    onErrorMessage: (result) => {
+      if (result.success === false && result.error) {
+        return getUserFriendlyMessage(result.error);
+      }
+      return 'HTTPS check failed: Unknown error';
+    },
+    //onErrorMessage: ({ error }) => `HTTPS check failed: ${error?.message || 'Unknown error'}`,
+  });
+};
+
+// Other existing functions and exports...

@@ -11,11 +11,13 @@
     "@sentnl/nodepulse": "^1.0.12",
     "chalk": "^5.3.0",
     "dotenv": "^16.3.1",
+    "eosio-protocol": "github:Blacklusion/eosio-protocol#with-dist",
     "eosjs": "^22.1.0",
     "fastify": "^4.21.0",
     "ky": "^0.33.3",
     "node-fetch": "^3.3.1",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "why-is-node-running": "^3.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
