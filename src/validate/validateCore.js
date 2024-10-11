@@ -111,7 +111,7 @@ export const getValidationData = async (chain) => {
   }
 };
 
-// SHARED SAVE TO DB RESULTS
+// Save Test resulst to the DB
 export const saveTestResult = async (
   producerId,
   chain,
@@ -163,6 +163,7 @@ export const saveTestResult = async (
   ]);
 };
 
+// Wrapper to save test results to the DB
 export const saveTestResultWrapper = async (
   producerId,
   chain,
@@ -320,5 +321,3 @@ export const runHttpsCheckTest = async ({
     //onErrorMessage: ({ error }) => `HTTPS check failed: ${error?.message || 'Unknown error'}`,
   });
 };
-
-// Other existing functions and exports...

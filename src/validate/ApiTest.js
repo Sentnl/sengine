@@ -43,10 +43,8 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       }))
     );
 
-    let error = null;
-
     // HTTP check
-    const httpCheckResult = await runTest({
+    await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.CORE.HTTP,
@@ -56,6 +54,7 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       nodeType,
       existingResult: response,
       existingResponseTime: responseTime,
+      version: response.body.server_version_string,
       successCondition: (result) => 
         result.status === 200 && 
         typeof result.body === 'object' && 
@@ -66,11 +65,6 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
           ? 'HTTP request successful but response is not a JSON object'
           : getUserFriendlyMessage(error),
     });
-
-    if (error) {
-      console.log(`Throwing error ${error}`)
-      throw error;
-    }
 
     const expectedChainId = config.chains[chain].chainId;
     const correctChain = response.body.chain_id === expectedChainId;

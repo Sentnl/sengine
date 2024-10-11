@@ -93,15 +93,15 @@ const runAllTests = async (chain, producerName = null) => {
     Logger.log('', `Testing producer: ${row.name} on ${chain}`);
     Logger.log('', '----------------------------------------');
 
-    //await runGuildTests(row.id, row.chain, row.json_url);
+    await runGuildTests(row.id, row.chain, row.json_url);
     Logger.log('', '----------------------------------------');
-    //await runAllHyperionTests(row.id, chain, validationData);
+    await runAllHyperionTests(row.id, chain, validationData);
     Logger.log('', '----------------------------------------');
     await runAllApiTests(row.id, chain, validationData);
     Logger.log('', '----------------------------------------');
-     //await runAllP2PTests(row.id, chain, validationData);
+    await runAllP2PTests(row.id, chain, validationData);
     Logger.log('', '----------------------------------------');
-    //await runAllHistoryTests(row.id, chain, validationData);
+    await runAllHistoryTests(row.id, chain, validationData);
     
     // Run other tests here...
   }

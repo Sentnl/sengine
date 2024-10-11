@@ -30,31 +30,46 @@ const runHistoryTest = async (producerId, chain, endpoint, validationData, nodeT
   });
 
   // Combined check for HTTP availability and CORS configuration
-  const infoUrl = `${endpoint}/v1/chain/get_info`;
-  const infoCurl = generateCurlCommandFromKyConfig(infoUrl);
+  const getInfoUrl = `${endpoint}/v1/chain/get_info`;
+  const getInfoCurl = generateCurlCommandFromKyConfig(getInfoUrl);
+
 
   try {
-    console.log(`Checking HTTP and CORS for URL: ${infoUrl}`);
-    const { responseTime, result: response } = await measureResponseTime(() => ky.get(infoUrl));
+    const { result: response, responseTime } = await measureResponseTime(() => 
+      ky.get(getInfoUrl, { throwHttpErrors: false }).then(async res => ({
+        status: res.status,
+        headers: Object.fromEntries(res.headers),
+        body: await res.json().catch(() => ({}))
+      }))
+    );
 
-    // Save HTTP_AVAILABLE test result
+    // HTTP check
     await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.CORE.HTTP,
-      url: infoUrl,
+      url: getInfoUrl,
       method: 'GET',
-      curlCmd: infoCurl,
+      curlCmd: getInfoCurl,
       nodeType,
-      version: response.server_version,
       existingResult: response,
       existingResponseTime: responseTime,
-      successCondition: (response) => response.status === 200,
-      onErrorMessage: 'HTTP request failed',
+      version: response.body.server_version_string,
+      successCondition: (result) => 
+        result.status === 200 && 
+        typeof result.body === 'object' && 
+        result.body !== null && 
+        !Array.isArray(result.body),
+      onErrorMessage: (error) => 
+        response.status === 200
+          ? 'HTTP request successful but response is not a JSON object'
+          : getUserFriendlyMessage(error),
     });
+
     
     // Check CORS configuration
-    const corsHeader = response.headers.get('access-control-allow-origin');
+    //const corsHeader = response.headers.get('access-control-allow-origin');
+    const corsHeader = response.headers && response.headers['access-control-allow-origin'];
     const corsValues = corsHeader ? corsHeader.split(',').map(v => v.trim()) : [];
     const corsOk = corsValues.includes('*') || corsValues.includes('https://wax.sengine.co');
 
@@ -62,9 +77,9 @@ const runHistoryTest = async (producerId, chain, endpoint, validationData, nodeT
       producerId,
       chain,
       testType: TEST_TYPES.CORE.CORS,
-      url: infoUrl,
+      url: getInfoUrl,
       method: 'GET',
-      curlCmd: infoCurl,
+      curlCmd: getInfoCurl,
       nodeType,
       existingResult: response,
       existingResponseTime: responseTime,
@@ -72,8 +87,6 @@ const runHistoryTest = async (producerId, chain, endpoint, validationData, nodeT
       onErrorMessage: 'CORS not properly configured',
     });
   } catch (error) {
-    console.error('Error in HTTP and CORS check:', error);
-    // Both HTTP and CORS checks failed
     await saveMultipleFailedResults({
       producerId,
       chain,
@@ -81,9 +94,9 @@ const runHistoryTest = async (producerId, chain, endpoint, validationData, nodeT
         TEST_TYPES.CORE.HTTP,
         TEST_TYPES.CORE.CORS,
       ],
-      url: infoUrl,
+      url: getInfoUrl,
       error,
-      curlCmd: infoCurl,
+      curlCmd: getInfoCurl,
       nodeType,
       method: 'GET',
     });
