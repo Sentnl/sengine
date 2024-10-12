@@ -37,7 +37,7 @@ export const setupDatabase = async () => {
       UNIQUE (producer_id, api_endpoint, p2p_endpoint)
     );
 
-    CREATE TABLE IF NOT EXISTS validate_results (
+    CREATE TABLE IF NOT EXISTS validate_services (
       id SERIAL PRIMARY KEY,
       producer_id INTEGER REFERENCES producers(id),
       chain VARCHAR(50) NOT NULL,
@@ -53,6 +53,17 @@ export const setupDatabase = async () => {
       request_type VARCHAR(10),
       payload TEXT,
       version VARCHAR(20)
+    );
+
+    CREATE TABLE IF NOT EXISTS validate_results (
+      id SERIAL PRIMARY KEY,
+      producer_id INTEGER REFERENCES producers(id),
+      guild BOOLEAN,
+      api BOOLEAN,
+      history BOOLEAN,
+      hyperion BOOLEAN,
+      p2p BOOLEAN,
+      timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `);
 };

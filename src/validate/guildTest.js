@@ -23,6 +23,8 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       'guild',
       'GET'
     );
+
+    return isSuccessful; // Return the test result
   } catch (error) {
     await saveTestResultWrapper(
       producerId,
@@ -37,11 +39,13 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       'guild',
       'GET'
     );
+
+    return false; // Return false if there was an error
   }
 };
 
 const testGithubUsername = async (producerId, chain, jsonUrl) => {
-  await runTest(
+  return await runTest(
     producerId,
     chain,
     jsonUrl,
@@ -56,7 +60,7 @@ const testGithubUsername = async (producerId, chain, jsonUrl) => {
 };
 
 const testBranding = async (producerId, chain, jsonUrl) => {
-  await runTest(
+  return await runTest(
     producerId,
     chain,
     jsonUrl,
@@ -70,6 +74,18 @@ const testBranding = async (producerId, chain, jsonUrl) => {
 };
 
 export const runGuildTests = async (producerId, chain, jsonUrl) => {
-  await testGithubUsername(producerId, chain, jsonUrl);
-  await testBranding(producerId, chain, jsonUrl);
+  let totalTests = 0;
+  let passedTests = 0;
+
+  const githubUsernameResult = await testGithubUsername(producerId, chain, jsonUrl);
+  totalTests++;
+  if (githubUsernameResult) passedTests++;
+
+  const brandingResult = await testBranding(producerId, chain, jsonUrl);
+  totalTests++;
+  if (brandingResult) passedTests++;
+
+  // Add more tests as needed
+  console.log(`Guild Tests: ${passedTests}/${totalTests}`);
+  return passedTests === totalTests; // Return true if all tests passed
 };

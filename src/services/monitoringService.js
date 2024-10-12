@@ -1,11 +1,6 @@
 import { getProducers, fetchChainJson, fetchProducerJson, parseProducerServices } from './blockchainService.js';
 import { saveProducer, saveProducerService } from './dataService.js';
-import { runGuildTests } from '../validate/guildTest.js';
-import { runAllHyperionTests } from '../validate/hyperionTest.js';
-import { runAllHistoryTests } from '../validate/HistoryTest.js';
-import { runAllApiTests } from '../validate/ApiTest.js';
-import { runAllP2PTests } from '../validate/P2PTest.js';
-import { getValidationData, getProducerName } from '../validate/validateCore.js';
+import { getValidationData, getProducerName, validateProducer } from '../validate/validateCore.js';
 import config from '../config.js';
 import { isUrlIgnored, joinUrl } from '../helpers/Urls.js';
 import { getDatabase } from '../models/db.js';
@@ -47,7 +42,6 @@ const updateProducers = async (chain) => {
 
       const producerJsonResponse = await httpRequest(producerJsonUrl, {}, failedRequests, website);
       const producerJson = await producerJsonResponse.json();
-      console.log('producerJson', producerJson);
       if (!producerJson) continue;
 
       const logoSvg = producerJson.org?.branding?.logo_svg || null;
@@ -93,17 +87,19 @@ const runAllTests = async (chain, producerName = null) => {
     Logger.log('', `Testing producer: ${row.name} on ${chain}`);
     Logger.log('', '----------------------------------------');
 
-    await runGuildTests(row.id, row.chain, row.json_url);
+    const { results, timestamp } = await validateProducer(row.id, row.chain, {
+      ...validationData,
+      jsonUrl: row.json_url
+    });
+
+    Logger.log('', 'Test Results:');
+    Logger.log('', `Guild: ${results.guild ? 'Passed' : 'Failed'}`);
+    Logger.log('', `API: ${results.api ? 'Passed' : 'Failed'}`);
+    Logger.log('', `History: ${results.history ? 'Passed' : 'Failed'}`);
+    Logger.log('', `Hyperion: ${results.hyperion ? 'Passed' : 'Failed'}`);
+    Logger.log('', `P2P: ${results.p2p ? 'Passed' : 'Failed'}`);
+    Logger.log('', `Timestamp: ${timestamp}`);
     Logger.log('', '----------------------------------------');
-    await runAllHyperionTests(row.id, chain, validationData);
-    Logger.log('', '----------------------------------------');
-    await runAllApiTests(row.id, chain, validationData);
-    Logger.log('', '----------------------------------------');
-    await runAllP2PTests(row.id, chain, validationData);
-    Logger.log('', '----------------------------------------');
-    await runAllHistoryTests(row.id, chain, validationData);
-    
-    // Run other tests here...
   }
   console.log(`Completed tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
 };

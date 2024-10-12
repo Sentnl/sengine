@@ -1,7 +1,11 @@
 import { measureResponseTime } from './measureResponseTime.js';
 import { saveTestResultWrapper } from '../validate/validateCore.js';
 import { getUserFriendlyMessage, logDetailedError } from './errorHandler.js';
+import { getDatabase } from '../models/db.js';
 
+
+
+// Modify the existing runTest function to return the test result
 export async function runTest({
   producerId,
   chain,
@@ -77,6 +81,8 @@ export async function runTest({
       payload ? JSON.stringify(payload) : null,
       version
     );
+
+    return success; // Return the success status
   } catch (error) {
     const userMessage = getUserFriendlyMessage(error);
     const errorStatus = error.response?.status || (error.cause && error.cause.code === 'ENOTFOUND' ? 404 : 500);
@@ -99,9 +105,13 @@ export async function runTest({
 
     // Log detailed error
     logDetailedError(error, `TestType: ${testType}, URL: ${url}`);
+    return false; // Return false for any caught errors
   }
 }
 
+
+// Used for those test where multiple tests rely on a single ky.get(). So we don't make unecesarry requests. So in the event if that first ky.get() fails 
+// all other tests will fail and they wil utilise this function to save teh results.
 export async function saveMultipleFailedResults({
   producerId,
   chain,
@@ -138,4 +148,24 @@ export async function saveMultipleFailedResults({
 
   // Log detailed error
   //logDetailedError(error, `MultipleFailedResults, URL: ${url}`);
+}
+
+// Add this new function at the end of the file
+export async function saveValidateResult(producerId, results, timestamp) {
+  const db = getDatabase();
+  const query = `
+    INSERT INTO validate_results (producer_id, guild, api, history, hyperion, p2p, timestamp)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+  `;
+  const values = [
+    producerId,
+    results.guild,
+    results.api,
+    results.history,
+    results.hyperion,
+    results.p2p,
+    timestamp
+  ];
+
+  await db.query(query, values);
 }

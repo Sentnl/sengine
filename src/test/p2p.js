@@ -483,6 +483,8 @@ async function validateSeed(
    * Log the results
    */
   console.log("Seed Validation Results:", JSON.stringify(seed, null, 2));
+
+  return seed;
 }
 
 /**
@@ -511,3 +513,8 @@ const location = {
 
 // Execute the validateSeed function
 validateSeed(guildName, chainId, endpointUrl, location).catch(console.error);
+
+export async function runP2PTests(producerId, chainId, endpointUrl, location) {
+  const result = await validateSeed(producerId, chainId, endpointUrl, location);
+  return result.all_checks_ok;
+}

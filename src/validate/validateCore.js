@@ -9,6 +9,12 @@ import { checkTls } from '../utils/tlsChecker.js';
 import { runTest } from '../helpers/testRunner.js';
 import { generateCurlCommandFromKyConfig } from '../helpers/curlGenerator.js';
 import { getUserFriendlyMessage } from '../helpers/errorHandler.js';
+import { runAllApiTests } from './ApiTest.js';
+import { runAllHistoryTests } from './HistoryTest.js';
+import { runAllHyperionTests } from './hyperionTest.js';
+import { runGuildTests } from './guildTest.js';
+import { runAllP2PTests } from './P2PTest.js';
+import { saveValidateResult } from '../helpers/testRunner.js';
 
 const mainnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
@@ -111,6 +117,23 @@ export const getValidationData = async (chain) => {
   }
 };
 
+
+export async function validateProducer(producerId, chain, validationData) {
+  const timestamp = new Date().toISOString();
+  const results = {
+    guild: await runGuildTests(producerId, chain, validationData.jsonUrl),
+    api: await runAllApiTests(producerId, chain, validationData),
+    history: await runAllHistoryTests(producerId, chain, validationData),
+    hyperion: await runAllHyperionTests(producerId, chain, validationData),
+    p2p: await runAllP2PTests(producerId, chain, validationData)
+  };
+  console.log(producerId,results);
+  await saveValidateResult(producerId, results, timestamp);
+
+  return { results, timestamp };
+}
+
+
 // Save Test resulst to the DB
 export const saveTestResult = async (
   producerId,
@@ -129,7 +152,7 @@ export const saveTestResult = async (
 ) => {
   const db = getDatabase();
   const query = `
-    INSERT INTO validate_results (
+    INSERT INTO validate_services (
       producer_id,
       chain,
       test_type,
@@ -264,13 +287,15 @@ export const getSeedNodes = async (producerId) => {
 
 
 // Shared  Validation TESTS
-export const runTlsSecurityTest = async ({
+export async function runTlsSecurityTest({
   producerId,
   chain,
   hostname,
   nodeType = 'core',
-}) => {
-  await runTest({
+}) {
+  // ... existing implementation ...
+
+  return await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.CORE.TLS_SECURITY,
@@ -285,23 +310,23 @@ export const runTlsSecurityTest = async ({
     expectedStatusCode: (result) => (result.isSecure ? 200 : 0),
     saveErrorMessageOnSuccess: true,
   });
-};
+}
 
-export const runHttpsCheckTest = async ({
+export async function runHttpsCheckTest({
   producerId,
   chain,
   url,
   nodeType = 'core',
-}) => {
-  const curlCmd = generateCurlCommandFromKyConfig(url);
-  
-  await runTest({
+}) {
+  // ... existing implementation ...
+
+  return await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.CORE.HTTPS,
     url,
     method: 'GET',
-    curlCmd,
+    curlCmd: generateCurlCommandFromKyConfig(url),
     nodeType,
     testFunction: async () => {
       try {
@@ -318,6 +343,6 @@ export const runHttpsCheckTest = async ({
       }
       return 'HTTPS check failed: Unknown error';
     },
-    //onErrorMessage: ({ error }) => `HTTPS check failed: ${error?.message || 'Unknown error'}`,
   });
-};
+}
+

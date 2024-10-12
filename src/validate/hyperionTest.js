@@ -9,6 +9,9 @@ import { runTest, saveMultipleFailedResults } from '../helpers/testRunner.js';
 import { checkHttp2 } from '../utils/http2Checker.js';
 
 const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validationData, nodeType = 'hyperion') => {
+  // Variables to evaluate whether this node is a pass or not.
+  let totalTests = 0;
+  let passedTests = 0;
 
   // 1. Node is correctly marked as full
   const fullNodeCurl = generateCurlCommandFromKyConfig(endpoint);
@@ -34,7 +37,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     const { result: response, responseTime } = await measureResponseTime(() => ky.get(healthUrl, corsConfig));
     const healthResponse = await response.json();
     // HTTP check
-    await runTest({
+    const httpResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.CORE.HTTP,
@@ -47,10 +50,11 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       successCondition: (response) => response.status === 200,
       onErrorMessage: 'HTTP request failed',
     });
+    totalTests++;
+    if (httpResult) passedTests++
     
     // Health check
-    console.log('Version:', healthResponse.version);
-    await runTest({
+    const healthResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.HYPERION.HEALTH,
@@ -64,14 +68,15 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       successCondition: ({ healthResponse }) => healthResponse.health && Array.isArray(healthResponse.health),
       onErrorMessage: 'Health endpoint not available',
     });
-
+    totalTests++;
+    if (httpResult) passedTests++;
 
 
     // CORS check
     const corsHeader = response.headers.get('access-control-allow-origin');
     const corsValues = corsHeader ? corsHeader.split(',').map(v => v.trim()) : [];
     const corsOk = corsValues.includes('*') || corsValues.includes('https://wax.sengine.co');
-    await runTest({
+    const corsResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.CORE.CORS,
@@ -84,6 +89,8 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       successCondition: () => corsOk,
       onErrorMessage: 'CORS not properly configured',
     });
+    totalTests++;
+    if (corsResult) passedTests++;
 
     // Services and Missing Blocks
     const healthOk = healthResponse.health && Array.isArray(healthResponse.health);
@@ -95,7 +102,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
         .map(service => service.service)
         .join(', ');
 
-      await runTest({
+    const servicesResult = await runTest({
         producerId,
         chain,
         testType: TEST_TYPES.HYPERION.SERVICES,
@@ -108,13 +115,15 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
         successCondition: () => servicesOk,
         onErrorMessage: `Failed services: ${failedServices}`,
       });
+      totalTests++;
+      if (servicesResult) passedTests++;
 
       // Any Missing Blocks
       const missingBlocks = parseInt(
         healthResponse.health.find(service => service.service === 'Elasticsearch')?.service_data?.missing_blocks || '0',
         10
       );
-      await runTest({
+      const missingBlocksResult = await runTest({
         producerId,
         chain,
         testType: TEST_TYPES.HYPERION.MISSING_BLOCKS,
@@ -127,6 +136,8 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
         successCondition: () => missingBlocks === 0,
         onErrorMessage: `Missing blocks: ${missingBlocks}`,
       });
+      totalTests++;
+      if (missingBlocksResult) passedTests++;
     }
   } catch (error) {
     await saveMultipleFailedResults({
@@ -143,13 +154,15 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       nodeType,
       method: 'GET',
     });
+    // If all tests fail just manually state that 3 Tests were performed
+    totalTests += 3;
   }
 
   // HTTP/2 check with timeout
   const http2Endpoint = endpoint.replace('http://', 'https://');
   const http2Curl = generateCurlCommandFromKyConfig(`${http2Endpoint}/v2/health`, { headers: { ':method': 'GET' } });
 
-  await runTest({
+  const http2Result = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.CORE.HTTP2,
@@ -161,11 +174,13 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     successCondition: (result) => result.success,
     onErrorMessage: (result) => result.error || 'HTTP/2 connection failed',
   });
+  totalTests++;
+  if (http2Result) passedTests++;
 
   // HTTPS is available
   const httpsEndpoint = endpoint.replace('http://', 'https://');
   const httpsCurl = generateCurlCommandFromKyConfig(`${httpsEndpoint}/v2/health`);
-  await runTest({
+  const httpsResult = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.CORE.HTTPS,
@@ -176,10 +191,12 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     testFunction: () => ky.get(`${httpsEndpoint}/v2/health`),
     successCondition: () => true,
   });
+  totalTests++;
+  if (httpsResult) passedTests++;
 
   // 4. get_transaction test
   const transactionCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/history/get_transaction`, { searchParams: { id: validationData.transaction } });
-  await runTest({
+  const transactionResult = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.HYPERION.GET_TRANSACTION,
@@ -191,10 +208,12 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     successCondition: (result) => result.query_time_ms !== undefined,
     onErrorMessage: 'Invalid transaction response',
   });
+  totalTests++;
+  if (transactionResult) passedTests++;
 
   // 5. get_actions test
   const actionsCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/history/get_actions`, { searchParams: { limit: 1 } });
-  await runTest({
+  const actionsResult = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.HYPERION.GET_ACTIONS,
@@ -206,10 +225,12 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     successCondition: (result) => result.actions && Array.isArray(result.actions),
     onErrorMessage: 'Invalid actions response',
   });
+  totalTests++;
+  if (actionsResult) passedTests++;
 
   // 6. get_key_accounts test
   const keyAccountsCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } });
-  await runTest({
+  const keyAccountsResult = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.HYPERION.GET_KEY_ACCOUNTS,
@@ -221,6 +242,8 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     successCondition: (result) => result.account_names !== undefined,
     onErrorMessage: 'Invalid key accounts response',
   });
+  totalTests++;
+  if (keyAccountsResult) passedTests++;
 
   // 7. Partial Hyperion test
   if (!isFull) {
@@ -233,7 +256,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
         after: timestamp42DaysAgo.toISOString(),
       },
     });
-    await runTest({
+    const partialResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.HYPERION.PARTIAL,
@@ -251,19 +274,34 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       successCondition: (result) => result.actions !== undefined,
       onErrorMessage: 'Invalid partial Hyperion response',
     });
+    totalTests++;
+    if (partialResult) passedTests++;
   }
+
+  return passedTests === totalTests;
 };
 
 
 export const runAllHyperionTests = async (producerId, chain, validationData) => {
+  const nodeType = 'hyperion'
   const hyperionNodes = await getHyperionNodes(producerId);
 
   if (hyperionNodes.length === 0) {
     Logger.log('No Hyperion nodes found for this producer', 'Passed');
     return;
   }
+
+  let anyTestPassed = false;
   for (const node of hyperionNodes) {
-    Logger.log('', `Hyperion: ${node.endpoint}`);
-    await runHyperionTest(producerId, chain, node, validationData, 'hyperion');
+    Logger.log('', `${nodeType}: ${node.endpoint}`);
+    const endpointTestsPassed = await runHyperionTest(producerId, chain, node, validationData, nodeType);
+    console.log(`${nodeType} Endpoint passed: ${endpointTestsPassed}`);
+    anyTestPassed = anyTestPassed || endpointTestsPassed;
   }
+  Logger.log('', '----------------------------------------');
+  console.log(`Is one endpoint working: ${anyTestPassed}`);
+  Logger.log('', '----------------------------------------');
+  return anyTestPassed;
 };
+
+

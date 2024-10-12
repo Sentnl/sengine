@@ -1,4 +1,4 @@
-import ky from 'ky';
+import ky, { HTTPError } from 'ky';
 import { getApiNodes,  runTlsSecurityTest, runHttpsCheckTest } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
@@ -9,27 +9,35 @@ import { runTest, saveMultipleFailedResults } from '../helpers/testRunner.js';
 import { getUserFriendlyMessage } from '../helpers/errorHandler.js';
 
 
-const runApiTest = async (producerId, chain, endpoint, validationData, nodeType = 'api') => {
+const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType = 'api') => {
   const httpsEndpoint = endpoint.replace(/^http:/, 'https:');
   const { hostname } = new URL(httpsEndpoint);
   let combinedError = null; // Initialize combinedErr
+  let totalTests = 0;
+  let passedTests = 0;
 
   // TLS security test
-  await runTlsSecurityTest({
+  const tlsResult = await runTlsSecurityTest({
     producerId,
     chain,
     hostname,
     nodeType,
   });
+  totalTests++;
+  console.log(`TLS Result ${tlsResult}`);
+  if (tlsResult) passedTests++;
 
   // HTTPS check
   const httpsGetInfoUrl = `${httpsEndpoint}/v1/chain/get_info`;
-  await runHttpsCheckTest({
+  const httpsResult = await runHttpsCheckTest({
     producerId,
     chain,
     url: httpsGetInfoUrl,
     nodeType,
   });
+  console.log(`HTTPS Reslut ${httpsResult}`)
+  totalTests++;
+  if (httpsResult) passedTests++;
 
   // GET /v1/chain/get_info (including HTTP check)
   const getInfoUrl = `${endpoint}/v1/chain/get_info`;
@@ -44,7 +52,7 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
     );
 
     // HTTP check
-    await runTest({
+    const httpResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.CORE.HTTP,
@@ -65,11 +73,13 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
           ? 'HTTP request successful but response is not a JSON object'
           : getUserFriendlyMessage(error),
     });
+    totalTests++;
+    if (httpResult) passedTests++;
 
     const expectedChainId = config.chains[chain].chainId;
     const correctChain = response.body.chain_id === expectedChainId;
 
-    await runTest({
+    const correctChainResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.API.GET_INFO_CORRECT_CHAIN,
@@ -82,10 +92,12 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       successCondition: () => correctChain,
       onErrorMessage: `Chain ID mismatch. Expected: ${expectedChainId}, Got: ${response.body.chain_id}`,
     });
+    totalTests++;
+    if (correctChainResult) passedTests++;
 
     const headBlockUpToDate = response.body.head_block_num >= validationData.latestHeadBlock - 10;
 
-    await runTest({
+    const headBlockUpToDateResult = await runTest({
       producerId,
       chain,
       testType: TEST_TYPES.API.GET_INFO_UP_TO_DATE,
@@ -98,6 +110,8 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       successCondition: () => headBlockUpToDate,
       onErrorMessage: 'Head block not up-to-date',
     });
+    totalTests++;
+    if (headBlockUpToDateResult) passedTests++;
 
   } catch (error) {
     await saveMultipleFailedResults({
@@ -114,6 +128,8 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       nodeType,
       method: 'GET',
     });
+    // If all tests fail just manaully state that 3 Tests were performed
+    totalTests += 3;
   }
 
   // Invalid endpoints test
@@ -126,7 +142,7 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
   for (const { url, testType } of invalidEndpoints) {
     const curlCmd = generateCurlCommandFromKyConfig(url);
     
-    await runTest({
+    const testResult = await runTest({
       producerId,
       chain,
       testType,
@@ -163,6 +179,14 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       },
       onErrorMessage: 'Endpoint unexpectedly available and serving JSON',
     });
+
+    totalTests++;
+    if (testResult) {
+      passedTests++;
+      // Perform additional action here if the test was successful
+      console.log(`Test passed for URL: ${url}`);
+      // Add any other actions you want to perform on success
+    }
   }
 
 /*   // Block one test
@@ -196,8 +220,9 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
   const latestBlockUrl = `${endpoint}/v1/chain/get_block`;
   const latestBlockPayload = { "block_num_or_id": validationData.head_block_num, "json": true };
   const latestBlockCurl = generateCurlCommandFromKyConfig(latestBlockUrl, { method: 'POST', json: latestBlockPayload });
+  
 
-  await runTest({
+  const latestBlockResult = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.API.LATEST_BLOCK_TEST,
@@ -213,6 +238,8 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
       Array.isArray(result.transactions),
     onErrorMessage: (error) => getUserFriendlyMessage(error), 
   });
+  totalTests++;
+  if (latestBlockResult) passedTests++;
 
   // Basic symbol test
   const currencyBalanceUrl = `${endpoint}/v1/chain/get_currency_balance`;
@@ -224,7 +251,7 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
   };
   const currencyBalanceCurl = generateCurlCommandFromKyConfig(currencyBalanceUrl, { method: 'POST', json: currencyBalancePayload });
 
-  await runTest({
+  const currencyBalanceResult = await runTest({
     producerId,
     chain,
     testType: TEST_TYPES.API.BASIC_SYMBOL_TEST,
@@ -252,18 +279,31 @@ const runApiTest = async (producerId, chain, endpoint, validationData, nodeType 
         ? `Invalid currency balance response: ${JSON.stringify(result)}`
         : getUserFriendlyMessage(result),
   });
+  totalTests++;
+  if (currencyBalanceResult) passedTests++;
+  console.log(`Total tests ${totalTests} passed tests ${passedTests}`);
+  return passedTests === totalTests;
 };
 
+
 export const runAllApiTests = async (producerId, chain, validationData) => {
+  const nodeType = 'api'
   const apiEndpoints = await getApiNodes(producerId);
 
   if (apiEndpoints.length === 0) {
-    Logger.log('No API nodes found for this producer', 'Passed');
-    return;
+    Logger.log(`No ${nodeType} nodes found for this producer', 'Passed`);
+    return true;
   }
 
+  let anyTestPassed = false;
   for (const endpoint of apiEndpoints) {
-    Logger.log('', `API: ${endpoint}`);
-    await runApiTest(producerId, chain, endpoint, validationData, 'api');
+    Logger.log('', `${nodeType}: ${endpoint}`);
+    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType);
+    console.log(`${nodeType} Endpoint test passed: ${endpointTestsPassed}`);
+    anyTestPassed = anyTestPassed || endpointTestsPassed;
   }
+  Logger.log('', '----------------------------------------');
+  console.log(`Is one endpoint working: ${anyTestPassed}`);
+  Logger.log('', '----------------------------------------');
+  return anyTestPassed;
 };
