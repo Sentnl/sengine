@@ -1,6 +1,6 @@
-import { getProducers, fetchChainJson, fetchProducerJson, parseProducerServices } from './blockchainService.js';
+import { getProducers, parseProducerServices } from './blockchainService.js';
 import { saveProducer, saveProducerService } from './dataService.js';
-import { getValidationData, getProducerName, validateProducer } from '../validate/validateCore.js';
+import { getValidationData, validateProducer } from '../validate/validateCore.js';
 import config from '../config.js';
 import { isUrlIgnored, joinUrl } from '../helpers/Urls.js';
 import { getDatabase } from '../models/db.js';
@@ -9,6 +9,8 @@ import { httpRequest } from '../helpers/performanceHelper.js';
 
 const isAbsoluteUrl = (url) => /^https?:\/\//i.test(url);
 
+
+// Updating producers and services
 const updateProducers = async (chain) => {
   console.log(`Updating producers for ${chain}`);
   const producers = await getProducers(chain);
@@ -66,7 +68,7 @@ const updateProducers = async (chain) => {
   }
 };
 
-
+// Running all tests
 const runAllTests = async (chain, producerName = null) => {
   console.log(`Running tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
   const validationData = await getValidationData(chain);
@@ -91,26 +93,28 @@ const runAllTests = async (chain, producerName = null) => {
       ...validationData,
       jsonUrl: row.json_url
     });
-
-    Logger.log('', 'Test Results:');
-    Logger.log('', `Guild: ${results.guild ? 'Passed' : 'Failed'}`);
-    Logger.log('', `API: ${results.api ? 'Passed' : 'Failed'}`);
-    Logger.log('', `History: ${results.history ? 'Passed' : 'Failed'}`);
-    Logger.log('', `Hyperion: ${results.hyperion ? 'Passed' : 'Failed'}`);
-    Logger.log('', `P2P: ${results.p2p ? 'Passed' : 'Failed'}`);
+    Logger.log('', `Test Results for: ${row.name}`);
+    if (results.guild[0]) Logger.log('', `Guild: ${results.guild[1] ? 'Passed' : 'Failed'}`);
+    if (results.api[0]) Logger.log('', `API: ${results.api[1] ? 'Passed' : 'Failed'}`);
+    if (results.history[0]) Logger.log('', `History: ${results.history[1] ? 'Passed' : 'Failed'}`);
+    if (results.hyperion[0]) Logger.log('', `Hyperion: ${results.hyperion[1] ? 'Passed' : 'Failed'}`);
+    if (results.p2p[0]) Logger.log('', `P2P: ${results.p2p[1] ? 'Passed' : 'Failed'}`);
+    if (results.atomicassets[0]) Logger.log('', `AtomicAssets: ${results.atomicassets[1] ? 'Passed' : 'Failed'}`);
+    if (results.pricefeed[0]) Logger.log('', `PriceFeed: ${results.pricefeed[1] ? 'Passed' : 'Failed'}`);
     Logger.log('', `Timestamp: ${timestamp}`);
     Logger.log('', '----------------------------------------');
   }
   console.log(`Completed tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
 };
 
-export const startMonitoring = async (producerName = null) => {
+// StartMonitoring
+export const startMonitoring = async () => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
   };
 
-  const runAllTestsForBothChains = async () => {
+  const runAllTestsForBothChains = async (producerName = null) => {
     // To test a single producer, use the producerName parameter
     await runAllTests('mainnet', producerName);
     await runAllTests('testnet', producerName);

@@ -1,17 +1,17 @@
 import ky from 'ky';
-import { getHistoryNodes, runTlsSecurityTest, runHttpsCheckTest } from './validateCore.js';
+import { getApiNodes, runTlsSecurityTest, runHttpsCheckTest } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 import { Logger } from '../helpers/Logger.js';
 import { generateCurlCommandFromKyConfig } from '../helpers/curlGenerator.js';
 import { measureResponseTime } from '../helpers/measureResponseTime.js';
-import { runTest, saveMultipleFailedResults } from '../helpers/testRunner.js'; 
+import { runTest, saveMultipleFailedResults, evaluateTestResults } from '../helpers/testRunner.js'; 
 
 
-const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType = 'history') => {
+const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId) => {
   let totalTests = 0;
   let passedTests = 0;
-
+  const importantTests = [];
   const httpsEndpoint = endpoint.replace(/^http:/, 'https:');
   const hostname = new URL(httpsEndpoint).hostname;
 
@@ -21,9 +21,9 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     chain,
     hostname,
     nodeType,
+    validateResultId,
   });
-  totalTests++;
-  if (tlsResult) passedTests++;
+
 
   // HTTPS check
   const httpsGetInfoUrl = `${httpsEndpoint}/v1/chain/get_info`;
@@ -32,14 +32,15 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     chain,
     url: httpsGetInfoUrl,
     nodeType,
+    validateResultId,
   });
   totalTests++;
   if (httpsResult) passedTests++;
+  importantTests.push(httpsResult);
 
   // Combined check for HTTP availability and CORS configuration
   const getInfoUrl = `${endpoint}/v1/chain/get_info`;
   const getInfoCurl = generateCurlCommandFromKyConfig(getInfoUrl);
-
 
   try {
     const { result: response, responseTime } = await measureResponseTime(() => 
@@ -71,12 +72,13 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
         response.status === 200
           ? 'HTTP request successful but response is not a JSON object'
           : getUserFriendlyMessage(error),
+      validateResultId,
     });
     totalTests++;
     if (httpResult) passedTests++;
-    
+    importantTests.push(httpResult);
+
     // Check CORS configuration
-    //const corsHeader = response.headers.get('access-control-allow-origin');
     const corsHeader = response.headers && response.headers['access-control-allow-origin'];
     const corsValues = corsHeader ? corsHeader.split(',').map(v => v.trim()) : [];
     const corsOk = corsValues.includes('*') || corsValues.includes('https://wax.sengine.co');
@@ -93,9 +95,12 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       existingResponseTime: responseTime,
       successCondition: () => corsOk,
       onErrorMessage: 'CORS not properly configured',
+      validateResultId,
     });
     totalTests++;
     if (corsResult) passedTests++;
+    importantTests.push(corsResult);
+
   } catch (error) {
     await saveMultipleFailedResults({
       producerId,
@@ -109,8 +114,10 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       curlCmd: getInfoCurl,
       nodeType,
       method: 'GET',
+      validateResultId,
     });
     totalTests += 2
+    importantTests.push(false); 
   }
 
   // Perform specific POST requests
@@ -154,6 +161,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     },
   ];
 
+  let failedTests = 0;
   for (const testCase of testCases) {
     const curlCmd = generateCurlCommandFromKyConfig(testCase.url, { method: 'POST', json: testCase.payload });
     const result = await runTest({
@@ -168,33 +176,48 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       testFunction: () => ky.post(testCase.url, { json: testCase.payload }).json(),
       successCondition: testCase.successCondition,
       onErrorMessage: testCase.errorMessage,
+      validateResultId,
     });
     totalTests++;
-    if (result) passedTests++;
+    if (result) {
+      passedTests++;
+    } else {
+      failedTests++;
+    }
+    if (failedTests > 1) {
+      importantTests.push(result);
+    }
   }
+  const testsPassed = evaluateTestResults(passedTests, totalTests, importantTests);
+  console.log(`${nodeType} Tests: ${passedTests}/${totalTests}`);
+  return testsPassed;
 
-  return passedTests === totalTests;
 };
 
 
-export const runAllHistoryTests = async (producerId, chain, validationData) => {
-  const nodeType = 'history'
-  const apiEndpoints = await getHistoryNodes(producerId);
+export const runAllHistoryTests = async (producerId, chain, validationData, validateResultId) => {
+  const nodeType = 'history-v1'
+  const Endpoints = await getApiNodes(producerId, nodeType);
+  let runningHistoryNodes = false;
 
-  if (apiEndpoints.length === 0) {
+  if (Endpoints.length === 0) {
     Logger.log(`No ${nodeType} nodes found for this producer', 'Passed`);
-    return true;
+    return [runningHistoryNodes, false];
   }
 
+  runningHistoryNodes = true;
   let anyTestPassed = false;
-  for (const endpoint of apiEndpoints) {
+  for (let endpoint of Endpoints) {
+    // Remove trailing slash if present
+    endpoint = endpoint.replace(/\/$/, '');
+    
     Logger.log('', `${nodeType}: ${endpoint}`);
-    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType);
+    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId);
     console.log(`${nodeType} Endpoint test passed: ${endpointTestsPassed}`);
     anyTestPassed = anyTestPassed || endpointTestsPassed;
   }
   Logger.log('', '----------------------------------------');
   console.log(`Is one endpoint working: ${anyTestPassed}`);
   Logger.log('', '----------------------------------------');
-  return anyTestPassed;
+  return [runningHistoryNodes, anyTestPassed];
 };

@@ -14,16 +14,21 @@ import { runAllHistoryTests } from './HistoryTest.js';
 import { runAllHyperionTests } from './hyperionTest.js';
 import { runGuildTests } from './guildTest.js';
 import { runAllP2PTests } from './P2PTest.js';
-import { saveValidateResult } from '../helpers/testRunner.js';
+import { runAllAtomicTests } from './AtomicTest.js';
+import { runPriceFeedTests } from './PriceFeedTest.js';
+import { saveValidateResult, updateValidateResult } from '../services/dataService.js';
+import { getProducerChainJson, getCpuData, getPriceFeedData } from '../services/blockchainService.js';
 
 const mainnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
   network: 'mainnet',
+  nodeCount: 5,
 });
 
 const testnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
   network: 'testnet',
+  nodeCount: 5,
 });
 
 const mainnetAtomicNodePulse = new NodePulse({
@@ -31,7 +36,7 @@ const mainnetAtomicNodePulse = new NodePulse({
   network: 'mainnet',
 });
 
-const getNodeAndRpc = async (nodePulse) => {
+export const getNodeAndRpc = async (nodePulse) => {
   const endpoint = await nodePulse.getNode();
   return { endpoint, rpc: new JsonRpc(endpoint, { fetch }) };
 };
@@ -83,8 +88,12 @@ export const getValidationData = async (chain) => {
 
       let atomicAssetId = null;
       let delphioracleActions = null;
+      let producerJsonData = {};
+      let CpuData = 0;
+      let PriceFeed = null;
 
       if (chain === 'mainnet') {
+
         // 3. Get an Atomic AssetId (only for mainnet)
         const atomicEndpoint = await mainnetAtomicNodePulse.getNode();
         const atomicAssetResponse = await ky.get(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
@@ -93,8 +102,27 @@ export const getValidationData = async (chain) => {
         // 4. Get delphioracle actions (only for mainnet)
         const actions = await rpc.history_get_actions('delphioracle', -1, -100);
         delphioracleActions = actions.actions.map(action => action.action_trace);
-      }
 
+        // 5. Get Producer JSON data
+        console.log('Fetching producer JSON data...');
+        try {
+          producerJsonData = await getProducerChainJson(chain,rpc);
+          if (!producerJsonData) {
+            console.log('No producer JSON data returned');
+            producerJsonData = {};
+          }
+        } catch (error) {
+          console.error(`Error fetching JSON data for chain ${chain}:`, error);
+          producerJsonData = {};
+        }
+        //6. Get Pricefeed Data
+        PriceFeed = await getPriceFeedData(chain,nodePulse)
+      
+        
+      }
+      //7. Get CPU Data
+      CpuData = await getCpuData(chain,rpc,nodePulse)
+       
       return {
         api, // Renamed from endpoint to api
         latestHeadBlock,
@@ -105,7 +133,10 @@ export const getValidationData = async (chain) => {
         last_irreversible_block_id,
         head_block_num,
         head_block_id,
-        chain_id
+        chain_id,
+        producerJsonData,
+        CpuData,
+        PriceFeed,
       };
     } catch (error) {
       console.error(`Error with ${chain} node, attempt ${nodeAttempts + 1}:`, error);
@@ -120,17 +151,44 @@ export const getValidationData = async (chain) => {
 
 export async function validateProducer(producerId, chain, validationData) {
   const timestamp = new Date().toISOString();
-  const results = {
-    guild: await runGuildTests(producerId, chain, validationData.jsonUrl),
-    api: await runAllApiTests(producerId, chain, validationData),
-    history: await runAllHistoryTests(producerId, chain, validationData),
-    hyperion: await runAllHyperionTests(producerId, chain, validationData),
-    p2p: await runAllP2PTests(producerId, chain, validationData)
-  };
-  console.log(producerId,results);
-  await saveValidateResult(producerId, results, timestamp);
+  
+  // Extract CPU value for the specific producer
+  const producerName = await getProducerName(producerId);
+  const cpuData = validationData.CpuData.find(data => data.producer === producerName);
+  const cpuValue = cpuData ? cpuData.cpuStats : null;
 
-  return { results, timestamp };
+  // Create initial entry in validate_results with timestamp, producerID and CPU
+  const validateResultId = await saveValidateResult(producerId, {}, timestamp, cpuValue);
+
+  const testResults = {
+    guild: await runGuildTests(producerId, chain, validationData, validateResultId),
+    api: await runAllApiTests(producerId, chain, validationData, validateResultId),
+    history: await runAllHistoryTests(producerId, chain, validationData, validateResultId),
+    hyperion: await runAllHyperionTests(producerId, chain, validationData, validateResultId),
+    atomicassets: await runAllAtomicTests(producerId, chain, validationData, validateResultId),
+    p2p: await runAllP2PTests(producerId, chain, validationData, validateResultId),
+  };
+
+  // Only run pricefeed tests for mainnet, return [false, false] for testnet
+  testResults.pricefeed = chain === 'mainnet'
+    ? await runPriceFeedTests(producerId, chain, validationData, validateResultId)
+    : [false, false];
+
+  // Create a results object suitable for updateValidateResult
+  const results = {
+    guild: testResults.guild,
+    api: testResults.api,
+    history: testResults.history,
+    hyperion: testResults.hyperion,
+    atomicassets: testResults.atomicassets,
+    p2p: testResults.p2p,
+    pricefeed: testResults.pricefeed
+  };
+  
+  // Update the validate_results row with the final results
+  await updateValidateResult(validateResultId, results);
+
+  return { results: testResults, timestamp, validateResultId };
 }
 
 
@@ -148,7 +206,8 @@ export const saveTestResult = async (
   type,
   requestType,
   payload,
-  version = null // Added version with default null
+  version = null,
+  validateResultId
 ) => {
   const db = getDatabase();
   const query = `
@@ -165,9 +224,10 @@ export const saveTestResult = async (
       type,
       request_type,
       payload,
-      version
+      version,
+      validate_result_id
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
   `;
   await db.query(query, [
     producerId,
@@ -182,7 +242,8 @@ export const saveTestResult = async (
     type,
     requestType,
     payload,
-    version, // New value
+    version,
+    validateResultId,
   ]);
 };
 
@@ -200,7 +261,8 @@ export const saveTestResultWrapper = async (
   nodeType,
   requestType = 'GET', // Default to GET
   payload = null,      // Default to null
-  version = null       // Added version parameter with default null
+  version = null,       // Added version parameter with default null
+  validateResultId 
 ) => {
   Logger.log(testType, passed ? 'Passed' : 'Failed', errorMessage || '');
   await saveTestResult(
@@ -216,37 +278,12 @@ export const saveTestResultWrapper = async (
     nodeType,
     requestType,
     payload,
-    version // Pass version
+    version, // Pass version
+    validateResultId
   );
 };
 
 
-// SHARED DB GET QUERIES
-export const getHyperionNodes = async (producerId) => {
-  const db = getDatabase();
-  const query = `
-    SELECT api_endpoint, is_full 
-    FROM producer_services 
-    WHERE producer_id = $1 
-    AND $2 = ANY(node_type)
-    AND $3 = ANY(features)
-  `;
-  const result = await db.query(query, [producerId, 'query', 'hyperion-v2']);
-  return result.rows.map(row => ({ endpoint: row.api_endpoint, isFull: row.is_full }));
-};
-
-export const getHistoryNodes = async (producerId) => {
-  const db = getDatabase();
-  const query = `
-    SELECT api_endpoint 
-    FROM producer_services 
-    WHERE producer_id = $1 
-    AND $2 = ANY(node_type)
-    AND $3 = ANY(features)
-  `;
-  const result = await db.query(query, [producerId, 'query', 'history-v1']);
-  return result.rows.map(row => row.api_endpoint);
-};
 
 export const getProducerName = async (producerId) => {
   const db = getDatabase();
@@ -260,7 +297,7 @@ export const getProducerName = async (producerId) => {
   }
 };
 
-export const getApiNodes = async (producerId) => {
+export const getAtomicNodes = async (producerId) => {
   const db = getDatabase();
   const query = `
     SELECT api_endpoint 
@@ -269,8 +306,29 @@ export const getApiNodes = async (producerId) => {
     AND $2 = ANY(node_type)
     AND $3 = ANY(features)
   `;
-  const result = await db.query(query, [producerId, 'query', 'chain-api']);
+  const result = await db.query(query, [producerId, 'query', 'atomic-assets-api']);
   return result.rows.map(row => row.api_endpoint);
+};
+
+// General DB function to get Nodes, including special statements to deal with hyperion-v2
+export const getApiNodes = async (producerId, nodeFeature) => {
+  const db = getDatabase();
+  const query = `
+    SELECT 
+      COALESCE(NULLIF(ssl_endpoint, ''), api_endpoint) AS endpoint
+      ${nodeFeature === 'hyperion-v2' ? ', is_full' : ''}
+    FROM producer_services 
+    WHERE producer_id = $1 
+    AND $2 = ANY(node_type)
+    AND $3 = ANY(features)
+  `;
+  const result = await db.query(query, [producerId, 'query', nodeFeature]);
+  
+  if (nodeFeature === 'hyperion-v2') {
+    return result.rows.map(row => ({ endpoint: row.endpoint, isFull: row.is_full }));
+  } else {
+    return result.rows.map(row => row.endpoint);
+  }
 };
 
 export const getSeedNodes = async (producerId) => {
@@ -292,6 +350,7 @@ export async function runTlsSecurityTest({
   chain,
   hostname,
   nodeType = 'core',
+  validateResultId
 }) {
   // ... existing implementation ...
 
@@ -309,6 +368,7 @@ export async function runTlsSecurityTest({
     onErrorMessage: (result) => result.status,
     expectedStatusCode: (result) => (result.isSecure ? 200 : 0),
     saveErrorMessageOnSuccess: true,
+    validateResultId,
   });
 }
 
@@ -317,9 +377,8 @@ export async function runHttpsCheckTest({
   chain,
   url,
   nodeType = 'core',
+  validateResultId
 }) {
-  // ... existing implementation ...
-
   return await runTest({
     producerId,
     chain,
@@ -343,6 +402,9 @@ export async function runHttpsCheckTest({
       }
       return 'HTTPS check failed: Unknown error';
     },
+    validateResultId,
   });
 }
+
+
 

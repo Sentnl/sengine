@@ -1,7 +1,9 @@
 import http2 from 'http2';
+import tls from 'tls';
+import { URL } from 'url';
 
 /**
- * Checks if the server supports HTTP/2.
+ * Checks if the server supports HTTP/2, logs the request URL, response, headers, and body.
  * @param {string} http2Endpoint - The endpoint to check for HTTP/2 support.
  * @returns {Promise<{ success: boolean, error?: string }>}
  */
@@ -9,14 +11,27 @@ export const checkHttp2 = async (http2Endpoint) => {
   return new Promise((resolve) => {
     let client;
     try {
-      client = http2.connect(http2Endpoint);
+      const parsedUrl = new URL(http2Endpoint);
+
+      // Connect to the HTTP/2 server with the secure context
+      client = http2.connect(parsedUrl.origin, {
+        ALPNProtocols: ['h2', 'http/1.1'],
+      });
 
       client.on('error', (err) => {
         resolve({ success: false, error: `HTTP/2 connection error: ${err.message}` });
       });
 
-      const req = client.request({ ':path': '/v2/health' });
+      // Explicitly set the method, path, and headers (like curl)
+      const req = client.request({
+        ':method': 'GET',
+        ':path': parsedUrl.pathname,
+        'Host': parsedUrl.hostname,
+        'User-Agent': 'curl/8.4.0', // Mimic curl User-Agent
+        'Accept': '*/*',
+      });
 
+      // Log the response headers
       req.on('response', (headers) => {
         if (headers[':status'] === 200) {
           resolve({ success: true });
@@ -25,8 +40,10 @@ export const checkHttp2 = async (http2Endpoint) => {
         }
       });
 
-      req.on('data', () => {
-        // Consume data to ensure the response is fully processed
+      let body = '';
+
+      req.on('data', (chunk) => {
+        body += chunk;
       });
 
       req.on('end', () => {

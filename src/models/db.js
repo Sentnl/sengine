@@ -37,6 +37,27 @@ export const setupDatabase = async () => {
       UNIQUE (producer_id, api_endpoint, p2p_endpoint)
     );
 
+    CREATE TABLE IF NOT EXISTS validate_results (
+      id SERIAL PRIMARY KEY,
+      producer_id INTEGER REFERENCES producers(id),
+      guild BOOLEAN,
+      guild_ok BOOLEAN,
+      api BOOLEAN,
+      api_ok BOOLEAN,
+      history BOOLEAN,
+      history_ok BOOLEAN,
+      hyperion BOOLEAN,
+      hyperion_ok BOOLEAN,
+      p2p BOOLEAN,
+      p2p_ok BOOLEAN,
+      atomicassets BOOLEAN,
+      atomicassets_ok BOOLEAN,
+      pricefeed BOOLEAN,
+      pricefeed_ok BOOLEAN,
+      cpu INTEGER,
+      timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
     CREATE TABLE IF NOT EXISTS validate_services (
       id SERIAL PRIMARY KEY,
       producer_id INTEGER REFERENCES producers(id),
@@ -52,19 +73,14 @@ export const setupDatabase = async () => {
       type VARCHAR(50) NOT NULL,
       request_type VARCHAR(10),
       payload TEXT,
-      version VARCHAR(20)
+      version VARCHAR(20),
+      validate_result_id INTEGER REFERENCES validate_results(id)
     );
 
-    CREATE TABLE IF NOT EXISTS validate_results (
-      id SERIAL PRIMARY KEY,
-      producer_id INTEGER REFERENCES producers(id),
-      guild BOOLEAN,
-      api BOOLEAN,
-      history BOOLEAN,
-      hyperion BOOLEAN,
-      p2p BOOLEAN,
-      timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
+
+      -- Add any necessary indexes
+      CREATE INDEX IF NOT EXISTS idx_validate_services_producer_id ON validate_services(producer_id);
+      CREATE INDEX IF NOT EXISTS idx_validate_services_validate_result_id ON validate_services(validate_result_id);
   `);
 };
 

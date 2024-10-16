@@ -14,6 +14,7 @@
     "eosio-protocol": "github:Blacklusion/eosio-protocol#with-dist",
     "eosjs": "^22.1.0",
     "fastify": "^4.21.0",
+    "jsondiffpatch": "^0.6.0",
     "ky": "^0.33.3",
     "node-fetch": "^3.3.1",
     "pg": "^8.11.3",

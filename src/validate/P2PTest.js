@@ -230,34 +230,23 @@ class BlockTransmissionTestRunner extends TestRunner {
   }
 }
 
-export const runAllP2PTests = async (producerId, chain, validationData) => {
+export const runAllP2PTests = async (producerId, chain, validationData, validateResultId) => {
   const seedNodes = await getSeedNodes(producerId);
   let totalTests = 0;
   let passedTests = 0;
   let anyNodePassedAllTests = false;
+  let runningP2PNodes = false;
 
   if (seedNodes.length === 0) {
     Logger.log('No P2P nodes found for this producer', 'Passed');
-    await saveTestResultWrapper(
-      producerId,
-      chain,
-      TEST_TYPES.P2P.P2P_NOT_AVAILABLE,
-      false,
-      null,
-      0,
-      200,
-      TEST_TYPES.P2P.P2P_NOT_AVAILABLE,
-      TEST_TYPES.P2P.P2P_NOT_AVAILABLE,
-      'p2p'
-    );
-    totalTests++;
-    passedTests++;
-    return { totalTests, passedTests, anyNodePassedAllTests: true };
+    return [runningP2PNodes, false];
   }
+
+  runningP2PNodes = true;
 
   for (const seedNode of seedNodes) {
     Logger.log('', `P2P: ${seedNode.p2p_endpoint}`);
-    const { testsRun, testsPassed } = await runP2PTest(producerId, chain, seedNode.p2p_endpoint, validationData);
+    const { testsRun, testsPassed } = await runP2PTest(producerId, chain, seedNode.p2p_endpoint, validationData, validateResultId);
     totalTests += testsRun;
     passedTests += testsPassed;
 
@@ -272,10 +261,10 @@ export const runAllP2PTests = async (producerId, chain, validationData) => {
   Logger.log('', `At least one P2P node passed all tests: ${anyNodePassedAllTests ? 'Yes' : 'No'}`);
   Logger.log('', '----------------------------------------');
 
-  return  anyNodePassedAllTests;
+  return [runningP2PNodes, anyNodePassedAllTests];
 };
 
-const runP2PTest = async (producerId, chain, endpoint, validationData) => {
+const runP2PTest = async (producerId, chain, endpoint, validationData, validateResultId) => {
   const [host, portStr] = endpoint.split(':');
   const port = parseInt(portStr, 10);
   const node = {
@@ -306,7 +295,11 @@ const runP2PTest = async (producerId, chain, endpoint, validationData) => {
     connectionPossible ? 200 : 500,
     result.error_detail || null,
     TEST_TYPES.P2P.CONNECTION_POSSIBLE,
-    'p2p'
+    'p2p',
+    'GET',
+    null,
+    null,
+    validateResultId
   );
 
   // Test 2: Block transmission speed is OK
@@ -326,7 +319,11 @@ const runP2PTest = async (producerId, chain, endpoint, validationData) => {
       ? (speedOk ? null : `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
       : 'Block transmission not possible',
     parseFloat(result.speed),
-    'p2p'
+    'p2p',
+    'GET',
+    null,
+    null,
+    validateResultId
   );
 
   return { testsRun, testsPassed };

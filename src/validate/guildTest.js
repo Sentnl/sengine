@@ -1,14 +1,18 @@
 import { httpRequest } from '../helpers/performanceHelper.js';
 import { saveTestResultWrapper } from './validateCore.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
+import { create } from 'jsondiffpatch';
+import { getProducerName } from './validateCore.js';
 
-const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, errorMessageOnFailure) => {
+const jsondiffpatch = create();
+
+const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, errorMessageOnFailure, validateResultId) => {
   const startTime = Date.now();
   try {
     const response = await httpRequest(jsonUrl, {}, 0, 'guildTest');
     const responseTime = Date.now() - startTime;
     const responseData = await response.json();
-    const isSuccessful = checkSuccess(responseData);
+    const isSuccessful = await checkSuccess(responseData);
 
     await saveTestResultWrapper(
       producerId,
@@ -21,10 +25,13 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       isSuccessful ? null : errorMessageOnFailure,
       null,
       'guild',
-      'GET'
+      'GET',
+      null,
+      null,
+      validateResultId
     );
 
-    return isSuccessful; // Return the test result
+    return isSuccessful;
   } catch (error) {
     await saveTestResultWrapper(
       producerId,
@@ -37,14 +44,17 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       error.message,
       null,
       'guild',
-      'GET'
+      'GET',
+      null,
+      null,
+      validateResultId
     );
 
-    return false; // Return false if there was an error
+    return false;
   }
 };
 
-const testGithubUsername = async (producerId, chain, jsonUrl) => {
+const testGithubUsername = async (producerId, chain, jsonUrl, validateResultId) => {
   return await runTest(
     producerId,
     chain,
@@ -55,11 +65,12 @@ const testGithubUsername = async (producerId, chain, jsonUrl) => {
       const socialGithub = response.org?.social?.github;
       return (Array.isArray(githubUser) ? githubUser.length > 0 : Boolean(githubUser)) || Boolean(socialGithub);
     },
-    'No GitHub username specified in either org.github_user or org.social.github'
+    'No GitHub username specified in either org.github_user or org.social.github',
+    validateResultId
   );
 };
 
-const testBranding = async (producerId, chain, jsonUrl) => {
+const testBranding = async (producerId, chain, jsonUrl, validateResultId) => {
   return await runTest(
     producerId,
     chain,
@@ -69,23 +80,66 @@ const testBranding = async (producerId, chain, jsonUrl) => {
       const branding = response.org?.branding;
       return Boolean(branding && branding.logo_256 && branding.logo_1024 && branding.logo_svg);
     },
-    'Missing one or more branding fields'
+    'Missing one or more branding fields',
+    validateResultId
   );
 };
 
-export const runGuildTests = async (producerId, chain, jsonUrl) => {
+
+const testJsonConsistency = async (producerId, chain, jsonUrl, validateResultId, chainJson, producerName) => {
+  return await runTest(
+    producerId,
+    chain,
+    jsonUrl,
+    TEST_TYPES.GUILD.JSON_CONSISTENCY,
+    async (downloadedJson) => {
+      const onChainJson = chainJson.find(p => p.owner === producerName)?.json;
+      if (!onChainJson) {
+        console.log(`No chain JSON found for producer ${producerName} on chain ${chain}`);
+        return false;
+      }
+      const delta = jsondiffpatch.diff(downloadedJson, onChainJson);
+      if (delta) {
+        console.log('Differences:', JSON.stringify(delta, null, 2));
+        return false;
+      }
+      return true;
+    },
+    'Inconsistency found between downloaded JSON and on-chain JSON',
+    validateResultId
+  );
+};
+
+export const runGuildTests = async (producerId, chain, validationData, validateResultId) => {
+  const producerName = await getProducerName(producerId);
+  let runningGuildInfo = false;
   let totalTests = 0;
   let passedTests = 0;
+  const jsonUrl = validationData.jsonUrl
+  const chainJson = validationData.producerJsonData
 
-  const githubUsernameResult = await testGithubUsername(producerId, chain, jsonUrl);
+  if (!jsonUrl) {
+    console.log('No Guild JSON URL found for this producer');
+    return [runningGuildInfo, false];
+  }
+   
+  runningGuildInfo = true;
+
+  const githubUsernameResult = await testGithubUsername(producerId, chain, jsonUrl, validateResultId);
   totalTests++;
   if (githubUsernameResult) passedTests++;
 
-  const brandingResult = await testBranding(producerId, chain, jsonUrl);
+  const brandingResult = await testBranding(producerId, chain, jsonUrl, validateResultId);
   totalTests++;
   if (brandingResult) passedTests++;
+  
+  // Only run this test on mainnet
+  if (chain === 'mainnet') {
+    const jsonConsistencyResult = await testJsonConsistency(producerId, chain, jsonUrl, validateResultId, chainJson, producerName);
+    totalTests++;
+      if (jsonConsistencyResult) passedTests++;
+  }
 
-  // Add more tests as needed
   console.log(`Guild Tests: ${passedTests}/${totalTests}`);
-  return passedTests === totalTests; // Return true if all tests passed
+  return [runningGuildInfo, passedTests === totalTests];
 };

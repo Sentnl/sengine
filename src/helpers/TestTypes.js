@@ -21,6 +21,7 @@ export const TEST_TYPES = {
     GUILD: {
       GITHUB_USERNAME: 'Github username is set',
       BRANDING: 'Branding logos have been set',
+      JSON_CONSISTENCY: 'guild_json_consistency',
     },
     API: {
       GET_INFO_CORRECT_CHAIN: 'Correct chain version',
@@ -35,13 +36,23 @@ export const TEST_TYPES = {
       LATEST_BLOCK_TEST: 'Latest block test passed',
       BASIC_SYMBOL_TEST: 'Basic symbol test passed',
     },
+    ATOMIC:{
+      HEALTH: 'Atomic Health was found',
+      HEAD_BLOCK: 'Atomic Head Block is up to date',
+      SERVICES: 'Atomic Services are ok',
+      COLLECTIONS: 'Atomic Collections found',
+      ASSET: 'Atomic Assets found',
+      SCHEMA: 'Atomic Schema found',
+      TEMPLATE: 'Atomic Template found',
+    },
+    PRICEFEED: {
+      HEALTH: '3 Pricefeeds being supplied',
+    },
     P2P: {
       CONNECTION_POSSIBLE: 'P2P Connection was possible',
       BLOCK_TRANSMISSION_SPEED: 'P2P Block Transmission Speed',
       CHAIN_ID_MATCH: 'P2P Chain ID Matches',
       P2P_NOT_AVAILABLE: 'No P2P nodes found for this producer',
-      
+
     },
-    // You can add other test types here, e.g.:
-    // ATOMIC: { ... }
   };

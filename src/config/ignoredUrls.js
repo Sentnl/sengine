@@ -61,6 +61,6 @@ export const ignoredUrls = [
   'validierung.cc',
   'elktech.io',
   'genereos.io',
-  'polar.io'
-
+  'polar.io',
+  'eos.barcelona'
 ];

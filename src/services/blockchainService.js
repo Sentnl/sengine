@@ -2,6 +2,7 @@ import { JsonRpc } from 'eosjs';
 import fetch from 'node-fetch';
 import ky from 'ky';
 import config from '../config.js';
+import { getNodeAndRpc } from '../validate/validateCore.js';
 
 const getProducers = async (chain) => {
   try {
@@ -31,6 +32,35 @@ const getProducers = async (chain) => {
   }
 };
 
+const getProducerChainJson = async (chain,rpc) => {
+  console.log(`Starting getProducerChainJson for chain ${chain}`);
+  try {
+
+    const response = await rpc.get_table_rows({
+      json: true,
+      code: 'producerjson',
+      scope: 'producerjson',
+      table: 'producerjson',
+      limit: 200,
+      reverse: false,
+      show_payer: false
+    });
+
+    if (!response || !response.rows) {
+      console.log('Response or response.rows is undefined');
+      return null;
+    }
+
+    return response.rows.map(row => ({
+      owner: row.owner,
+      json: JSON.parse(row.json)
+    }));
+  } catch (error) {
+    console.error(`Error in getProducerChainJson for ${chain}:`, error);
+    throw error;
+  }
+};
+/* 
 const fetchChainJson = async (url) => {
   try {
     const response = await ky.get(url).json();
@@ -49,7 +79,7 @@ const fetchProducerJson = async (url) => {
     console.error(`Error fetching producer JSON from ${url}:`, error);
     return null;
   }
-};
+}; */
 
 const parseProducerServices = (producerJson) => {
   if (!producerJson || !producerJson.nodes) return [];
@@ -67,4 +97,118 @@ const parseProducerServices = (producerJson) => {
     }));
 };
 
-export { getProducers, fetchChainJson, fetchProducerJson, parseProducerServices };
+const getPriceFeedData = async (chain, nodePulse, count = 100, maxRetries = 3) => {
+  console.log(`Getting Pricefeed data for ${chain}`);
+  let retries = 0;
+
+  while (retries < maxRetries) {
+    try {
+      const { endpoint: api } = await getNodeAndRpc(nodePulse);
+      const url = `${api}/v2/history/get_actions`;
+      
+      const response = await ky.get(url, {
+        searchParams: {
+          limit: count,
+          account: 'delphioracle'
+        },
+        timeout: 30000 // 30 seconds timeout
+      }).json();
+     
+      if (!response || !response.actions || response.actions.length === 0) {
+        console.log(`No data received from ${api}, retrying...`);
+        retries++;
+        continue;
+      }
+
+      console.log(`Received ${response.actions.length} actions`);
+      const guilds = response.actions;
+      const producerFinal = [];
+
+      for (const guild of guilds) {
+        if (guild.act.data.quotes.length >= 3) {
+          producerFinal.push(guild.act.data.owner);
+        }
+      }
+      // Remove duplicates
+      const uniqueProducers = [...new Set(producerFinal)];
+
+      return uniqueProducers;
+    } catch (error) {
+      console.error(`Error in getPriceFeedData for ${chain}:`, error);
+      retries++;
+      if (retries < maxRetries) {
+        console.log(`Retrying... (Attempt ${retries + 1} of ${maxRetries})`);
+      }
+    }
+  }
+
+  throw new Error(`Failed to get price feed data for ${chain} after ${maxRetries} attempts`);
+};
+
+const getCpuData = async (chain, rpc, nodePulse, count) => {
+  // Set count based on the chain
+  count = chain === 'mainnet' ? 120 : 120;
+
+  console.log(`Getting CPU Results for ${chain} with count ${count}`);
+  try {
+    const actions = await getEosmechanicsActions(rpc, count);
+    const producerFinal = [];
+    let { endpoint: api } = await getNodeAndRpc(nodePulse);
+    console.log(`Initial API: ${api}`);
+
+    for (const action of actions) {
+      const trxId = action.trx_id;
+      let retries = 0;
+      const maxRetries = 3;
+
+      while (retries < maxRetries) {
+        try {
+          const fullTrx = await ky.get(`${api}/v2/history/get_transaction`, {
+            searchParams: { id: trxId },
+            timeout: 50000 // 5 seconds timeout
+          }).json();
+
+          if (fullTrx && fullTrx.actions && fullTrx.actions.length > 0) {
+            const firstAction = fullTrx.actions[0];
+            const cpuStats = firstAction.cpu_usage_us;
+            const producer = firstAction.producer;
+            
+            if (cpuStats !== undefined && producer) {
+              producerFinal.push({ producer, cpuStats, trxId });
+              break; // Success, exit the retry loop
+            }
+          }
+          // If we reach here, fullTrx doesn't contain the expected data
+          console.log(`Invalid data for transaction ${trxId}. Retrying with a new endpoint.`);
+          retries++;
+          ({ endpoint: api } = await getNodeAndRpc(nodePulse));
+          console.log(`New API: ${api}`);
+
+        } catch (error) {
+          console.error(`Error processing transaction ${trxId}:`, error);
+          retries++;
+          ({ endpoint: api } = await getNodeAndRpc(nodePulse));
+          console.log(`Error occurred. Retrying with a new endpoint. New API: ${api}`);
+        }
+      }
+
+      if (retries === maxRetries) {
+        console.log(`Max retries reached for transaction ${trxId}. Moving to next transaction.`);
+      }
+    }
+    console.log(`Producer Final: ${producerFinal.producer}`);
+    return producerFinal;
+  } catch (error) {
+    console.error(`Error in getCpuData for ${chain}:`, error);
+    throw error;
+  }
+};
+
+const getEosmechanicsActions = async (rpc, count) => {
+  const result = await rpc.history_get_actions('eosmechanics', -1, -count);
+  return result.actions.map(action => ({
+    trx_id: action.action_trace.trx_id,
+  }));
+};
+
+export { getProducers, parseProducerServices, getProducerChainJson, getPriceFeedData, getCpuData };

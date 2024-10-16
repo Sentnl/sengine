@@ -26,11 +26,13 @@ export const checkTls = async (domainName, port) => {
         minVersion: version,
         maxVersion: version,
         rejectUnauthorized: false,
+        timeout: 5000, // Add a timeout to prevent hanging
       };
 
       return await new Promise((resolve, reject) => {
         const socket = tls.connect(options, () => {
           const protocol = socket.getProtocol();
+          console.log(`Successfully connected using ${version}, actual protocol: ${protocol}`);
           resolve(protocol);
           socket.end();
         });
@@ -38,16 +40,22 @@ export const checkTls = async (domainName, port) => {
         socket.on('error', (err) => {
           reject(err);
         });
+
+        socket.on('timeout', () => {
+          reject(new Error('Connection timed out'));
+        });
       });
     } catch (error) {
-      return null;
+      console.log(`Failed to connect using ${version}: ${error.message}`);
+      return { error: error.message };
     }
   };
 
   // Check deprecated versions
   for (const version of deprecatedVersions) {
     const result = await checkVersion(version);
-    if (result) {;
+    if (result && !result.error) {
+      console.log(`Deprecated version ${version} is accepted`);
       acceptedDeprecatedVersions.push(version);
     }
   }
@@ -55,7 +63,8 @@ export const checkTls = async (domainName, port) => {
   // Check modern versions
   for (const version of modernVersions.reverse()) {
     const result = await checkVersion(version);
-    if (result) {
+    if (result && !result.error) {
+      console.log(`Modern version ${version} is accepted`);
       highestAcceptedVersion = result;
       break;
     }
@@ -64,7 +73,7 @@ export const checkTls = async (domainName, port) => {
   const isSecure = acceptedDeprecatedVersions.length === 0 && highestAcceptedVersion !== null;
   const statusMessage = isSecure
     ? `Server is secure. Highest accepted version: ${highestAcceptedVersion}`
-    : `Server ${acceptedDeprecatedVersions.length > 0 ? `accepts deprecated TLS/SSL versions: ${acceptedDeprecatedVersions.join(', ')}. ` : ''}Lowest accepted version: ${highestAcceptedVersion || 'None'}`;
+    : `Server ${acceptedDeprecatedVersions.length > 0 ? `accepts deprecated TLS/SSL versions: ${acceptedDeprecatedVersions.join(', ')}. ` : ''}`;
 
   return {
     isSecure,

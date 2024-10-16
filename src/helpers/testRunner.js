@@ -1,8 +1,6 @@
 import { measureResponseTime } from './measureResponseTime.js';
 import { saveTestResultWrapper } from '../validate/validateCore.js';
 import { getUserFriendlyMessage, logDetailedError } from './errorHandler.js';
-import { getDatabase } from '../models/db.js';
-
 
 
 // Modify the existing runTest function to return the test result
@@ -24,6 +22,7 @@ export async function runTest({
   expectedStatusCode = 200,
   saveErrorMessageOnSuccess = false,
   version = null,
+  validateResultId,
 }) {
   try {
     let result;
@@ -44,7 +43,6 @@ export async function runTest({
       // Use existing result and response time
       result = existingResult;
       responseTime = existingResponseTime;
-      console.log(`existingResult is not null`)
     } else {
       throw new Error('Either testFunction or existingResult and existingResponseTime must be provided.');
     }
@@ -79,7 +77,8 @@ export async function runTest({
       nodeType,
       method,
       payload ? JSON.stringify(payload) : null,
-      version
+      version,
+      validateResultId
     );
 
     return success; // Return the success status
@@ -100,7 +99,8 @@ export async function runTest({
       nodeType,
       method,
       payload ? JSON.stringify(payload) : null,
-      version
+      version,
+      validateResultId,
     );
 
     // Log detailed error
@@ -122,7 +122,8 @@ export async function saveMultipleFailedResults({
   nodeType,
   method,
   payload = null,
-  version = null
+  version = null,
+  validateResultId,
 }) {
   const errorStatus = error.response?.status || (error.cause && error.cause.code === 'ENOTFOUND' ? 404 : 500);
   const responseTime = error.responseTime || 0;
@@ -142,30 +143,20 @@ export async function saveMultipleFailedResults({
       nodeType,
       method,
       payload ? JSON.stringify(payload) : null,
-      version
+      version,
+      validateResultId,
     );
   }
-
-  // Log detailed error
-  //logDetailedError(error, `MultipleFailedResults, URL: ${url}`);
 }
 
-// Add this new function at the end of the file
-export async function saveValidateResult(producerId, results, timestamp) {
-  const db = getDatabase();
-  const query = `
-    INSERT INTO validate_results (producer_id, guild, api, history, hyperion, p2p, timestamp)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
-  `;
-  const values = [
-    producerId,
-    results.guild,
-    results.api,
-    results.history,
-    results.hyperion,
-    results.p2p,
-    timestamp
-  ];
+export function evaluateTestResults(passedTests, totalTests, importantTests) {
+  // Calculate 10% failure allowance
+  const maxAllowedFailures = Math.floor(totalTests * 0.10);
+  const failedTests = totalTests - passedTests;
 
-  await db.query(query, values);
+  // Check if any important test failed
+  const importantTestsFailed = importantTests.some(test => !test);
+
+  // Determine if tests passed within the 10% allowance and no important tests failed
+  return failedTests <= maxAllowedFailures && !importantTestsFailed;
 }

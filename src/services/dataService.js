@@ -80,4 +80,59 @@ const saveProducerService = async (producerId, service) => {
     }
 };
 
-export { saveProducer, saveProducerService };
+// Add this new function at the end of the file
+async function saveValidateResult(producerId, results, timestamp, cpuValue) {
+    const db = getDatabase();
+    const query = `
+      INSERT INTO validate_results (
+        producer_id, guild, guild_ok, api, api_ok, history, history_ok, 
+        hyperion, hyperion_ok, p2p, p2p_ok, atomicassets, atomicassets_ok, pricefeed, pricefeed_ok, timestamp, cpu
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+      RETURNING id
+    `;
+    const values = [
+      producerId,
+      false, false, // guild, guild_ok
+      false, false, // api, api_ok
+      false, false, // history, history_ok
+      false, false, // hyperion, hyperion_ok
+      false, false, // p2p, p2p_ok
+      false, false, // atomicassets, atomicassets_ok
+      false, false, // pricefeed, pricefeed_ok
+      timestamp,
+      cpuValue
+    ];
+  
+    const { rows } = await db.query(query, values);
+    return rows[0].id;
+  }
+  
+  async function updateValidateResult(id, results) {
+    const db = getDatabase();
+    const query = `
+      UPDATE validate_results
+      SET guild = $1, guild_ok = $2, 
+          api = $3, api_ok = $4, 
+          history = $5, history_ok = $6, 
+          hyperion = $7, hyperion_ok = $8, 
+          atomicassets = $9, atomicassets_ok = $10,
+          p2p = $11, p2p_ok = $12,
+          pricefeed = $13, pricefeed_ok = $14
+      WHERE id = $15
+    `;
+    const values = [
+      results.guild[0], results.guild[1],
+      results.api[0], results.api[1],
+      results.history[0], results.history[1],
+      results.hyperion[0], results.hyperion[1],
+      results.atomicassets[0], results.atomicassets[1],
+      results.p2p[0], results.p2p[1],
+      results.pricefeed[0], results.pricefeed[1],
+      id
+    ];
+  
+    await db.query(query, values);
+  }
+
+export { saveProducer, saveProducerService, saveValidateResult, updateValidateResult };
