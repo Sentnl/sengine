@@ -6,7 +6,7 @@
 ### Docker compose
 
 
-`DB_USER=your_username DB_PASSWORD=your_secure_password DB_NAME=wax_monitoring docker-compose up --build`
+`DB_USER=your_username DB_PASSWORD=your_secure_password DB_NAME=wax_monitoring DB_HOST=sengine-db docker-compose up --build`
 
 
 ### Only start sengine-app service
