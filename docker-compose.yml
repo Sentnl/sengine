@@ -16,7 +16,7 @@ services:
       - sentnl-net
 
   sengine-db:
-    image: postgres:13
+    image: postgres:14-bullseye
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
