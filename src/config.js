@@ -42,10 +42,10 @@ export default {
       },
     },
   },
-  publicKey: process.env.PUBLIC_KEY,
-  timestamp42DaysAgo: process.env.TIMESTAMP_42_DAYS_AGO,
-  account: process.env.ACCOUNT,
-  symbol: process.env.SYMBOL,
+  publicKey: "EOS8FWK5oYydJUzfJeRZ64G8taTR1L3RTqpyaWdnaXtizh4LJ89r4",
+  timestamp42DaysAgo:"=2024-02-21T00:00:00Z",
+  account: "a4v5y.waa",
+  symbol: "WAX",
 
   // {{ Add performance mode configurations }}
   validation: {
