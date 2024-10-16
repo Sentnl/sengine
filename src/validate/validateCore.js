@@ -23,12 +23,14 @@ const mainnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
   network: 'mainnet',
   nodeCount: 5,
+  historyfull: true
 });
 
 const testnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
   network: 'testnet',
   nodeCount: 5,
+  historyfull: true
 });
 
 const mainnetAtomicNodePulse = new NodePulse({
@@ -41,7 +43,8 @@ export const getNodeAndRpc = async (nodePulse) => {
   return { endpoint, rpc: new JsonRpc(endpoint, { fetch }) };
 };
 
-export const getValidationData = async (chain) => {
+export const getValidationData = async (chain, options = {}) => {
+  const { skipCpu = false } = options;
   const nodePulse = chain === 'mainnet' ? mainnetNodePulse : testnetNodePulse;
   let nodeAttempts = 0;
   const maxNodeAttempts = 5;
@@ -93,7 +96,6 @@ export const getValidationData = async (chain) => {
       let PriceFeed = null;
 
       if (chain === 'mainnet') {
-
         // 3. Get an Atomic AssetId (only for mainnet)
         const atomicEndpoint = await mainnetAtomicNodePulse.getNode();
         const atomicAssetResponse = await ky.get(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
@@ -115,20 +117,38 @@ export const getValidationData = async (chain) => {
           console.error(`Error fetching JSON data for chain ${chain}:`, error);
           producerJsonData = {};
         }
-        //6. Get Pricefeed Data
-        PriceFeed = await getPriceFeedData(chain,nodePulse)
-      
-        
+
+        // 6. Get Pricefeed Data (if not skipped)
+        console.log('Fetching PriceFeed data...');
+        PriceFeed = await getPriceFeedData(chain, nodePulse);
+   
+        // 7. Get CPU Data (if not skipped)
+        if (!skipCpu) {
+          console.log('Fetching CPU data...');
+          CpuData = await getCpuData(chain, rpc, nodePulse);
+        } else {
+          console.log('Skipping CPU data fetch.');
+        }
+
       }
-      //7. Get CPU Data
-      CpuData = await getCpuData(chain,rpc,nodePulse)
+ 
+      if (chain === 'testnet') {
+        if (!skipCpu) {
+          console.log('Fetching CPU data...');
+          CpuData = await getCpuData(chain, rpc, nodePulse);
+        } else {
+          console.log('Skipping CPU data fetch.');
+        }
+
+      }
+
        
       return {
-        api, // Renamed from endpoint to api
+        api,
         latestHeadBlock,
         transaction,
         atomicAssetId,
-        delphioracleActions,
+        //delphioracleActions,
         last_irreversible_block_num,
         last_irreversible_block_id,
         head_block_num,
@@ -137,6 +157,7 @@ export const getValidationData = async (chain) => {
         producerJsonData,
         CpuData,
         PriceFeed,
+        skipCpu
       };
     } catch (error) {
       console.error(`Error with ${chain} node, attempt ${nodeAttempts + 1}:`, error);
@@ -152,10 +173,13 @@ export const getValidationData = async (chain) => {
 export async function validateProducer(producerId, chain, validationData) {
   const timestamp = new Date().toISOString();
   
-  // Extract CPU value for the specific producer
-  const producerName = await getProducerName(producerId);
-  const cpuData = validationData.CpuData.find(data => data.producer === producerName);
-  const cpuValue = cpuData ? cpuData.cpuStats : null;
+  // Extract CPU value for the specific producer only if not skipping CPU
+  let cpuValue = null;
+  if (!validationData.skipCpu) {
+    const producerName = await getProducerName(producerId);
+    const cpuData = validationData.CpuData.find(data => data.producer === producerName);
+    cpuValue = cpuData ? cpuData.cpuStats : null;
+  }
 
   // Create initial entry in validate_results with timestamp, producerID and CPU
   const validateResultId = await saveValidateResult(producerId, {}, timestamp, cpuValue);

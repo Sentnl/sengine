@@ -69,9 +69,9 @@ const updateProducers = async (chain) => {
 };
 
 // Running all tests
-const runAllTests = async (chain, producerName = null) => {
+const runAllTests = async (chain, producerName = null, options = {}) => {
   console.log(`Running tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
-  const validationData = await getValidationData(chain);
+  const validationData = await getValidationData(chain, options);
 
   const db = getDatabase();
   let query = "SELECT id, chain, json_url, name FROM producers WHERE chain = $1";
@@ -108,16 +108,17 @@ const runAllTests = async (chain, producerName = null) => {
 };
 
 // StartMonitoring
-export const startMonitoring = async () => {
+// To skip cpu and pricefeed tests, use options: { skipCpu: true }
+export const startMonitoring = async (options = { skipCpu: true }) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
   };
 
-  const runAllTestsForBothChains = async (producerName = null) => {
-    // To test a single producer, use the producerName parameter
-    await runAllTests('mainnet', producerName);
-    await runAllTests('testnet', producerName);
+  // Use the options passed to startMonitoring
+  const runAllTestsForBothChains = async (producerName = 'bountyblokbp') => {
+    await runAllTests('mainnet', producerName, options);
+    await runAllTests('testnet', producerName, options);
   };
 
   // Run producer updates immediately and wait for it to finish
@@ -129,6 +130,6 @@ export const startMonitoring = async () => {
   // Only set intervals if we're not testing a single producer
   if (!producerName) {
     setInterval(updateAllProducers, 15 * 60 * 1000);
-    setInterval(runAllTestsForBothChains, 60 * 60 * 1000);
+    setInterval(() => runAllTestsForBothChains(null, options), 60 * 60 * 1000);
   }
 };

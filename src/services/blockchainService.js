@@ -156,6 +156,8 @@ const getCpuData = async (chain, rpc, nodePulse, count) => {
     let { endpoint: api } = await getNodeAndRpc(nodePulse);
     console.log(`Initial API: ${api}`);
 
+    let transactionCount = 0;
+
     for (const action of actions) {
       const trxId = action.trx_id;
       let retries = 0;
@@ -165,7 +167,7 @@ const getCpuData = async (chain, rpc, nodePulse, count) => {
         try {
           const fullTrx = await ky.get(`${api}/v2/history/get_transaction`, {
             searchParams: { id: trxId },
-            timeout: 50000 // 5 seconds timeout
+            timeout: 50000
           }).json();
 
           if (fullTrx && fullTrx.actions && fullTrx.actions.length > 0) {
@@ -175,7 +177,8 @@ const getCpuData = async (chain, rpc, nodePulse, count) => {
             
             if (cpuStats !== undefined && producer) {
               producerFinal.push({ producer, cpuStats, trxId });
-              break; // Success, exit the retry loop
+              transactionCount++;
+              break;
             }
           }
           // If we reach here, fullTrx doesn't contain the expected data
@@ -195,8 +198,14 @@ const getCpuData = async (chain, rpc, nodePulse, count) => {
       if (retries === maxRetries) {
         console.log(`Max retries reached for transaction ${trxId}. Moving to next transaction.`);
       }
+
+      // // Change API node after every 5 transactions
+      // if (transactionCount % 5 === 0) {
+      //   ({ endpoint: api } = await getNodeAndRpc(nodePulse));
+      //   console.log(`Changing API after 5 transactions. New API: ${api}`);
+      // }
     }
-    console.log(`Producer Final: ${producerFinal.producer}`);
+    console.log(`Total transactions processed: ${transactionCount}`);
     return producerFinal;
   } catch (error) {
     console.error(`Error in getCpuData for ${chain}:`, error);

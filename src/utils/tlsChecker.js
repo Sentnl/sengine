@@ -26,18 +26,20 @@ export const checkTls = async (domainName, port) => {
         minVersion: version,
         maxVersion: version,
         rejectUnauthorized: false,
-        timeout: 5000, // Add a timeout to prevent hanging
+        timeout: 5000,
       };
 
       return await new Promise((resolve, reject) => {
         const socket = tls.connect(options, () => {
           const protocol = socket.getProtocol();
-          console.log(`Successfully connected using ${version}, actual protocol: ${protocol}`);
-          resolve(protocol);
+          const cipher = socket.getCipher();
+          console.log(`Successfully connected using ${version}, actual protocol: ${protocol}, cipher: ${cipher.name}`);
+          resolve({ protocol, cipher: cipher.name });
           socket.end();
         });
 
         socket.on('error', (err) => {
+          console.error(`Detailed error for ${version}:`, err);
           reject(err);
         });
 
@@ -46,8 +48,8 @@ export const checkTls = async (domainName, port) => {
         });
       });
     } catch (error) {
-      console.log(`Failed to connect using ${version}: ${error.message}`);
-      return { error: error.message };
+      console.error(`Failed to connect using ${version}:`, error);
+      return { error: error.message, details: error.stack };
     }
   };
 
