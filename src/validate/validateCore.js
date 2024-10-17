@@ -178,7 +178,7 @@ export async function validateProducer(producerId, chain, validationData) {
   if (!validationData.skipCpu) {
     const producerName = await getProducerName(producerId);
     const cpuData = validationData.CpuData.find(data => data.producer === producerName);
-    cpuValue = cpuData ? cpuData.cpuStats : null;
+    cpuValue = cpuData ? cpuData.cpuStats : null; 
   }
 
   // Create initial entry in validate_results with timestamp, producerID and CPU

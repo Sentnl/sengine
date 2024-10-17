@@ -73,7 +73,13 @@ const saveProducerService = async (producerId, service) => {
             service.location?.latitude || null,
             service.location?.longitude || null,
         ]);
-        Logger.log('Node add:', service.api_endpoint,  service.ssl_endpoint, service.p2p_endpoint);
+        // Modified logging
+        Logger.log('Node add:', 
+            JSON.stringify({
+                api: service.api_endpoint,
+                ssl: service.ssl_endpoint,
+                p2p: service.p2p_endpoint
+            }, null, 2));
     } catch (error) {
         console.error('Error saving producer service:', error);
         throw error;

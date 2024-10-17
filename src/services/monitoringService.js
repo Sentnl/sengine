@@ -9,6 +9,13 @@ import { httpRequest } from '../helpers/performanceHelper.js';
 
 const isAbsoluteUrl = (url) => /^https?:\/\//i.test(url);
 
+// Add this function at the top of the file or just before startMonitoring
+const formatCountdown = (milliseconds) => {
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+};
 
 // Updating producers and services
 const updateProducers = async (chain) => {
@@ -108,28 +115,67 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 };
 
 // StartMonitoring
-// To skip cpu and pricefeed tests, use options: { skipCpu: true }
-export const startMonitoring = async (options = { skipCpu: true }) => {
+// To skip cpu and pricefeed tests, use options: { skipCpu: true } 
+// To validate a single producer set prodcuerName = 'producername'
+export const startMonitoring = async (options = { skipCpu: false }, producerName = 'bp.adex' ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
   };
 
-  // Use the options passed to startMonitoring
-  const runAllTestsForBothChains = async (producerName = 'bountyblokbp') => {
+  const runAllTestsForBothChains = async () => {
     await runAllTests('mainnet', producerName, options);
     await runAllTests('testnet', producerName, options);
   };
 
-  // Run producer updates immediately and wait for it to finish
+  // Run update producers
   //await updateAllProducers();
-
-  // Run all tests after producer updates have completed
+  
+  // Run all tests immediately
   await runAllTestsForBothChains();
 
   // Only set intervals if we're not testing a single producer
-  if (!producerName) {
-    setInterval(updateAllProducers, 15 * 60 * 1000);
-    setInterval(() => runAllTestsForBothChains(null, options), 60 * 60 * 1000);
-  }
+    let lastUpdateTime = Date.now();
+    let lastTestTime = Date.now();
+
+    const scheduleNextUpdate = () => {
+      const now = Date.now();
+      const timeUntilNextUpdate = Math.max(0, 60 * 60 * 1000 - (now - lastUpdateTime));
+      console.log(`Next producer update in: ${formatCountdown(timeUntilNextUpdate)}`);
+
+      const countdown = setInterval(() => {
+        const remaining = timeUntilNextUpdate - (Date.now() - now);
+        if (remaining <= 0) {
+          clearInterval(countdown);
+          updateAllProducers().then(() => {
+            lastUpdateTime = Date.now();
+            scheduleNextUpdate();
+          });
+        } else {
+          console.log(`Producer update in: ${formatCountdown(remaining)}`);
+        }
+      }, 1000);
+    };
+
+    const scheduleNextTest = () => {
+      const now = Date.now();
+      const timeUntilNextTest = Math.max(0, 15 * 60 * 1000 - (now - lastTestTime));
+      console.log(`Next test run in: ${formatCountdown(timeUntilNextTest)}`);
+
+      const countdown = setInterval(() => {
+        const remaining = timeUntilNextTest - (Date.now() - now);
+        if (remaining <= 0) {
+          clearInterval(countdown);
+          runAllTestsForBothChains().then(() => {
+            lastTestTime = Date.now();
+            scheduleNextTest();
+          });
+        } else {
+          console.log(`Test run in: ${formatCountdown(remaining)}`);
+        }
+      }, 1000);
+    };
+
+    //scheduleNextUpdate();
+    //scheduleNextTest();
 };

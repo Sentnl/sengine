@@ -1,4 +1,4 @@
-import ky, { HTTPError } from 'ky';
+import kyInstance from '../utils/kyInstance.js';
 import { getApiNodes,  runTlsSecurityTest, runHttpsCheckTest } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
@@ -48,7 +48,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
 
   try {
     const { result: response, responseTime } = await measureResponseTime(() => 
-      ky.get(getInfoUrl, { throwHttpErrors: false }).then(async res => ({
+      kyInstance.get(getInfoUrl, { throwHttpErrors: false }).then(async res => ({
         status: res.status,
         body: await res.json().catch(() => ({}))
       }))
@@ -162,7 +162,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       curlCmd,
       nodeType,
       testFunction: async () => {
-        const response = await ky.get(url, { 
+        const response = await kyInstance.get(url, { 
           throwHttpErrors: false,
           followRedirect: false  // Disable automatic redirect following
         });
@@ -262,7 +262,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     payload: latestBlockPayload,
     curlCmd: latestBlockCurl,
     nodeType,
-    testFunction: () => ky.post(latestBlockUrl, { json: latestBlockPayload }).json(),
+    testFunction: () => kyInstance.post(latestBlockUrl, { json: latestBlockPayload }).json(),
     successCondition: (result) =>
       result &&
       typeof result === 'object' &&
@@ -293,7 +293,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     curlCmd: currencyBalanceCurl,
     nodeType,
     testFunction: async () => {
-      const response = await ky.post(currencyBalanceUrl, { 
+      const response = await kyInstance.post(currencyBalanceUrl, { 
         json: currencyBalancePayload,
         throwHttpErrors: false
       });

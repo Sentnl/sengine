@@ -11,7 +11,7 @@
 
 ### Only start sengine-app service
 
-   `docker-compose up --build --no-deps -d sengine-app`
+   `DB_USER=your_username DB_PASSWORD=your_secure_password DB_NAME=wax_monitoring DB_HOST=sengine-db docker-compose up --build --no-deps -d sengine-app`
 
 ```
 --build: Rebuilds the image

@@ -1,4 +1,4 @@
-import ky from 'ky';
+import kyInstance from '../utils/kyInstance.js';
 import { getApiNodes, runHttpsCheckTest } from './validateCore.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
 import { Logger } from '../helpers/Logger.js';
@@ -45,9 +45,9 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
 
   try {
     const { result: response, responseTime } = await measureResponseTime(() => 
-      ky.get(healthUrl, { 
+      kyInstance.get(healthUrl, { 
         throwHttpErrors: false,
-        timeout: 10000, // Add a 10 second timeout
+        timeout: 10000,
       }).then(async res => ({
         status: res.status,
         body: await res.text().then(text => {
@@ -160,7 +160,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     method: 'GET',
     curlCmd: collectionsCurl,
     nodeType,
-    testFunction: () => ky.get(collectionsUrl).json(),
+    testFunction: () => kyInstance.get(collectionsUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
     validateResultId
@@ -181,7 +181,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     method: 'GET',
     curlCmd: templatesCurl,
     nodeType,
-    testFunction: () => ky.get(templatesUrl).json(),
+    testFunction: () => kyInstance.get(templatesUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
     validateResultId
@@ -201,7 +201,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     method: 'GET',
     curlCmd: schemaCurl,
     nodeType,
-    testFunction: () => ky.get(schemaUrl).json(),
+    testFunction: () => kyInstance.get(schemaUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
     validateResultId
@@ -221,7 +221,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     method: 'GET',
     curlCmd: assetCurl,
     nodeType,
-    testFunction: () => ky.get(assetUrl).json(),
+    testFunction: () => kyInstance.get(assetUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
     validateResultId

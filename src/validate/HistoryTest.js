@@ -1,4 +1,4 @@
-import ky from 'ky';
+import kyInstance from '../utils/kyInstance.js';
 import { getApiNodes, runTlsSecurityTest, runHttpsCheckTest } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
@@ -44,7 +44,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
 
   try {
     const { result: response, responseTime } = await measureResponseTime(() => 
-      ky.get(getInfoUrl, { throwHttpErrors: false }).then(async res => ({
+      kyInstance.get(getInfoUrl, { throwHttpErrors: false }).then(async res => ({
         status: res.status,
         headers: Object.fromEntries(res.headers),
         body: await res.json().catch(() => ({}))
@@ -173,7 +173,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       payload: testCase.payload,
       curlCmd: curlCmd,
       nodeType,
-      testFunction: () => ky.post(testCase.url, { json: testCase.payload }).json(),
+      testFunction: () => kyInstance.post(testCase.url, { json: testCase.payload }).json(),
       successCondition: testCase.successCondition,
       onErrorMessage: testCase.errorMessage,
       validateResultId,

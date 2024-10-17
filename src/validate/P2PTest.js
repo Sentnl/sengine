@@ -37,7 +37,7 @@ class TestRunner {
     this.killedReason = "";
     this.killedDetail = "";
     this.latencies = [];
-    this.blockTimeout = 10000; // 10 seconds
+    this.blockTimeout = 5000; // 5 seconds
     this.numBlocks = numBlocks;
     this.chainId = chainId;
 
@@ -89,9 +89,6 @@ class BlockTransmissionTestRunner extends TestRunner {
       const latency = Number(tm - this.lastBlockTime);
       this.latencies.push(latency);
       const blocksPerSecond = 1 / (latency / 1e9);
-      // console.log(
-      //   `Received block signed by ${msg.producer} with latency ${latency} ns - ${this.blockCount} received from ${this.node.host} - Blocks/s: ${blocksPerSecond.toFixed(2)}`
-      // );
     }
     this.lastBlockTime = tm;
   }
@@ -108,14 +105,18 @@ class BlockTransmissionTestRunner extends TestRunner {
     const numBlocks = this.numBlocks;
     const p2p = this.p2p;
 
-    p2p.on("net_error", (e) => {
-      this.killed = true;
-      this.killedReason = "net_error";
-      this.killedDetail = e.message;
-    });
+    // Set up a timeout for the connection attempt
+    const connectionTimeout = 5000; // 5 seconds timeout for connection
+    let connectionSuccessful = false;
 
     try {
-      const client = await p2p.connect();
+      // Attempt the connection with a timeout
+      const client = await Promise.race([
+        p2p.connect(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), connectionTimeout))
+      ]);
+
+      connectionSuccessful = true;
 
       const deserializedStream = client
         .pipe(new EOSIOStreamTokenizer({}))
@@ -152,14 +153,20 @@ class BlockTransmissionTestRunner extends TestRunner {
       msg.end_block = this.validationData.last_irreversible_block_num + numBlocks;
       await p2p.send_message(msg);
     } catch (e) {
-      this.onError(e);
+      if (e.message === 'Connection timeout') {
+        this.onError({ code: 'timeout', message: 'Connection attempt timed out' });
+      } else {
+        this.onError(e);
+      }
     }
 
     const results = await this.waitForTests(numBlocks);
 
     try {
-      console.log('disconnecting');
-      await p2p.disconnect();
+      if (connectionSuccessful) {
+        console.log('disconnecting');
+        await p2p.disconnect();
+      }
     } catch (disconnectError) {
       childLogger.warn("Error while disconnecting P2P client:", disconnectError);
     }

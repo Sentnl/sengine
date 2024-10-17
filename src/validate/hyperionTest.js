@@ -1,4 +1,4 @@
-import ky from 'ky';
+import kyInstance from '../utils/kyInstance.js';
 import { getApiNodes } from './validateCore.js';
 import config from '../config.js';
 import { TEST_TYPES } from '../helpers/TestTypes.js';
@@ -37,7 +37,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
   const healthCurl = generateCurlCommandFromKyConfig(healthUrl, corsConfig);
 
   try {
-    const { result: response, responseTime } = await measureResponseTime(() => ky.get(healthUrl, corsConfig));
+    const { result: response, responseTime } = await measureResponseTime(() => kyInstance.get(healthUrl, corsConfig));
     const healthResponse = await response.json();
     // HTTP check
     const httpResult = await runTest({
@@ -182,7 +182,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     method: 'GET',
     curlCmd: httpsCurl,
     nodeType,
-    testFunction: () => ky.get(`${httpsEndpoint}/v2/health`),
+    testFunction: () => kyInstance.get(`${httpsEndpoint}/v2/health`),
     successCondition: () => true,
     validateResultId
   });
@@ -200,7 +200,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     method: 'GET',
     curlCmd: transactionCurl,
     nodeType,
-    testFunction: () => ky.get(`${endpoint}/v2/history/get_transaction`, { searchParams: { id: validationData.transaction } }).json(),
+    testFunction: () => kyInstance.get(`${endpoint}/v2/history/get_transaction`, { searchParams: { id: validationData.transaction } }).json(),
     successCondition: (result) => result.query_time_ms !== undefined,
     onErrorMessage: 'Invalid transaction response',
     validateResultId
@@ -218,7 +218,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     method: 'GET',
     curlCmd: actionsCurl,
     nodeType,
-    testFunction: () => ky.get(`${endpoint}/v2/history/get_actions`, { searchParams: { limit: 1 } }).json(),
+    testFunction: () => kyInstance.get(`${endpoint}/v2/history/get_actions`, { searchParams: { limit: 1 } }).json(),
     successCondition: (result) => result.actions && Array.isArray(result.actions),
     onErrorMessage: 'Invalid actions response',
     validateResultId
@@ -236,7 +236,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     method: 'GET',
     curlCmd: keyAccountsCurl,
     nodeType,
-    testFunction: () => ky.get(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } }).json(),
+    testFunction: () => kyInstance.get(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } }).json(),
     successCondition: (result) => result.account_names !== undefined,
     onErrorMessage: 'Invalid key accounts response',
     validateResultId
@@ -263,7 +263,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       method: 'GET',
       curlCmd: partialCurl,
       nodeType,
-      testFunction: () => ky.get(`${endpoint}/v2/history/get_actions`, {
+      testFunction: () => kyInstance.get(`${endpoint}/v2/history/get_actions`, {
         searchParams: {
           limit: 1,
           before: timestamp41DaysAgo.toISOString(),

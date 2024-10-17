@@ -1,4 +1,4 @@
-import ky from 'ky';
+import kyInstance from '../utils/kyInstance.js';
 import http from 'http';
 import https from 'https';
 import { Logger } from '../helpers/Logger.js';
@@ -58,7 +58,7 @@ export const httpRequest = async (url, options, failedRequests, base) => {
 
   while (retryCounter >= 0) {
     try {
-      const response = await ky.get(url, {
+      const response = await kyInstance(url, {
         ...options,
         agent: {
           https: ipv4HttpsAgent,
