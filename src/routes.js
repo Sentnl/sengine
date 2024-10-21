@@ -83,7 +83,7 @@ fastify.get('/latest-results', async (request, reply) => {
 
     return categorizedResults;
   });
-
+/* 
   // 3. Validate services for a producer within a time range
   fastify.get('/producer-services/:producerId', async (request, reply) => {
     const db = getDatabase();
@@ -98,60 +98,92 @@ fastify.get('/latest-results', async (request, reply) => {
     const query = `
       SELECT 
         vs.*,
-        vr.created_at AT TIME ZONE 'UTC' AS utc_created_at
+        vr.timestamp AT TIME ZONE 'UTC' AS utc_timestamp
       FROM validate_services vs
       JOIN validate_results vr ON vs.validate_result_id = vr.id
       WHERE vr.producer_id = $1
-        AND vr.created_at BETWEEN $2::timestamp AND $3::timestamp
+        AND vr.timestamp BETWEEN $2::timestamp AND $3::timestamp
     `;
     const { rows } = await db.query(query, [producerId, start_date, end_date]);
 
-    // Convert the created_at to ISO format
+    // Convert the timestamp to ISO format
     rows.forEach(row => {
-      row.created_at = row.utc_created_at.toISOString();
-      delete row.utc_created_at;
+      row.timestamp = row.utc_timestamp.toISOString();
+      delete row.utc_timestamp;
     });
 
     return rows;
   });
+ */
 
- 4. // Latest results for a specific producer
-fastify.get('/producer-latest-results/:producerName', async (request, reply) => {
-  const { producerName } = request.params;
-  const { chain } = request.query;
+  
+// 4. Results for a specific producer or all producers in a chain
+fastify.get('/producer-results/:producerId?', async (request, reply) => {
+  const { producerId } = request.params;
+  const { chain, start_date, end_date } = request.query;
   const db = getDatabase();
   
+  if (!start_date || !end_date || !chain) {
+    reply.code(400).send({ error: 'start_date, end_date, and chain are required query parameters' });
+    return;
+  }
+
   let query = `
-    WITH latest_results AS (
-      SELECT DISTINCT ON (vr.producer_id, vr.chain) 
-        vr.*,
-        vr.timestamp AT TIME ZONE 'UTC' AS utc_timestamp
-      FROM validate_results vr
-      JOIN producers p ON vr.producer_id = p.id
-      WHERE p.name = $1
-      ${chain ? 'AND vr.chain = $2' : ''}
-      ORDER BY vr.producer_id, vr.chain, vr.timestamp DESC
-    )
-    SELECT * FROM latest_results
+    SELECT 
+      vr.*,
+      vr.timestamp AT TIME ZONE 'UTC' AS utc_timestamp,
+      p.name AS producer_name
+    FROM validate_results vr
+    JOIN producers p ON vr.producer_id = p.id
+    WHERE vr.timestamp BETWEEN $1::timestamp AND $2::timestamp
+      AND vr.chain = $3
+      ${producerId ? 'AND vr.producer_id = $4' : ''}
+    ORDER BY vr.producer_id, vr.timestamp DESC
   `;
   
-  const queryParams = [producerName];
-  if (chain) queryParams.push(chain);
+  const queryParams = [start_date, end_date, chain];
+  if (producerId) queryParams.push(producerId);
 
   const { rows } = await db.query(query, queryParams);
   
   if (rows.length === 0) {
-    reply.code(404).send({ error: 'Producer not found or no results available' });
+    reply.code(404).send({ error: 'No results available for the given parameters' });
     return;
   }
   
-  // Convert the timestamp to ISO format
-  rows.forEach(row => {
-    row.timestamp = row.utc_timestamp.toISOString();
-    delete row.utc_timestamp;
+  const groupedResults = rows.reduce((acc, row) => {
+    if (!acc[row.producer_id]) {
+      acc[row.producer_id] = {
+        id: row.id,
+        producer_id: row.producer_id,
+        producer_name: row.producer_name,
+        chain: row.chain,
+        start_timestamp: start_date,
+        end_timestamp: end_date,
+        rows: []
+      };
+    }
+    acc[row.producer_id].rows.push(row);
+    return acc;
+  }, {});
+
+  const services = ['guild', 'api', 'history', 'hyperion', 'p2p', 'atomicassets', 'pricefeed'];
+
+  const results = Object.values(groupedResults).map(producer => {
+    services.forEach(service => {
+      const totalTests = producer.rows.length;
+      const passedTests = producer.rows.filter(row => row[`${service}_ok`]).length;
+      producer[service] = producer.rows[0][service];
+      producer[`${service}_ok`] = Math.round((passedTests / totalTests) * 100);
+    });
+
+    producer.cpu = Math.round(producer.rows.reduce((sum, row) => sum + row.cpu, 0) / producer.rows.length);
+
+    delete producer.rows;
+    return producer;
   });
-  
-  return rows;
+
+  return producerId ? results[0] : results;
 });
 
 };
