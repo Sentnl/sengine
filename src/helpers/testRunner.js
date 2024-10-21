@@ -23,6 +23,7 @@ export async function runTest({
   saveErrorMessageOnSuccess = false,
   version = null,
   validateResultId,
+  producerServiceId
 }) {
   try {
     let result;
@@ -78,7 +79,8 @@ export async function runTest({
       method,
       payload ? JSON.stringify(payload) : null,
       version,
-      validateResultId
+      validateResultId,
+      producerServiceId
     );
 
     return success; // Return the success status
@@ -101,6 +103,7 @@ export async function runTest({
       payload ? JSON.stringify(payload) : null,
       version,
       validateResultId,
+      producerServiceId
     );
 
     // Log detailed error
@@ -124,6 +127,7 @@ export async function saveMultipleFailedResults({
   payload = null,
   version = null,
   validateResultId,
+  producerServiceId
 }) {
   const errorStatus = error.response?.status || (error.cause && error.cause.code === 'ENOTFOUND' ? 404 : 500);
   const responseTime = error.responseTime || 0;
@@ -145,18 +149,20 @@ export async function saveMultipleFailedResults({
       payload ? JSON.stringify(payload) : null,
       version,
       validateResultId,
+      producerServiceId
     );
   }
 }
 
 export function evaluateTestResults(passedTests, totalTests, importantTests) {
-  // Calculate 10% failure allowance
-  const maxAllowedFailures = Math.floor(totalTests * 0.10);
+  const failureAllowancePercentage = 0.10;
+  const minAllowedFailures = 1;
+  const maxAllowedFailures = Math.max(
+    minAllowedFailures,
+    Math.ceil(totalTests * failureAllowancePercentage)
+  );
   const failedTests = totalTests - passedTests;
-
-  // Check if any important test failed
   const importantTestsFailed = importantTests.some(test => !test);
-
-  // Determine if tests passed within the 10% allowance and no important tests failed
+  
   return failedTests <= maxAllowedFailures && !importantTestsFailed;
 }

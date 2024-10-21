@@ -67,7 +67,7 @@ export const checkTls = async (domainName, port) => {
     const result = await checkVersion(version);
     if (result && !result.error) {
       console.log(`Modern version ${version} is accepted`);
-      highestAcceptedVersion = result;
+      highestAcceptedVersion = result.protocol;
       break;
     }
   }

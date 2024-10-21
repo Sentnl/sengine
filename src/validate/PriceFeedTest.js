@@ -5,7 +5,7 @@ import { getProducerName } from './validateCore.js';
 const runTest = async (producerId, chain, priceFeedData, testType, checkSuccess, errorMessageOnFailure, validateResultId) => {
   const startTime = Date.now();
   try {
-    const isSuccessful = await checkSuccess(priceFeedData);
+    const [isSuccessful, errorMessage] = await checkSuccess(priceFeedData);
     const responseTime = Date.now() - startTime;
     
     await saveTestResultWrapper(
@@ -16,7 +16,7 @@ const runTest = async (producerId, chain, priceFeedData, testType, checkSuccess,
       null,
       responseTime,
       isSuccessful ? 200 : 400, // Mock status code
-      isSuccessful ? null : errorMessageOnFailure,
+      isSuccessful ? null : errorMessage, // Use errorMessage directly
       null, // requestBody
       'pricefeed',
       'GET',
@@ -26,6 +26,7 @@ const runTest = async (producerId, chain, priceFeedData, testType, checkSuccess,
     );
     return isSuccessful;
   } catch (error) {
+    const responseTime = Date.now() - startTime;
     await saveTestResultWrapper(
       producerId,
       chain,
@@ -55,9 +56,16 @@ const testPriceFeedProvided = async (producerId, chain, priceFeedData, validateR
     priceFeedData,
     TEST_TYPES.PRICEFEED.HEALTH,
     (priceFeedData) => {
-      return priceFeedData.includes(producerName);
+      const producerEntry = priceFeedData.find(entry => entry.owner === producerName);
+      if (!producerEntry) {
+        return [false, "Producer is not publishing a pricefeed."];
+      }
+      if (producerEntry.quoteCount < 5) {
+        return [false, `Producer is only publishing ${producerEntry.quoteCount} pairs.`];
+      }
+      return [true, null];
     },
-    `No price feed found for producer ${producerName}`,
+    (result) => result[1], // Pass the error message to errorMessageOnFailure
     validateResultId
   );
 };

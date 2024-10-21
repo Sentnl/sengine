@@ -125,8 +125,11 @@ const getPriceFeedData = async (chain, nodePulse, count = 100, maxRetries = 3) =
       const producerFinal = [];
 
       for (const guild of guilds) {
-        if (guild.act.data.quotes.length >= 3) {
-          producerFinal.push(guild.act.data.owner);
+        if (guild.act.data.quotes && guild.act.data.quotes.length > 0) {
+          producerFinal.push({
+            owner: guild.act.data.owner,
+            quoteCount: guild.act.data.quotes.length
+          });
         }
       }
       // Remove duplicates
@@ -147,7 +150,7 @@ const getPriceFeedData = async (chain, nodePulse, count = 100, maxRetries = 3) =
 
 const getCpuData = async (chain, rpc, nodePulse, count) => {
   // Set count based on the chain
-  count = chain === 'mainnet' ? 120 : 120;
+  count = chain === 'mainnet' ? 120 : 200;
 
   console.log(`Getting CPU Results for ${chain} with count ${count}`);
   try {

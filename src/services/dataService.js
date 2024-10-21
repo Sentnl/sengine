@@ -87,14 +87,15 @@ const saveProducerService = async (producerId, service) => {
 };
 
 // Add this new function at the end of the file
-async function saveValidateResult(producerId, results, timestamp, cpuValue) {
+async function saveValidateResult(producerId, results, timestamp, cpuValue, chain) {
     const db = getDatabase();
     const query = `
       INSERT INTO validate_results (
         producer_id, guild, guild_ok, api, api_ok, history, history_ok, 
-        hyperion, hyperion_ok, p2p, p2p_ok, atomicassets, atomicassets_ok, pricefeed, pricefeed_ok, timestamp, cpu
+        hyperion, hyperion_ok, p2p, p2p_ok, atomicassets, atomicassets_ok, 
+        pricefeed, pricefeed_ok, timestamp, cpu, chain
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
       RETURNING id
     `;
     const values = [
@@ -107,7 +108,8 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue) {
       false, false, // atomicassets, atomicassets_ok
       false, false, // pricefeed, pricefeed_ok
       timestamp,
-      cpuValue
+      cpuValue,
+      chain
     ];
   
     const { rows } = await db.query(query, values);

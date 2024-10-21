@@ -55,12 +55,14 @@ export const setupDatabase = async () => {
       pricefeed BOOLEAN,
       pricefeed_ok BOOLEAN,
       cpu INTEGER,
+      chain VARCHAR(50) NOT NULL,
       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
     CREATE TABLE IF NOT EXISTS validate_services (
       id SERIAL PRIMARY KEY,
       producer_id INTEGER REFERENCES producers(id),
+      producer_service_id INTEGER REFERENCES producer_services(id),
       chain VARCHAR(50) NOT NULL,
       test_type VARCHAR(100) NOT NULL,
       is_successful BOOLEAN NOT NULL,
@@ -81,6 +83,7 @@ export const setupDatabase = async () => {
       -- Add any necessary indexes
       CREATE INDEX IF NOT EXISTS idx_validate_services_producer_id ON validate_services(producer_id);
       CREATE INDEX IF NOT EXISTS idx_validate_services_validate_result_id ON validate_services(validate_result_id);
+      CREATE INDEX IF NOT EXISTS idx_validate_services_producer_service_id ON validate_services(producer_service_id);
   `);
 };
 

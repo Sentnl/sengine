@@ -8,7 +8,7 @@ import { measureResponseTime } from '../helpers/measureResponseTime.js';
 import { runTest, saveMultipleFailedResults, evaluateTestResults } from '../helpers/testRunner.js'; 
 
 
-const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId) => {
+const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId) => {
   let totalTests = 0;
   let passedTests = 0;
   const importantTests = [];
@@ -22,6 +22,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     hostname,
     nodeType,
     validateResultId,
+    producerServiceId,
   });
 
 
@@ -33,6 +34,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     url: httpsGetInfoUrl,
     nodeType,
     validateResultId,
+    producerServiceId,
   });
   totalTests++;
   if (httpsResult) passedTests++;
@@ -73,6 +75,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
           ? 'HTTP request successful but response is not a JSON object'
           : getUserFriendlyMessage(error),
       validateResultId,
+      producerServiceId,
     });
     totalTests++;
     if (httpResult) passedTests++;
@@ -96,6 +99,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       successCondition: () => corsOk,
       onErrorMessage: 'CORS not properly configured',
       validateResultId,
+      producerServiceId,
     });
     totalTests++;
     if (corsResult) passedTests++;
@@ -115,6 +119,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       nodeType,
       method: 'GET',
       validateResultId,
+      producerServiceId,
     });
     totalTests += 2
     importantTests.push(false); 
@@ -177,6 +182,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       successCondition: testCase.successCondition,
       onErrorMessage: testCase.errorMessage,
       validateResultId,
+      producerServiceId,
     });
     totalTests++;
     if (result) {
@@ -207,12 +213,12 @@ export const runAllHistoryTests = async (producerId, chain, validationData, vali
 
   runningHistoryNodes = true;
   let anyTestPassed = false;
-  for (let endpoint of Endpoints) {
+  for (let { producerServiceId, endpoint } of Endpoints) {
     // Remove trailing slash if present
     endpoint = endpoint.replace(/\/$/, '');
     
     Logger.log('', `${nodeType}: ${endpoint}`);
-    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId);
+    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId);
     console.log(`${nodeType} Endpoint test passed: ${endpointTestsPassed}`);
     anyTestPassed = anyTestPassed || endpointTestsPassed;
   }

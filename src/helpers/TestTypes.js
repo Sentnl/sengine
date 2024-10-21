@@ -46,7 +46,7 @@ export const TEST_TYPES = {
       TEMPLATE: 'Atomic Template found',
     },
     PRICEFEED: {
-      HEALTH: '3 Pricefeeds being supplied',
+      HEALTH: 'Pricefeeds being supplied',
     },
     P2P: {
       CONNECTION_POSSIBLE: 'P2P Connection was possible',

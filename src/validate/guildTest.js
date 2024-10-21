@@ -28,7 +28,8 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       'GET',
       null,
       null,
-      validateResultId
+      validateResultId,
+      null  
     );
 
     return isSuccessful;
@@ -47,7 +48,8 @@ const runTest = async (producerId, chain, jsonUrl, testType, checkSuccess, error
       'GET',
       null,
       null,
-      validateResultId
+      validateResultId,
+      null  // Use null for producerServiceId in guild tests
     );
 
     return false;
@@ -137,7 +139,7 @@ export const runGuildTests = async (producerId, chain, validationData, validateR
   if (chain === 'mainnet') {
     const jsonConsistencyResult = await testJsonConsistency(producerId, chain, jsonUrl, validateResultId, chainJson, producerName);
     totalTests++;
-      if (jsonConsistencyResult) passedTests++;
+    if (jsonConsistencyResult) passedTests++;
   }
 
   console.log(`Guild Tests: ${passedTests}/${totalTests}`);

@@ -7,7 +7,7 @@ import { measureResponseTime } from '../helpers/measureResponseTime.js';
 import { runTest, saveMultipleFailedResults,evaluateTestResults } from '../helpers/testRunner.js';
 import { getUserFriendlyMessage } from '../helpers/errorHandler.js';
 
-const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId) => {
+const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId) => {
   if (!endpoint || typeof endpoint !== 'string') {
     console.error(`Invalid endpoint: ${endpoint}`);
     return false;
@@ -33,7 +33,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     chain,
     url: httpsHealthUrl,
     nodeType,
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (httpsResult) passedTests++;
@@ -80,7 +81,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
         response.status === 200
           ? 'HTTP request successful but response is not as expected'
           : getUserFriendlyMessage(error),
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests++;
     if (httpResult) passedTests++;
@@ -101,7 +103,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
         response.body.data.redis.status === 'OK' &&
         response.body.data.chain.status === 'OK',
       onErrorMessage: 'One or more services are not OK',
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests++;
     if (servicesResult) passedTests++;
@@ -121,7 +124,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       successCondition: () => 
         response.body.data.chain.head_block >= validationData.latestHeadBlock - 10,
       onErrorMessage: 'Head block is not up-to-date',
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests++;
     if (headBlockResult) passedTests++;
@@ -142,7 +146,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       curlCmd: healthCurl,
       nodeType,
       method: 'GET',
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests += 3;
     importantTests.push(false); 
@@ -245,12 +250,12 @@ export const runAllAtomicTests = async (producerId, chain, validationData, valid
 
   runningAtomicNodes = true;
   let anyTestPassed = false;
-  for (let endpoint of Endpoints) {
+  for (let { producerServiceId, endpoint } of Endpoints) {
     // Remove trailing slash if present
     endpoint = endpoint.replace(/\/$/, '');
     
     Logger.log('', `${nodeType}: ${endpoint}`);
-    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId);
+    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId);
     console.log(`${nodeType} Endpoint test passed: ${endpointTestsPassed}`);
     anyTestPassed = anyTestPassed || endpointTestsPassed;
   }

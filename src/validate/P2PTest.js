@@ -251,17 +251,17 @@ export const runAllP2PTests = async (producerId, chain, validationData, validate
 
   runningP2PNodes = true;
 
-  for (const seedNode of seedNodes) {
-    Logger.log('', `P2P: ${seedNode.p2p_endpoint}`);
-    const { testsRun, testsPassed } = await runP2PTest(producerId, chain, seedNode.p2p_endpoint, validationData, validateResultId);
+  for (const { producerServiceId, p2p_endpoint } of seedNodes) {
+    Logger.log('', `P2P: ${p2p_endpoint}`);
+    const { testsRun, testsPassed } = await runP2PTest(producerId, chain, p2p_endpoint, validationData, validateResultId, producerServiceId);
     totalTests += testsRun;
     passedTests += testsPassed;
 
     const nodePassedAllTests = testsRun === testsPassed;
     anyNodePassedAllTests = anyNodePassedAllTests || nodePassedAllTests;
 
-    Logger.log('', `P2P Node ${seedNode.p2p_endpoint} - Tests Passed: ${testsPassed}/${testsRun}`);
-    Logger.log('', `P2P Node ${seedNode.p2p_endpoint} - All Tests Passed: ${nodePassedAllTests ? 'Yes' : 'No'}`);
+    Logger.log('', `P2P Node ${p2p_endpoint} - Tests Passed: ${testsPassed}/${testsRun}`);
+    Logger.log('', `P2P Node ${p2p_endpoint} - All Tests Passed: ${nodePassedAllTests ? 'Yes' : 'No'}`);
     Logger.log('', '----------------------------------------');
   }
 
@@ -271,7 +271,7 @@ export const runAllP2PTests = async (producerId, chain, validationData, validate
   return [runningP2PNodes, anyNodePassedAllTests];
 };
 
-const runP2PTest = async (producerId, chain, endpoint, validationData, validateResultId) => {
+const runP2PTest = async (producerId, chain, endpoint, validationData, validateResultId, producerServiceId) => {
   const [host, portStr] = endpoint.split(':');
   const port = parseInt(portStr, 10);
   const node = {
@@ -306,7 +306,8 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
     'GET',
     null,
     null,
-    validateResultId
+    validateResultId,
+    producerServiceId
   );
 
   // Test 2: Block transmission speed is OK
@@ -330,7 +331,8 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
     'GET',
     null,
     null,
-    validateResultId
+    validateResultId,
+    producerServiceId
   );
 
   return { testsRun, testsPassed };

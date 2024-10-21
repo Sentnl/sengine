@@ -181,8 +181,8 @@ export async function validateProducer(producerId, chain, validationData) {
     cpuValue = cpuData ? cpuData.cpuStats : null; 
   }
 
-  // Create initial entry in validate_results with timestamp, producerID and CPU
-  const validateResultId = await saveValidateResult(producerId, {}, timestamp, cpuValue);
+  // Create initial entry in validate_results with timestamp, producerID, CPU, and chain
+  const validateResultId = await saveValidateResult(producerId, {}, timestamp, cpuValue, chain);
 
   const testResults = {
     guild: await runGuildTests(producerId, chain, validationData, validateResultId),
@@ -231,12 +231,14 @@ export const saveTestResult = async (
   requestType,
   payload,
   version = null,
-  validateResultId
+  validateResultId,
+  producerServiceId  // This parameter name is correct
 ) => {
   const db = getDatabase();
   const query = `
     INSERT INTO validate_services (
       producer_id,
+      producer_service_id,   
       chain,
       test_type,
       is_successful,
@@ -251,10 +253,11 @@ export const saveTestResult = async (
       version,
       validate_result_id
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
   `;
   await db.query(query, [
     producerId,
+    producerServiceId,  
     chain,
     testType,
     isSuccessful,
@@ -267,7 +270,7 @@ export const saveTestResult = async (
     requestType,
     payload,
     version,
-    validateResultId,
+    validateResultId
   ]);
 };
 
@@ -286,7 +289,8 @@ export const saveTestResultWrapper = async (
   requestType = 'GET', // Default to GET
   payload = null,      // Default to null
   version = null,       // Added version parameter with default null
-  validateResultId 
+  validateResultId,
+  producerServiceId  // Add this new parameter
 ) => {
   Logger.log(testType, passed ? 'Passed' : 'Failed', errorMessage || '');
   await saveTestResult(
@@ -303,7 +307,8 @@ export const saveTestResultWrapper = async (
     requestType,
     payload,
     version, // Pass version
-    validateResultId
+    validateResultId,
+    producerServiceId  // Pass the new parameter
   );
 };
 
@@ -324,14 +329,19 @@ export const getProducerName = async (producerId) => {
 export const getAtomicNodes = async (producerId) => {
   const db = getDatabase();
   const query = `
-    SELECT api_endpoint 
+    SELECT 
+      id AS producer_service_id,
+      api_endpoint 
     FROM producer_services 
     WHERE producer_id = $1 
     AND $2 = ANY(node_type)
     AND $3 = ANY(features)
   `;
   const result = await db.query(query, [producerId, 'query', 'atomic-assets-api']);
-  return result.rows.map(row => row.api_endpoint);
+  return result.rows.map(row => ({ 
+    producerServiceId: row.producer_service_id,
+    endpoint: row.api_endpoint 
+  }));
 };
 
 // General DB function to get Nodes, including special statements to deal with hyperion-v2
@@ -339,6 +349,7 @@ export const getApiNodes = async (producerId, nodeFeature) => {
   const db = getDatabase();
   const query = `
     SELECT 
+      id AS producer_service_id,
       COALESCE(NULLIF(ssl_endpoint, ''), api_endpoint) AS endpoint
       ${nodeFeature === 'hyperion-v2' ? ', is_full' : ''}
     FROM producer_services 
@@ -349,22 +360,34 @@ export const getApiNodes = async (producerId, nodeFeature) => {
   const result = await db.query(query, [producerId, 'query', nodeFeature]);
   
   if (nodeFeature === 'hyperion-v2') {
-    return result.rows.map(row => ({ endpoint: row.endpoint, isFull: row.is_full }));
+    return result.rows.map(row => ({ 
+      producerServiceId: row.producer_service_id,
+      endpoint: row.endpoint, 
+      isFull: row.is_full 
+    }));
   } else {
-    return result.rows.map(row => row.endpoint);
+    return result.rows.map(row => ({ 
+      producerServiceId: row.producer_service_id,
+      endpoint: row.endpoint 
+    }));
   }
 };
 
 export const getSeedNodes = async (producerId) => {
   const db = getDatabase();
   const query = `
-    SELECT p2p_endpoint 
+    SELECT 
+      id AS producer_service_id,
+      p2p_endpoint 
     FROM producer_services 
     WHERE producer_id = $1 
     AND $2 = ANY(node_type)
   `;
   const result = await db.query(query, [producerId, 'seed']);
-  return result.rows.map(row => ({ p2p_endpoint: row.p2p_endpoint }));
+  return result.rows.map(row => ({ 
+    producerServiceId: row.producer_service_id,
+    p2p_endpoint: row.p2p_endpoint 
+  }));
 };
 
 
@@ -374,10 +397,9 @@ export async function runTlsSecurityTest({
   chain,
   hostname,
   nodeType = 'core',
-  validateResultId
+  validateResultId,
+  producerServiceId
 }) {
-  // ... existing implementation ...
-
   return await runTest({
     producerId,
     chain,
@@ -393,6 +415,7 @@ export async function runTlsSecurityTest({
     expectedStatusCode: (result) => (result.isSecure ? 200 : 0),
     saveErrorMessageOnSuccess: true,
     validateResultId,
+    producerServiceId
   });
 }
 
@@ -401,7 +424,8 @@ export async function runHttpsCheckTest({
   chain,
   url,
   nodeType = 'core',
-  validateResultId
+  validateResultId,
+  producerServiceId
 }) {
   return await runTest({
     producerId,
@@ -427,8 +451,14 @@ export async function runHttpsCheckTest({
       return 'HTTPS check failed: Unknown error';
     },
     validateResultId,
+    producerServiceId
   });
 }
+
+
+
+
+
 
 
 

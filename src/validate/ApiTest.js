@@ -10,7 +10,8 @@ import { getUserFriendlyMessage } from '../helpers/errorHandler.js';
 import { checkHttp2 } from '../utils/http2Checker.js';
 
 
-const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId) => {
+
+const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId) => {
   const httpsEndpoint = endpoint.replace(/^http:/, 'https:');
   const { hostname } = new URL(httpsEndpoint);
   // Define important tests (add test results here that must pass)
@@ -36,7 +37,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     chain,
     url: httpsGetInfoUrl,
     nodeType,
-    validateResultId
+    validateResultId,
+    producerServiceId  // Add this parameter
   });
   totalTests++;
   if (httpsResult) passedTests++;
@@ -75,7 +77,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
         response.status === 200
           ? 'HTTP request successful but response is not a JSON object'
           : getUserFriendlyMessage(error),
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests++;
     if (httpResult) passedTests++;
@@ -96,7 +99,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       testFunction: () => Promise.resolve({ response }),
       successCondition: () => correctChain,
       onErrorMessage: `Chain ID mismatch. Expected: ${expectedChainId}, Got: ${response.body.chain_id}`,
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests++;
     if (correctChainResult) passedTests++;
@@ -116,7 +120,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       testFunction: () => Promise.resolve({ response, }),
       successCondition: () => headBlockUpToDate,
       onErrorMessage: 'Head block not up-to-date',
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     totalTests++;
     if (headBlockUpToDateResult) passedTests++;
@@ -136,7 +141,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       curlCmd: getInfoCurl,
       nodeType,
       method: 'GET',
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
     // If all tests fail just manaully state that 3 Tests were performed
     totalTests += 3;
@@ -189,7 +195,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
         }
       },
       onErrorMessage: 'Endpoint unexpectedly available and serving JSON',
-      validateResultId
+      validateResultId,
+      producerServiceId
     });
 
     totalTests++;
@@ -213,7 +220,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     testFunction: () => checkHttp2(`${http2Endpoint}/v1/chain/get_info`),
     successCondition: (result) => result.success,
     onErrorMessage: (result) => result.error || 'HTTP/2 connection failed',
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (http2Result) passedTests++;
@@ -268,7 +276,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       typeof result === 'object' &&
       Array.isArray(result.transactions),
     onErrorMessage: (error) => getUserFriendlyMessage(error), 
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (latestBlockResult) passedTests++;
@@ -310,7 +319,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       status === 200
         ? `Invalid currency balance response: ${JSON.stringify(result)}`
         : getUserFriendlyMessage(result),
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (currencyBalanceResult) passedTests++;
@@ -329,17 +339,17 @@ export const runAllApiTests = async (producerId, chain, validationData, validate
 
   if (Endpoints.length === 0) {
     Logger.log(`No ${nodeType} nodes found for this producer', 'Passed`);
-    return [runningApiNodes, false]; // Return an array instead of using comma
+    return [runningApiNodes, false];
   }
-  // If apiEndpoints are found in DB, then we set runningApiNodes to True
+  
   runningApiNodes = true;
   let anyTestPassed = false;
-  for (let endpoint of Endpoints) {
+  for (let { producerServiceId, endpoint } of Endpoints) {
     // Remove trailing slash if present
     endpoint = endpoint.replace(/\/$/, '');
     
     Logger.log('', `${nodeType}: ${endpoint}`);
-    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId);
+    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId);
     console.log(`${nodeType} Endpoint test passed: ${endpointTestsPassed}`);
     anyTestPassed = anyTestPassed || endpointTestsPassed;
   }
@@ -347,5 +357,5 @@ export const runAllApiTests = async (producerId, chain, validationData, validate
   console.log(`Is one endpoint working: ${anyTestPassed}`);
   Logger.log('', '----------------------------------------');
   console.log(`Running API nodes: ${runningApiNodes}, Any test passed: ${anyTestPassed}`);
-  return [runningApiNodes, anyTestPassed]; // Return an array instead of using comma
+  return [runningApiNodes, anyTestPassed];
 };

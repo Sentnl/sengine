@@ -117,7 +117,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 // StartMonitoring
 // To skip cpu and pricefeed tests, use options: { skipCpu: true } 
 // To validate a single producer set prodcuerName = 'producername'
-export const startMonitoring = async (options = { skipCpu: false }, producerName = 'bp.adex' ) => {
+export const startMonitoring = async (options = { skipCpu: false }, producerName = null ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
@@ -128,54 +128,39 @@ export const startMonitoring = async (options = { skipCpu: false }, producerName
     await runAllTests('testnet', producerName, options);
   };
 
+
+  const initializeMonitoring = async () => {
   // Run update producers
-  //await updateAllProducers();
+    await updateAllProducers();
   
   // Run all tests immediately
-  await runAllTestsForBothChains();
+    await runAllTestsForBothChains();
 
   // Only set intervals if we're not testing a single producer
-    let lastUpdateTime = Date.now();
     let lastTestTime = Date.now();
-
-    const scheduleNextUpdate = () => {
-      const now = Date.now();
-      const timeUntilNextUpdate = Math.max(0, 60 * 60 * 1000 - (now - lastUpdateTime));
-      console.log(`Next producer update in: ${formatCountdown(timeUntilNextUpdate)}`);
-
-      const countdown = setInterval(() => {
-        const remaining = timeUntilNextUpdate - (Date.now() - now);
-        if (remaining <= 0) {
-          clearInterval(countdown);
-          updateAllProducers().then(() => {
-            lastUpdateTime = Date.now();
-            scheduleNextUpdate();
-          });
-        } else {
-          console.log(`Producer update in: ${formatCountdown(remaining)}`);
-        }
-      }, 1000);
-    };
 
     const scheduleNextTest = () => {
       const now = Date.now();
-      const timeUntilNextTest = Math.max(0, 15 * 60 * 1000 - (now - lastTestTime));
-      console.log(`Next test run in: ${formatCountdown(timeUntilNextTest)}`);
+      const timeUntilNextTest = Math.max(0, 15 * 60 * 1000 - (now - lastTestTime)); // Run every 15 minutes
+      console.log(`Next update and test run in: ${formatCountdown(timeUntilNextTest)}`);
 
       const countdown = setInterval(() => {
         const remaining = timeUntilNextTest - (Date.now() - now);
         if (remaining <= 0) {
           clearInterval(countdown);
-          runAllTestsForBothChains().then(() => {
-            lastTestTime = Date.now();
-            scheduleNextTest();
-          });
+          updateAllProducers()
+            .then(() => runAllTestsForBothChains())
+            .then(() => {
+              lastTestTime = Date.now();
+              scheduleNextTest();
+            });
         } else {
-          console.log(`Test run in: ${formatCountdown(remaining)}`);
+          console.log(`Update and test run in: ${formatCountdown(remaining)}`);
         }
       }, 1000);
     };
+    scheduleNextTest();
+  };
 
-    //scheduleNextUpdate();
-    //scheduleNextTest();
+  await initializeMonitoring();
 };
