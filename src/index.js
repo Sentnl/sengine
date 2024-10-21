@@ -20,7 +20,8 @@ setupRoutes(fastify);
 const start = async () => {
   try {
     await setupDatabase();
-    await fastify.listen({ port: process.env.PORT || 3000 });
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+    await fastify.listen({ port: process.env.PORT || 3000, host });
     startMonitoring();
   } catch (err) {
     fastify.log.error(err);
