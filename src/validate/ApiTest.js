@@ -26,7 +26,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     chain,
     hostname,
     nodeType,
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
 
 

@@ -168,7 +168,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     testFunction: () => kyInstance.get(collectionsUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (collectionsResult) passedTests++;
@@ -189,7 +190,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     testFunction: () => kyInstance.get(templatesUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (templatesResult) passedTests++;
@@ -209,7 +211,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     testFunction: () => kyInstance.get(schemaUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (schemaResult) passedTests++;      
@@ -229,7 +232,8 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     testFunction: () => kyInstance.get(assetUrl).json(),
     successCondition: (result) => result.success === true,
     onErrorMessage: (error) => getUserFriendlyMessage(error),
-    validateResultId
+    validateResultId,
+    producerServiceId
   });
   totalTests++;
   if (assetResult) passedTests++;

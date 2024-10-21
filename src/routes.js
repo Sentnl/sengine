@@ -48,7 +48,7 @@ fastify.get('/latest-results', async (request, reply) => {
 
 
 
-  // 2. Return Validate_services for a specific result, categorized by type
+  // 2. Return Validate_services for a specific result, categorized by type and endpoint
   fastify.get('/validate-services/:resultId', async (request, reply) => {
     const db = getDatabase();
     const { resultId } = request.params;
@@ -66,12 +66,18 @@ fastify.get('/latest-results', async (request, reply) => {
     `;
     const { rows } = await db.query(query, [resultId]);
 
-    // Categorize results by type
+    // Categorize results by type and endpoint
     const categorizedResults = rows.reduce((acc, row) => {
       if (!acc[row.type]) {
-        acc[row.type] = [];
+        acc[row.type] = {};
       }
-      acc[row.type].push(row);
+      
+      const endpoint = row.ssl_endpoint || row.p2p_endpoint;
+      if (!acc[row.type][endpoint]) {
+        acc[row.type][endpoint] = [];
+      }
+      
+      acc[row.type][endpoint].push(row);
       return acc;
     }, {});
 
