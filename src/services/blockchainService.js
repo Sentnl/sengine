@@ -24,8 +24,6 @@ const getProducers = async (chain,top21Producers) => {
       reverse: false,
       show_payer: false
     });
-
-    console.log(top21Producers)
     
     return response.rows.map(producer => ({
       ...producer,
@@ -231,7 +229,6 @@ const getEosmechanicsActions = async (rpc, count) => {
 const getTop21Producers = async (chain, nodePulse) => {
   try {
     const { endpoint: api } = await getNodeAndRpc(nodePulse);
-    console.log(`API: ${api}`);
     const url = `${api}/v2/history/get_schedule`;
     
     const response = await ky.get(url, { timeout: 30000 }).json();
