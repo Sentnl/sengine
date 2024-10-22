@@ -17,7 +17,7 @@ import { runAllP2PTests } from './P2PTest.js';
 import { runAllAtomicTests } from './AtomicTest.js';
 import { runPriceFeedTests } from './PriceFeedTest.js';
 import { saveValidateResult, updateValidateResult } from '../services/dataService.js';
-import { getProducerChainJson, getCpuData, getPriceFeedData } from '../services/blockchainService.js';
+import { getProducerChainJson, getCpuData, getPriceFeedData, getTop21Producers } from '../services/blockchainService.js';
 
 const mainnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
@@ -42,6 +42,14 @@ export const getNodeAndRpc = async (nodePulse) => {
   const endpoint = await nodePulse.getNode();
   return { endpoint, rpc: new JsonRpc(endpoint, { fetch }) };
 };
+
+
+export const getAllTop21Producers = async (chain) => {
+  const nodePulse = chain === 'mainnet' ? mainnetNodePulse : testnetNodePulse;
+  // Get the top 21 producers from the chain 
+  return await getTop21Producers(chain, nodePulse);
+}
+
 
 export const getValidationData = async (chain, options = {}) => {
   const { skipCpu = false } = options;

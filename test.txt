@@ -7,11 +7,1147 @@
 [33m[nodemon] watching path(s): *.*[39m
 [33m[nodemon] watching extensions: js,mjs,cjs,json[39m
 [32m[nodemon] starting `node src/index.js`[39m
-{"level":30,"time":1729156484383,"pid":20772,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://[::1]:3000"}
-{"level":30,"time":1729156484383,"pid":20772,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://127.0.0.1:3000"}
+{"level":30,"time":1729529594084,"pid":49519,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://[::1]:3000"}
+{"level":30,"time":1729529594084,"pid":49519,"hostname":"Charless-MacBook-Pro.local","msg":"Server listening at http://127.0.0.1:3000"}
 Updating producers for mainnet
+API: https://hyperion.wax.detroitledger.tech
 Mainnet node: https://hyperion.wax.detroitledger.tech
 Retrieved endpoint for mainnet: https://hyperion.wax.detroitledger.tech
+[
+  'guild.nefty',  'alohaeosprod',
+  'liquidstudio', 'eosiodetroit',
+  'ivote4waxusa', 'eosriobrazil',
+  'bountyblokbp', 'eosdacserver',
+  'teamgreymass', 'eosauthority',
+  'amsterdamwax', 'ledgerwiseio',
+  'cryptolions1', 'guild.taco',
+  '3dkrenderwax', 'waxswedenorg',
+  'waxhiveguild', 'eosphereiobp',
+  'bp.alcor',     'bp.wecan',
+  'guild.waxdao'
+]
+[
+  {
+    owner: '3dkrenderwax',
+    total_votes: '83978903131886794418244155741811164050232442880.00000000000000000',
+    producer_key: 'EOS6LSgC1fiMemkMABnFLX91K2t8cE6Tg1abwHM1UJeDqrj2MbnvS',
+    is_active: 1,
+    url: 'https://3dkrender.com',
+    unpaid_blocks: 576,
+    last_claim_time: '2024-10-21T15:11:00.500',
+    location: 220,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: '4halffloripa',
+    total_votes: '16789594700562913881151709691234940530720768.00000000000000000',
+    producer_key: 'EOS8JfkSTEGL6GerHqnoqUo9VJbBQjqJe9mhLDdHfWZ2ziqvEnBQh',
+    is_active: 1,
+    url: 'https://www.4half.com.br',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-06T20:38:20.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'ahtbatd11112',
+    total_votes: '20481357214150287189815945646443283953483776.00000000000000000',
+    producer_key: 'EOS5VNTvJbzABv7xDf7xU4p7igh154jRaiB59SEegF54p2USGUoxT',
+    is_active: 1,
+    url: '192.168.10.126:8888',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-07-03T08:44:11.000',
+    location: 35,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'aikonproduce',
+    total_votes: '61708686784001056132679122166852318597742592.00000000000000000',
+    producer_key: 'EOS5pKt5X6r3WsgZFipYTLZd9ZWcWoeLk4KovH4D56vpYbqhqZopD',
+    is_active: 1,
+    url: 'https://aikon.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-09-12T19:19:32.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'alohaeosprod',
+    total_votes: '90729178622956710510349259137806600059437973504.00000000000000000',
+    producer_key: 'EOS7T2mAzC5eNGb6WGuFpHRHjSDakcrvP9uF2VenUGZo2BfJ9bJFR',
+    is_active: 1,
+    url: 'https://www.alohaeos.com',
+    unpaid_blocks: 108,
+    last_claim_time: '2024-10-21T16:33:37.500',
+    location: 10,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'amsterdamwax',
+    total_votes: '90721874082099513879166925115086472978127388672.00000000000000000',
+    producer_key: 'EOS7CxjxLmEgpRPFu87HKfvmMKTZf4PGasuUMRoEPBd8K7q6VaQ7X',
+    is_active: 1,
+    url: 'https://wax.eosamsterdam.net',
+    unpaid_blocks: 276,
+    last_claim_time: '2024-10-21T16:04:07.500',
+    location: 140,
+    top21: true
+  },
+  {
+    owner: 'anonymousoff',
+    total_votes: '17249912144986543019605998661851938178465792.00000000000000000',
+    producer_key: 'EOS7MbguN8RnriUWtaA7Qyqn4AovQbJkjPasAfsUzXRF3PFjEAM4w',
+    is_active: 1,
+    url: 'https://vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-11T00:13:05.500',
+    location: 37,
+    top21: false
+  },
+  {
+    owner: 'apidae.wax',
+    total_votes: '10302975708650487474902780538193588544077824.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:07.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'apoidea.wax',
+    total_votes: '10192378478122500004671926155648978529550336.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-15T21:00:08.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'argentinawax',
+    total_votes: '3368010440914315889355646402908295675248640.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-10-14T20:21:08.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'aus1genereos',
+    total_votes: '3342045055007173076626575853418446948663296.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://genereos.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-11-06T20:24:08.500',
+    location: 36,
+    top21: false
+  },
+  {
+    owner: 'bee.wax',
+    total_votes: '9948859687864406700091343928971303004930048.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:09.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'blacklusionx',
+    total_votes: '13364644908133369469192770757656151381011070976.00000000000000000',
+    producer_key: 'EOS5BLJjJQHBsRgGqmwyeBf4VP5xpuW7NUYwbGuvBVyCgGZRtpdmm',
+    is_active: 1,
+    url: 'https://blacklusion.io',
+    unpaid_blocks: 116685,
+    last_claim_time: '2024-05-22T14:20:19.500',
+    location: 155,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'blockmatrix1',
+    total_votes: '2257336270180873933610732745810079991726080.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://blockmatrix.network',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-01-06T09:54:02.500',
+    location: 826,
+    top21: false
+  },
+  {
+    owner: 'blocksmithio',
+    total_votes: '5905914920556153154528324750151569077889400832.00000000000000000',
+    producer_key: 'EOS6ufzturmznWHprKHX8QhLy4AL2Ca7d8afRP3mGp4vRSbCzqxbv',
+    is_active: 1,
+    url: 'https://eosblocksmith.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-04-22T09:10:06.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'blokcrafters',
+    total_votes: '6324215932977405717474418618248465598698749952.00000000000000000',
+    producer_key: 'EOS5ARCFWq6fgB9DnCvUe9WYnsCmKXZSNH9Us3evUQbr7RvvBx41H',
+    is_active: 1,
+    url: 'https://blokcrafters.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-06-11T20:33:19.000',
+    location: 60,
+    top21: false
+  },
+  {
+    owner: 'bountyblokbp',
+    total_votes: '90614729033660862100113878416728130290773393408.00000000000000000',
+    producer_key: 'EOS6Sb1qLEkLWA8KyVZjeHTTXBKdgHVM9oKRZd3tihjJKYSmxjy3K',
+    is_active: 1,
+    url: 'https://www.bountyblok.io',
+    unpaid_blocks: 4620,
+    last_claim_time: '2024-10-21T03:24:03.000',
+    location: 90,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'bp.adex',
+    total_votes: '14527433606983044291276745905599060776058880.00000000000000000',
+    producer_key: 'EOS5oSQaLXMMSj6GAQip2WzgB1gAJRo8FY5e8EvzZZ5jU3subBL8B',
+    is_active: 1,
+    url: 'https://wax.a-dex.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-10-21T16:00:06.500',
+    location: 7878,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'bp.alcor',
+    total_votes: '80964356918940229777701358665298271578389217280.00000000000000000',
+    producer_key: 'EOS6ATw71SK7rDJQQBFMQkw4D9k3n9oEw3Mk5QEaQyLes63ZSLvs8',
+    is_active: 1,
+    url: 'https://bp.alcor.exchange/',
+    unpaid_blocks: 13368,
+    last_claim_time: '2024-10-20T01:52:39.500',
+    location: 666,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'bp.box',
+    total_votes: '3384990951547688294295786401690642768415686656.00000000000000000',
+    producer_key: 'EOS5Dt3qD6E4KqfGAFxAg7B9oWsWwN4A7QW6AjikPaiKF2YFehDdU',
+    is_active: 1,
+    url: 'https://wax.defibox.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-08-31T10:28:11.000',
+    location: 10,
+    top21: false
+  },
+  {
+    owner: 'bp.wecan',
+    total_votes: '83635256711869381989511013616815225221345705984.00000000000000000',
+    producer_key: 'EOS8coa6fhiEQJbfaSXwqeBG6YZaHXybQErvid3mpHJZfsu4pWpbv',
+    is_active: 1,
+    url: 'https://wecan.dev',
+    unpaid_blocks: 6804,
+    last_claim_time: '2024-10-20T21:01:04.500',
+    location: 804,
+    top21: true
+  },
+  {
+    owner: 'bumble.wax',
+    total_votes: '11766914118043668418193966788664187986903040.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:09.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'busy.wax',
+    total_votes: '9953960895730972754077286766714959251374080.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:10.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'cryptolions1',
+    total_votes: '19024530146697887437036118053504993842140545024.00000000000000000',
+    producer_key: 'EOS6G5CgDoLioNSNwYciyT79Gr9vguTSufXDS8VG3zHRzizVCC6S5',
+    is_active: 1,
+    url: 'https://cryptolions.io',
+    unpaid_blocks: 8220,
+    last_claim_time: '2024-10-20T16:55:16.000',
+    location: 200,
+    top21: true
+  },
+  {
+    owner: 'csxcommunity',
+    total_votes: '221323342230081966799928711208745907053920256.00000000000000000',
+    producer_key: 'EOS8HsrWJ9omjmwt26fieagCM95f2dsT2CyWuFQSFbp4jR7KyrZPF',
+    is_active: 1,
+    url: 'https://wax.csx.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-05-04T10:00:07.000',
+    location: 276,
+    top21: false
+  },
+  {
+    owner: 'cypherglasss',
+    total_votes: '3095290824375952800741612391933666959353184256.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.cypherglass.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-04-12T22:00:03.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'daemonshelby',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'shelbyclub.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-04-10T20:43:28.500',
+    location: 460,
+    top21: false
+  },
+  {
+    owner: 'dapplica',
+    total_votes: '14039439257248356328150452901288858266892238848.00000000000000000',
+    producer_key: 'EOS8Ldwos2bQMuFHAf1vdDmgWwwfLLCAKwqcLNP8XiSGrxL2JafbH',
+    is_active: 1,
+    url: 'https://wax.dapplica.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-10-12T10:39:22.000',
+    location: 190,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'darkprodnet1',
+    total_votes: '1093069833917055400322625052913652006387712.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'http://darkprod.net/',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-01-18T12:03:07.500',
+    location: 200,
+    top21: false
+  },
+  {
+    owner: 'deinproducer',
+    total_votes: '17257598025304444348123175155845256469020672.00000000000000000',
+    producer_key: 'EOS77iwhXu9XMCM4g6eKxuoJQVx1kmYD2qvhCccsV7oswKY5oHBDj',
+    is_active: 1,
+    url: 'http://deinceps.org',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-06-29T14:27:42.000',
+    location: 1,
+    top21: false
+  },
+  {
+    owner: 'digger.wax',
+    total_votes: '10661444345884456680936559688084201863643136.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:10.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'dmaildotcobp',
+    total_votes: '1927483628819806954567591831819103705759744.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://dmail.co',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-04-22T20:29:54.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'dmitriyepman',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://shelbyclub.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-04-15T17:56:40.000',
+    location: 460,
+    top21: false
+  },
+  {
+    owner: 'dqgk4.waa',
+    total_votes: '10004321358374228177040406236887964731834368.00000000000000000',
+    producer_key: 'EOS7MbguN8RnriUWtaA7Qyqn4AovQbJkjPasAfsUzXRF3PFjEAM4w',
+    is_active: 1,
+    url: 'https://vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-09T20:40:31.000',
+    location: 37,
+    top21: false
+  },
+  {
+    owner: 'drone.wax',
+    total_votes: '47446008570165658813231898669999844648550400.00000000000000000',
+    producer_key: 'EOS6KmN55D6p7LPwm3EFKwGaESfFHa2ZyJnCoZgwzAfQy7Dvksjop',
+    is_active: 1,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-05-05T16:00:37.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'edeniaedenia',
+    total_votes: '51752039535758278572523387783398895017525248.00000000000000000',
+    producer_key: 'EOS6jvB8Ytq74oebcawEbUgG2MRLYLscZMm9bceAcJZSqBDruj3f8',
+    is_active: 1,
+    url: 'https://edenia.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-10T18:35:00.500',
+    location: 188,
+    top21: false
+  },
+  {
+    owner: 'eos42freedom',
+    total_votes: '3215380055719063107583795742170669511019069440.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eos42.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-02T18:01:03.000',
+    location: 250,
+    top21: false
+  },
+  {
+    owner: 'eosarabianet',
+    total_votes: '1352528158972283028419736815985146790873661440.00000000000000000',
+    producer_key: 'EOS4yR1SQaR2udZNvxTjccHKtCH9mMuyMuWYuLnCnJxRnNoLUgNA7',
+    is_active: 1,
+    url: 'https://eosarabia.net',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-10-20T17:42:28.000',
+    location: 230,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'eosauthority',
+    total_votes: '85376303670300635555576009466326147217177444352.00000000000000000',
+    producer_key: 'EOS8QSYJrfDCMQxfXtkCPpbKd44XgYUJyniRKXZpnURCixqLBzrEE',
+    is_active: 1,
+    url: 'https://eosauthority.com',
+    unpaid_blocks: 8172,
+    last_claim_time: '2024-10-20T17:03:12.500',
+    location: 130,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eosbarcelona',
+    total_votes: '3231177935713323923463358932055378577586126848.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eos.barcelona/wax',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-14T01:44:02.000',
+    location: 724,
+    top21: false
+  },
+  {
+    owner: 'eoscannonwax',
+    total_votes: '72013617708741070801906589811793016500781056.00000000000000000',
+    producer_key: 'EOS6ZkiE6862gFjDXfGQXpj1DxBUStoX2qRjxR3yBCznv5UERGs1G',
+    is_active: 1,
+    url: 'https://eoscannon.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-08-28T17:49:09.500',
+    location: 156,
+    top21: false
+  },
+  {
+    owner: 'eosdacserver',
+    total_votes: '86018842772204344769104128961559740672280363008.00000000000000000',
+    producer_key: 'EOS5jhw6Ao5jYH9biZojT7ua5sZwGQp6EB7G4pM2MYVuCrzWC9R2C',
+    is_active: 1,
+    url: 'http://eosdac.io',
+    unpaid_blocks: 7992,
+    last_claim_time: '2024-10-20T17:34:08.500',
+    location: 90,
+    top21: true
+  },
+  {
+    owner: 'eosdublinwow',
+    total_votes: '12955254829021635621135152392543344209682235392.00000000000000000',
+    producer_key: 'EOS4uv4UiockBa17PUJ95PFk74UmfS3TE6dv4WGKuuyhX4WddK7Uw',
+    is_active: 1,
+    url: 'https://eosdublin.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-10-21T15:00:02.500',
+    location: 260,
+    top21: false
+  },
+  {
+    owner: 'eoseouldotio',
+    total_votes: '619296746207844994593812595877282615593533440.00000000000000000',
+    producer_key: 'EOS7Q9MdZSiHTZywYq8PikXdgk1EJBQvbQuLn6MzxUsYesooYS9QX',
+    is_active: 1,
+    url: 'https://eoseoul.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-03-23T05:19:18.000',
+    location: 410,
+    top21: false
+  },
+  {
+    owner: 'eosio',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-06-27T02:32:31.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'eosiocentral',
+    total_votes: '307637668698062817460051364504841337002000384.00000000000000000',
+    producer_key: 'EOS6U9kUSopWFSk5xBDxeP5AtyVFWhG4cTMd3FNXBGYZ7VpWJYHZh',
+    is_active: 1,
+    url: 'https://teloscentral.com',
+    unpaid_blocks: 60,
+    last_claim_time: '2020-03-22T15:39:59.500',
+    location: 276,
+    top21: false
+  },
+  {
+    owner: 'eosiodetroit',
+    total_votes: '87280344336089645006965442107079172997972492288.00000000000000000',
+    producer_key: 'EOS5skUnkBWe1VpSm8D1pnGLmMHC9gY4Wdmg9nEUEpyKbBXKcTkDT',
+    is_active: 1,
+    url: 'https://detroitledger.tech',
+    unpaid_blocks: 1380,
+    last_claim_time: '2024-10-21T12:51:08.000',
+    location: 50,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eosnewyorkio',
+    total_votes: '163422759510229453113667046658225500848128.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.eosnewyork.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-08-16T22:19:25.500',
+    location: 1,
+    top21: false
+  },
+  {
+    owner: 'eosphereiobp',
+    total_votes: '90697597048768216406599934062977972512556580864.00000000000000000',
+    producer_key: 'EOS6YiSDbsNRJMV5prJRS1R28a31TWQ6S8W1CaHn6gz4eJ8WXnn4P',
+    is_active: 1,
+    url: 'https://www.eosphere.io',
+    unpaid_blocks: 4008,
+    last_claim_time: '2024-10-21T05:11:04.000',
+    location: 290,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eosriobrazil',
+    total_votes: '90531019738104729479421520563703023863106371584.00000000000000000',
+    producer_key: 'EOS62VTMkGDMWpK3ECNegVLt92UYQQMXC3uzcx5zjW64hrMCaL1rx',
+    is_active: 1,
+    url: 'https://eosrio.io',
+    unpaid_blocks: 5784,
+    last_claim_time: '2024-10-21T00:01:33.000',
+    location: 80,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eostribeprod',
+    total_votes: '121861711508807969136048299542023027264847872.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://cryptotribe.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-10-11T17:46:02.000',
+    location: 276,
+    top21: false
+  },
+  {
+    owner: 'greeneosiobp',
+    total_votes: '14134114435513026026700222086364527783288242176.00000000000000000',
+    producer_key: 'EOS8HHtg16aezSgmvkZFwXgASBdXR7gt37cGB7FhTzPD8LL2pifhQ',
+    is_active: 1,
+    url: 'https://greeneosio.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-08T14:07:01.000',
+    location: 180,
+    top21: false
+  },
+  {
+    owner: 'guild.nefty',
+    total_votes: '87257073321484715597960946126938832870028869632.00000000000000000',
+    producer_key: 'EOS8VXNhcufCtVCWnPBxrArAjqGSwHxhVumqegj8kPuPWJy3n6mTf',
+    is_active: 1,
+    url: 'https://bp.neftyblocks.com/',
+    unpaid_blocks: 5100,
+    last_claim_time: '2024-10-21T02:00:12.500',
+    location: 1,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'guild.taco',
+    total_votes: '83319007117318036963549205966075427318432530432.00000000000000000',
+    producer_key: 'EOS7rU4ZDPZtjLHKSBa5mUCWo6NXXzewxKBuWZiboUzZg1M9cVz2d',
+    is_active: 1,
+    url: 'https://tacocrypto.io',
+    unpaid_blocks: 3373,
+    last_claim_time: '2024-10-21T07:00:44.000',
+    location: 210,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'guild.waxdao',
+    total_votes: '82217329492451214289472743160130100658234720256.00000000000000000',
+    producer_key: 'EOS7Jqix9G63Jsadj5RnZ7EEwtKSTDjRDUZMoN5HC2JnLoorEfty9',
+    is_active: 1,
+    url: 'https://waxdaobp.io',
+    unpaid_blocks: 81972,
+    last_claim_time: '2024-10-11T17:48:06.000',
+    location: 840,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'hkeosguildhk',
+    total_votes: '5351699830736920165142663649971955163149107200.00000000000000000',
+    producer_key: 'EOS75Hy7nUei49B7K4rH5rvnavay7Stbpb3YQokadgoLdopsQ7q8J',
+    is_active: 1,
+    url: 'https://www.hkeos.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-01-29T00:09:36.000',
+    location: 344,
+    top21: false
+  },
+  {
+    owner: 'honey.wax',
+    total_votes: '10354963657125094374579188268146460144435200.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:11.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'hornet.wax',
+    total_votes: '10643783096637479049413421978466196840775680.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:12.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'hyperblocks',
+    total_votes: '3658429963664522440439787494410371357271392256.00000000000000000',
+    producer_key: 'EOS69LEc4U4MSwov18rFvQAcxWES5GStFW2ZZo2wSLoegnsN1dXaU',
+    is_active: 1,
+    url: 'https://hyperblocks.pro/',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-02-23T09:42:31.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'infinitybloc',
+    total_votes: '4594708340901048441787251815193100893028352.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.infinitybloc.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-05-28T23:29:46.500',
+    location: 48,
+    top21: false
+  },
+  {
+    owner: 'ivote4waxusa',
+    total_votes: '89967944059473610565394082306596425015654088704.00000000000000000',
+    producer_key: 'EOS7D3rXJ6P8vxohmjyw2153HUy7EoU36g2nKP4TcJxvfGJRrgmqc',
+    is_active: 1,
+    url: 'https://eosusa.io/bp/wax/',
+    unpaid_blocks: 6958,
+    last_claim_time: '2024-10-20T20:35:03.500',
+    location: 70,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'karmaproduce',
+    total_votes: '58090888371294229551899360528628196531240960.00000000000000000',
+    producer_key: 'EOS5bXJd9qYv8MnBR2WSq4A8vHqfGo8DGqj7tJjiW9vMe7AtSgAhE',
+    is_active: 1,
+    url: 'https://karmaguild.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-23T22:01:23.000',
+    location: 170,
+    top21: false
+  },
+  {
+    owner: 'killer.wax',
+    total_votes: '11753614167307841385574080752204957817503744.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:13.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'ledgerwiseio',
+    total_votes: '89878160893803017648307435795718357118659592192.00000000000000000',
+    producer_key: 'EOS7Vi2QBmjyPaRxFsJ1BtcmfEyRPCniD18CpKExdZnrZTVjp7BBV',
+    is_active: 1,
+    url: 'https://ledgerwise.io',
+    unpaid_blocks: 6396,
+    last_claim_time: '2024-10-20T22:15:02.000',
+    location: 175,
+    top21: true
+  },
+  {
+    owner: 'liquidstudio',
+    total_votes: '82836968800428567277753802814964339270108577792.00000000000000000',
+    producer_key: 'EOS6oj1Yn1FMvMcnVYVYg6g4Szr2gVWKLjncuQP7eKUksD3rhyxbt',
+    is_active: 1,
+    url: 'https://www.liquiid.io',
+    unpaid_blocks: 252300,
+    last_claim_time: '2024-09-21T01:00:54.500',
+    location: 49,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'machinebloks',
+    total_votes: '15752012861761737278865745423361977182322688.00000000000000000',
+    producer_key: 'EOS8cARqfYA7T2gkoE57ZEEnwkPkn9JMsVNxBLFBPRCW94gremtws',
+    is_active: 1,
+    url: 'https://www.machinearmy.world/',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-07-25T13:03:49.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'maltablockbp',
+    total_votes: '3224043876801179216837400245299490736964632576.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://maltablock.org',
+    unpaid_blocks: 888,
+    last_claim_time: '2021-02-01T00:06:03.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'mason.wax',
+    total_votes: '10351451659620444108204413669523254346252288.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:13.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'metax',
+    total_votes: '160644713563616014222453735280465011539968.00000000000000000',
+    producer_key: 'EOS8Urge2mgQHkMYjNeMQ1ZAsSKjcvu3mre8TYhWNEVUKzZt6Z8DH',
+    is_active: 1,
+    url: 'https://google.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-09-29T06:00:32.500',
+    location: 764,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'mining.wax',
+    total_votes: '10188265280568841085112272306525502896603136.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:14.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'nation.wax',
+    total_votes: '16309547172303453843997328274925144014476804096.00000000000000000',
+    producer_key: 'EOS64Xiqqta5qLduXKCbFGE5jNc7XKjxisxSDT4McU3n3F4QhXXxK',
+    is_active: 1,
+    url: 'https://eosnation.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-10-20T20:11:01.500',
+    location: 124,
+    top21: false
+  },
+  {
+    owner: 'nebulablocks',
+    total_votes: '331759109634643476123137611416026015072256.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.nebulaprotocol.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-07-06T15:57:32.000',
+    location: 233,
+    top21: false
+  },
+  {
+    owner: 'niftylifewax',
+    total_votes: '1216074289741125198269958681254430769152.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://niftylife.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-08-20T05:12:17.500',
+    location: 1,
+    top21: false
+  },
+  {
+    owner: 'nomadxchange',
+    total_votes: '134303828346139571080040791293533228273500160.00000000000000000',
+    producer_key: 'EOS6AkDFCXzzcmwFYiFYahvR79wb7ngkSZvMaytM3QakyjBMbrPN6',
+    is_active: 1,
+    url: 'https://nomadexchange.me',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-08-13T23:28:28.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'oneinacilian',
+    total_votes: '7013198472055691927058034802388967162086686720.00000000000000000',
+    producer_key: 'EOS7fv5P8F3MWjBmQ2T4CgacGsbYvKDrzHwXujoRWZJeN9znYBLEq',
+    is_active: 1,
+    url: 'https://www.oiac.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-10-07T04:41:42.500',
+    location: 135,
+    top21: false
+  },
+  {
+    owner: 'phubproducer',
+    total_votes: '10050395699968284781932165766940769755594752.00000000000000000',
+    producer_key: 'EOS5uWFZ7ZSPWLWWuwXJQWnpvpcFb1LAYTpyexKjj7XXUYpWqFvJx',
+    is_active: 1,
+    url: 'vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-12T21:42:59.000',
+    location: 37,
+    top21: false
+  },
+  {
+    owner: 'pink.gg',
+    total_votes: '6055089557768237639952428230990198062970830848.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.pink.gg',
+    unpaid_blocks: 4908,
+    last_claim_time: '2023-08-28T06:00:48.000',
+    location: 170,
+    top21: false
+  },
+  {
+    owner: 'polar.wax',
+    total_votes: '3478407574004220505909715970088980047061843968.00000000000000000',
+    producer_key: 'EOS6G5VJRHaaEzetAKCNidbNXWTZcJbG9HFoAoX3WgbWXeMyHTqz7',
+    is_active: 1,
+    url: 'https://www.polar.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-10-05T00:27:50.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'pplbresource',
+    total_votes: '1594893997428577439790993729255879036895232.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.pplbresource.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-03-15T05:03:42.000',
+    location: 764,
+    top21: false
+  },
+  {
+    owner: 'producera',
+    total_votes: '325432619244024432299151514341939401981952.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-07-23T17:25:05.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerb',
+    total_votes: '198634388009789560021071744046553003720704.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 174215,
+    last_claim_time: '2019-06-24T18:02:16.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerc',
+    total_votes: '198629946700907190044446376530014579458048.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 174192,
+    last_claim_time: '2019-06-24T18:02:16.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerd',
+    total_votes: '198493061178131853867181140319480687099904.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173989,
+    last_claim_time: '2019-06-24T18:02:17.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producere',
+    total_votes: '196854420463400872798704764761048036147200.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 171140,
+    last_claim_time: '2019-06-24T18:02:17.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerf',
+    total_votes: '198497584634167550220792237536160218349568.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173964,
+    last_claim_time: '2019-06-24T18:02:17.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerg',
+    total_votes: '198633489767558264533228086330040673894400.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173424,
+    last_claim_time: '2019-06-24T18:02:18.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerh',
+    total_votes: '198634475611730074982878565006250942136320.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173436,
+    last_claim_time: '2019-06-24T18:02:18.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'produceri',
+    total_votes: '196990638715068767956050468545671150436352.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173423,
+    last_claim_time: '2019-06-24T18:02:18.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerj',
+    total_votes: '198495029406576666008401333440737315913728.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173076,
+    last_claim_time: '2019-06-24T18:02:19.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerk',
+    total_votes: '190971516675111831763407494398003531218944.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173082,
+    last_claim_time: '2019-06-24T18:02:19.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerl',
+    total_votes: '198496190421049144876010228699429817286656.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173060,
+    last_claim_time: '2019-06-24T18:02:19.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerm',
+    total_votes: '190969339247204539586560353679242271129600.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 172993,
+    last_claim_time: '2019-06-24T18:02:20.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producern',
+    total_votes: '198039922793009846277766083757311673761792.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173004,
+    last_claim_time: '2019-06-24T18:02:20.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producero',
+    total_votes: '190971112745633619312485286193575313276928.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173015,
+    last_claim_time: '2019-06-24T18:02:20.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerp',
+    total_votes: '196396033480605541864723229765423201255424.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148585,
+    last_claim_time: '2019-06-24T18:02:21.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerq',
+    total_votes: '316126506161027339616302558671624493596672.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148584,
+    last_claim_time: '2019-06-24T18:02:21.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerr',
+    total_votes: '198619037737166227700484814855292929966080.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148583,
+    last_claim_time: '2019-06-24T18:02:21.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producers',
+    total_votes: '196981313032131631321072511207658682843136.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 115077,
+    last_claim_time: '2019-06-24T18:02:22.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producert',
+    total_votes: '35801839965966022756591805531160576000.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 50604,
+    last_claim_time: '2019-06-24T18:02:22.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'produceru',
+    total_votes: '41444553905817148679595965534936498176.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 44064,
+    last_claim_time: '2019-06-24T18:02:22.500',
+    location: 0,
+    top21: false
+  },
+  ... 35 more items
+]
 Retrieved 135 producers for mainnet
 : ---------------------------------------- 
 : Adding: 3dkrenderwax on mainnet 
@@ -719,1759 +1855,6 @@ Node add:: {
   "p2p": "wax-p2p.wombat.app:9876"
 } 
 Updating producers for testnet
+API: https://hyperion.testnet.wax.detroitledger.tech
 Testnet node: https://hyperion.testnet.wax.detroitledger.tech
 Retrieved endpoint for testnet: https://hyperion.testnet.wax.detroitledger.tech
-Retrieved 106 producers for testnet
-: ---------------------------------------- 
-: Adding: 3dkrenderwax on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://testnet-wax.3dkrender.com",
-  "ssl": "https://testnet-wax.3dkrender.com",
-  "p2p": "testnet-p2p.3dkrender.com:9876"
-} 
-Node add:: {
-  "api": "http://testatomic.3dkrender.com",
-  "ssl": "https://testatomic.3dkrender.com"
-} 
-Node add:: {
-  "api": "http://tapiwax.3dkrender.com",
-  "ssl": "https://tapiwax.3dkrender.com",
-  "p2p": ""
-} 
-: ---------------------------------------- 
-: Adding: alohaeosprod on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api.waxtest.alohaeos.com",
-  "ssl": "https://api.waxtest.alohaeos.com",
-  "p2p": "peer.waxtest.alohaeos.com:9876"
-} 
-: ---------------------------------------- 
-: Adding: amsterdamwax on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "waxtest.eu.eosamsterdam.net:9912"
-} 
-Node add:: {
-  "api": "http://waxtest.eu.eosamsterdam.net",
-  "ssl": "https://waxtest.eu.eosamsterdam.net"
-} 
-: ---------------------------------------- 
-: Adding: blacklusionx on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "peer1.testnet.wax.blacklusion.io:5757"
-} 
-Node add:: {
-  "api": "http://testnet.wax.blacklusion.io",
-  "ssl": "https://testnet.wax.blacklusion.io"
-} 
-: ---------------------------------------- 
-: Adding: blokcrafters on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "waxtest-peer-us.blokcrafters.io:19876"
-} 
-Node add:: {
-  "p2p": "waxtest-peer-eu.blokcrafters.io:19876"
-} 
-Node add:: {
-  "api": "http://wax-test.blokcrafters.io",
-  "ssl": "https://wax-test.blokcrafters.io"
-} 
-: ---------------------------------------- 
-: Adding: bountyblokbp on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api.wax-test.bountyblok.io",
-  "ssl": "https://api.wax-test.bountyblok.io"
-} 
-Node add:: {
-  "p2p": "p2p.wax-test.bountyblok.io:9874"
-} 
-: ---------------------------------------- 
-: Adding: bp.adex on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://wax-testnet.a-dex.xyz",
-  "ssl": "https://wax-testnet.a-dex.xyz"
-} 
-Node add:: {
-  "p2p": "p2p-wax-testnet.a-dex.xyz:9878"
-} 
-Node add:: {
-  "api": "http://hyperion-wax-testnet.a-dex.xyz",
-  "ssl": "https://hyperion-wax-testnet.a-dex.xyz"
-} 
-: ---------------------------------------- 
-: Adding: bp.alcor on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "waxtest-p2p.alcor.exchange:9876"
-} 
-Node add:: {
-  "api": "http://waxtest-api.alcor.exchange",
-  "ssl": "https://waxtest-api.alcor.exchange"
-} 
-Node add:: {
-  "api": "http://waxtest-hyperion.alcor.exchange",
-  "ssl": "https://waxtest-hyperion.alcor.exchange"
-} 
-: ---------------------------------------- 
-: Adding: bp.box on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://waxtest.defibox.xyz",
-  "ssl": "https://waxtest.defibox.xyz",
-  "p2p": "waxtest.defibox.xyz:19876"
-} 
-: ---------------------------------------- 
-: Adding: cryptolions1 on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://wax-testnet.cryptolions.io",
-  "ssl": "https://wax-testnet.cryptolions.io",
-  "p2p": "wax-testnet.cryptolions.io:7987"
-} 
-: ---------------------------------------- 
-: Adding: dapplicawaxt on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://wax-testnet.dapplica.io",
-  "ssl": "https://wax-testnet.dapplica.io",
-  "p2p": "wax-testnet.dapplica.io:9877"
-} 
-: ---------------------------------------- 
-: Adding: efkayatnoapp on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "peer1-wax-testnet.eosphere.io:9876"
-} 
-Node add:: {
-  "api": "http://wax-testnet.eosphere.io",
-  "ssl": "https://wax-testnet.eosphere.io"
-} 
-: ---------------------------------------- 
-: Adding: eosarabianet on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api-testnet-wax.eosarabia.net",
-  "ssl": "https://api-testnet-wax.eosarabia.net"
-} 
-Node add:: {
-  "p2p": "p2p-testnet-wax.eosarabia.net:9876"
-} 
-: ---------------------------------------- 
-: Adding: eosdacserver on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://waxtest.eosdac.io",
-  "ssl": "https://waxtest.eosdac.io",
-  "p2p": "waxtest-p2p.eosdac.io:49876"
-} 
-Node add:: {
-  "api": "http://waxtest-aa.eosdac.io",
-  "ssl": "https://waxtest-aa.eosdac.io"
-} 
-: ---------------------------------------- 
-: Adding: eosdublinwax on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://wax.testnet.eosdublin.io",
-  "ssl": "https://wax.testnet.eosdublin.io"
-} 
-Node add:: {
-  "p2p": "wax.p2p.eosdublin.io:9877"
-} 
-: ---------------------------------------- 
-: Adding: eosdublinwow on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://wax.testnet.eosdublin.io",
-  "ssl": "https://wax.testnet.eosdublin.io"
-} 
-Node add:: {
-  "p2p": "wax.p2p.eosdublin.io:9877"
-} 
-: ---------------------------------------- 
-: Adding: eosiodetroit on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://testnet.wax.detroitledger.tech",
-  "ssl": "https://testnet.wax.detroitledger.tech",
-  "p2p": ""
-} 
-Node add:: {
-  "api": "http://hyperion.testnet.wax.detroitledger.tech",
-  "ssl": "https://hyperion.testnet.wax.detroitledger.tech",
-  "p2p": ""
-} 
-Node add:: {
-  "api": "http://atomic.testnet.wax.detroitledger.tech",
-  "ssl": "https://atomic.testnet.wax.detroitledger.tech",
-  "p2p": ""
-} 
-Node add:: {
-  "api": "",
-  "ssl": "",
-  "p2p": "p2p.testnet.wax.detroitledger.tech:1337"
-} 
-: ---------------------------------------- 
-: Adding: eosphereiobp on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "peer1-wax-testnet.eosphere.io:9876"
-} 
-Node add:: {
-  "api": "http://wax-testnet.eosphere.io",
-  "ssl": "https://wax-testnet.eosphere.io"
-} 
-: ---------------------------------------- 
-: Adding: eosriobrazil on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://testnet.wax.eosrio.io",
-  "ssl": "https://testnet.wax.eosrio.io"
-} 
-: ---------------------------------------- 
-: Adding: greeneosiobp on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api.waxtest.waxgalaxy.io",
-  "ssl": "https://api.waxtest.waxgalaxy.io",
-  "p2p": "p2p.waxtest.waxgalaxy.io:9878"
-} 
-: ---------------------------------------- 
-: Adding: guild.nefty on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "",
-  "ssl": "",
-  "p2p": "p2p-testnet.neftyblocks.com:19876"
-} 
-Node add:: {
-  "api": "http://wax-public-testnet.neftyblocks.com",
-  "ssl": "https://wax-public-testnet.neftyblocks.com"
-} 
-Node add:: {
-  "api": "http://wax-testnet-hyperion.neftyblocks.com",
-  "ssl": "https://wax-testnet-hyperion.neftyblocks.com"
-} 
-Node add:: {
-  "api": "http://wax-testnet-history.neftyblocks.com",
-  "ssl": "https://wax-testnet-history.neftyblocks.com"
-} 
-Node add:: {
-  "api": "http://aa-testnet-public.neftyblocks.com",
-  "ssl": "https://aa-testnet-public.neftyblocks.com"
-} 
-Node add:: {
-  "api": "http://lightapi-testnet.neftyblocks.com",
-  "ssl": "https://lightapi-testnet.neftyblocks.com"
-} 
-: ---------------------------------------- 
-: Adding: guild.taco on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "peer.wax-test.tacocrypto.io:9999"
-} 
-Node add:: {
-  "api": "http://atomic-wax-test.tacocrypto.io",
-  "ssl": "https://atomic-wax-test.tacocrypto.io"
-} 
-Node add:: {
-  "api": "http://wax-test.tacocrypto.io",
-  "ssl": "https://wax-test.tacocrypto.io"
-} 
-Node add:: {
-  "api": "http://wax-test.tacocrypto.io/hyperion",
-  "ssl": "https://wax-test.tacocrypto.io/hyperion"
-} 
-: ---------------------------------------- 
-: Adding: ivote4waxusa on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://test.wax.eosusa.io",
-  "ssl": "https://test.wax.eosusa.io"
-} 
-Node add:: {
-  "p2p": "test.wax.p2p.eosusa.io:19875"
-} 
-: ---------------------------------------- 
-: Adding: ledgerwiseio on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://waxtestnet.ledgerwise.io",
-  "ssl": "https://waxtestnet.ledgerwise.io",
-  "p2p": "waxp2ptestnet.ledgerwise.io:20876"
-} 
-: ---------------------------------------- 
-: Adding: liquidgaming on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "p2p.wax-test.liquidstudios.io:9876"
-} 
-Node add:: {
-  "api": "http://api.wax-test.liquidstudios.io",
-  "ssl": "https://api.wax-test.liquidstudios.io"
-} 
-Node add:: {
-  "api": "http://api.wax-test.liquidstudios.io",
-  "ssl": "https://api.wax-test.liquidstudios.io"
-} 
-: ---------------------------------------- 
-: Adding: nation.wax on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://waxtest.api.eosnation.io",
-  "ssl": "https://waxtest.api.eosnation.io"
-} 
-Node add:: {
-  "p2p": "waxtest.seed.eosnation.io:9876"
-} 
-Node add:: {
-  "ssl": "https://waxtest.firehose.pinax.network"
-} 
-Node add:: {
-  "ssl": "https://waxtest.substreams.pinax.network"
-} 
-: ---------------------------------------- 
-: Adding: oneinacilian on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://hyperion-test.oiac.io",
-  "ssl": "https://hyperion-test.oiac.io"
-} 
-Node add:: {
-  "p2p": "p2ptest.oiac.io:19877"
-} 
-Node add:: {
-  "api": "http://atomic-test.oiac.io",
-  "ssl": "https://atomic-test.oiac.io"
-} 
-: ---------------------------------------- 
-: Adding: pink.gg on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "peer1.testnet.wax.pink.gg:16714"
-} 
-Node add:: {
-  "api": "http://testnet.wax.pink.gg",
-  "ssl": "https://testnet.wax.pink.gg"
-} 
-Node add:: {
-  "api": "http://test.wax.api.atomicassets.io",
-  "ssl": "https://test.wax.api.atomicassets.io"
-} 
-: ---------------------------------------- 
-: Adding: qaraqolblock on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "p2p-waxtest.qaraqol.com:9004"
-} 
-Node add:: {
-  "api": "http://waxtest.qaraqol.com",
-  "ssl": "https://waxtest.qaraqol.com"
-} 
-Node add:: {
-  "api": "http://atomic-waxtest.qaraqol.com",
-  "ssl": "https://atomic-waxtest.qaraqol.com"
-} 
-Node add:: {
-  "api": "http://ipfs.qaraqol.com",
-  "ssl": "https://ipfs.qaraqol.com"
-} 
-: ---------------------------------------- 
-: Adding: sentnlagents on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://hyperion-test.sentnl.io",
-  "ssl": "https://hyperion-test.sentnl.io"
-} 
-Node add:: {
-  "p2p": "waxtest.sentnl.io:9877"
-} 
-: ---------------------------------------- 
-: Adding: sentnltestin on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://hyperion-test.sentnl.io",
-  "ssl": "https://hyperion-test.sentnl.io"
-} 
-Node add:: {
-  "p2p": "waxtest.sentnl.io:9877"
-} 
-: ---------------------------------------- 
-: Adding: wax.eastern on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "p2p.testnet.waxeastern.cn:9876"
-} 
-Node add:: {
-  "api": "http://api.testnet.waxeastern.cn",
-  "ssl": "https://api.testnet.waxeastern.cn"
-} 
-: ---------------------------------------- 
-: Adding: waxauthority on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api-waxtest.eosauthority.com",
-  "ssl": "https://api-waxtest.eosauthority.com"
-} 
-Node add:: {
-  "p2p": "node-waxtest.eosauthority.com:9302"
-} 
-: ---------------------------------------- 
-: Adding: waxdaoguild1 on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "",
-  "ssl": "",
-  "p2p": "p2p-test.waxdaobp.io:9876"
-} 
-Node add:: {
-  "api": "http://test-api.waxdaobp.io",
-  "ssl": "https://test-api.waxdaobp.io"
-} 
-Node add:: {
-  "api": "http://history-test.waxdaobp.io",
-  "ssl": "https://history-test.waxdaobp.io"
-} 
-: ---------------------------------------- 
-: Adding: waxhiveguild on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "",
-  "ssl": "",
-  "p2p": "peer-test.hivebp.io:9876"
-} 
-Node add:: {
-  "api": "http://api-test.hivebp.io",
-  "ssl": "https://api-test.hivebp.io"
-} 
-Node add:: {
-  "api": "http://hyperion-test.hivebp.io",
-  "ssl": "https://hyperion-test.hivebp.io"
-} 
-: ---------------------------------------- 
-: Adding: waxnodeonebp on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api-waxtest.nodeone.network:8888",
-  "ssl": "https://api-waxtest.nodeone.network:8344",
-  "p2p": "peer-waxtest.nodeone.network:9875"
-} 
-: ---------------------------------------- 
-: Adding: waxswedenorg on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "p2p": "p2p.testnet.waxsweden.org:59676"
-} 
-Node add:: {
-  "api": "http://testnet.waxsweden.org",
-  "ssl": "https://testnet.waxsweden.org"
-} 
-: ---------------------------------------- 
-: Adding: wecan on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://api-wax-testnet.wecan.dev",
-  "ssl": "https://api-wax-testnet.wecan.dev"
-} 
-Node add:: {
-  "api": "http://hyperion-wax-testnet.wecan.dev",
-  "ssl": "https://hyperion-wax-testnet.wecan.dev"
-} 
-Node add:: {
-  "api": "http://atomic-wax-testnet.wecan.dev",
-  "ssl": "https://atomic-wax-testnet.wecan.dev"
-} 
-Node add:: {
-  "api": "http://ipfs.wecan.dev",
-  "ssl": "https://ipfs.wecan.dev"
-} 
-Node add:: {
-  "p2p": "seed1-wax-testnet.wecan.dev:9876"
-} 
-Node add:: {
-  "p2p": "seed2-wax-testnet.wecan.dev:9876"
-} 
-: ---------------------------------------- 
-: Adding: wombatblockx on testnet 
-: ---------------------------------------- 
-Node add:: {
-  "api": "http://wax-testnet.wombat.app",
-  "ssl": "https://wax-testnet.wombat.app",
-  "p2p": "wax-p2p-testnet.wombat.app:9876"
-} 
-Running tests for mainnet
-Using mainnet endpoint: https://hyperion.wax.detroitledger.tech
-Fetching producer JSON data...
-Starting getProducerChainJson for chain mainnet
-Fetching PriceFeed data...
-Getting Pricefeed data for mainnet
-Received 100 actions
-Fetching CPU data...
-Getting CPU Results for mainnet with count 120
-Initial API: https://wax-hyperion.alcor.exchange
-Total transactions processed: 100
-: ---------------------------------------- 
-: Testing producer: 3dkrenderwax on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://apiwax.3dkrender.com 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'apiwax.3dkrender.com',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: chain-api: https://query.3dkrender.com 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'query.3dkrender.com',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://apiwax.3dkrender.com 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Failed An unexpected error occurred: Request timed out
-history-v1 Tests: 6/7
-history-v1 Endpoint test passed: false
-: ---------------------------------------- 
-Is one endpoint working: false
-: ---------------------------------------- 
-: hyperion-v2: https://apiwax.3dkrender.com 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Failed Missing blocks: 15
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 8/9
-hyperion-v2 Endpoint passed: false
-: ---------------------------------------- 
-Is one endpoint working: false
-: ---------------------------------------- 
-: atomic-assets-api: https://atomic.3dkrender.com 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: peer.3dkrender.com:9880 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node peer.3dkrender.com:9880 - Tests Passed: 2/2 
-: P2P Node peer.3dkrender.com:9880 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: 3dkrenderwax 
-: Guild: Passed 
-: API: Passed 
-: History: Failed 
-: Hyperion: Failed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:16:42.494Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: amsterdamwax on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax.eu.eosamsterdam.net 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax.eu.eosamsterdam.net',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://wax.eu.eosamsterdam.net 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://wax.eu.eosamsterdam.net 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Failed An unexpected error occurred: Request timed out
-hyperion-v2 Tests: 8/9
-hyperion-v2 Endpoint passed: false
-: ---------------------------------------- 
-Is one endpoint working: false
-: ---------------------------------------- 
-: atomic-assets-api: https://wax-aa.eu.eosamsterdam.net 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: wax.eu.eosamsterdam.net:9101 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax.eu.eosamsterdam.net:9101 - Tests Passed: 2/2 
-: P2P Node wax.eu.eosamsterdam.net:9101 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: amsterdamwax 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Failed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:17:15.047Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: bp.alcor on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax-api.alcor.exchange 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax-api.alcor.exchange',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://wax-hyperion.alcor.exchange 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://wax-hyperion.alcor.exchange 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://wax-atomic.alcor.exchange 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: wax-p2p.alcor.exchange:9876 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax-p2p.alcor.exchange:9876 - Tests Passed: 2/2 
-: P2P Node wax-p2p.alcor.exchange:9876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: bp.alcor 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:17:43.588Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: bp.box on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax.defibox.xyz 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax.defibox.xyz',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://wax.defibox.xyz 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://wax.defibox.xyz 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://wax.defibox.xyz 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: wax.defibox.xyz:9966 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax.defibox.xyz:9966 - Tests Passed: 2/2 
-: P2P Node wax.defibox.xyz:9966 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: bp.box 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:17:52.818Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: bp.wecan on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://api-wax-mainnet.wecan.dev 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'api-wax-mainnet.wecan.dev',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: chain-api: https://hyperion-wax-mainnet.wecan.dev 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'hyperion-wax-mainnet.wecan.dev',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: chain-api: https://history-wax-mainnet.wecan.dev 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'history-wax-mainnet.wecan.dev',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://history-wax-mainnet.wecan.dev 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://hyperion-wax-mainnet.wecan.dev 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://atomic-wax-mainnet.wecan.dev 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Failed An unexpected error occurred: Request failed with status code 416 Range Not Satisfiable
-atomic-assets-api Tests: 7/8
-atomic-assets-api Endpoint test passed: false
-: ---------------------------------------- 
-Is one endpoint working: false
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: false
-: P2P: seed1-wax-mainnet.wecan.dev:14998 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node seed1-wax-mainnet.wecan.dev:14998 - Tests Passed: 2/2 
-: P2P Node seed1-wax-mainnet.wecan.dev:14998 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: P2P: seed2-wax-mainnet.wecan.dev:14998 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node seed2-wax-mainnet.wecan.dev:14998 - Tests Passed: 2/2 
-: P2P Node seed2-wax-mainnet.wecan.dev:14998 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: bp.wecan 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Failed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:18:05.405Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: cryptolions1 on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax.cryptolions.io 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_128_GCM_SHA256
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax.cryptolions.io',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://wax.cryptolions.io 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_128_GCM_SHA256
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://wax.cryptolions.io 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://atomic-api.wax.cryptolions.io 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: wax.cryptolions.io:9876 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax.cryptolions.io:9876 - Tests Passed: 2/2 
-: P2P Node wax.cryptolions.io:9876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: cryptolions1 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:18:25.286Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: dapplica on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax.dapplica.io 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_128_GCM_SHA256
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax.dapplica.io',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://wax.dapplica.io 
-Successfully connected using TLSv1.3, actual protocol: TLSv1.3, cipher: TLS_AES_128_GCM_SHA256
-Modern version TLSv1.3 is accepted
-TLS test passed: Passed Server is secure. Highest accepted version: [object Object]
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://wax.dapplica.io 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://aa.dapplica.io 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: wax.dapplica.io:9876 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax.dapplica.io:9876 - Tests Passed: 2/2 
-: P2P Node wax.dapplica.io:9876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: dapplica 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:18:38.058Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: eosarabianet on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://api-wax.eosarabia.net 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'api-wax.eosarabia.net',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://api-wax.eosarabia.net 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://api-wax.eosarabia.net 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://api-wax-aa.eosarabia.net 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: p2p-wax.eosarabia.net:9876 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node p2p-wax.eosarabia.net:9876 - Tests Passed: 2/2 
-: P2P Node p2p-wax.eosarabia.net:9876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: eosarabianet 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:18:48.524Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: eosauthority on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://api-wax.eosauthority.com 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'api-wax.eosauthority.com',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://api-wax.eosauthority.com 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://api-wax.eosauthority.com 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Failed CORS not properly configured
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 8/9
-hyperion-v2 Endpoint passed: false
-: ---------------------------------------- 
-Is one endpoint working: false
-: ---------------------------------------- 
-: atomic-assets-api: https://aa-api-wax.eosauthority.com 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: node-wax.eosauthority.com:10301 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node node-wax.eosauthority.com:10301 - Tests Passed: 2/2 
-: P2P Node node-wax.eosauthority.com:10301 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: P2P: node-wax-p2p.eosauthority.com:10301 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node node-wax-p2p.eosauthority.com:10301 - Tests Passed: 2/2 
-: P2P Node node-wax-p2p.eosauthority.com:10301 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: eosauthority 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Failed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:19:01.330Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: eosdacserver on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax.eosdac.io 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax.eosdac.io',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: chain-api: https://wax-history.eosdac.io 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax-history.eosdac.io',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://wax-history.eosdac.io 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-Get controlled accounts test: Passed 
-history-v1 Tests: 7/7
-history-v1 Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: hyperion-v2: https://wax-history.eosdac.io 
-Node is correctly marked as full: Passed 
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-Client connection closed
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-hyperion-v2 Tests: 9/9
-hyperion-v2 Endpoint passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-: atomic-assets-api: https://wax-aa.eosdac.io 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Atomic Services are ok: Passed 
-Atomic Head Block is up to date: Passed 
-Atomic Collections found: Passed 
-Atomic Template found: Passed 
-Atomic Schema found: Passed 
-Atomic Assets found: Passed 
-atomic-assets-api Tests: 8/8
-atomic-assets-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running Atomic nodes: true, Any test passed: true
-: P2P: wax-p2p.eosdac.io:29876 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax-p2p.eosdac.io:29876 - Tests Passed: 2/2 
-: P2P Node wax-p2p.eosdac.io:29876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: P2P: wax-p2p.uk.eosdac.io:29873 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax-p2p.uk.eosdac.io:29873 - Tests Passed: 2/2 
-: P2P Node wax-p2p.uk.eosdac.io:29873 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: P2P: wax-p2p.fi.eosdac.io:19876 
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node wax-p2p.fi.eosdac.io:19876 - Tests Passed: 2/2 
-: P2P Node wax-p2p.fi.eosdac.io:19876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: eosdacserver 
-: Guild: Passed 
-: API: Passed 
-: History: Passed 
-: Hyperion: Passed 
-: P2P: Passed 
-: AtomicAssets: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:19:12.194Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: bountyblokbp on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://api.wax.bountyblok.io 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'api.wax.bountyblok.io',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-No history-v1 nodes found for this producer', 'Passed: undefined 
-No Hyperion nodes found for this producer: Passed 
-No atomic-assets-api nodes found for this producer', 'Passed: undefined 
-: P2P: p2p.wax.bountyblok.io:29876 
-Client connection closed
-disconnecting
-P2P Connection was possible: Passed 
-P2P Block Transmission Speed: Passed 
-: P2P Node p2p.wax.bountyblok.io:29876 - Tests Passed: 2/2 
-: P2P Node p2p.wax.bountyblok.io:29876 - All Tests Passed: Yes 
-: ---------------------------------------- 
-: At least one P2P node passed all tests: Yes 
-: ---------------------------------------- 
-3 Pricefeeds being supplied: Passed 
-Price Feed Tests: 1/1
-: Test Results for: bountyblokbp 
-: Guild: Passed 
-: API: Passed 
-: P2P: Passed 
-: PriceFeed: Passed 
-: Timestamp: 2024-10-17T09:19:27.387Z 
-: ---------------------------------------- 
-: ---------------------------------------- 
-: Testing producer: bp.adex on mainnet 
-: ---------------------------------------- 
-Github username is set: Passed 
-Branding logos have been set: Passed 
-guild_json_consistency: Passed 
-Guild Tests: 3/3
-: chain-api: https://wax.a-dex.xyz 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-Correct chain version: Passed 
-Head block is up-to-date: Passed 
-Producer api is not accessible: Passed 
-Db_size api is not accessible: Passed 
-Net api is not accessible: Passed 
-Sending headers: {
-  ':method': 'GET',
-  ':path': '/v1/chain/get_info',
-  ':scheme': 'https',
-  ':authority': 'wax.a-dex.xyz',
-  'User-Agent': 'curl/8.4.0',
-  Accept: '*/*'
-}
-HTTP/2 request succeeded with status 200
-HTTP2 is available: Passed 
-Latest block test passed: Passed 
-Basic symbol test passed: Passed 
-chain-api Tests: 10/10
-chain-api Endpoint test passed: true
-: ---------------------------------------- 
-Is one endpoint working: true
-: ---------------------------------------- 
-Running API nodes: true, Any test passed: true
-: history-v1: https://hyperion-wax.a-dex.xyz 
-TLS test passed: Failed Server 
-HTTPS is available: Passed 
-HTTP is available: Passed 
-CORS is configured correctly: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Failed Invalid key accounts response
-Get controlled accounts test: Failed Invalid controlled accounts response
-history-v1 Tests: 5/7
-history-v1 Endpoint test passed: false
-: ---------------------------------------- 
-Is one endpoint working: false
-: ---------------------------------------- 
-: hyperion-v2: https://hyperion-wax.a-dex.xyz 
-Node is correctly marked as full: Failed Node is not marked as full
-HTTP is available: Passed 
-Hyperion Health was found: Passed 
-CORS is configured correctly: Passed 
-Hyperion services are ok: Passed 
-No missing blocks: Passed 
-HTTPS is available: Passed 
-Get transaction test: Passed 
-Get actions test: Passed 
-Get key accounts test: Passed 
-[31m[nodemon] app crashed - waiting for file changes before starting...[39m

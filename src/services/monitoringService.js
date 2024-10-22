@@ -1,11 +1,12 @@
 import { getProducers, parseProducerServices } from './blockchainService.js';
 import { saveProducer, saveProducerService } from './dataService.js';
-import { getValidationData, validateProducer } from '../validate/validateCore.js';
+import { getValidationData, validateProducer, getAllTop21Producers } from '../validate/validateCore.js';
 import config from '../config.js';
 import { isUrlIgnored, joinUrl } from '../helpers/Urls.js';
 import { getDatabase } from '../models/db.js';
 import { Logger } from '../helpers/Logger.js';
 import { httpRequest } from '../helpers/performanceHelper.js';
+
 
 const isAbsoluteUrl = (url) => /^https?:\/\//i.test(url);
 
@@ -20,7 +21,9 @@ const formatCountdown = (milliseconds) => {
 // Updating producers and services
 const updateProducers = async (chain) => {
   console.log(`Updating producers for ${chain}`);
-  const producers = await getProducers(chain);
+  const top21Producers = await getAllTop21Producers(chain);
+  const producers = await getProducers(chain,top21Producers);
+  console.log(producers)
   console.log(`Retrieved ${producers.length} producers for ${chain}`);
 
   for (const producer of producers) {
@@ -62,6 +65,7 @@ const updateProducers = async (chain) => {
         json_url: producerJsonUrl,
         logo_svg: logoSvg,
         chain,
+        top21: producer.top21
       });
 
       const services = parseProducerServices(producerJson);

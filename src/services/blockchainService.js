@@ -4,7 +4,7 @@ import ky from 'ky';
 import config from '../config.js';
 import { getNodeAndRpc } from '../validate/validateCore.js';
 
-const getProducers = async (chain) => {
+const getProducers = async (chain,top21Producers) => {
   try {
     const endpoint = await config.chains[chain].getEndpoint();
     console.log(`Retrieved endpoint for ${chain}:`, endpoint);
@@ -25,7 +25,12 @@ const getProducers = async (chain) => {
       show_payer: false
     });
 
-    return response.rows;
+    console.log(top21Producers)
+    
+    return response.rows.map(producer => ({
+      ...producer,
+      top21: top21Producers.includes(producer.owner)
+    }));
   } catch (error) {
     console.error(`Error getting producers for ${chain}:`, error);
     throw error;
@@ -223,4 +228,23 @@ const getEosmechanicsActions = async (rpc, count) => {
   }));
 };
 
-export { getProducers, parseProducerServices, getProducerChainJson, getPriceFeedData, getCpuData };
+const getTop21Producers = async (chain, nodePulse) => {
+  try {
+    const { endpoint: api } = await getNodeAndRpc(nodePulse);
+    console.log(`API: ${api}`);
+    const url = `${api}/v2/history/get_schedule`;
+    
+    const response = await ky.get(url, { timeout: 30000 }).json();
+    
+    if (!response || !response.producers || response.producers.length === 0) {
+      throw new Error('Invalid response from get_schedule');
+    }
+
+    return response.producers.map(producer => producer.name);
+  } catch (error) {
+    console.error(`Error fetching top 21 producers for ${chain}:`, error);
+    return [];
+  }
+};
+
+export { getProducers, parseProducerServices, getProducerChainJson, getPriceFeedData, getCpuData, getTop21Producers };

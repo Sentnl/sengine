@@ -18,7 +18,8 @@ export const setupDatabase = async () => {
       json_url VARCHAR(255),
       logo_svg TEXT,
       chain VARCHAR(50) NOT NULL,
-      UNIQUE(name, chain)
+      UNIQUE(name, chain),
+      top21 BOOLEAN DEFAULT FALSE
     );
 
     CREATE TABLE IF NOT EXISTS producer_services (
