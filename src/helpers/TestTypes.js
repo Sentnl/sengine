@@ -18,6 +18,9 @@ export const TEST_TYPES = {
       GET_CONTROLLED_ACCOUNTS: 'Get controlled accounts test',
       PARTIAL: 'Partial Hyperion test',
     },
+    HISTORY:{
+      BLOCK_ONE_TEST: 'Get block one',
+    },
     GUILD: {
       GITHUB_USERNAME: 'Github username is set',
       BRANDING: 'Branding logos have been set',

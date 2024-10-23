@@ -23,8 +23,6 @@ const updateProducers = async (chain) => {
   console.log(`Updating producers for ${chain}`);
   const top21Producers = await getAllTop21Producers(chain);
   const producers = await getProducers(chain,top21Producers);
-  console.log(producers)
-  console.log(`Retrieved ${producers.length} producers for ${chain}`);
 
   for (const producer of producers) {
     let website = producer.url;

@@ -125,6 +125,39 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     importantTests.push(false); 
   }
 
+
+ // Block one test
+  const blockOneUrl = `${endpoint}/v1/chain/get_block`;
+  const blockOnePayload = { "block_num_or_id": 1, "json": true };
+  const blockOneCurl = generateCurlCommandFromKyConfig(blockOneUrl, { method: 'POST', json: blockOnePayload });
+
+  const blockOneTest = await runTest({
+    producerId,
+    chain,
+    testType: TEST_TYPES.HISTORY.BLOCK_ONE_TEST,
+    url: blockOneUrl,
+    method: 'POST',
+    payload: blockOnePayload,
+    curlCmd: blockOneCurl,
+    nodeType,
+    testFunction: async () => {
+      const response = await kyInstance.post(blockOneUrl, { 
+        json: blockOnePayload, 
+        throwHttpErrors: false 
+      }).json();
+      return response;
+    },
+    successCondition: (result) => 
+      result && typeof result === 'object' && !result.code,
+    onErrorMessage: (result) => 
+      result.message || `Invalid block one response. Received: ${JSON.stringify(result)}`,
+    validateResultId,
+    producerServiceId,
+  });
+  totalTests++;
+  if (blockOneTest) passedTests++;
+  importantTests.push(blockOneTest);
+
   // Perform specific POST requests
   const testCases = [
     {
