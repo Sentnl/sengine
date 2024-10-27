@@ -23,6 +23,7 @@ export const checkTls = async (domainName, port) => {
       const options = {
         host: HOST,
         port: PORT,
+        servername: HOST,
         minVersion: version,
         maxVersion: version,
         rejectUnauthorized: false,
