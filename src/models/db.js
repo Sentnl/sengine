@@ -80,11 +80,34 @@ export const setupDatabase = async () => {
       validate_result_id INTEGER REFERENCES validate_results(id)
     );
 
+    CREATE TABLE IF NOT EXISTS telegram_alerts (
+    id SERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL, -- Telegram user ID
+    producer_id INTEGER REFERENCES producers(id) ON DELETE CASCADE, -- References the producers table
+    monitor_mainnet BOOLEAN DEFAULT FALSE, -- Indicates if alerts for mainnet are enabled
+    monitor_testnet BOOLEAN DEFAULT FALSE, -- Indicates if alerts for testnet are enabled
+    last_alert_timestamp_mainnet TIMESTAMP WITH TIME ZONE, -- Tracks the last alert timestamp for mainnet
+    last_alert_timestamp_testnet TIMESTAMP WITH TIME ZONE, -- Tracks the last alert timestamp for testnet
+    UNIQUE (user_id, producer_id) -- Ensures each user only has one entry per producer
+    );
+
 
       -- Add any necessary indexes
       CREATE INDEX IF NOT EXISTS idx_validate_services_producer_id ON validate_services(producer_id);
       CREATE INDEX IF NOT EXISTS idx_validate_services_validate_result_id ON validate_services(validate_result_id);
       CREATE INDEX IF NOT EXISTS idx_validate_services_producer_service_id ON validate_services(producer_service_id);
+      
+      -- New indexes
+      CREATE INDEX IF NOT EXISTS idx_validate_results_producer_id_chain ON validate_results(producer_id, chain);
+      CREATE INDEX IF NOT EXISTS idx_validate_results_timestamp ON validate_results(timestamp);
+      
+      CREATE INDEX IF NOT EXISTS idx_producers_chain ON producers(chain);
+      CREATE INDEX IF NOT EXISTS idx_producers_name_chain ON producers(name, chain);
+      
+      CREATE INDEX IF NOT EXISTS idx_producer_services_producer_id ON producer_services(producer_id);
+      
+      CREATE INDEX IF NOT EXISTS idx_validate_services_chain_timestamp ON validate_services(chain, timestamp);
+      CREATE INDEX IF NOT EXISTS idx_validate_services_type ON validate_services(type);
   `);
 };
 

@@ -119,7 +119,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 // StartMonitoring
 // To skip cpu and pricefeed tests, use options: { skipCpu: true } 
 // To validate a single producer set prodcuerName = 'producername'
-export const startMonitoring = async (options = { skipCpu: false }, producerName = null  ) => {
+export const startMonitoring = async (options = { skipCpu: true }, producerName = '3dkrenderwax'  ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
@@ -133,7 +133,7 @@ export const startMonitoring = async (options = { skipCpu: false }, producerName
 
   const initializeMonitoring = async () => {
   // Run update producers
-    await updateAllProducers();
+    //await updateAllProducers();
   
   // Run all tests immediately
     await runAllTestsForBothChains();

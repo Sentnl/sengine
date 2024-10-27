@@ -15,11 +15,11 @@ export const setupRoutes = (fastify) => {
   });
 
 
-  // 1. Latest results for each producer, optionally filtered by chain
+  // 1. Latest results for each producer, optionally filtered by chain and/or producer
   // Home page
-  // example: /latest-results?chain=mainnet
+  // example: /latest-results?chain=mainnet&producer=someproducer
 fastify.get('/latest-results', async (request, reply) => {
-  const { chain } = request.query;
+  const { chain, producer } = request.query;
   const db = getDatabase();
   
   let query = `
@@ -30,13 +30,18 @@ fastify.get('/latest-results', async (request, reply) => {
         vr.timestamp AT TIME ZONE 'UTC' AS utc_timestamp
       FROM validate_results vr
       JOIN producers p ON vr.producer_id = p.id
-      ${chain ? 'WHERE vr.chain = $1' : ''}
+      WHERE 1=1
+      ${chain ? 'AND vr.chain = $1' : ''}
+      ${producer ? 'AND LOWER(p.name) = LOWER($' + (chain ? '2' : '1') + ')' : ''}
       ORDER BY vr.producer_id, vr.timestamp DESC
     )
     SELECT * FROM latest_results
   `;
 
-  const queryParams = chain ? [chain] : [];
+  const queryParams = [];
+  if (chain) queryParams.push(chain);
+  if (producer) queryParams.push(producer);
+
   const { rows } = await db.query(query, queryParams);
 
   // Convert the timestamp to ISO format
@@ -262,7 +267,7 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
 // So if you passed in hyperion and a range of ids, it will get all the test_types done for hyperion. 
 // Since it start from the stats page they 30 days range will automatically work, 
 // since it will get the ids from the stats page that are associated with that timestamp range.
-// example: validate-services-range?ids=162,198,249,250,252,287,296,298&type=hyperion
+// example: /services-stats?ids=162,198,249,250,252,287,296,298&type=hyperion
 fastify.get('/services-stats', async (request, reply) => {
   const db = getDatabase();
   const { ids, type } = request.query;
