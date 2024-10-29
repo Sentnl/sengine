@@ -238,7 +238,9 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
   if (actionsResult) passedTests++;
 
   // 6. get_key_accounts test
-  const keyAccountsCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } });
+  const keyAccountsCurl = generateCurlCommandFromKyConfig(`${endpoint}/v2/state/get_key_accounts`, { 
+    searchParams: { public_key: config.chains[chain].publicKey } 
+  });
   const keyAccountsResult = await runTest({
     producerId,
     chain,
@@ -247,7 +249,9 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
     method: 'GET',
     curlCmd: keyAccountsCurl,
     nodeType,
-    testFunction: () => kyInstance.get(`${endpoint}/v2/state/get_key_accounts`, { searchParams: { public_key: config.publicKey } }).json(),
+    testFunction: () => kyInstance.get(`${endpoint}/v2/state/get_key_accounts`, { 
+      searchParams: { public_key: config.chains[chain].publicKey } 
+    }).json(),
     successCondition: (result) => result.account_names !== undefined,
     onErrorMessage: 'Invalid key accounts response',
     validateResultId,

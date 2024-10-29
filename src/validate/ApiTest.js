@@ -287,9 +287,9 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
   const currencyBalanceUrl = `${endpoint}/v1/chain/get_currency_balance`;
   const currencyBalancePayload = {
     "json": true,
-    "account": config.api.testAccount,
+    "account": config.chains[chain].testAccount,
     "code": "eosio.token",
-    "symbol": config.api.testSymbol,
+    "symbol": config.symbol,
   };
   const currencyBalanceCurl = generateCurlCommandFromKyConfig(currencyBalanceUrl, { method: 'POST', json: currencyBalancePayload });
 
@@ -315,7 +315,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       Array.isArray(result) &&
       result.length === 1 &&
       typeof result[0] === 'string' &&
-      result[0].endsWith(` ${config.api.testSymbol}`),
+      result[0].endsWith(` ${config.symbol}`),
     onErrorMessage: ({ status, result }) => 
       status === 200
         ? `Invalid currency balance response: ${JSON.stringify(result)}`

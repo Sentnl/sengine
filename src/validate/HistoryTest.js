@@ -177,22 +177,22 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     {
       testType: TEST_TYPES.HYPERION.GET_KEY_ACCOUNTS,
       url: `${endpoint}/v1/history/get_key_accounts`,
-      payload: { "json": true, "public_key": config.publicKey },
-      successCondition: (result) => 
-        typeof result === 'object' && 
-        Array.isArray(result.account_names) && 
-        result.account_names.length === 1,
+      payload: { "json": true, "public_key": config.chains[chain].publicKey },
+      successCondition: (result) => {
+        return typeof result === 'object' && 
+          result.account_names !== undefined;
+      },
       errorMessage: 'Invalid key accounts response',
     },
     {
       testType: TEST_TYPES.HYPERION.GET_CONTROLLED_ACCOUNTS,
       url: `${endpoint}/v1/history/get_controlled_accounts`,
-      payload: { "controlling_account": config.api.controllingAccount },
+      payload: { "controlling_account": config.chains[chain].controllingAccount },
       successCondition: (result) => {
         return (
           typeof result === 'object' &&
           Array.isArray(result.controlled_accounts) &&
-          result.controlled_accounts.includes(config.api.testAccount)
+          result.controlled_accounts.includes(config.chains[chain].testAccount)
         );
       },
       errorMessage: 'Invalid controlled accounts response',

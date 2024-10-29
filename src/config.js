@@ -27,6 +27,9 @@ export default {
   chains: {
     mainnet: {
       chainId: '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4',
+      publicKey: "EOS8FWK5oYydJUzfJeRZ64G8taTR1L3RTqpyaWdnaXtizh4LJ89r4",
+      testAccount: 'sentnlagents',
+      controllingAccount: 'a4v5y.waa',
       getEndpoint: async () => {
         const node = await mainnetNodePulse.getNode();
         console.log('Mainnet node:', node);
@@ -35,6 +38,9 @@ export default {
     },
     testnet: {
       chainId: 'f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12',
+      publicKey: "EOS7tPMYZHx9vWLY5ntXw7NE2swJUhhHyLH3hy8ASABj5u9tT3PQ9",
+      testAccount: 'sentnltestin',
+      controllingAccount: 'sentnlagents',
       getEndpoint: async () => {
         const node = await testnetNodePulse.getNode();
         console.log('Testnet node:', node);
@@ -42,9 +48,7 @@ export default {
       },
     },
   },
-  publicKey: "EOS8FWK5oYydJUzfJeRZ64G8taTR1L3RTqpyaWdnaXtizh4LJ89r4",
-  //timestamp42DaysAgo:"=2024-02-21T00:00:00Z",
-  account: "a4v5y.waa",
+  //account: "a4v5y.waa",
   symbol: "WAX",
 
   // {{ Add performance mode configurations }}
@@ -55,12 +59,7 @@ export default {
     retry_delay_ms: 1000, // Delay between retries in milliseconds
   },
   p2p: {
-    seedBlockCount: 10, // or whatever value you're using
-    blocks_per_second: 5, // or whatever value you're using
-  },
-  api:{
-    testAccount: 'sentnlagents',
-    testSymbol: 'WAX',
-    controllingAccount: 'a4v5y.waa',
-  },
+    seedBlockCount: 10, 
+    blocks_per_second: 5, 
+  }
 };
