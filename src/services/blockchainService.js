@@ -4,38 +4,45 @@ import ky from 'ky';
 import config from '../config.js';
 import { getNodeAndRpc } from '../validate/validateCore.js';
 
-const getProducers = async (chain,top21Producers) => {
-  try {
-    const endpoint = await config.chains[chain].getEndpoint();
-    console.log(`Retrieved endpoint for ${chain}:`, endpoint);
+const getProducers = async (chain, top21Producers, retries = 3) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const endpoint = await config.chains[chain].getEndpoint();
+      console.log(`Try ${i + 1}: Using endpoint for ${chain}:`, endpoint);
 
-    if (typeof endpoint !== 'string' || !endpoint) {
-      throw new Error(`Invalid endpoint for ${chain}: ${endpoint}`);
+      if (typeof endpoint !== 'string' || !endpoint) {
+        throw new Error(`Invalid endpoint for ${chain}: ${endpoint}`);
+      }
+
+      const rpc = new JsonRpc(endpoint, { fetch });
+      const response = await rpc.get_table_rows({
+        json: true,
+        code: 'eosio',
+        scope: 'eosio',
+        table: 'producers',
+        limit: 150,
+        reverse: false,
+        show_payer: false
+      });
+
+      if (!response || !Array.isArray(response.rows)) {
+        throw new Error('Invalid response format');
+      }
+
+      return response.rows.map(producer => ({
+        ...producer,
+        top21: top21Producers.includes(producer.owner)
+      }));
+
+    } catch (error) {
+      console.error(`Attempt ${i + 1} failed for ${chain}:`, error);
+      if (i === retries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 1000)); // 1s delay between retries
     }
-
-    const rpc = new JsonRpc(endpoint, { fetch });
-
-    const response = await rpc.get_table_rows({
-      json: true,
-      code: 'eosio',
-      scope: 'eosio',
-      table: 'producers',
-      limit: 150,
-      reverse: false,
-      show_payer: false
-    });
-    
-    return response.rows.map(producer => ({
-      ...producer,
-      top21: top21Producers.includes(producer.owner)
-    }));
-  } catch (error) {
-    console.error(`Error getting producers for ${chain}:`, error);
-    throw error;
   }
 };
 
-const getProducerChainJson = async (chain,rpc) => {
+const getProducerChainJson = async (chain, rpc) => {
   console.log(`Starting getProducerChainJson for chain ${chain}`);
   try {
 
