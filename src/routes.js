@@ -1,4 +1,38 @@
 import { getDatabase } from './models/db.js';
+import config from './config.js';
+import ky from 'ky';
+
+
+function insertDummyDataIfEmpty(apiResponse) {
+  if (apiResponse.data && apiResponse.data.length === 0) {
+    const startDate = new Date(apiResponse.startDate);
+    const endDate = new Date(apiResponse.endDate);
+    const oneDayMilliseconds = 24 * 60 * 60 * 1000;
+    const days = Math.ceil((endDate - startDate) / oneDayMilliseconds);
+
+    let dummyDataset = [];  // Temporary storage for dummy data
+
+    for (let i = 0; i < days; i++) {
+      const dateObj = new Date(startDate.getTime() + i * oneDayMilliseconds);
+
+      const dummyData = {
+        owner_name: apiResponse.ownerName,
+        block_number: 231959980 + i,  // Adjust this based on your needs.
+        date: dateObj.toISOString(),
+        round_missed: false,
+        blocks_missed: false,
+        missed_block_count: 0
+      };
+
+      dummyDataset.push(dummyData);
+    }
+
+    apiResponse.data = dummyDataset.reverse();  // No need to reverse as we're incrementing the date
+  }
+
+  return apiResponse;
+}
+
 
 export const setupRoutes = (fastify) => {
   fastify.get('/producers', async (request, reply) => {
@@ -13,6 +47,47 @@ export const setupRoutes = (fastify) => {
     const { rows } = await db.query('SELECT * FROM producers WHERE chain = $1', [chain]);
     return rows;
   });
+
+
+// Get missing block data fdrom external urls 
+fastify.get('/api/missing-blocks', async (req, reply) => {
+  const ownerName = req.query.ownerName;
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  const chain = req.query.chain?.toLowerCase();
+
+  if (!ownerName || !chain || !['mainnet', 'testnet'].includes(chain)) {
+    return reply.status(400).send({
+      success: false,
+      error: {
+        kind: "user_input",
+        message: "Invalid or missing parameters. Chain must be 'mainnet' or 'testnet'",
+      },
+    });
+  }
+
+  const baseURL = config.chains[chain].missingBlocksUrl;
+  
+  // Construct the external URL with query parameters
+  const externalURL = `${baseURL}/missing-blocks?ownerName=${encodeURIComponent(ownerName)}&startDate=${startDate}&endDate=${endDate}`;
+
+  try {
+    const response = await ky.get(externalURL).json();
+    const processedResponse = insertDummyDataIfEmpty(response);
+    reply.send(processedResponse);
+  } catch (error) {
+    console.error('Error calling external URL:', error);
+    
+    // Handle the error based on your needs (e.g., sending a custom error response)
+    reply.status(500).send({
+      success: false,
+      error: {
+        kind: "external_api",
+        message: "Failed to fetch data from external source.",
+      },
+    });
+  }
+});
 
 
   // 1. Latest results for each producer, optionally filtered by chain and/or producer

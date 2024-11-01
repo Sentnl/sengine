@@ -30,6 +30,7 @@ export default {
       publicKey: "EOS8FWK5oYydJUzfJeRZ64G8taTR1L3RTqpyaWdnaXtizh4LJ89r4",
       testAccount: 'sentnlagents',
       controllingAccount: 'a4v5y.waa',
+      missingBlocksUrl: 'https://missm.sentnl.io',
       getEndpoint: async () => {
         const node = await mainnetNodePulse.getNode();
         console.log('Mainnet node:', node);
@@ -41,6 +42,7 @@ export default {
       publicKey: "EOS7tPMYZHx9vWLY5ntXw7NE2swJUhhHyLH3hy8ASABj5u9tT3PQ9",
       testAccount: 'sentnltestin',
       controllingAccount: 'sentnlagents',
+      missingBlocksUrl: 'https://misst.sentnl.io',
       getEndpoint: async () => {
         const node = await testnetNodePulse.getNode();
         console.log('Testnet node:', node);
