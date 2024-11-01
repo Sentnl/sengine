@@ -18,6 +18,7 @@ export const setupDatabase = async () => {
       json_url VARCHAR(255),
       logo_svg TEXT,
       chain VARCHAR(50) NOT NULL,
+      country_code TEXT,
       UNIQUE(name, chain),
       top21 BOOLEAN DEFAULT FALSE
     );

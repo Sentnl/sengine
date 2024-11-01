@@ -4,10 +4,10 @@ import { Logger } from '../helpers/Logger.js';
 const saveProducer = async (producer) => {
     const db = getDatabase();
     const query = `
-      INSERT INTO producers (name, website, chain_json_url, json_url, logo_svg, chain, top21)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO producers (name, website, chain_json_url, json_url, logo_svg, chain, top21, country_code)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       ON CONFLICT (name, chain) DO UPDATE
-      SET website = $2, chain_json_url = $3, json_url = $4, logo_svg = $5, top21 = $7
+      SET website = $2, chain_json_url = $3, json_url = $4, logo_svg = $5, top21 = $7, country_code = $8
       RETURNING id
     `;
     try {
@@ -18,7 +18,8 @@ const saveProducer = async (producer) => {
             producer.json_url,
             producer.logo_svg,
             producer.chain, 
-            producer.top21
+            producer.top21,
+            producer.country_code
         ]);
         Logger.log('', '----------------------------------------');
         Logger.log('', `Adding: ${producer.name} on ${producer.chain}`);
