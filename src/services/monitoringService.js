@@ -55,6 +55,7 @@ const updateProducers = async (chain) => {
       if (!producerJson) continue;
 
       const logoSvg = producerJson.org?.branding?.logo_svg || null;
+      const logo256 = producerJson.org?.branding?.logo_256 || null;
       const countryCode = producerJson.org?.location?.country || null;
 
       const producerId = await saveProducer({
@@ -63,6 +64,7 @@ const updateProducers = async (chain) => {
         chain_json_url: chainJsonUrl,
         json_url: producerJsonUrl,
         logo_svg: logoSvg,
+        logo_256: logo256,
         chain,
         top21: producer.top21,
         country_code: countryCode

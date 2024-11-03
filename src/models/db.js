@@ -17,6 +17,7 @@ export const setupDatabase = async () => {
       chain_json_url VARCHAR(255),
       json_url VARCHAR(255),
       logo_svg TEXT,
+      logo_256 TEXT,
       chain VARCHAR(50) NOT NULL,
       country_code TEXT,
       UNIQUE(name, chain),
