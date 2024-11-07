@@ -105,9 +105,9 @@ export const getValidationData = async (chain, options = {}) => {
 
       if (chain === 'mainnet') {
         // 3. Get an Atomic AssetId (only for mainnet)
-        const atomicEndpoint = await mainnetAtomicNodePulse.getNode();
-        const atomicAssetResponse = await ky.get(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
-        atomicAssetId = atomicAssetResponse.data[0]?.asset_id || null;
+        //const atomicEndpoint = await mainnetAtomicNodePulse.getNode();
+        //const atomicAssetResponse = await ky.get(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
+        //atomicAssetId = atomicAssetResponse.data[0]?.asset_id || null;
 
         // 4. Get delphioracle actions (only for mainnet)
         const actions = await rpc.history_get_actions('delphioracle', -1, -100);
@@ -139,6 +139,13 @@ export const getValidationData = async (chain, options = {}) => {
         }
 
       }
+
+      // 3. Get an Atomic AssetId (only for mainnet and testnet)
+      const atomicEndpoint = await mainnetAtomicNodePulse.getNode();
+      console.log(`Atomic Endpoint: ${atomicEndpoint}`);
+      const atomicAssetResponse = await ky.get(`${atomicEndpoint}/atomicassets/v1/assets?page=1&limit=1&order=desc&sort=asset_id`).json();
+      atomicAssetId = atomicAssetResponse.data[0]?.asset_id || null;
+      console.log(`Atomic Asset ID: ${atomicAssetId}`);
  
       if (chain === 'testnet') {
         if (!skipCpu) {

@@ -50,7 +50,7 @@ export const setupRoutes = (fastify) => {
 
 
 // Get missing block data fdrom external urls 
-fastify.get('/api/missing-blocks', async (req, reply) => {
+fastify.get('/missing-blocks', async (req, reply) => {
   const ownerName = req.query.ownerName;
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
