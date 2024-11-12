@@ -90,6 +90,38 @@ fastify.get('/missing-blocks', async (req, reply) => {
 });
 
 
+// CPU history for charts
+// example: /cpu/123?start_date=2024-01-01&end_date=2024-01-31&chain=mainnet
+fastify.get('/cpu/:producerId', async (request, reply) => {
+  const { producerId } = request.params;
+  const { start_date, end_date, chain } = request.query;
+  const db = getDatabase();
+  
+  if (!start_date || !end_date || !chain) {
+    reply.code(400).send({ error: 'start_date, end_date, and chain are required query parameters' });
+    return;
+  }
+
+  const query = `
+    SELECT 
+      cpu,
+      timestamp AT TIME ZONE 'UTC' as timestamp
+    FROM validate_results 
+    WHERE producer_id = $1
+      AND chain = $2
+      AND timestamp BETWEEN $3::timestamp AND $4::timestamp
+    ORDER BY timestamp ASC
+  `;
+
+  const { rows } = await db.query(query, [producerId, chain, start_date, end_date]);
+
+  return rows.map(row => ({
+    date: row.timestamp.toISOString(),
+    value: row.cpu
+  }));
+});
+
+
   // 1. Latest results for each producer, optionally filtered by chain and/or producer
   // Home page
   // example: /latest-results?chain=mainnet&producer=someproducer
@@ -167,6 +199,8 @@ fastify.get('/latest-results', async (request, reply) => {
 
     return categorizedResults;
   });
+
+
 
 
 // 3. Results for a specific producer or all producers in a chain, provides a list of services and their uptime percentages.
