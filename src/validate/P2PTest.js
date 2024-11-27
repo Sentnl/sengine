@@ -324,7 +324,7 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
     Math.round(result.total_test_time * 1000),
     result.status === 'success' ? 200 : 500,
     result.status === 'success' 
-      ? (speedOk ? null : `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
+      ? (speedOk ? `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s)` : `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
       : 'Block transmission not possible',
     parseFloat(result.speed),
     'p2p',

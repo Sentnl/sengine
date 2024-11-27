@@ -49,7 +49,7 @@ export const setupRoutes = (fastify) => {
   });
 
 
-// Get missing block data fdrom external urls 
+// Get missing block data from external urls 
 fastify.get('/missing-blocks', async (req, reply) => {
   const ownerName = req.query.ownerName;
   const startDate = req.query.startDate;
@@ -91,7 +91,7 @@ fastify.get('/missing-blocks', async (req, reply) => {
 
 
 // CPU history for charts
-// example: /cpu/123?start_date=2024-01-01&end_date=2024-01-31&chain=mainnet
+// example: /cpu/131?start_date=2024-10-01&end_date=2024-11-01&chain=mainnet
 fastify.get('/cpu/:producerId', async (request, reply) => {
   const { producerId } = request.params;
   const { start_date, end_date, chain } = request.query;
