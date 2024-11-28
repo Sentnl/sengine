@@ -66,26 +66,48 @@ fastify.get('/missing-blocks', async (req, reply) => {
     });
   }
 
+  if (!startDate || !endDate) {
+    return reply.status(400).send({
+      success: false,
+      error: {
+        kind: "user_input",
+        message: "startDate and endDate are required",
+      },
+    });
+  }
+
   const baseURL = config.chains[chain].missingBlocksUrl;
-  
-  // Construct the external URL with query parameters
   const externalURL = `${baseURL}/missing-blocks?ownerName=${encodeURIComponent(ownerName)}&startDate=${startDate}&endDate=${endDate}`;
+  
+  console.log('Calling external URL:', externalURL);
 
   try {
-    const response = await ky.get(externalURL).json();
+    const response = await ky.get(externalURL, {
+      timeout: 30000, // 30 sec timeout
+      retry: 0 // Disable retries for debugging
+    }).json();
+    
     const processedResponse = insertDummyDataIfEmpty(response);
     reply.send(processedResponse);
   } catch (error) {
-    console.error('Error calling external URL:', error);
-    
-    // Handle the error based on your needs (e.g., sending a custom error response)
-    reply.status(500).send({
-      success: false,
-      error: {
-        kind: "external_api",
-        message: "Failed to fetch data from external source.",
-      },
+    console.error('Error details:', {
+      message: error.message,
+      url: externalURL,
+      response: await error.response?.text(),
+      status: error.response?.status
     });
+        
+    // Return dummy data on error
+    const dummyResponse = {
+      ownerName,
+      startDate,
+      endDate,
+      chain,
+      data: []
+    };
+    const processedResponse = insertDummyDataIfEmpty(dummyResponse);
+    reply.send(processedResponse);
+    
   }
 });
 
