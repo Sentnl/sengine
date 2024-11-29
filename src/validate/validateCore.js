@@ -421,7 +421,7 @@ export async function runTlsSecurityTest({
     testType: TEST_TYPES.CORE.TLS_SECURITY,
     url: `${hostname}:443`,
     method: 'GET',
-    curlCmd: 'TLS security test',
+    curlCmd: 'TLS security test passed',
     nodeType,
     testFunction: () => checkTls(hostname, 443),
     successCondition: (result) => result.isSecure,

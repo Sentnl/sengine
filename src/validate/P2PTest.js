@@ -301,7 +301,7 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
     Math.round(result.total_test_time * 1000),
     connectionPossible ? 200 : 500,
     result.error_detail || null,
-    TEST_TYPES.P2P.CONNECTION_POSSIBLE,
+    result.error_detail || 'P2P Connection successful',
     'p2p',
     'GET',
     null,
@@ -312,8 +312,11 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
 
   // Test 2: Block transmission speed is OK
   testsRun++;
-  const speedOk = parseFloat(result.speed) >= config.p2p.blocks_per_second;
+  const speed = result.speed ? parseFloat(result.speed) : 0;
+  const speedOk = !isNaN(speed) && speed >= config.p2p.blocks_per_second;
   if (speedOk) testsPassed++;
+
+  const speedFormatted = isNaN(speed) ? '0' : speed.toFixed(1);
 
   await saveTestResultWrapper(
     producerId,
@@ -324,9 +327,11 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
     Math.round(result.total_test_time * 1000),
     result.status === 'success' ? 200 : 500,
     result.status === 'success' 
-      ? (speedOk ? `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s)` : `Block transmission speed (${parseFloat(result.speed).toFixed(2)} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
+      ? (speedOk ? null : `Block transmission speed (${speedFormatted} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
       : 'Block transmission not possible',
-    parseFloat(result.speed),
+    result.status === 'success' 
+      ? (speedOk ? `Block transmission speed (${speedFormatted} blocks/s)` : `Block transmission speed (${speedFormatted} blocks/s) is below the required ${config.p2p.blocks_per_second} blocks/s`)
+      : 'Block transmission not possible',
     'p2p',
     'GET',
     null,
