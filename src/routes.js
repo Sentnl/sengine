@@ -399,18 +399,20 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
 // Since it start from the stats page they 30 days range will automatically work, 
 // since it will get the ids from the stats page that are associated with that timestamp range.
 // example: /services-stats?ids=162,198,249,250,252,287,296,298&type=hyperion
-fastify.get('/services-stats', async (request, reply) => {
+fastify.post('/services-stats', async (request, reply) => {
   const db = getDatabase();
-  const { ids, type } = request.query;
+  const { ids, type } = request.body;
 
-  console.log('Received query:', { ids, type });
+  console.log('Received body:', { ids, type });
 
   if (!ids || !type) {
-    reply.code(400).send({ error: 'ids and type are required query parameters' });
+    reply.code(400).send({ error: 'ids and type are required in request body' });
     return;
   }
 
-  const idArray = ids.split(',').map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id));
+  const idArray = Array.isArray(ids) 
+    ? ids.map(id => parseInt(id, 10)).filter(id => !isNaN(id))
+    : ids.split(',').map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id));
 
   console.log('Parsed ID array:', idArray);
 
