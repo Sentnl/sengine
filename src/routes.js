@@ -531,5 +531,85 @@ fastify.post('/services-stats', async (request, reply) => {
   }
 });
 
+const getNodesByType = async (db, nodeType, chain = null) => {
+  let query = '';
+  const params = chain ? [chain] : [];
+
+  switch (nodeType) {
+    case 'hyperion':
+      query = `
+        SELECT DISTINCT
+          p.name as owner_name,
+          ps.ssl_endpoint as https_node_url,
+          ps.is_full as historyfull,
+          p.chain as net
+        FROM producers p
+        JOIN producer_services ps ON p.id = ps.producer_id
+        WHERE 'hyperion-v2' = ANY(ps.features)
+        ${chain ? 'AND p.chain = $1' : ''}
+        AND ps.ssl_endpoint != ''
+        ORDER BY p.chain, p.name
+      `;
+      break;
+    case 'atomic':
+      query = `
+        SELECT DISTINCT
+          p.name as owner_name,
+          ps.ssl_endpoint as https_node_url,
+          p.chain as net
+        FROM producers p
+        JOIN producer_services ps ON p.id = ps.producer_id
+        WHERE 'atomic-assets-api' = ANY(ps.features)
+        ${chain ? 'AND p.chain = $1' : ''}
+        AND ps.ssl_endpoint != ''
+        ORDER BY p.chain, p.name
+      `;
+      break;
+    case 'p2p':
+      query = `
+        SELECT DISTINCT
+          p.name as owner_name,
+          ps.p2p_endpoint as p2p_url,
+          p.chain as net
+        FROM producers p
+        JOIN producer_services ps ON p.id = ps.producer_id
+        WHERE ps.p2p_endpoint != ''
+        ${chain ? 'AND p.chain = $1' : ''}
+        ORDER BY p.chain, p.name
+      `;
+      break;
+    default:
+      throw new Error('Invalid node type');
+  }
+
+  
+  const { rows } = await db.query(query, params);
+  
+  return rows.map(row => ({
+    ...row,
+    network: row.net
+  }));
+};
+
+fastify.get('/nodes/:nodeType', async (request, reply) => {
+  try {
+    const { nodeType } = request.params;
+    const { chain } = request.query;
+    const db = getDatabase();
+    
+    const nodes = await getNodesByType(db, nodeType, chain);
+    reply.send(nodes);
+  } catch (error) {
+    console.error('Error fetching nodes:', error);
+    reply.status(500).send({
+      success: false,
+      error: {
+        kind: "server_error",
+        message: "Failed to fetch nodes data.",
+      },
+    });
+  }
+});
+
 };
 
