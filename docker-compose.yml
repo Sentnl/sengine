@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   sengine-app:
+    container_name: sengine-api
     build: .
     expose:
       - "3000"
