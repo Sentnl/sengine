@@ -62,6 +62,6 @@ export default {
   },
   p2p: {
     seedBlockCount: 10, 
-    blocks_per_second: 5, 
+    blocks_per_second: 2, 
   }
 };
