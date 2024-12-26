@@ -455,7 +455,7 @@ fastify.post('/services-stats', async (request, reply) => {
     LEFT JOIN producer_services ps ON vs.producer_service_id = ps.id
     WHERE vs.validate_result_id = ANY($1::int[])
     AND vs.type = $2
-    ORDER BY vr.timestamp DESC
+    ORDER BY vr.timestamp
   `;
   
   try {
