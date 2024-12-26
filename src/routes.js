@@ -322,7 +322,8 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
     FROM validate_results vr
     WHERE vr.producer_id = $1
       AND vr.chain = $2
-      AND vr.timestamp BETWEEN $3::timestamp AND $4::timestamp
+      AND vr.timestamp >= $3::timestamp
+      AND vr.timestamp < ($4::timestamp + INTERVAL '1 day')
     ORDER BY vr.timestamp
   `;
 
