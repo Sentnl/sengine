@@ -58,4 +58,11 @@ export const TEST_TYPES = {
       P2P_NOT_AVAILABLE: 'No P2P nodes found for this producer',
 
     },
+    LIGHT_API: {
+      STATUS_OK: 'light-api-status-ok'
+    },
+    IPFS: {
+      STATUS_OK: 'ipfs-status-ok',
+      IMAGE_CHECK: 'ipfs-image-check'
+    },
   };

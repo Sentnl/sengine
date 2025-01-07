@@ -276,7 +276,17 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
     return acc;
   }, {});
 
-  const services = ['guild', 'api', 'history', 'hyperion', 'p2p', 'atomicassets', 'pricefeed'];
+  const services = [
+    'guild', 
+    'api', 
+    'history', 
+    'hyperion', 
+    'p2p', 
+    'atomicassets', 
+    'pricefeed',
+    'light_api',
+    'ipfs'
+  ];
 
   const results = Object.values(groupedResults).map(producer => {
     services.forEach(service => {
@@ -318,7 +328,9 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
       vr.hyperion_ok,
       vr.p2p_ok,
       vr.atomicassets_ok,
-      vr.pricefeed_ok
+      vr.pricefeed_ok,
+      vr.light_api_ok,
+      vr.ipfs_ok
     FROM validate_results vr
     WHERE vr.producer_id = $1
       AND vr.chain = $2
@@ -334,7 +346,17 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
     return;
   }
 
-  const services = ['guild', 'api', 'history', 'hyperion', 'p2p', 'atomicassets', 'pricefeed'];
+  const services = [
+    'guild', 
+    'api', 
+    'history', 
+    'hyperion', 
+    'p2p', 
+    'atomicassets', 
+    'pricefeed',
+    'light_api',
+    'ipfs'
+  ];
   const dailyResults = {};
 
   rows.forEach(row => {
@@ -435,6 +457,12 @@ fastify.post('/services-stats', async (request, reply) => {
       break;
     case 'atomicassets':
       dbType = 'atomic-assets-api';
+      break;
+    case 'light-api':
+      dbType = 'light-api';
+      break;
+    case 'ipfs':
+      dbType = 'ipfs';
       break;
     default:
       dbType = type;
@@ -566,6 +594,34 @@ const getNodesByType = async (db, nodeType, chain = null) => {
         ORDER BY p.chain, p.name
       `;
       break;
+    case 'light-api':
+      query = `
+        SELECT DISTINCT
+          p.name as owner_name,
+          ps.ssl_endpoint as https_node_url,
+          p.chain as net
+        FROM producers p
+        JOIN producer_services ps ON p.id = ps.producer_id
+        WHERE 'light-api' = ANY(ps.features)
+        ${chain ? 'AND p.chain = $1' : ''}
+        AND ps.ssl_endpoint != ''
+        ORDER BY p.chain, p.name
+      `;
+      break;
+    case 'ipfs':
+      query = `
+        SELECT DISTINCT
+          p.name as owner_name,
+          ps.ssl_endpoint as https_node_url,
+          p.chain as net
+        FROM producers p
+        JOIN producer_services ps ON p.id = ps.producer_id
+        WHERE 'ipfs' = ANY(ps.features)
+        ${chain ? 'AND p.chain = $1' : ''}
+        AND ps.ssl_endpoint != ''
+        ORDER BY p.chain, p.name
+      `;
+      break;
     case 'p2p':
       query = `
         SELECT DISTINCT
@@ -583,7 +639,6 @@ const getNodesByType = async (db, nodeType, chain = null) => {
       throw new Error('Invalid node type');
   }
 
-  
   const { rows } = await db.query(query, params);
   
   return rows.map(row => ({

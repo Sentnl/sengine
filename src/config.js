@@ -63,5 +63,9 @@ export default {
   p2p: {
     seedBlockCount: 10, 
     blocks_per_second: 2, 
-  }
+  },
+  // IPFS Configuration
+  ipfs: {
+    testPath: '/ipfs/QmWnfdZkwWJxabDUbimrtaweYF8u9TaESDBM8xvRxxbQxv'
+  },
 };

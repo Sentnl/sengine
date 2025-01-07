@@ -18,6 +18,8 @@ import { runAllAtomicTests } from './AtomicTest.js';
 import { runPriceFeedTests } from './PriceFeedTest.js';
 import { saveValidateResult, updateValidateResult } from '../services/dataService.js';
 import { getProducerChainJson, getCpuData, getPriceFeedData, getTop21Producers } from '../services/blockchainService.js';
+import { runAllLightApiTests } from './lightApi.js';
+import { runAllIpfsTests } from './ipfsTest.js';
 
 const mainnetNodePulse = new NodePulse({
   nodeType: 'hyperion',
@@ -206,6 +208,8 @@ export async function validateProducer(producerId, chain, validationData) {
     hyperion: await runAllHyperionTests(producerId, chain, validationData, validateResultId),
     atomicassets: await runAllAtomicTests(producerId, chain, validationData, validateResultId),
     p2p: await runAllP2PTests(producerId, chain, validationData, validateResultId),
+    light_api: await runAllLightApiTests(producerId, chain, validateResultId),
+    ipfs: await runAllIpfsTests(producerId, chain, validateResultId),
   };
 
   // Only run pricefeed tests for mainnet, return [false, false] for testnet
@@ -213,7 +217,7 @@ export async function validateProducer(producerId, chain, validationData) {
     ? await runPriceFeedTests(producerId, chain, validationData, validateResultId)
     : [false, false];
 
-  // Create a results object suitable for updateValidateResult
+  // Update results
   const results = {
     guild: testResults.guild,
     api: testResults.api,
@@ -221,7 +225,9 @@ export async function validateProducer(producerId, chain, validationData) {
     hyperion: testResults.hyperion,
     atomicassets: testResults.atomicassets,
     p2p: testResults.p2p,
-    pricefeed: testResults.pricefeed
+    light_api: testResults.light_api,
+    pricefeed: testResults.pricefeed,
+    ipfs: testResults.ipfs,
   };
   
   // Update the validate_results row with the final results

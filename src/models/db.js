@@ -57,6 +57,10 @@ export const setupDatabase = async () => {
       atomicassets_ok BOOLEAN,
       pricefeed BOOLEAN,
       pricefeed_ok BOOLEAN,
+      light_api BOOLEAN DEFAULT FALSE,
+      light_api_ok BOOLEAN DEFAULT FALSE,
+      ipfs BOOLEAN DEFAULT FALSE,
+      ipfs_ok BOOLEAN DEFAULT FALSE,
       cpu INTEGER,
       chain VARCHAR(50) NOT NULL,
       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP

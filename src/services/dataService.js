@@ -96,9 +96,10 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue, chai
       INSERT INTO validate_results (
         producer_id, guild, guild_ok, api, api_ok, history, history_ok, 
         hyperion, hyperion_ok, p2p, p2p_ok, atomicassets, atomicassets_ok, 
-        pricefeed, pricefeed_ok, timestamp, cpu, chain
+        pricefeed, pricefeed_ok, light_api, light_api_ok, timestamp, cpu, chain,
+        ipfs, ipfs_ok
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
       RETURNING id
     `;
     const values = [
@@ -110,16 +111,18 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue, chai
       false, false, // p2p, p2p_ok
       false, false, // atomicassets, atomicassets_ok
       false, false, // pricefeed, pricefeed_ok
+      false, false, // light_api, light_api_ok
       timestamp,
       cpuValue,
-      chain
+      chain,
+      false, false, // ipfs, ipfs_ok
     ];
   
     const { rows } = await db.query(query, values);
     return rows[0].id;
-  }
+}
   
-  async function updateValidateResult(id, results) {
+async function updateValidateResult(id, results) {
     const db = getDatabase();
     const query = `
       UPDATE validate_results
@@ -129,8 +132,10 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue, chai
           hyperion = $7, hyperion_ok = $8, 
           atomicassets = $9, atomicassets_ok = $10,
           p2p = $11, p2p_ok = $12,
-          pricefeed = $13, pricefeed_ok = $14
-      WHERE id = $15
+          pricefeed = $13, pricefeed_ok = $14,
+          light_api = $15, light_api_ok = $16,
+          ipfs = $17, ipfs_ok = $18
+      WHERE id = $19
     `;
     const values = [
       results.guild[0], results.guild[1],
@@ -140,10 +145,12 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue, chai
       results.atomicassets[0], results.atomicassets[1],
       results.p2p[0], results.p2p[1],
       results.pricefeed[0], results.pricefeed[1],
+      results.light_api[0], results.light_api[1],
+      results.ipfs[0], results.ipfs[1],
       id
     ];
   
     await db.query(query, values);
-  }
+}
 
 export { saveProducer, saveProducerService, saveValidateResult, updateValidateResult };

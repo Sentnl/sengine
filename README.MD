@@ -19,3 +19,10 @@
 -d: Runs in detached mode
 --sengine-app: Specifies the service name to rebuild and restart
 ```
+
+
+SQL updates:
+
+LTER TABLE validate_results 
+ADD COLUMN IF NOT EXISTS light_api BOOLEAN DEFAULT FALSE,
+ADD COLUMN IF NOT EXISTS light_api_ok BOOLEAN DEFAULT FALSE;

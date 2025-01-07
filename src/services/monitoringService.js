@@ -114,6 +114,8 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
     if (results.p2p[0]) Logger.log('', `P2P: ${results.p2p[1] ? 'Passed' : 'Failed'}`);
     if (results.atomicassets[0]) Logger.log('', `AtomicAssets: ${results.atomicassets[1] ? 'Passed' : 'Failed'}`);
     if (results.pricefeed[0]) Logger.log('', `PriceFeed: ${results.pricefeed[1] ? 'Passed' : 'Failed'}`);
+    if (results.light_api[0]) Logger.log('', `Light API: ${results.light_api[1] ? 'Passed' : 'Failed'}`);
+    if (results.ipfs[0]) Logger.log('', `IPFS: ${results.ipfs[1] ? 'Passed' : 'Failed'}`);
     Logger.log('', `Timestamp: ${timestamp}`);
     Logger.log('', '----------------------------------------');
   }
@@ -123,7 +125,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 // StartMonitoring
 // To skip cpu and pricefeed tests, use options: { skipCpu: true } 
 // To validate a single producer set prodcuerName = 'producername'
-export const startMonitoring = async (options = { skipCpu: false }, producerName = null  ) => {
+export const startMonitoring = async (options = { skipCpu: false }, producerName = 'sentnlagents'  ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
@@ -137,7 +139,7 @@ export const startMonitoring = async (options = { skipCpu: false }, producerName
 
   const initializeMonitoring = async () => {
   // Run update producers
-   await updateAllProducers();
+   //await updateAllProducers();
   
   // Run all tests immediately
     await runAllTestsForBothChains();
