@@ -137,7 +137,7 @@ export const startMonitoring = async (options = { skipCpu: false }, producerName
 
   const initializeMonitoring = async () => {
   // Run update producers
-   //await updateAllProducers();
+   await updateAllProducers();
   
   // Run all tests immediately
     await runAllTestsForBothChains();
