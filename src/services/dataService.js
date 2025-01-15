@@ -41,7 +41,7 @@ const saveProducerService = async (producerId, service) => {
         features, is_full, location_name, location_country, location_latitude, location_longitude
       )
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-      ON CONFLICT (producer_id, api_endpoint, features,p2p_endpoint) 
+      ON CONFLICT (producer_id, api_endpoint, p2p_endpoint, features) 
       DO UPDATE SET
         node_type = EXCLUDED.node_type,
         ssl_endpoint = EXCLUDED.ssl_endpoint,
@@ -52,12 +52,10 @@ const saveProducerService = async (producerId, service) => {
         location_longitude = EXCLUDED.location_longitude
     `;
     try {
-        // Ensure node_type is always an array of strings
         const nodeType = Array.isArray(service.node_type) 
             ? service.node_type.map(String) 
             : [String(service.node_type)];
 
-        // Ensure features is always an array of strings
         const features = Array.isArray(service.features) 
             ? service.features.map(String) 
             : (service.features ? [String(service.features)] : null);
@@ -75,7 +73,6 @@ const saveProducerService = async (producerId, service) => {
             service.location?.latitude || null,
             service.location?.longitude || null,
         ]);
-        // Modified logging
         Logger.log('Node add:', 
             JSON.stringify({
                 api: service.api_endpoint,

@@ -31,7 +31,7 @@ export const setupDatabase = async () => {
       api_endpoint VARCHAR(255) NOT NULL DEFAULT '',
       ssl_endpoint VARCHAR(255),
       p2p_endpoint VARCHAR(255) NOT NULL DEFAULT '',
-      features TEXT[],
+      features TEXT[] NOT NULL,
       is_full BOOLEAN,
       location_name VARCHAR(100),
       location_country VARCHAR(2),

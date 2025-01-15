@@ -95,13 +95,13 @@ const parseProducerServices = (producerJson) => {
   if (!producerJson || !producerJson.nodes) return [];
 
   return producerJson.nodes
-    .filter(node => node.node_type !== 'producer') // Ignore nodes with type 'producer'
+    .filter(node => node.node_type !== 'producer')
     .map(node => ({
       node_type: node.node_type,
       api_endpoint: node.api_endpoint,
       ssl_endpoint: node.ssl_endpoint,
       p2p_endpoint: node.p2p_endpoint,
-      features: node.features,
+      features: (node.features || []).concat(node.p2p_endpoint ? ['p2p'] : []),
       is_full: node.full || false,
       location: node.location,
     }));
