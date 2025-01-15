@@ -41,11 +41,10 @@ const saveProducerService = async (producerId, service) => {
         features, is_full, location_name, location_country, location_latitude, location_longitude
       )
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-      ON CONFLICT (producer_id, api_endpoint, p2p_endpoint) 
+      ON CONFLICT (producer_id, api_endpoint, features,p2p_endpoint) 
       DO UPDATE SET
         node_type = EXCLUDED.node_type,
         ssl_endpoint = EXCLUDED.ssl_endpoint,
-        features = EXCLUDED.features,
         is_full = EXCLUDED.is_full,
         location_name = EXCLUDED.location_name,
         location_country = EXCLUDED.location_country,

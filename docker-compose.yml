@@ -24,6 +24,7 @@ services:
       - sentnl-net
 
   sengine-db:
+    container_name: sengine-db
     image: postgres:14-bullseye
     environment:
       - POSTGRES_USER=${DB_USER}

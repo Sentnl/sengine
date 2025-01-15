@@ -37,7 +37,7 @@ export const setupDatabase = async () => {
       location_country VARCHAR(2),
       location_latitude DECIMAL,
       location_longitude DECIMAL,
-      UNIQUE (producer_id, api_endpoint, p2p_endpoint)
+      UNIQUE (producer_id, api_endpoint, features,p2p_endpoint)
     );
 
     CREATE TABLE IF NOT EXISTS validate_results (
