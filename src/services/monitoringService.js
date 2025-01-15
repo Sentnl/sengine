@@ -70,8 +70,7 @@ const updateProducers = async (chain) => {
         country_code: countryCode
       });
 
-      const services = parseProdu
-      cerServices(producerJson);
+      const services = parseProducerServices(producerJson);
       for (const service of services) {
         await saveProducerService(producerId, service);
       }
@@ -150,7 +149,7 @@ export const startMonitoring = async (options = { skipCpu: false }, producerName
 
     const scheduleNextTest = () => {
       const now = Date.now();
-      const timeUntilNextTest = Math.max(0, 25 * 60 * 1000 - (now - lastTestTime)); 
+      const timeUntilNextTest = Math.max(0, 25 * 60 * 1000 - (now - lastTestTime)); // Run every 20 minutes
       console.log(`Next update and test run in: ${formatCountdown(timeUntilNextTest)}`);
 
       const countdown = setInterval(() => {
