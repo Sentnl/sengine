@@ -31,13 +31,13 @@ export const setupDatabase = async () => {
       api_endpoint VARCHAR(255) NOT NULL DEFAULT '',
       ssl_endpoint VARCHAR(255),
       p2p_endpoint VARCHAR(255) NOT NULL DEFAULT '',
-      features TEXT[] NOT NULL,
+      features TEXT[] DEFAULT '{}',
       is_full BOOLEAN,
       location_name VARCHAR(100),
       location_country VARCHAR(2),
       location_latitude DECIMAL,
       location_longitude DECIMAL,
-      UNIQUE (producer_id, api_endpoint, features,p2p_endpoint)
+      UNIQUE (producer_id, api_endpoint, p2p_endpoint, features)
     );
 
     CREATE TABLE IF NOT EXISTS validate_results (

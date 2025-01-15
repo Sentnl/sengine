@@ -58,7 +58,7 @@ const saveProducerService = async (producerId, service) => {
 
         const features = Array.isArray(service.features) 
             ? service.features.map(String) 
-            : (service.features ? [String(service.features)] : null);
+            : (service.features ? [String(service.features)] : []);
 
         await db.query(query, [
             producerId,
