@@ -458,7 +458,7 @@ fastify.post('/services-stats', async (request, reply) => {
     case 'atomicassets':
       dbType = 'atomic-assets-api';
       break;
-    case 'light-api':
+    case 'light_api':
       dbType = 'light-api';
       break;
     case 'ipfs':
