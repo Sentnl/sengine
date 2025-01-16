@@ -114,6 +114,27 @@ export const setupDatabase = async () => {
       
       CREATE INDEX IF NOT EXISTS idx_validate_services_chain_timestamp ON validate_services(chain, timestamp);
       CREATE INDEX IF NOT EXISTS idx_validate_services_type ON validate_services(type);
+
+      -- Indexes for /latest-results route
+      CREATE INDEX IF NOT EXISTS idx_validate_results_producer_timestamp ON validate_results(producer_id, timestamp DESC);
+      CREATE INDEX IF NOT EXISTS idx_validate_results_chain_producer_timestamp ON validate_results(chain, producer_id, timestamp DESC);
+      
+      -- Indexes for /validate-services/:resultId route
+      CREATE INDEX IF NOT EXISTS idx_validate_services_result_type ON validate_services(validate_result_id, type);
+      
+      -- Indexes for /validate-producer/:producerId route
+      CREATE INDEX IF NOT EXISTS idx_validate_results_chain_timestamp_producer ON validate_results(chain, timestamp, producer_id);
+      
+      -- Indexes for /producer-stats/:producerId route
+      CREATE INDEX IF NOT EXISTS idx_validate_results_producer_chain_timestamp ON validate_results(producer_id, chain, timestamp);
+      
+      -- Indexes for /services-stats route
+      CREATE INDEX IF NOT EXISTS idx_validate_services_result_type_timestamp ON validate_services(validate_result_id, type, timestamp);
+      
+      -- Indexes for /nodes/:nodeType route
+      CREATE INDEX IF NOT EXISTS idx_producer_services_features_gin ON producer_services USING gin(features);
+      CREATE INDEX IF NOT EXISTS idx_producer_services_chain_features ON producer_services(producer_id, ssl_endpoint) INCLUDE (features);
+      CREATE INDEX IF NOT EXISTS idx_producer_services_p2p_chain ON producer_services(producer_id, p2p_endpoint) WHERE p2p_endpoint != '';
   `);
 };
 
