@@ -135,10 +135,17 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       importantTests.push(servicesResult);
 
       // Any Missing Blocks
+      const elasticsearchService = healthResponse.health.find(service => service.service === 'Elasticsearch');
       const missingBlocks = parseInt(
-        healthResponse.health.find(service => service.service === 'Elasticsearch')?.service_data?.missing_blocks || '0',
+        elasticsearchService?.service_data?.missing_blocks || '0',
         10
       );
+
+      // Log missing blocks information
+      if (elasticsearchService?.service_data) {
+        Logger.log('Missing Blocks Info:', JSON.stringify(elasticsearchService.service_data, null, 2));
+      }
+
       const missingBlocksResult = await runTest({
         producerId,
         chain,
