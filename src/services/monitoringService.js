@@ -125,7 +125,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 // StartMonitoring
 // To skip cpu and pricefeed tests, use options: { skipCpu: true } 
 // To validate a single producer set prodcuerName = 'producername'
-export const startMonitoring = async (options = { skipCpu: true }, producerName = 'eosdublinwow'  ) => {
+export const startMonitoring = async (options = { skipCpu: false }, producerName = null  ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
@@ -142,7 +142,7 @@ export const startMonitoring = async (options = { skipCpu: true }, producerName 
    await updateAllProducers();
   
   // Run all tests immediately
-    await runAllTestsForBothChains();
+   await runAllTestsForBothChains();
 
   // Only set intervals if we're not testing a single producer
     let lastTestTime = Date.now();
