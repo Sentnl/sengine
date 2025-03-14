@@ -12,7 +12,6 @@ export const ignoredUrls = [
   'tgg.gg',
   'wax-test.pp-bot.com',
   'waxgalaxy.io',
-  'eosiomadrid.io',
   'wax.world',
   'xpoblocks.com',
   'wizardsguild.one',
