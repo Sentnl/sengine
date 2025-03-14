@@ -47,6 +47,7 @@ export const TEST_TYPES = {
       ASSET: 'Atomic Assets found',
       SCHEMA: 'Atomic Schema found',
       TEMPLATE: 'Atomic Template found',
+      MISSING_BLOCKS: 'Atomic Missing Blocks check',
     },
     PRICEFEED: {
       HEALTH: 'Pricefeeds being supplied',

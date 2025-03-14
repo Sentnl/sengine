@@ -131,6 +131,45 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     if (headBlockResult) passedTests++;
     importantTests.push(headBlockResult);
 
+    // Check for missing blocks
+    const missingBlocksResult = await runTest({
+      producerId,
+      chain,
+      testType: TEST_TYPES.ATOMIC.MISSING_BLOCKS,
+      url: healthUrl,
+      method: 'GET',
+      curlCmd: healthCurl,
+      nodeType,
+      existingResponseTime: responseTime,
+      testFunction: () => Promise.resolve({ response }),
+      successCondition: () => {
+        // Get the block_num from postgres readers
+        const blockNum = response.body.data.postgres.readers?.[0]?.block_num;
+        if (!blockNum) return false;
+        
+        // Convert to number if it's a string
+        const blockNumValue = typeof blockNum === 'string' ? parseInt(blockNum, 10) : blockNum;
+        
+        // Check if block_num is within 10 blocks of latestHeadBlock
+        return blockNumValue >= validationData.latestHeadBlock - 10;
+      },
+      onErrorMessage: () => {
+        // Calculate the difference for reporting
+        const blockNum = response.body.data.postgres.readers?.[0]?.block_num;
+        if (!blockNum) return 'Missing block_num in response';
+        
+        const blockNumValue = typeof blockNum === 'string' ? parseInt(blockNum, 10) : blockNum;
+        const difference = validationData.latestHeadBlock - blockNumValue;
+        
+        return `Missing blocks detected: ${difference} blocks behind (block_num: ${blockNumValue}, latestHeadBlock: ${validationData.latestHeadBlock})`;
+      },
+      validateResultId,
+      producerServiceId
+    });
+    totalTests++;
+    if (missingBlocksResult) passedTests++;
+    importantTests.push(missingBlocksResult);
+
   } catch (error) {
     console.error(`Error in health check:`, error);
     await saveMultipleFailedResults({
@@ -140,6 +179,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
         TEST_TYPES.CORE.HTTP,
         TEST_TYPES.ATOMIC.SERVICES,
         TEST_TYPES.ATOMIC.HEAD_BLOCK,
+        TEST_TYPES.ATOMIC.MISSING_BLOCKS,
       ],
       url: healthUrl,
       error,
@@ -149,7 +189,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       validateResultId,
       producerServiceId
     });
-    totalTests += 3;
+    totalTests += 4;
     importantTests.push(false); 
   }
 
