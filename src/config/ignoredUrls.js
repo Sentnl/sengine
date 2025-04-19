@@ -61,5 +61,19 @@ export const ignoredUrls = [
   'elktech.io',
   'genereos.io',
   'polar.io',
-  'eos.barcelona'
+  'eos.barcelona',
+  'blokcrafters.com',
+  'eosarabia.net',
+  'eosdublin.com',
+  'qaraqol.com',
+  'qtradingtheory.com',
+  'machinearmy.world',
+  'wax.a-dex.io',
+  'google.com',
+  'niftylife.io',
+  'validation.capital',
+  'bp.eosnewyork.io',
+  'bp.nebulaprotocol.com',
+  'blockmatrix.network',
+  'darkprod.net'
 ];
