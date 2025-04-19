@@ -20,7 +20,7 @@ const formatCountdown = (milliseconds) => {
 
 // Updating producers and services
 const updateProducers = async (chain) => {
-  console.log(`Updating producers for ${chain}`);
+  console.log(`Updating producers for ${chain} gert`);
   const top21Producers = await getAllTop21Producers(chain);
   const producers = await getProducers(chain, top21Producers);
   
