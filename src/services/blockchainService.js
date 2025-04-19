@@ -29,10 +29,12 @@ const getProducers = async (chain, top21Producers, retries = 3) => {
         throw new Error('Invalid response format');
       }
 
-      return response.rows.map(producer => ({
-        ...producer,
-        top21: top21Producers.includes(producer.owner)
-      }));
+      return response.rows
+        .filter(producer => producer.total_votes > 0) // Only include active producers
+        .map(producer => ({
+          ...producer,
+          top21: top21Producers.includes(producer.owner)
+        }));
 
     } catch (error) {
       console.error(`Attempt ${i + 1} failed for ${chain}:`, error);
