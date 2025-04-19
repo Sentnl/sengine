@@ -22,7 +22,25 @@ const formatCountdown = (milliseconds) => {
 const updateProducers = async (chain) => {
   console.log(`Updating producers for ${chain}`);
   const top21Producers = await getAllTop21Producers(chain);
-  const producers = await getProducers(chain,top21Producers);
+  const producers = await getProducers(chain, top21Producers);
+  
+  // Get all current producers for this chain
+  const db = getDatabase();
+  const { rows: currentProducers } = await db.query('SELECT id, name FROM producers WHERE chain = $1', [chain]);
+  
+  // Create a map of current producers
+  const currentProducerMap = new Map(currentProducers.map(p => [p.name, p.id]));
+  
+  // Create a set of active producers from the chain
+  const activeProducers = new Set(producers.map(p => p.owner));
+  
+  // Disable producers not found in the chain
+  for (const [name, id] of currentProducerMap) {
+    if (!activeProducers.has(name)) {
+      console.log(`Disabling producer ${name} as it is not found in the chain`);
+      await db.query('UPDATE producers SET disabled = true WHERE id = $1', [id]);
+    }
+  }
 
   for (const producer of producers) {
     let website = producer.url;
@@ -87,7 +105,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
   const validationData = await getValidationData(chain, options);
 
   const db = getDatabase();
-  let query = "SELECT id, chain, json_url, name FROM producers WHERE chain = $1";
+  let query = "SELECT id, chain, json_url, name FROM producers WHERE chain = $1 AND disabled = false";
   let params = [chain];
 
   if (producerName) {

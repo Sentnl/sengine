@@ -21,7 +21,8 @@ export const setupDatabase = async () => {
       chain VARCHAR(50) NOT NULL,
       country_code TEXT,
       UNIQUE(name, chain),
-      top21 BOOLEAN DEFAULT FALSE
+      top21 BOOLEAN DEFAULT FALSE,
+      disabled BOOLEAN DEFAULT FALSE
     );
 
     CREATE TABLE IF NOT EXISTS producer_services (
