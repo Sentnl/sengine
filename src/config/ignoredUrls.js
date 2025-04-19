@@ -75,5 +75,6 @@ export const ignoredUrls = [
   'bp.eosnewyork.io',
   'bp.nebulaprotocol.com',
   'blockmatrix.network',
-  'darkprod.net'
+  'darkprod.net',
+  'wax.blokcrafters.io'
 ];
