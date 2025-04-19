@@ -25,6 +25,7 @@ const updateProducers = async (chain) => {
   const producers = await getProducers(chain, top21Producers);
   
   // Get all current producers for this chain
+  console.log(`Getting all current producers for ${chain}`);
   const db = getDatabase();
   const { rows: currentProducers } = await db.query('SELECT id, name FROM producers WHERE chain = $1', [chain]);
   
