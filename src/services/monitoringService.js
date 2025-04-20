@@ -6,6 +6,7 @@ import { isUrlIgnored, joinUrl } from '../helpers/Urls.js';
 import { getDatabase } from '../models/db.js';
 import { Logger } from '../helpers/Logger.js';
 import { httpRequest } from '../helpers/performanceHelper.js';
+import { ignoredUrls } from '../config/ignoredUrls.js';
 
 
 const isAbsoluteUrl = (url) => /^https?:\/\//i.test(url);
@@ -20,26 +21,42 @@ const formatCountdown = (milliseconds) => {
 
 // Updating producers and services
 const updateProducers = async (chain) => {
-  console.log(`Updating producers for ${chain} gert`);
+  console.log(`Updating producers for ${chain}`);
   const top21Producers = await getAllTop21Producers(chain);
   const producers = await getProducers(chain, top21Producers);
   
   // Get all current producers for this chain
-  console.log(`Getting all current producers for ${chain}`);
   const db = getDatabase();
-  const { rows: currentProducers } = await db.query('SELECT id, name FROM producers WHERE chain = $1', [chain]);
+  const { rows: currentProducers } = await db.query('SELECT id, name, website FROM producers WHERE chain = $1', [chain]);
   
-  // Create a map of current producers
-  const currentProducerMap = new Map(currentProducers.map(p => [p.name, p.id]));
+  // Create a map of current producers by website
+  const currentProducerMap = new Map();
+  currentProducers.forEach(p => {
+    if (p.website) {
+      try {
+        const domain = new URL(p.website).hostname;
+        if (!currentProducerMap.has(domain)) {
+          currentProducerMap.set(domain, []);
+        }
+        currentProducerMap.get(domain).push(p);
+      } catch (error) {
+        console.error(`Error processing website for producer ${p.name}: ${p.website}`, error);
+      }
+    }
+  });
   
   // Create a set of active producers from the chain
   const activeProducers = new Set(producers.map(p => p.owner));
   
-  // Disable producers not found in the chain
-  for (const [name, id] of currentProducerMap) {
-    if (!activeProducers.has(name)) {
-      console.log(`Disabling producer ${name} as it is not found in the chain`);
-      await db.query('UPDATE producers SET disabled = true WHERE id = $1', [id]);
+  // Disable producers not found in the chain or with ignored domains
+  for (const [domain, producers] of currentProducerMap) {
+    const hasActiveProducer = producers.some(p => activeProducers.has(p.name));
+    const isIgnoredDomain = ignoredUrls.includes(domain);
+    
+    if (!hasActiveProducer || isIgnoredDomain) {
+      console.log(`Disabling all producers with domain ${domain} as ${isIgnoredDomain ? 'domain is ignored' : 'none are found in the chain'}`);
+      const producerIds = producers.map(p => p.id);
+      await db.query('UPDATE producers SET disabled = true WHERE id = ANY($1)', [producerIds]);
     }
   }
 
@@ -144,7 +161,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 // StartMonitoring
 // To skip cpu and pricefeed tests, use options: { skipCpu: true } 
 // To validate a single producer set prodcuerName = 'producername'
-export const startMonitoring = async (options = { skipCpu: true }, producerName = null  ) => {
+export const startMonitoring = async (options = { skipCpu: false }, producerName = null  ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');

@@ -37,7 +37,7 @@ class TestRunner {
     this.killedReason = "";
     this.killedDetail = "";
     this.latencies = [];
-    this.blockTimeout = 5000; // 5 seconds
+    this.blockTimeout = 30000; // Increased to 30 seconds
     this.numBlocks = numBlocks;
     this.chainId = chainId;
 
@@ -77,6 +77,7 @@ class BlockTransmissionTestRunner extends TestRunner {
   constructor(node, numBlocks, chainId) {
     super(node, numBlocks, chainId);
     this.killTimer = null;
+    this.connection = null;
   }
 
   async onSignedBlock(msg) {
@@ -106,17 +107,21 @@ class BlockTransmissionTestRunner extends TestRunner {
     const p2p = this.p2p;
 
     // Set up a timeout for the connection attempt
-    const connectionTimeout = 5000; // 5 seconds timeout for connection
+    const connectionTimeout = 30000; // Increased to 30 seconds
     let connectionSuccessful = false;
 
     try {
+      console.log(`Attempting to connect to ${this.node.host}:${this.node.port}...`);
+      
       // Attempt the connection with a timeout
       const client = await Promise.race([
         p2p.connect(),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), connectionTimeout))
       ]);
 
+      this.connection = client;
       connectionSuccessful = true;
+      console.log(`Successfully connected to ${this.node.host}:${this.node.port}`);
 
       const deserializedStream = client
         .pipe(new EOSIOStreamTokenizer({}))
@@ -129,6 +134,7 @@ class BlockTransmissionTestRunner extends TestRunner {
             this.killed = true;
             this.killedReason = "go_away";
             this.killedDetail = `Received go away message: ${GoAwayMessage.reasons[obj[2].reason]}`;
+            console.log(`Received go away message from ${this.node.host}:${this.node.port}: ${this.killedDetail}`);
           }
         });
 
@@ -162,13 +168,19 @@ class BlockTransmissionTestRunner extends TestRunner {
 
     const results = await this.waitForTests(numBlocks);
 
+    // Ensure proper cleanup
     try {
+      if (this.connection) {
+        console.log(`Cleaning up connection to ${this.node.host}:${this.node.port}...`);
+        this.connection.destroy();
+        this.connection = null;
+      }
       if (connectionSuccessful) {
-        console.log('disconnecting');
+        console.log('Disconnecting P2P client...');
         await p2p.disconnect();
       }
     } catch (disconnectError) {
-      childLogger.warn("Error while disconnecting P2P client:", disconnectError);
+      console.error("Error while cleaning up P2P client:", disconnectError);
     }
 
     return results;
@@ -279,6 +291,24 @@ const runP2PTest = async (producerId, chain, endpoint, validationData, validateR
     host: host,
     port: port,
   };
+
+  // Validate endpoint is accessible
+  try {
+    console.log(`Validating endpoint ${endpoint}...`);
+    const response = await fetch(`${validationData.api}/v1/chain/get_info`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const info = await response.json();
+    console.log(`Endpoint ${endpoint} is accessible. Chain ID: ${info.chain_id}`);
+  } catch (error) {
+    console.error(`Endpoint ${endpoint} validation failed:`, error);
+    return {
+      status: 'error',
+      error_detail: `Endpoint validation failed: ${error.message}`,
+      total_test_time: 0
+    };
+  }
 
   const runner = new BlockTransmissionTestRunner(node, 10, validationData.chain_id);
   runner.validationData = validationData;

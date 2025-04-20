@@ -1,0 +1,2543 @@
+
+> wax-monitoring-backend@1.0.0 start
+> node src/index.js
+
+{"level":30,"time":1745166177348,"pid":91912,"hostname":"Mac","msg":"Server listening at http://[::1]:3000"}
+{"level":30,"time":1745166177349,"pid":91912,"hostname":"Mac","msg":"Server listening at http://127.0.0.1:3000"}
+Updating producers for mainnet gert
+Mainnet node: https://apiwax.3dkrender.com
+Try 1: Using endpoint for mainnet: https://apiwax.3dkrender.com
+Raw producers from chain: [
+  {
+    owner: '3dkrenderwax',
+    total_votes: '341871305179710247681456855552917140070106923008.00000000000000000',
+    producer_key: 'EOS6LSgC1fiMemkMABnFLX91K2t8cE6Tg1abwHM1UJeDqrj2MbnvS',
+    is_active: 1,
+    url: 'https://3dkrender.com',
+    unpaid_blocks: 8124,
+    last_claim_time: '2025-04-19T16:42:00.500',
+    location: 220,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: '4halffloripa',
+    total_votes: '71471059413760998682366903568302551775313920.00000000000000000',
+    producer_key: 'EOS8JfkSTEGL6GerHqnoqUo9VJbBQjqJe9mhLDdHfWZ2ziqvEnBQh',
+    is_active: 1,
+    url: 'https://www.4half.com.br',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-06T20:38:20.000',
+    location: 0
+  },
+  {
+    owner: 'ahtbatd11112',
+    total_votes: '8270907385603269675599048128304514366177280.00000000000000000',
+    producer_key: 'EOS5VNTvJbzABv7xDf7xU4p7igh154jRaiB59SEegF54p2USGUoxT',
+    is_active: 1,
+    url: '192.168.10.126:8888',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-07-03T08:44:11.000',
+    location: 35,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'aikonproduce',
+    total_votes: '563155413277053107840665975474445828694736896.00000000000000000',
+    producer_key: 'EOS5pKt5X6r3WsgZFipYTLZd9ZWcWoeLk4KovH4D56vpYbqhqZopD',
+    is_active: 1,
+    url: 'https://aikon.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-09-12T19:19:32.500',
+    location: 0
+  },
+  {
+    owner: 'alohaeosprod',
+    total_votes: '362247519855715660837276871521658435978924130304.00000000000000000',
+    producer_key: 'EOS7T2mAzC5eNGb6WGuFpHRHjSDakcrvP9uF2VenUGZo2BfJ9bJFR',
+    is_active: 1,
+    url: 'https://www.alohaeos.com',
+    unpaid_blocks: 7260,
+    last_claim_time: '2025-04-19T19:11:36.500',
+    location: 10,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'amsterdamwax',
+    total_votes: '361201612859364223943032998794016340273811947520.00000000000000000',
+    producer_key: 'EOS7CxjxLmEgpRPFu87HKfvmMKTZf4PGasuUMRoEPBd8K7q6VaQ7X',
+    is_active: 1,
+    url: 'https://wax.eosamsterdam.net',
+    unpaid_blocks: 7932,
+    last_claim_time: '2025-04-19T17:16:03.000',
+    location: 140
+  },
+  {
+    owner: 'anonymousoff',
+    total_votes: '78190382719563526268062735535477815754358784.00000000000000000',
+    producer_key: 'EOS7MbguN8RnriUWtaA7Qyqn4AovQbJkjPasAfsUzXRF3PFjEAM4w',
+    is_active: 1,
+    url: 'https://vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-11T00:13:05.500',
+    location: 37
+  },
+  {
+    owner: 'apidae.wax',
+    total_votes: '25359564139497318614838909859428673809022976.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:07.000',
+    location: 136
+  },
+  {
+    owner: 'apoidea.wax',
+    total_votes: '25236309746497339725559122383683888330309632.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-15T21:00:08.500',
+    location: 136
+  },
+  {
+    owner: 'argentinawax',
+    total_votes: '13520612020541054068421228676268434342805504.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-10-14T20:21:08.500',
+    location: 0
+  },
+  {
+    owner: 'aus1genereos',
+    total_votes: '9907972129174542803128323345449578827612160.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://genereos.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-11-06T20:24:08.500',
+    location: 36
+  },
+  {
+    owner: 'bee.wax',
+    total_votes: '24224613305536834005219617952422244240064512.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:09.000',
+    location: 136
+  },
+  {
+    owner: 'blacklusionx',
+    total_votes: '48488231189621344568419827459447676344459067392.00000000000000000',
+    producer_key: 'EOS5BLJjJQHBsRgGqmwyeBf4VP5xpuW7NUYwbGuvBVyCgGZRtpdmm',
+    is_active: 1,
+    url: 'https://blacklusion.io',
+    unpaid_blocks: 116685,
+    last_claim_time: '2024-05-22T14:20:19.500',
+    location: 155,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'blockmatrix1',
+    total_votes: '2302912680631559931676016401860654358593536.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://blockmatrix.network',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-01-06T09:54:02.500',
+    location: 826
+  },
+  {
+    owner: 'blocksmithio',
+    total_votes: '16935044458891476247529981191499388206144552960.00000000000000000',
+    producer_key: 'EOS6ufzturmznWHprKHX8QhLy4AL2Ca7d8afRP3mGp4vRSbCzqxbv',
+    is_active: 1,
+    url: 'https://eosblocksmith.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-04-22T09:10:06.500',
+    location: 840
+  },
+  {
+    owner: 'blokcrafters',
+    total_votes: '17449690774100331842582187871667101742217035776.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://blokcrafters.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-01-07T15:11:12.500',
+    location: 60
+  },
+  {
+    owner: 'bountyblokbp',
+    total_votes: '361432598116070372324656603988691870094395965440.00000000000000000',
+    producer_key: 'EOS6Sb1qLEkLWA8KyVZjeHTTXBKdgHVM9oKRZd3tihjJKYSmxjy3K',
+    is_active: 1,
+    url: 'https://www.bountyblok.io',
+    unpaid_blocks: 312,
+    last_claim_time: '2025-04-20T15:28:03.000',
+    location: 90,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'bp.adex',
+    total_votes: '52997954807245076145485453798746508587171840.00000000000000000',
+    producer_key: 'EOS5oSQaLXMMSj6GAQip2WzgB1gAJRo8FY5e8EvzZZ5jU3subBL8B',
+    is_active: 1,
+    url: 'https://wax.a-dex.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-20T14:00:06.000',
+    location: 7878,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'bp.alcor',
+    total_votes: '337237139692280472315612832355661836932490461184.00000000000000000',
+    producer_key: 'EOS6ATw71SK7rDJQQBFMQkw4D9k3n9oEw3Mk5QEaQyLes63ZSLvs8',
+    is_active: 1,
+    url: 'https://bp.alcor.exchange/',
+    unpaid_blocks: 3816,
+    last_claim_time: '2025-04-20T05:15:13.500',
+    location: 666,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'bp.box',
+    total_votes: '18774315233282877283572866804443486441976102912.00000000000000000',
+    producer_key: 'EOS5Dt3qD6E4KqfGAFxAg7B9oWsWwN4A7QW6AjikPaiKF2YFehDdU',
+    is_active: 1,
+    url: 'https://wax.defibox.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-08-31T10:28:11.000',
+    location: 10
+  },
+  {
+    owner: 'bp.twosticks',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://twosticks.xyz',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-02-11T01:19:16.000',
+    location: 420
+  },
+  {
+    owner: 'bp.wecan',
+    total_votes: '340308649739952696633819724900157311785084387328.00000000000000000',
+    producer_key: 'EOS8coa6fhiEQJbfaSXwqeBG6YZaHXybQErvid3mpHJZfsu4pWpbv',
+    is_active: 1,
+    url: 'https://wecan.dev',
+    unpaid_blocks: 1488,
+    last_claim_time: '2025-04-20T12:01:03.000',
+    location: 804
+  },
+  {
+    owner: 'bumble.wax',
+    total_votes: '26812688087652535078799938008975837138780160.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:09.000',
+    location: 136
+  },
+  {
+    owner: 'busy.wax',
+    total_votes: '24227476018557654189136442766864318705172480.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:10.500',
+    location: 136
+  },
+  {
+    owner: 'cryptolions1',
+    total_votes: '63533414681835963612869636749886512239256535040.00000000000000000',
+    producer_key: 'EOS6G5CgDoLioNSNwYciyT79Gr9vguTSufXDS8VG3zHRzizVCC6S5',
+    is_active: 1,
+    url: 'https://cryptolions.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-19T19:31:55.000',
+    location: 200
+  },
+  {
+    owner: 'csxcommunity',
+    total_votes: '859083575060325290269461732157715181532610560.00000000000000000',
+    producer_key: 'EOS8HsrWJ9omjmwt26fieagCM95f2dsT2CyWuFQSFbp4jR7KyrZPF',
+    is_active: 1,
+    url: 'https://wax.csx.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-05-04T10:00:07.000',
+    location: 276
+  },
+  {
+    owner: 'cypherglasss',
+    total_votes: '9007353776225029785110665654972864214415179776.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.cypherglass.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-04-12T22:00:03.500',
+    location: 840
+  },
+  {
+    owner: 'daemonshelby',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'shelbyclub.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-04-10T20:43:28.500',
+    location: 460
+  },
+  {
+    owner: 'dapplica',
+    total_votes: '345703943175539129272505241789220998560847233024.00000000000000000',
+    producer_key: 'EOS8Ldwos2bQMuFHAf1vdDmgWwwfLLCAKwqcLNP8XiSGrxL2JafbH',
+    is_active: 1,
+    url: 'https://wax.dapplica.io',
+    unpaid_blocks: 10668,
+    last_claim_time: '2025-04-19T09:15:59.500',
+    location: 190,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'darkprodnet1',
+    total_votes: '6450118011462832759763130620077273182633984.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'http://darkprod.net/',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-01-18T12:03:07.500',
+    location: 200
+  },
+  {
+    owner: 'deinproducer',
+    total_votes: '73438690784125846051689777457243376930783232.00000000000000000',
+    producer_key: 'EOS77iwhXu9XMCM4g6eKxuoJQVx1kmYD2qvhCccsV7oswKY5oHBDj',
+    is_active: 1,
+    url: 'http://deinceps.org',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-06-29T14:27:42.000',
+    location: 1
+  },
+  {
+    owner: 'did4love4fun',
+    total_votes: '4829124922814279249901529582282377003008.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-12-08T20:20:42.000',
+    location: 0
+  },
+  {
+    owner: 'digger.wax',
+    total_votes: '25702151655385133846476120619352291834593280.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:10.000',
+    location: 136
+  },
+  {
+    owner: 'dmaildotcobp',
+    total_votes: '12686580642049147773616986768720543701008384.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://dmail.co',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-04-22T20:29:54.500',
+    location: 840
+  },
+  {
+    owner: 'dmitriyepman',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://shelbyclub.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-04-15T17:56:40.000',
+    location: 460
+  },
+  {
+    owner: 'dqgk4.waa',
+    total_votes: '23736559025036221077357972502371296314654720.00000000000000000',
+    producer_key: 'EOS7MbguN8RnriUWtaA7Qyqn4AovQbJkjPasAfsUzXRF3PFjEAM4w',
+    is_active: 1,
+    url: 'https://vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-09T20:40:31.000',
+    location: 37
+  },
+  {
+    owner: 'drone.wax',
+    total_votes: '164247108933819141469407435632938426088554496.00000000000000000',
+    producer_key: 'EOS6KmN55D6p7LPwm3EFKwGaESfFHa2ZyJnCoZgwzAfQy7Dvksjop',
+    is_active: 1,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-05-05T16:00:37.500',
+    location: 136
+  },
+  {
+    owner: 'edeniaedenia',
+    total_votes: '144465174641510478400953463594086337095925760.00000000000000000',
+    producer_key: 'EOS6jvB8Ytq74oebcawEbUgG2MRLYLscZMm9bceAcJZSqBDruj3f8',
+    is_active: 1,
+    url: 'https://edenia.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-10T18:35:00.500',
+    location: 188
+  },
+  {
+    owner: 'eos42freedom',
+    total_votes: '9705331876474105507688276853942201161250504704.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eos42.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-02T18:01:03.000',
+    location: 250
+  },
+  {
+    owner: 'eosarabianet',
+    total_votes: '2859807668130441505573388301226882006039658496.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eosarabia.net',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-04T21:01:34.500',
+    location: 230
+  },
+  {
+    owner: 'eosauthority',
+    total_votes: '346839612898870356574351474333006926597368840192.00000000000000000',
+    producer_key: 'EOS8QSYJrfDCMQxfXtkCPpbKd44XgYUJyniRKXZpnURCixqLBzrEE',
+    is_active: 1,
+    url: 'https://eosauthority.com',
+    unpaid_blocks: 7908,
+    last_claim_time: '2025-04-19T17:18:54.500',
+    location: 130,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'eosbarcelona',
+    total_votes: '9729744021844895086464053837503816290157985792.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eos.barcelona/wax',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-14T01:44:02.000',
+    location: 724
+  },
+  {
+    owner: 'eoscannonwax',
+    total_votes: '208406576032503076535881589722577604037312512.00000000000000000',
+    producer_key: 'EOS6ZkiE6862gFjDXfGQXpj1DxBUStoX2qRjxR3yBCznv5UERGs1G',
+    is_active: 1,
+    url: 'https://eoscannon.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-08-28T17:49:09.500',
+    location: 156
+  },
+  {
+    owner: 'eosdacserver',
+    total_votes: '360863986185330311057951429520464644978526650368.00000000000000000',
+    producer_key: 'EOS5jhw6Ao5jYH9biZojT7ua5sZwGQp6EB7G4pM2MYVuCrzWC9R2C',
+    is_active: 1,
+    url: 'http://eosdac.io',
+    unpaid_blocks: 7644,
+    last_claim_time: '2025-04-19T18:04:41.000',
+    location: 90
+  },
+  {
+    owner: 'eosdublinwow',
+    total_votes: '47041855274834433119475727193712100903716126720.00000000000000000',
+    producer_key: 'EOS4uv4UiockBa17PUJ95PFk74UmfS3TE6dv4WGKuuyhX4WddK7Uw',
+    is_active: 1,
+    url: 'https://eosdublin.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-03-21T12:00:02.000',
+    location: 260
+  },
+  {
+    owner: 'eoseouldotio',
+    total_votes: '2726063266225603911585510280563658993044553728.00000000000000000',
+    producer_key: 'EOS7Q9MdZSiHTZywYq8PikXdgk1EJBQvbQuLn6MzxUsYesooYS9QX',
+    is_active: 1,
+    url: 'https://eoseoul.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-03-23T05:19:18.000',
+    location: 410
+  },
+  {
+    owner: 'eosio',
+    total_votes: '0.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-06-27T02:32:31.000',
+    location: 0
+  },
+  {
+    owner: 'eosiocentral',
+    total_votes: '1342672563964926126693167880644364330625662976.00000000000000000',
+    producer_key: 'EOS6U9kUSopWFSk5xBDxeP5AtyVFWhG4cTMd3FNXBGYZ7VpWJYHZh',
+    is_active: 1,
+    url: 'https://teloscentral.com',
+    unpaid_blocks: 60,
+    last_claim_time: '2020-03-22T15:39:59.500',
+    location: 276
+  },
+  {
+    owner: 'eosiodetroit',
+    total_votes: '66001811663019062205790606508014782507439357952.00000000000000000',
+    producer_key: 'EOS5skUnkBWe1VpSm8D1pnGLmMHC9gY4Wdmg9nEUEpyKbBXKcTkDT',
+    is_active: 1,
+    url: 'https://detroitledger.tech',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-19T17:00:13.500',
+    location: 50,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'eosnewyorkio',
+    total_votes: '196571385941853781609579468221844159463424.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.eosnewyork.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-08-16T22:19:25.500',
+    location: 1
+  },
+  {
+    owner: 'eosphereiobp',
+    total_votes: '361486860961708447481288622746579705636700815360.00000000000000000',
+    producer_key: 'EOS6YiSDbsNRJMV5prJRS1R28a31TWQ6S8W1CaHn6gz4eJ8WXnn4P',
+    is_active: 1,
+    url: 'https://www.eosphere.io',
+    unpaid_blocks: 2751,
+    last_claim_time: '2025-04-20T08:20:04.500',
+    location: 290,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'eosriobrazil',
+    total_votes: '361021393645893254144801079503259393543311982592.00000000000000000',
+    producer_key: 'EOS62VTMkGDMWpK3ECNegVLt92UYQQMXC3uzcx5zjW64hrMCaL1rx',
+    is_active: 1,
+    url: 'https://eosrio.io',
+    unpaid_blocks: 3912,
+    last_claim_time: '2025-04-20T04:58:47.500',
+    location: 80,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'eostribeprod',
+    total_votes: '743426381422667907786693802968928708714299392.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://cryptotribe.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-10-11T17:46:02.000',
+    location: 276
+  },
+  {
+    owner: 'greeneosiobp',
+    total_votes: '54148774769781997914191759619137379951456550912.00000000000000000',
+    producer_key: 'EOS8HHtg16aezSgmvkZFwXgASBdXR7gt37cGB7FhTzPD8LL2pifhQ',
+    is_active: 1,
+    url: 'https://greeneosio.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-08T14:07:01.000',
+    location: 180
+  },
+  {
+    owner: 'guild.nefty',
+    total_votes: '351386365323307212192028530567658823084178145280.00000000000000000',
+    producer_key: 'EOS8VXNhcufCtVCWnPBxrArAjqGSwHxhVumqegj8kPuPWJy3n6mTf',
+    is_active: 1,
+    url: 'https://bp.neftyblocks.com',
+    unpaid_blocks: 4236,
+    last_claim_time: '2025-04-20T04:00:07.500',
+    location: 1,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'guild.taco',
+    total_votes: '343022265858954566554531575437411892327425769472.00000000000000000',
+    producer_key: 'EOS7rU4ZDPZtjLHKSBa5mUCWo6NXXzewxKBuWZiboUzZg1M9cVz2d',
+    is_active: 1,
+    url: 'https://tacocrypto.io',
+    unpaid_blocks: 7536,
+    last_claim_time: '2025-04-19T18:25:11.000',
+    location: 210,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'guild.waxdao',
+    total_votes: '339827236050787099193789925732548682239986106368.00000000000000000',
+    producer_key: 'EOS7Jqix9G63Jsadj5RnZ7EEwtKSTDjRDUZMoN5HC2JnLoorEfty9',
+    is_active: 1,
+    url: 'https://waxdaobp.io',
+    unpaid_blocks: 15468,
+    last_claim_time: '2025-04-18T19:16:01.500',
+    location: 840,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'hkeosguildhk',
+    total_votes: '15586454925201430101308801987760322380874907648.00000000000000000',
+    producer_key: 'EOS75Hy7nUei49B7K4rH5rvnavay7Stbpb3YQokadgoLdopsQ7q8J',
+    is_active: 1,
+    url: 'https://www.hkeos.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-01-29T00:09:36.000',
+    location: 344
+  },
+  {
+    owner: 'honey.wax',
+    total_votes: '25406084932663369438479594022017971309772800.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:11.500',
+    location: 136
+  },
+  {
+    owner: 'hornet.wax',
+    total_votes: '25690185699552318481519084914646112316424192.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:12.000',
+    location: 136
+  },
+  {
+    owner: 'hyperblocks',
+    total_votes: '11355248676301973652948817170723233223877328896.00000000000000000',
+    producer_key: 'EOS69LEc4U4MSwov18rFvQAcxWES5GStFW2ZZo2wSLoegnsN1dXaU',
+    is_active: 1,
+    url: 'https://hyperblocks.pro/',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-02-23T09:42:31.000',
+    location: 0
+  },
+  {
+    owner: 'infinitybloc',
+    total_votes: '16538020506040224043076214083731387892891648.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.infinitybloc.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-05-28T23:29:46.500',
+    location: 48
+  },
+  {
+    owner: 'ivote4waxusa',
+    total_votes: '359582103371228901424868927818802278246826115072.00000000000000000',
+    producer_key: 'EOS7D3rXJ6P8vxohmjyw2153HUy7EoU36g2nKP4TcJxvfGJRrgmqc',
+    is_active: 1,
+    url: 'https://eosusa.io/bp/wax/',
+    unpaid_blocks: 2928,
+    last_claim_time: '2025-04-20T07:50:03.500',
+    location: 70,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'karmaproduce',
+    total_votes: '171473968228995061176971898830405103307980800.00000000000000000',
+    producer_key: 'EOS5bXJd9qYv8MnBR2WSq4A8vHqfGo8DGqj7tJjiW9vMe7AtSgAhE',
+    is_active: 1,
+    url: 'https://karmaguild.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-23T22:01:23.000',
+    location: 170
+  },
+  {
+    owner: 'killer.wax',
+    total_votes: '26821738803536007666330847676119614364844032.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:13.000',
+    location: 136
+  },
+  {
+    owner: 'ledgerwiseio',
+    total_votes: '66141025402076170277577826428521049276488351744.00000000000000000',
+    producer_key: 'EOS7Vi2QBmjyPaRxFsJ1BtcmfEyRPCniD18CpKExdZnrZTVjp7BBV',
+    is_active: 1,
+    url: 'https://ledgerwise.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-20T06:30:01.500',
+    location: 175
+  },
+  {
+    owner: 'liquidstudio',
+    total_votes: '338271191904194133132350823047564941532210397184.00000000000000000',
+    producer_key: 'EOS6oj1Yn1FMvMcnVYVYg6g4Szr2gVWKLjncuQP7eKUksD3rhyxbt',
+    is_active: 1,
+    url: 'https://www.liquiid.io',
+    unpaid_blocks: 8652,
+    last_claim_time: '2025-04-19T15:09:02.000',
+    location: 49,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'machinebloks',
+    total_votes: '65117213277502778997722707684744240526524416.00000000000000000',
+    producer_key: 'EOS8cARqfYA7T2gkoE57ZEEnwkPkn9JMsVNxBLFBPRCW94gremtws',
+    is_active: 1,
+    url: 'https://www.machinearmy.world/',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-01-20T12:34:09.500',
+    location: 0
+  },
+  {
+    owner: 'maltablockbp',
+    total_votes: '9711446858365961990057650668086951723164237824.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://maltablock.org',
+    unpaid_blocks: 888,
+    last_claim_time: '2021-02-01T00:06:03.500',
+    location: 840
+  },
+  {
+    owner: 'mason.wax',
+    total_votes: '25400101600618724412646509856770859433197568.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:13.500',
+    location: 136
+  },
+  {
+    owner: 'metax',
+    total_votes: '8055585559748972772302272345045982213308416.00000000000000000',
+    producer_key: 'EOS8Urge2mgQHkMYjNeMQ1ZAsSKjcvu3mre8TYhWNEVUKzZt6Z8DH',
+    is_active: 1,
+    url: 'https://google.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-09-29T06:00:32.500',
+    location: 764,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ]
+  },
+  {
+    owner: 'mining.wax',
+    total_votes: '25230580743108022618866254755535364487643136.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:14.000',
+    location: 136
+  },
+  {
+    owner: 'nation.wax',
+    total_votes: '360536461071029460918634807723533331273963536384.00000000000000000',
+    producer_key: 'EOS64Xiqqta5qLduXKCbFGE5jNc7XKjxisxSDT4McU3n3F4QhXXxK',
+    is_active: 1,
+    url: 'https://eosnation.io',
+    unpaid_blocks: 7368,
+    last_claim_time: '2025-04-19T18:54:27.000',
+    location: 124
+  },
+  {
+    owner: 'nebulablocks',
+    total_votes: '794519045810648477160253879003985387454464.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.nebulaprotocol.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-07-06T15:57:32.000',
+    location: 233
+  },
+  {
+    owner: 'niftylifewax',
+    total_votes: '11286178046310591231391332223263732400128.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://niftylife.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-08-20T05:12:17.500',
+    location: 1
+  },
+  {
+    owner: 'nomadxchange',
+    total_votes: '387158378623848525945224345306159835328282624.00000000000000000',
+    producer_key: 'EOS6AkDFCXzzcmwFYiFYahvR79wb7ngkSZvMaytM3QakyjBMbrPN6',
+    is_active: 1,
+    url: 'https://nomadexchange.me',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-08-13T23:28:28.500',
+    location: 840
+  },
+  {
+    owner: 'oneinacilian',
+    total_votes: '31409805839916919325198535875749370697386819584.00000000000000000',
+    producer_key: 'EOS7fv5P8F3MWjBmQ2T4CgacGsbYvKDrzHwXujoRWZJeN9znYBLEq',
+    is_active: 1,
+    url: 'https://www.oiac.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-10-07T04:41:42.500',
+    location: 135
+  },
+  {
+    owner: 'phubproducer',
+    total_votes: '25419444190987159948732979435539169823162368.00000000000000000',
+    producer_key: 'EOS5uWFZ7ZSPWLWWuwXJQWnpvpcFb1LAYTpyexKjj7XXUYpWqFvJx',
+    is_active: 1,
+    url: 'vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-12T21:42:59.000',
+    location: 37
+  },
+  {
+    owner: 'pink.gg',
+    total_votes: '17556639252694609655931096389512216471737991168.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.pink.gg',
+    unpaid_blocks: 4908,
+    last_claim_time: '2023-08-28T06:00:48.000',
+    location: 170
+  },
+  {
+    owner: 'polar.wax',
+    total_votes: '10364986333707790548093326942156880453402886144.00000000000000000',
+    producer_key: 'EOS6G5VJRHaaEzetAKCNidbNXWTZcJbG9HFoAoX3WgbWXeMyHTqz7',
+    is_active: 1,
+    url: 'https://www.polar.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-10-05T00:27:50.000',
+    location: 0
+  },
+  {
+    owner: 'pplbresource',
+    total_votes: '7521524589519719285647114467668630374973440.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.pplbresource.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-03-15T05:03:42.000',
+    location: 764
+  },
+  {
+    owner: 'producera',
+    total_votes: '7286076469802390841058424356128794611810304.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-07-23T17:25:05.000',
+    location: 0
+  },
+  {
+    owner: 'producerb',
+    total_votes: '6723877871776931423595658146383251120324608.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 174215,
+    last_claim_time: '2019-06-24T18:02:16.000',
+    location: 0
+  },
+  {
+    owner: 'producerc',
+    total_votes: '6723873430468058957139347061908911889055744.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 174192,
+    last_claim_time: '2019-06-24T18:02:16.500',
+    location: 0
+  },
+  {
+    owner: 'producerd',
+    total_votes: '6723736544945266289801531830374529408958464.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173989,
+    last_claim_time: '2019-06-24T18:02:17.000',
+    location: 0
+  },
+  {
+    owner: 'producere',
+    total_votes: '6722097904230545212253369737858295950999552.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 171140,
+    last_claim_time: '2019-06-24T18:02:17.000',
+    location: 0
+  },
+  {
+    owner: 'producerf',
+    total_votes: '6723741068401304462035221498351758738456576.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173964,
+    last_claim_time: '2019-06-24T18:02:17.500',
+    location: 0
+  },
+  {
+    owner: 'producerg',
+    total_votes: '6723876973534710031628128771708937983492096.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173424,
+    last_claim_time: '2019-06-24T18:02:18.000',
+    location: 0
+  },
+  {
+    owner: 'producerh',
+    total_votes: '6723877959378876890317622108864048655237120.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173436,
+    last_claim_time: '2019-06-24T18:02:18.000',
+    location: 0
+  },
+  {
+    owner: 'produceri',
+    total_votes: '6722234122482205679770479729361269670543360.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173423,
+    last_claim_time: '2019-06-24T18:02:18.500',
+    location: 0
+  },
+  {
+    owner: 'producerj',
+    total_votes: '6723738513173725957223223448059084827262976.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173076,
+    last_claim_time: '2019-06-24T18:02:19.000',
+    location: 0
+  },
+  {
+    owner: 'producerk',
+    total_votes: '6716215000442246267697758184453052253077504.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173082,
+    last_claim_time: '2019-06-24T18:02:19.000',
+    location: 0
+  },
+  {
+    owner: 'producerl',
+    total_votes: '6723739674188191008450596631036127933890560.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173060,
+    last_claim_time: '2019-06-24T18:02:19.500',
+    location: 0
+  },
+  {
+    owner: 'producerm',
+    total_votes: '6716212823014338975520911043734290992988160.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 172993,
+    last_claim_time: '2019-06-24T18:02:20.000',
+    location: 0
+  },
+  {
+    owner: 'producern',
+    total_votes: '6723283406560151709852352486094009790365696.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173004,
+    last_claim_time: '2019-06-24T18:02:20.000',
+    location: 0
+  },
+  {
+    owner: 'producero',
+    total_votes: '6716214596512770531126914547009173833383936.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173015,
+    last_claim_time: '2019-06-24T18:02:20.500',
+    location: 0
+  },
+  {
+    owner: 'producerp',
+    total_votes: '6721639517247752357199466773623220914356224.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148585,
+    last_claim_time: '2019-06-24T18:02:21.000',
+    location: 0
+  },
+  {
+    owner: 'producerq',
+    total_votes: '7276770356719403651895889683500678896418816.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148584,
+    last_claim_time: '2019-06-24T18:02:21.000',
+    location: 0
+  },
+  {
+    owner: 'producerr',
+    total_votes: '6723862521504313043035228358713090643066880.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148583,
+    last_claim_time: '2019-06-24T18:02:21.500',
+    location: 0
+  },
+  {
+    owner: 'producers',
+    total_votes: '6702589309475926056355111802844585285124096.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 115077,
+    last_claim_time: '2019-06-24T18:02:22.000',
+    location: 0
+  },
+  ... 37 more items
+]
+Active producers after filtering: [
+  {
+    owner: '3dkrenderwax',
+    total_votes: '341871305179710247681456855552917140070106923008.00000000000000000',
+    producer_key: 'EOS6LSgC1fiMemkMABnFLX91K2t8cE6Tg1abwHM1UJeDqrj2MbnvS',
+    is_active: 1,
+    url: 'https://3dkrender.com',
+    unpaid_blocks: 8124,
+    last_claim_time: '2025-04-19T16:42:00.500',
+    location: 220,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: '4halffloripa',
+    total_votes: '71471059413760998682366903568302551775313920.00000000000000000',
+    producer_key: 'EOS8JfkSTEGL6GerHqnoqUo9VJbBQjqJe9mhLDdHfWZ2ziqvEnBQh',
+    is_active: 1,
+    url: 'https://www.4half.com.br',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-06T20:38:20.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'ahtbatd11112',
+    total_votes: '8270907385603269675599048128304514366177280.00000000000000000',
+    producer_key: 'EOS5VNTvJbzABv7xDf7xU4p7igh154jRaiB59SEegF54p2USGUoxT',
+    is_active: 1,
+    url: '192.168.10.126:8888',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-07-03T08:44:11.000',
+    location: 35,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'aikonproduce',
+    total_votes: '563155413277053107840665975474445828694736896.00000000000000000',
+    producer_key: 'EOS5pKt5X6r3WsgZFipYTLZd9ZWcWoeLk4KovH4D56vpYbqhqZopD',
+    is_active: 1,
+    url: 'https://aikon.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-09-12T19:19:32.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'alohaeosprod',
+    total_votes: '362247519855715660837276871521658435978924130304.00000000000000000',
+    producer_key: 'EOS7T2mAzC5eNGb6WGuFpHRHjSDakcrvP9uF2VenUGZo2BfJ9bJFR',
+    is_active: 1,
+    url: 'https://www.alohaeos.com',
+    unpaid_blocks: 7260,
+    last_claim_time: '2025-04-19T19:11:36.500',
+    location: 10,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'amsterdamwax',
+    total_votes: '361201612859364223943032998794016340273811947520.00000000000000000',
+    producer_key: 'EOS7CxjxLmEgpRPFu87HKfvmMKTZf4PGasuUMRoEPBd8K7q6VaQ7X',
+    is_active: 1,
+    url: 'https://wax.eosamsterdam.net',
+    unpaid_blocks: 7932,
+    last_claim_time: '2025-04-19T17:16:03.000',
+    location: 140,
+    top21: true
+  },
+  {
+    owner: 'anonymousoff',
+    total_votes: '78190382719563526268062735535477815754358784.00000000000000000',
+    producer_key: 'EOS7MbguN8RnriUWtaA7Qyqn4AovQbJkjPasAfsUzXRF3PFjEAM4w',
+    is_active: 1,
+    url: 'https://vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-11T00:13:05.500',
+    location: 37,
+    top21: false
+  },
+  {
+    owner: 'apidae.wax',
+    total_votes: '25359564139497318614838909859428673809022976.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:07.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'apoidea.wax',
+    total_votes: '25236309746497339725559122383683888330309632.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-15T21:00:08.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'argentinawax',
+    total_votes: '13520612020541054068421228676268434342805504.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-10-14T20:21:08.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'aus1genereos',
+    total_votes: '9907972129174542803128323345449578827612160.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://genereos.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-11-06T20:24:08.500',
+    location: 36,
+    top21: false
+  },
+  {
+    owner: 'bee.wax',
+    total_votes: '24224613305536834005219617952422244240064512.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:09.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'blacklusionx',
+    total_votes: '48488231189621344568419827459447676344459067392.00000000000000000',
+    producer_key: 'EOS5BLJjJQHBsRgGqmwyeBf4VP5xpuW7NUYwbGuvBVyCgGZRtpdmm',
+    is_active: 1,
+    url: 'https://blacklusion.io',
+    unpaid_blocks: 116685,
+    last_claim_time: '2024-05-22T14:20:19.500',
+    location: 155,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'blockmatrix1',
+    total_votes: '2302912680631559931676016401860654358593536.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://blockmatrix.network',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-01-06T09:54:02.500',
+    location: 826,
+    top21: false
+  },
+  {
+    owner: 'blocksmithio',
+    total_votes: '16935044458891476247529981191499388206144552960.00000000000000000',
+    producer_key: 'EOS6ufzturmznWHprKHX8QhLy4AL2Ca7d8afRP3mGp4vRSbCzqxbv',
+    is_active: 1,
+    url: 'https://eosblocksmith.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-04-22T09:10:06.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'blokcrafters',
+    total_votes: '17449690774100331842582187871667101742217035776.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://blokcrafters.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-01-07T15:11:12.500',
+    location: 60,
+    top21: false
+  },
+  {
+    owner: 'bountyblokbp',
+    total_votes: '361432598116070372324656603988691870094395965440.00000000000000000',
+    producer_key: 'EOS6Sb1qLEkLWA8KyVZjeHTTXBKdgHVM9oKRZd3tihjJKYSmxjy3K',
+    is_active: 1,
+    url: 'https://www.bountyblok.io',
+    unpaid_blocks: 312,
+    last_claim_time: '2025-04-20T15:28:03.000',
+    location: 90,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'bp.adex',
+    total_votes: '52997954807245076145485453798746508587171840.00000000000000000',
+    producer_key: 'EOS5oSQaLXMMSj6GAQip2WzgB1gAJRo8FY5e8EvzZZ5jU3subBL8B',
+    is_active: 1,
+    url: 'https://wax.a-dex.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-20T14:00:06.000',
+    location: 7878,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'bp.alcor',
+    total_votes: '337237139692280472315612832355661836932490461184.00000000000000000',
+    producer_key: 'EOS6ATw71SK7rDJQQBFMQkw4D9k3n9oEw3Mk5QEaQyLes63ZSLvs8',
+    is_active: 1,
+    url: 'https://bp.alcor.exchange/',
+    unpaid_blocks: 3816,
+    last_claim_time: '2025-04-20T05:15:13.500',
+    location: 666,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'bp.box',
+    total_votes: '18774315233282877283572866804443486441976102912.00000000000000000',
+    producer_key: 'EOS5Dt3qD6E4KqfGAFxAg7B9oWsWwN4A7QW6AjikPaiKF2YFehDdU',
+    is_active: 1,
+    url: 'https://wax.defibox.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-08-31T10:28:11.000',
+    location: 10,
+    top21: false
+  },
+  {
+    owner: 'bp.wecan',
+    total_votes: '340308649739952696633819724900157311785084387328.00000000000000000',
+    producer_key: 'EOS8coa6fhiEQJbfaSXwqeBG6YZaHXybQErvid3mpHJZfsu4pWpbv',
+    is_active: 1,
+    url: 'https://wecan.dev',
+    unpaid_blocks: 1488,
+    last_claim_time: '2025-04-20T12:01:03.000',
+    location: 804,
+    top21: true
+  },
+  {
+    owner: 'bumble.wax',
+    total_votes: '26812688087652535078799938008975837138780160.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:09.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'busy.wax',
+    total_votes: '24227476018557654189136442766864318705172480.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:10.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'cryptolions1',
+    total_votes: '63533414681835963612869636749886512239256535040.00000000000000000',
+    producer_key: 'EOS6G5CgDoLioNSNwYciyT79Gr9vguTSufXDS8VG3zHRzizVCC6S5',
+    is_active: 1,
+    url: 'https://cryptolions.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-19T19:31:55.000',
+    location: 200,
+    top21: false
+  },
+  {
+    owner: 'csxcommunity',
+    total_votes: '859083575060325290269461732157715181532610560.00000000000000000',
+    producer_key: 'EOS8HsrWJ9omjmwt26fieagCM95f2dsT2CyWuFQSFbp4jR7KyrZPF',
+    is_active: 1,
+    url: 'https://wax.csx.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-05-04T10:00:07.000',
+    location: 276,
+    top21: false
+  },
+  {
+    owner: 'cypherglasss',
+    total_votes: '9007353776225029785110665654972864214415179776.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.cypherglass.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-04-12T22:00:03.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'dapplica',
+    total_votes: '345703943175539129272505241789220998560847233024.00000000000000000',
+    producer_key: 'EOS8Ldwos2bQMuFHAf1vdDmgWwwfLLCAKwqcLNP8XiSGrxL2JafbH',
+    is_active: 1,
+    url: 'https://wax.dapplica.io',
+    unpaid_blocks: 10668,
+    last_claim_time: '2025-04-19T09:15:59.500',
+    location: 190,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'darkprodnet1',
+    total_votes: '6450118011462832759763130620077273182633984.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'http://darkprod.net/',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-01-18T12:03:07.500',
+    location: 200,
+    top21: false
+  },
+  {
+    owner: 'deinproducer',
+    total_votes: '73438690784125846051689777457243376930783232.00000000000000000',
+    producer_key: 'EOS77iwhXu9XMCM4g6eKxuoJQVx1kmYD2qvhCccsV7oswKY5oHBDj',
+    is_active: 1,
+    url: 'http://deinceps.org',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-06-29T14:27:42.000',
+    location: 1,
+    top21: false
+  },
+  {
+    owner: 'did4love4fun',
+    total_votes: '4829124922814279249901529582282377003008.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: '',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-12-08T20:20:42.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'digger.wax',
+    total_votes: '25702151655385133846476120619352291834593280.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:10.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'dmaildotcobp',
+    total_votes: '12686580642049147773616986768720543701008384.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://dmail.co',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-04-22T20:29:54.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'dqgk4.waa',
+    total_votes: '23736559025036221077357972502371296314654720.00000000000000000',
+    producer_key: 'EOS7MbguN8RnriUWtaA7Qyqn4AovQbJkjPasAfsUzXRF3PFjEAM4w',
+    is_active: 1,
+    url: 'https://vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-09T20:40:31.000',
+    location: 37,
+    top21: false
+  },
+  {
+    owner: 'drone.wax',
+    total_votes: '164247108933819141469407435632938426088554496.00000000000000000',
+    producer_key: 'EOS6KmN55D6p7LPwm3EFKwGaESfFHa2ZyJnCoZgwzAfQy7Dvksjop',
+    is_active: 1,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-05-05T16:00:37.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'edeniaedenia',
+    total_votes: '144465174641510478400953463594086337095925760.00000000000000000',
+    producer_key: 'EOS6jvB8Ytq74oebcawEbUgG2MRLYLscZMm9bceAcJZSqBDruj3f8',
+    is_active: 1,
+    url: 'https://edenia.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-10T18:35:00.500',
+    location: 188,
+    top21: false
+  },
+  {
+    owner: 'eos42freedom',
+    total_votes: '9705331876474105507688276853942201161250504704.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eos42.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-02T18:01:03.000',
+    location: 250,
+    top21: false
+  },
+  {
+    owner: 'eosarabianet',
+    total_votes: '2859807668130441505573388301226882006039658496.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eosarabia.net',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-04T21:01:34.500',
+    location: 230,
+    top21: false
+  },
+  {
+    owner: 'eosauthority',
+    total_votes: '346839612898870356574351474333006926597368840192.00000000000000000',
+    producer_key: 'EOS8QSYJrfDCMQxfXtkCPpbKd44XgYUJyniRKXZpnURCixqLBzrEE',
+    is_active: 1,
+    url: 'https://eosauthority.com',
+    unpaid_blocks: 7908,
+    last_claim_time: '2025-04-19T17:18:54.500',
+    location: 130,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eosbarcelona',
+    total_votes: '9729744021844895086464053837503816290157985792.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://eos.barcelona/wax',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-14T01:44:02.000',
+    location: 724,
+    top21: false
+  },
+  {
+    owner: 'eoscannonwax',
+    total_votes: '208406576032503076535881589722577604037312512.00000000000000000',
+    producer_key: 'EOS6ZkiE6862gFjDXfGQXpj1DxBUStoX2qRjxR3yBCznv5UERGs1G',
+    is_active: 1,
+    url: 'https://eoscannon.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-08-28T17:49:09.500',
+    location: 156,
+    top21: false
+  },
+  {
+    owner: 'eosdacserver',
+    total_votes: '360863986185330311057951429520464644978526650368.00000000000000000',
+    producer_key: 'EOS5jhw6Ao5jYH9biZojT7ua5sZwGQp6EB7G4pM2MYVuCrzWC9R2C',
+    is_active: 1,
+    url: 'http://eosdac.io',
+    unpaid_blocks: 7644,
+    last_claim_time: '2025-04-19T18:04:41.000',
+    location: 90,
+    top21: true
+  },
+  {
+    owner: 'eosdublinwow',
+    total_votes: '47041855274834433119475727193712100903716126720.00000000000000000',
+    producer_key: 'EOS4uv4UiockBa17PUJ95PFk74UmfS3TE6dv4WGKuuyhX4WddK7Uw',
+    is_active: 1,
+    url: 'https://eosdublin.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-03-21T12:00:02.000',
+    location: 260,
+    top21: false
+  },
+  {
+    owner: 'eoseouldotio',
+    total_votes: '2726063266225603911585510280563658993044553728.00000000000000000',
+    producer_key: 'EOS7Q9MdZSiHTZywYq8PikXdgk1EJBQvbQuLn6MzxUsYesooYS9QX',
+    is_active: 1,
+    url: 'https://eoseoul.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-03-23T05:19:18.000',
+    location: 410,
+    top21: false
+  },
+  {
+    owner: 'eosiocentral',
+    total_votes: '1342672563964926126693167880644364330625662976.00000000000000000',
+    producer_key: 'EOS6U9kUSopWFSk5xBDxeP5AtyVFWhG4cTMd3FNXBGYZ7VpWJYHZh',
+    is_active: 1,
+    url: 'https://teloscentral.com',
+    unpaid_blocks: 60,
+    last_claim_time: '2020-03-22T15:39:59.500',
+    location: 276,
+    top21: false
+  },
+  {
+    owner: 'eosiodetroit',
+    total_votes: '66001811663019062205790606508014782507439357952.00000000000000000',
+    producer_key: 'EOS5skUnkBWe1VpSm8D1pnGLmMHC9gY4Wdmg9nEUEpyKbBXKcTkDT',
+    is_active: 1,
+    url: 'https://detroitledger.tech',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-19T17:00:13.500',
+    location: 50,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'eosnewyorkio',
+    total_votes: '196571385941853781609579468221844159463424.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.eosnewyork.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-08-16T22:19:25.500',
+    location: 1,
+    top21: false
+  },
+  {
+    owner: 'eosphereiobp',
+    total_votes: '361486860961708447481288622746579705636700815360.00000000000000000',
+    producer_key: 'EOS6YiSDbsNRJMV5prJRS1R28a31TWQ6S8W1CaHn6gz4eJ8WXnn4P',
+    is_active: 1,
+    url: 'https://www.eosphere.io',
+    unpaid_blocks: 2751,
+    last_claim_time: '2025-04-20T08:20:04.500',
+    location: 290,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eosriobrazil',
+    total_votes: '361021393645893254144801079503259393543311982592.00000000000000000',
+    producer_key: 'EOS62VTMkGDMWpK3ECNegVLt92UYQQMXC3uzcx5zjW64hrMCaL1rx',
+    is_active: 1,
+    url: 'https://eosrio.io',
+    unpaid_blocks: 3912,
+    last_claim_time: '2025-04-20T04:58:47.500',
+    location: 80,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'eostribeprod',
+    total_votes: '743426381422667907786693802968928708714299392.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://cryptotribe.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-10-11T17:46:02.000',
+    location: 276,
+    top21: false
+  },
+  {
+    owner: 'greeneosiobp',
+    total_votes: '54148774769781997914191759619137379951456550912.00000000000000000',
+    producer_key: 'EOS8HHtg16aezSgmvkZFwXgASBdXR7gt37cGB7FhTzPD8LL2pifhQ',
+    is_active: 1,
+    url: 'https://greeneosio.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-02-08T14:07:01.000',
+    location: 180,
+    top21: false
+  },
+  {
+    owner: 'guild.nefty',
+    total_votes: '351386365323307212192028530567658823084178145280.00000000000000000',
+    producer_key: 'EOS8VXNhcufCtVCWnPBxrArAjqGSwHxhVumqegj8kPuPWJy3n6mTf',
+    is_active: 1,
+    url: 'https://bp.neftyblocks.com',
+    unpaid_blocks: 4236,
+    last_claim_time: '2025-04-20T04:00:07.500',
+    location: 1,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'guild.taco',
+    total_votes: '343022265858954566554531575437411892327425769472.00000000000000000',
+    producer_key: 'EOS7rU4ZDPZtjLHKSBa5mUCWo6NXXzewxKBuWZiboUzZg1M9cVz2d',
+    is_active: 1,
+    url: 'https://tacocrypto.io',
+    unpaid_blocks: 7536,
+    last_claim_time: '2025-04-19T18:25:11.000',
+    location: 210,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'guild.waxdao',
+    total_votes: '339827236050787099193789925732548682239986106368.00000000000000000',
+    producer_key: 'EOS7Jqix9G63Jsadj5RnZ7EEwtKSTDjRDUZMoN5HC2JnLoorEfty9',
+    is_active: 1,
+    url: 'https://waxdaobp.io',
+    unpaid_blocks: 15468,
+    last_claim_time: '2025-04-18T19:16:01.500',
+    location: 840,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'hkeosguildhk',
+    total_votes: '15586454925201430101308801987760322380874907648.00000000000000000',
+    producer_key: 'EOS75Hy7nUei49B7K4rH5rvnavay7Stbpb3YQokadgoLdopsQ7q8J',
+    is_active: 1,
+    url: 'https://www.hkeos.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-01-29T00:09:36.000',
+    location: 344,
+    top21: false
+  },
+  {
+    owner: 'honey.wax',
+    total_votes: '25406084932663369438479594022017971309772800.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:11.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'hornet.wax',
+    total_votes: '25690185699552318481519084914646112316424192.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:12.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'hyperblocks',
+    total_votes: '11355248676301973652948817170723233223877328896.00000000000000000',
+    producer_key: 'EOS69LEc4U4MSwov18rFvQAcxWES5GStFW2ZZo2wSLoegnsN1dXaU',
+    is_active: 1,
+    url: 'https://hyperblocks.pro/',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-02-23T09:42:31.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'infinitybloc',
+    total_votes: '16538020506040224043076214083731387892891648.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.infinitybloc.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-05-28T23:29:46.500',
+    location: 48,
+    top21: false
+  },
+  {
+    owner: 'ivote4waxusa',
+    total_votes: '359582103371228901424868927818802278246826115072.00000000000000000',
+    producer_key: 'EOS7D3rXJ6P8vxohmjyw2153HUy7EoU36g2nKP4TcJxvfGJRrgmqc',
+    is_active: 1,
+    url: 'https://eosusa.io/bp/wax/',
+    unpaid_blocks: 2928,
+    last_claim_time: '2025-04-20T07:50:03.500',
+    location: 70,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'karmaproduce',
+    total_votes: '171473968228995061176971898830405103307980800.00000000000000000',
+    producer_key: 'EOS5bXJd9qYv8MnBR2WSq4A8vHqfGo8DGqj7tJjiW9vMe7AtSgAhE',
+    is_active: 1,
+    url: 'https://karmaguild.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-23T22:01:23.000',
+    location: 170,
+    top21: false
+  },
+  {
+    owner: 'killer.wax',
+    total_votes: '26821738803536007666330847676119614364844032.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:13.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'ledgerwiseio',
+    total_votes: '66141025402076170277577826428521049276488351744.00000000000000000',
+    producer_key: 'EOS7Vi2QBmjyPaRxFsJ1BtcmfEyRPCniD18CpKExdZnrZTVjp7BBV',
+    is_active: 1,
+    url: 'https://ledgerwise.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-04-20T06:30:01.500',
+    location: 175,
+    top21: false
+  },
+  {
+    owner: 'liquidstudio',
+    total_votes: '338271191904194133132350823047564941532210397184.00000000000000000',
+    producer_key: 'EOS6oj1Yn1FMvMcnVYVYg6g4Szr2gVWKLjncuQP7eKUksD3rhyxbt',
+    is_active: 1,
+    url: 'https://www.liquiid.io',
+    unpaid_blocks: 8652,
+    last_claim_time: '2025-04-19T15:09:02.000',
+    location: 49,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: true
+  },
+  {
+    owner: 'machinebloks',
+    total_votes: '65117213277502778997722707684744240526524416.00000000000000000',
+    producer_key: 'EOS8cARqfYA7T2gkoE57ZEEnwkPkn9JMsVNxBLFBPRCW94gremtws',
+    is_active: 1,
+    url: 'https://www.machinearmy.world/',
+    unpaid_blocks: 0,
+    last_claim_time: '2025-01-20T12:34:09.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'maltablockbp',
+    total_votes: '9711446858365961990057650668086951723164237824.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://maltablock.org',
+    unpaid_blocks: 888,
+    last_claim_time: '2021-02-01T00:06:03.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'mason.wax',
+    total_votes: '25400101600618724412646509856770859433197568.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-16T21:00:13.500',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'metax',
+    total_votes: '8055585559748972772302272345045982213308416.00000000000000000',
+    producer_key: 'EOS8Urge2mgQHkMYjNeMQ1ZAsSKjcvu3mre8TYhWNEVUKzZt6Z8DH',
+    is_active: 1,
+    url: 'https://google.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-09-29T06:00:32.500',
+    location: 764,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'mining.wax',
+    total_votes: '25230580743108022618866254755535364487643136.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2020-06-18T21:00:14.000',
+    location: 136,
+    top21: false
+  },
+  {
+    owner: 'nation.wax',
+    total_votes: '360536461071029460918634807723533331273963536384.00000000000000000',
+    producer_key: 'EOS64Xiqqta5qLduXKCbFGE5jNc7XKjxisxSDT4McU3n3F4QhXXxK',
+    is_active: 1,
+    url: 'https://eosnation.io',
+    unpaid_blocks: 7368,
+    last_claim_time: '2025-04-19T18:54:27.000',
+    location: 124,
+    top21: true
+  },
+  {
+    owner: 'nebulablocks',
+    total_votes: '794519045810648477160253879003985387454464.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.nebulaprotocol.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-07-06T15:57:32.000',
+    location: 233,
+    top21: false
+  },
+  {
+    owner: 'niftylifewax',
+    total_votes: '11286178046310591231391332223263732400128.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://niftylife.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-08-20T05:12:17.500',
+    location: 1,
+    top21: false
+  },
+  {
+    owner: 'nomadxchange',
+    total_votes: '387158378623848525945224345306159835328282624.00000000000000000',
+    producer_key: 'EOS6AkDFCXzzcmwFYiFYahvR79wb7ngkSZvMaytM3QakyjBMbrPN6',
+    is_active: 1,
+    url: 'https://nomadexchange.me',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-08-13T23:28:28.500',
+    location: 840,
+    top21: false
+  },
+  {
+    owner: 'oneinacilian',
+    total_votes: '31409805839916919325198535875749370697386819584.00000000000000000',
+    producer_key: 'EOS7fv5P8F3MWjBmQ2T4CgacGsbYvKDrzHwXujoRWZJeN9znYBLEq',
+    is_active: 1,
+    url: 'https://www.oiac.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-10-07T04:41:42.500',
+    location: 135,
+    top21: false
+  },
+  {
+    owner: 'phubproducer',
+    total_votes: '25419444190987159948732979435539169823162368.00000000000000000',
+    producer_key: 'EOS5uWFZ7ZSPWLWWuwXJQWnpvpcFb1LAYTpyexKjj7XXUYpWqFvJx',
+    is_active: 1,
+    url: 'vkcoin.store',
+    unpaid_blocks: 0,
+    last_claim_time: '2021-12-12T21:42:59.000',
+    location: 37,
+    top21: false
+  },
+  {
+    owner: 'pink.gg',
+    total_votes: '17556639252694609655931096389512216471737991168.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://bp.pink.gg',
+    unpaid_blocks: 4908,
+    last_claim_time: '2023-08-28T06:00:48.000',
+    location: 170,
+    top21: false
+  },
+  {
+    owner: 'polar.wax',
+    total_votes: '10364986333707790548093326942156880453402886144.00000000000000000',
+    producer_key: 'EOS6G5VJRHaaEzetAKCNidbNXWTZcJbG9HFoAoX3WgbWXeMyHTqz7',
+    is_active: 1,
+    url: 'https://www.polar.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-10-05T00:27:50.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'pplbresource',
+    total_votes: '7521524589519719285647114467668630374973440.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.pplbresource.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-03-15T05:03:42.000',
+    location: 764,
+    top21: false
+  },
+  {
+    owner: 'producera',
+    total_votes: '7286076469802390841058424356128794611810304.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 0,
+    last_claim_time: '2019-07-23T17:25:05.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerb',
+    total_votes: '6723877871776931423595658146383251120324608.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 174215,
+    last_claim_time: '2019-06-24T18:02:16.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerc',
+    total_votes: '6723873430468058957139347061908911889055744.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 174192,
+    last_claim_time: '2019-06-24T18:02:16.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerd',
+    total_votes: '6723736544945266289801531830374529408958464.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173989,
+    last_claim_time: '2019-06-24T18:02:17.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producere',
+    total_votes: '6722097904230545212253369737858295950999552.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 171140,
+    last_claim_time: '2019-06-24T18:02:17.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerf',
+    total_votes: '6723741068401304462035221498351758738456576.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173964,
+    last_claim_time: '2019-06-24T18:02:17.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerg',
+    total_votes: '6723876973534710031628128771708937983492096.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173424,
+    last_claim_time: '2019-06-24T18:02:18.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerh',
+    total_votes: '6723877959378876890317622108864048655237120.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173436,
+    last_claim_time: '2019-06-24T18:02:18.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'produceri',
+    total_votes: '6722234122482205679770479729361269670543360.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173423,
+    last_claim_time: '2019-06-24T18:02:18.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerj',
+    total_votes: '6723738513173725957223223448059084827262976.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173076,
+    last_claim_time: '2019-06-24T18:02:19.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerk',
+    total_votes: '6716215000442246267697758184453052253077504.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173082,
+    last_claim_time: '2019-06-24T18:02:19.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerl',
+    total_votes: '6723739674188191008450596631036127933890560.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173060,
+    last_claim_time: '2019-06-24T18:02:19.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerm',
+    total_votes: '6716212823014338975520911043734290992988160.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 172993,
+    last_claim_time: '2019-06-24T18:02:20.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producern',
+    total_votes: '6723283406560151709852352486094009790365696.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173004,
+    last_claim_time: '2019-06-24T18:02:20.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producero',
+    total_votes: '6716214596512770531126914547009173833383936.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 173015,
+    last_claim_time: '2019-06-24T18:02:20.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerp',
+    total_votes: '6721639517247752357199466773623220914356224.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148585,
+    last_claim_time: '2019-06-24T18:02:21.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerq',
+    total_votes: '7276770356719403651895889683500678896418816.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148584,
+    last_claim_time: '2019-06-24T18:02:21.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producerr',
+    total_votes: '6723862521504313043035228358713090643066880.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 148583,
+    last_claim_time: '2019-06-24T18:02:21.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producers',
+    total_votes: '6702589309475926056355111802844585285124096.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 115077,
+    last_claim_time: '2019-06-24T18:02:22.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'producert',
+    total_votes: '35801839965966022756591805531160576000.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 50604,
+    last_claim_time: '2019-06-24T18:02:22.000',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'produceru',
+    total_votes: '41444553905817148679595965534936498176.00000000000000000',
+    producer_key: 'EOS1111111111111111111111111111111114T1Anm',
+    is_active: 0,
+    url: 'https://wax.io',
+    unpaid_blocks: 44064,
+    last_claim_time: '2019-06-24T18:02:22.500',
+    location: 0,
+    top21: false
+  },
+  {
+    owner: 'qaraqolblock',
+    total_votes: '102676214041602770974972192591800968069251072.00000000000000000',
+    producer_key: 'EOS6RBPK6ssNrseZGeZL9zV3bygo9w7q1mnD9E8Enu3tPKkvjbuFe',
+    is_active: 1,
+    url: 'https://qaraqol.com',
+    unpaid_blocks: 0,
+    last_claim_time: '2024-05-06T19:23:20.000',
+    location: 276,
+    producer_authority: [ 'block_signing_authority_v0', [Object] ],
+    top21: false
+  },
+  {
+    owner: 'qttguildewax',
+    total_votes: '73059907015705023019547430633050924023545856.00000000000000000',
+    producer_key: 'EOS8TPTPS8NDigj29dAofCtWecz6BasSF1GknAsUVGSQ7oDgjyM8P',
+    is_active: 1,
+    url: 'https://www.qtradingtheory.com/',
+    unpaid_blocks: 0,
+    last_claim_time: '2022-03-03T16:51:55.000',
+    location: 47,
+    top21: false
+  },
+  ... 32 more items
+]
+Current producers in DB: [
+  { id: 16, name: 'eosdublinwow', website: 'https://eosdublin.com' },
+  { id: 19, name: 'eosriobrazil', website: 'https://eosrio.io' },
+  { id: 7, name: 'bp.adex', website: 'https://wax.a-dex.io' },
+  { id: 20, name: 'greeneosiobp', website: 'https://greeneosio.com' },
+  {
+    id: 21,
+    name: 'guild.nefty',
+    website: 'https://bp.neftyblocks.com'
+  },
+  { id: 22, name: 'guild.taco', website: 'https://tacocrypto.io' },
+  { id: 23, name: 'guild.waxdao', website: 'https://waxdaobp.io' },
+  {
+    id: 24,
+    name: 'ivote4waxusa',
+    website: 'https://eosusa.io/bp/wax/'
+  },
+  { id: 25, name: 'ledgerwiseio', website: 'https://ledgerwise.io' },
+  { id: 26, name: 'liquidstudio', website: 'https://www.liquiid.io' },
+  { id: 27, name: 'nation.wax', website: 'https://eosnation.io' },
+  { id: 28, name: 'oneinacilian', website: 'https://www.oiac.io' },
+  { id: 29, name: 'pink.gg', website: 'https://bp.pink.gg' },
+  { id: 31, name: 'sentnlagents', website: 'https://www.sentnl.io' },
+  { id: 32, name: 'teamgreymass', website: 'https://greymass.com' },
+  { id: 30, name: 'qaraqolblock', website: 'https://qaraqol.com' },
+  { id: 34, name: 'wax.eastern', website: 'https://waxeastern.cn' },
+  { id: 33, name: 'testcrafters', website: 'https://blokcrafters.com' },
+  { id: 8, name: 'bp.alcor', website: 'https://bp.alcor.exchange/' },
+  {
+    id: 3,
+    name: 'amsterdamwax',
+    website: 'https://wax.eosamsterdam.net'
+  },
+  { id: 6, name: 'bountyblokbp', website: 'https://www.bountyblok.io' },
+  { id: 9, name: 'bp.box', website: 'https://wax.defibox.io' },
+  { id: 10, name: 'bp.wecan', website: 'https://wecan.dev' },
+  { id: 4, name: 'blacklusionx', website: 'https://blacklusion.io' },
+  { id: 11, name: 'cryptolions1', website: 'https://cryptolions.io' },
+  { id: 12, name: 'dapplica', website: 'https://wax.dapplica.io' },
+  { id: 2, name: 'alohaeosprod', website: 'https://www.alohaeos.com' },
+  { id: 14, name: 'eosauthority', website: 'https://eosauthority.com' },
+  { id: 15, name: 'eosdacserver', website: 'http://eosdac.io' },
+  { id: 13, name: 'eosarabianet', website: 'https://eosarabia.net' },
+  { id: 18, name: 'eosphereiobp', website: 'https://www.eosphere.io' },
+  {
+    id: 17,
+    name: 'eosiodetroit',
+    website: 'https://detroitledger.tech'
+  },
+  { id: 35, name: 'waxhiveguild', website: 'https://hivebp.io' },
+  { id: 5, name: 'blokcrafters', website: 'https://blokcrafters.com' },
+  { id: 540, name: 'bp.twosticks', website: 'https://twosticks.xyz' },
+  { id: 1, name: '3dkrenderwax', website: 'https://3dkrender.com' },
+  { id: 830, name: 'waxmadrid111', website: 'https://eosiomadrid.io' },
+  { id: 36, name: 'waxswedenorg', website: 'https://waxsweden.org' },
+  {
+    id: 37,
+    name: 'wombatblockx',
+    website: 'https://www.spielworks.com'
+  }
+]
+Processing producer eosdublinwow with domain eosdublin.com
+Processing producer eosriobrazil with domain eosrio.io
+Processing producer bp.adex with domain wax.a-dex.io
+Processing producer greeneosiobp with domain greeneosio.com
+Processing producer guild.nefty with domain bp.neftyblocks.com
+Processing producer guild.taco with domain tacocrypto.io
+Processing producer guild.waxdao with domain waxdaobp.io
+Processing producer ivote4waxusa with domain eosusa.io
+Processing producer ledgerwiseio with domain ledgerwise.io
+Processing producer liquidstudio with domain www.liquiid.io
+Processing producer nation.wax with domain eosnation.io
+Processing producer oneinacilian with domain www.oiac.io
+Processing producer pink.gg with domain bp.pink.gg
+Processing producer sentnlagents with domain www.sentnl.io
+Processing producer teamgreymass with domain greymass.com
+Processing producer qaraqolblock with domain qaraqol.com
+Processing producer wax.eastern with domain waxeastern.cn
+Processing producer testcrafters with domain blokcrafters.com
+Processing producer bp.alcor with domain bp.alcor.exchange
+Processing producer amsterdamwax with domain wax.eosamsterdam.net
+Processing producer bountyblokbp with domain www.bountyblok.io
+Processing producer bp.box with domain wax.defibox.io
+Processing producer bp.wecan with domain wecan.dev
+Processing producer blacklusionx with domain blacklusion.io
+Processing producer cryptolions1 with domain cryptolions.io
+Processing producer dapplica with domain wax.dapplica.io
+Processing producer alohaeosprod with domain www.alohaeos.com
+Processing producer eosauthority with domain eosauthority.com
+Processing producer eosdacserver with domain eosdac.io
+Processing producer eosarabianet with domain eosarabia.net
+Processing producer eosphereiobp with domain www.eosphere.io
+Processing producer eosiodetroit with domain detroitledger.tech
+Processing producer waxhiveguild with domain hivebp.io
+Processing producer blokcrafters with domain blokcrafters.com
+Processing producer bp.twosticks with domain twosticks.xyz
+Processing producer 3dkrenderwax with domain 3dkrender.com
+Processing producer waxmadrid111 with domain eosiomadrid.io
+Processing producer waxswedenorg with domain waxsweden.org
+Processing producer wombatblockx with domain www.spielworks.com
+Active producers from chain: [
+  '3dkrenderwax', '4halffloripa', 'ahtbatd11112', 'aikonproduce', 'alohaeosprod',
+  'amsterdamwax', 'anonymousoff', 'apidae.wax',   'apoidea.wax',  'argentinawax',
+  'aus1genereos', 'bee.wax',      'blacklusionx', 'blockmatrix1', 'blocksmithio',
+  'blokcrafters', 'bountyblokbp', 'bp.adex',      'bp.alcor',     'bp.box',
+  'bp.wecan',     'bumble.wax',   'busy.wax',     'cryptolions1', 'csxcommunity',
+  'cypherglasss', 'dapplica',     'darkprodnet1', 'deinproducer', 'did4love4fun',
+  'digger.wax',   'dmaildotcobp', 'dqgk4.waa',    'drone.wax',    'edeniaedenia',
+  'eos42freedom', 'eosarabianet', 'eosauthority', 'eosbarcelona', 'eoscannonwax',
+  'eosdacserver', 'eosdublinwow', 'eoseouldotio', 'eosiocentral', 'eosiodetroit',
+  'eosnewyorkio', 'eosphereiobp', 'eosriobrazil', 'eostribeprod', 'greeneosiobp',
+  'guild.nefty',  'guild.taco',   'guild.waxdao', 'hkeosguildhk', 'honey.wax',
+  'hornet.wax',   'hyperblocks',  'infinitybloc', 'ivote4waxusa', 'karmaproduce',
+  'killer.wax',   'ledgerwiseio', 'liquidstudio', 'machinebloks', 'maltablockbp',
+  'mason.wax',    'metax',        'mining.wax',   'nation.wax',   'nebulablocks',
+  'niftylifewax', 'nomadxchange', 'oneinacilian', 'phubproducer', 'pink.gg',
+  'polar.wax',    'pplbresource', 'producera',    'producerb',    'producerc',
+  'producerd',    'producere',    'producerf',    'producerg',    'producerh',
+  'produceri',    'producerj',    'producerk',    'producerl',    'producerm',
+  'producern',    'producero',    'producerp',    'producerq',    'producerr',
+  'producers',    'producert',    'produceru',    'qaraqolblock', 'qttguildewax',
+  ... 32 more items
+]
+Checking domain eosdublin.com with producers: [ 'eosdublinwow' ]
+Has active producer for domain eosdublin.com: true
+Checking domain eosrio.io with producers: [ 'eosriobrazil' ]
+Has active producer for domain eosrio.io: true
+Checking domain wax.a-dex.io with producers: [ 'bp.adex' ]
+Has active producer for domain wax.a-dex.io: true
+Checking domain greeneosio.com with producers: [ 'greeneosiobp' ]
+Has active producer for domain greeneosio.com: true
+Checking domain bp.neftyblocks.com with producers: [ 'guild.nefty' ]
+Has active producer for domain bp.neftyblocks.com: true
+Checking domain tacocrypto.io with producers: [ 'guild.taco' ]
+Has active producer for domain tacocrypto.io: true
+Checking domain waxdaobp.io with producers: [ 'guild.waxdao' ]
+Has active producer for domain waxdaobp.io: true
+Checking domain eosusa.io with producers: [ 'ivote4waxusa' ]
+Has active producer for domain eosusa.io: true
+Checking domain ledgerwise.io with producers: [ 'ledgerwiseio' ]
+Has active producer for domain ledgerwise.io: true
+Checking domain www.liquiid.io with producers: [ 'liquidstudio' ]
+Has active producer for domain www.liquiid.io: true
+Checking domain eosnation.io with producers: [ 'nation.wax' ]
+Has active producer for domain eosnation.io: true
+Checking domain www.oiac.io with producers: [ 'oneinacilian' ]
+Has active producer for domain www.oiac.io: true
+Checking domain bp.pink.gg with producers: [ 'pink.gg' ]
+Has active producer for domain bp.pink.gg: true
+Checking domain www.sentnl.io with producers: [ 'sentnlagents' ]
+Has active producer for domain www.sentnl.io: true
+Checking domain greymass.com with producers: [ 'teamgreymass' ]
+Has active producer for domain greymass.com: true
+Checking domain qaraqol.com with producers: [ 'qaraqolblock' ]
+Has active producer for domain qaraqol.com: true
+Checking domain waxeastern.cn with producers: [ 'wax.eastern' ]
+Has active producer for domain waxeastern.cn: true
+Checking domain blokcrafters.com with producers: [ 'testcrafters', 'blokcrafters' ]
+Has active producer for domain blokcrafters.com: true
+Checking domain bp.alcor.exchange with producers: [ 'bp.alcor' ]
+Has active producer for domain bp.alcor.exchange: true
+Checking domain wax.eosamsterdam.net with producers: [ 'amsterdamwax' ]
+Has active producer for domain wax.eosamsterdam.net: true
+Checking domain www.bountyblok.io with producers: [ 'bountyblokbp' ]
+Has active producer for domain www.bountyblok.io: true
+Checking domain wax.defibox.io with producers: [ 'bp.box' ]
+Has active producer for domain wax.defibox.io: true
+Checking domain wecan.dev with producers: [ 'bp.wecan' ]
+Has active producer for domain wecan.dev: true
+Checking domain blacklusion.io with producers: [ 'blacklusionx' ]
+Has active producer for domain blacklusion.io: true
+Checking domain cryptolions.io with producers: [ 'cryptolions1' ]
+Has active producer for domain cryptolions.io: true
+Checking domain wax.dapplica.io with producers: [ 'dapplica' ]
+Has active producer for domain wax.dapplica.io: true
+Checking domain www.alohaeos.com with producers: [ 'alohaeosprod' ]
+Has active producer for domain www.alohaeos.com: true
+Checking domain eosauthority.com with producers: [ 'eosauthority' ]
+Has active producer for domain eosauthority.com: true
+Checking domain eosdac.io with producers: [ 'eosdacserver' ]
+Has active producer for domain eosdac.io: true
+Checking domain eosarabia.net with producers: [ 'eosarabianet' ]
+Has active producer for domain eosarabia.net: true
+Checking domain www.eosphere.io with producers: [ 'eosphereiobp' ]
+Has active producer for domain www.eosphere.io: true
+Checking domain detroitledger.tech with producers: [ 'eosiodetroit' ]
+Has active producer for domain detroitledger.tech: true
+Checking domain hivebp.io with producers: [ 'waxhiveguild' ]
+Has active producer for domain hivebp.io: true
+Checking domain twosticks.xyz with producers: [ 'bp.twosticks' ]
+Has active producer for domain twosticks.xyz: false
+Disabling all producers with domain twosticks.xyz as none are found in the chain
+Producer IDs to disable: [ 540 ]
+Checking domain 3dkrender.com with producers: [ '3dkrenderwax' ]
+Has active producer for domain 3dkrender.com: true
+Checking domain eosiomadrid.io with producers: [ 'waxmadrid111' ]
+Has active producer for domain eosiomadrid.io: true
+Checking domain waxsweden.org with producers: [ 'waxswedenorg' ]
+Has active producer for domain waxsweden.org: true
+Checking domain www.spielworks.com with producers: [ 'wombatblockx' ]
+Has active producer for domain www.spielworks.com: true
+: ---------------------------------------- 
+: Adding: 3dkrenderwax on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "p2p": "peer.3dkrender.com:9880"
+} 
+Node add:: {
+  "api": "http://apiwax.3dkrender.com",
+  "ssl": "https://apiwax.3dkrender.com",
+  "p2p": ""
+} 
+Node add:: {
+  "api": "http://atomic.3dkrender.com",
+  "ssl": "https://atomic.3dkrender.com"
+} 
+Node add:: {
+  "api": "http://query.3dkrender.com",
+  "ssl": "https://query.3dkrender.com"
+} 
+Node add:: {
+  "api": "http://ipfs.3dkrender.com",
+  "ssl": "https://ipfs.3dkrender.com"
+} 
+: ---------------------------------------- 
+: Adding: alohaeosprod on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://api.wax.alohaeos.com",
+  "ssl": "https://api.wax.alohaeos.com",
+  "p2p": "peer.wax.alohaeos.com:9876"
+} 
+: ---------------------------------------- 
+: Adding: amsterdamwax on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://wax.eu.eosamsterdam.net",
+  "ssl": "https://wax.eu.eosamsterdam.net"
+} 
+Node add:: {
+  "p2p": "wax.eu.eosamsterdam.net:9101"
+} 
+Node add:: {
+  "ssl": "https://wax-aa.eu.eosamsterdam.net"
+} 
+Node add:: {
+  "ssl": "https://wax.light-api.net"
+} 
+Node add:: {
+  "ssl": "https://wax.light-api.net"
+} 
+: ---------------------------------------- 
+: Adding: blacklusionx on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "p2p": "peer1-emea.wax.blacklusion.io:4646"
+} 
+Node add:: {
+  "api": "http://wax.blacklusion.io",
+  "ssl": "https://wax.blacklusion.io"
+} 
+Node add:: {
+  "api": "http://aa.wax.blacklusion.io",
+  "ssl": "https://aa.wax.blacklusion.io"
+} 
+Node add:: {
+  "api": "http://ipfs.blacklusion.cloud",
+  "ssl": "https://ipfs.blacklusion.cloud"
+} 
+: ---------------------------------------- 
+: Adding: bountyblokbp on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://api.wax.bountyblok.io",
+  "ssl": "https://api.wax.bountyblok.io"
+} 
+Node add:: {
+  "p2p": "p2p.wax.bountyblok.io:29876"
+} 
+Node add:: {
+  "api": "http://ipfs.wax.bountyblok.io",
+  "ssl": "https://ipfs.wax.bountyblok.io"
+} 
+: ---------------------------------------- 
+: Adding: bp.alcor on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "p2p": "wax-p2p.alcor.exchange:9876"
+} 
+Node add:: {
+  "p2p": "wax-p2p2.alcor.exchange:9876"
+} 
+Node add:: {
+  "api": "http://wax-api.alcor.exchange",
+  "ssl": "https://wax-api.alcor.exchange"
+} 
+Node add:: {
+  "api": "http://wax-atomic.alcor.exchange",
+  "ssl": "https://wax-atomic.alcor.exchange"
+} 
+Node add:: {
+  "api": "http://wax-hyperion.alcor.exchange",
+  "ssl": "https://wax-hyperion.alcor.exchange"
+} 
+: ---------------------------------------- 
+: Adding: bp.box on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://wax.defibox.xyz",
+  "ssl": "https://wax.defibox.xyz",
+  "p2p": "wax.defibox.xyz:9966"
+} 
+: ---------------------------------------- 
+: Adding: bp.wecan on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://api-wax-mainnet.wecan.dev",
+  "ssl": "https://api-wax-mainnet.wecan.dev"
+} 
+Node add:: {
+  "api": "http://hyperion-wax-mainnet.wecan.dev",
+  "ssl": "https://hyperion-wax-mainnet.wecan.dev"
+} 
+Node add:: {
+  "api": "http://history-wax-mainnet.wecan.dev",
+  "ssl": "https://history-wax-mainnet.wecan.dev"
+} 
+Node add:: {
+  "api": "http://atomic-wax-mainnet.wecan.dev",
+  "ssl": "https://atomic-wax-mainnet.wecan.dev"
+} 
+Node add:: {
+  "api": "http://ipfs.wecan.dev",
+  "ssl": "https://ipfs.wecan.dev"
+} 
+Node add:: {
+  "api": "http://light-api-wax-main.wecan.dev",
+  "ssl": "https://light-api-wax-main.wecan.dev"
+} 
+Node add:: {
+  "p2p": "seed1-wax-mainnet.wecan.dev:14998"
+} 
+Node add:: {
+  "p2p": "seed2-wax-mainnet.wecan.dev:14998"
+} 
+: ---------------------------------------- 
+: Adding: cryptolions1 on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://wax.cryptolions.io",
+  "ssl": "https://wax.cryptolions.io",
+  "p2p": "wax.cryptolions.io:9876"
+} 
+Node add:: {
+  "api": "http://atomic-api.wax.cryptolions.io",
+  "ssl": "https://atomic-api.wax.cryptolions.io"
+} 
+Node add:: {
+  "api": "http://ipfs-wax.cryptolions.io",
+  "ssl": "https://ipfs-wax.cryptolions.io"
+} 
+Node add:: {
+  "api": "http://lightapi.wax.cryptolions.io",
+  "ssl": "https://lightapi.wax.cryptolions.io"
+} 
+: ---------------------------------------- 
+: Adding: dapplica on mainnet 
+: ---------------------------------------- 
+Node add:: {
+  "api": "http://wax.dapplica.io",
+  "ssl": "https://wax.dapplica.io",
+  "p2p": "wax.dapplica.io:9876"
+} 
+Node add:: {
+  "api": "http://aa.dapplica.io",
+  "ssl": "https://aa.dapplica.io"
+} 
+Node add:: {
+  "api": "http://ipfs-wax.dapplica.io",
+  "ssl": "https://ipfs-wax.dapplica.io"
+} 
+Node add:: {
+  "api": "http://lightapi-wax.dapplica.io",
+  "ssl": "https://lightapi-wax.dapplica.io"
+} 
+Retry attempt 1 for https://dmail.co/chains.json
+Status: undefined
+Retry attempt 2 for https://dmail.co/chains.json
+Status: undefined
+Retry attempt 3 for https://dmail.co/chains.json
+Status: undefined

@@ -30,7 +30,7 @@ const getProducers = async (chain, top21Producers, retries = 3) => {
       }
 
       return response.rows
-        .filter(producer => producer.total_votes > 0) // Only include active producers
+        .filter(producer => producer.total_votes > 0 && producer.is_active === 1) // Only include active producers with votes
         .map(producer => ({
           ...producer,
           top21: top21Producers.includes(producer.owner)
