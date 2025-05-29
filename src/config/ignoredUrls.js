@@ -68,7 +68,6 @@ export const ignoredUrls = [
   'qaraqol.com',
   'qtradingtheory.com',
   'machinearmy.world',
-  'wax.a-dex.io',
   'google.com',
   'niftylife.io',
   'validation.capital',
