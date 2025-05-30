@@ -65,7 +65,6 @@ export const ignoredUrls = [
   'blokcrafters.com',
   'eosarabia.net',
   'eosdublin.com',
-  'qaraqol.com',
   'qtradingtheory.com',
   'machinearmy.world',
   'google.com',
