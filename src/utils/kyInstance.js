@@ -1,6 +1,7 @@
 import ky from 'ky';
 
 const kyInstance = ky.create({
+  timeout: 10000, // 10 second timeout
   retry: {
     limit: 5,
     methods: ['get', 'post'],

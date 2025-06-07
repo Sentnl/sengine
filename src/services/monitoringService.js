@@ -117,6 +117,16 @@ const updateProducers = async (chain) => {
   }
 };
 
+// Add timeout wrapper function
+const withTimeout = (promise, timeoutMs, timeoutMessage) => {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error(timeoutMessage)), timeoutMs)
+    )
+  ]);
+};
+
 // Running all tests
 const runAllTests = async (chain, producerName = null, options = {}) => {
   console.log(`Running tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);
@@ -138,21 +148,35 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
     Logger.log('', `Testing producer: ${row.name} on ${chain}`);
     Logger.log('', '----------------------------------------');
 
-    const { results, timestamp } = await validateProducer(row.id, row.chain, {
-      ...validationData,
-      jsonUrl: row.json_url
-    });
-    Logger.log('', `Test Results for: ${row.name}`);
-    if (results.guild[0]) Logger.log('', `Guild: ${results.guild[1] ? 'Passed' : 'Failed'}`);
-    if (results.api[0]) Logger.log('', `API: ${results.api[1] ? 'Passed' : 'Failed'}`);
-    if (results.history[0]) Logger.log('', `History: ${results.history[1] ? 'Passed' : 'Failed'}`);
-    if (results.hyperion[0]) Logger.log('', `Hyperion: ${results.hyperion[1] ? 'Passed' : 'Failed'}`);
-    if (results.p2p[0]) Logger.log('', `P2P: ${results.p2p[1] ? 'Passed' : 'Failed'}`);
-    if (results.atomicassets[0]) Logger.log('', `AtomicAssets: ${results.atomicassets[1] ? 'Passed' : 'Failed'}`);
-    if (results.pricefeed[0]) Logger.log('', `PriceFeed: ${results.pricefeed[1] ? 'Passed' : 'Failed'}`);
-    if (results.light_api[0]) Logger.log('', `Light API: ${results.light_api[1] ? 'Passed' : 'Failed'}`);
-    if (results.ipfs[0]) Logger.log('', `IPFS: ${results.ipfs[1] ? 'Passed' : 'Failed'}`);
-    Logger.log('', `Timestamp: ${timestamp}`);
+    try {
+      const validationPromise = validateProducer(row.id, row.chain, {
+        ...validationData,
+        jsonUrl: row.json_url
+      });
+      
+      const { results, timestamp } = await withTimeout(
+        validationPromise,
+        120000, // 2 minute timeout per producer
+        `Timeout testing producer ${row.name} after 2 minutes`
+      );
+
+      Logger.log('', `Test Results for: ${row.name}`);
+      if (results.guild[0]) Logger.log('', `Guild: ${results.guild[1] ? 'Passed' : 'Failed'}`);
+      if (results.api[0]) Logger.log('', `API: ${results.api[1] ? 'Passed' : 'Failed'}`);
+      if (results.history[0]) Logger.log('', `History: ${results.history[1] ? 'Passed' : 'Failed'}`);
+      if (results.hyperion[0]) Logger.log('', `Hyperion: ${results.hyperion[1] ? 'Passed' : 'Failed'}`);
+      if (results.p2p[0]) Logger.log('', `P2P: ${results.p2p[1] ? 'Passed' : 'Failed'}`);
+      if (results.atomicassets[0]) Logger.log('', `AtomicAssets: ${results.atomicassets[1] ? 'Passed' : 'Failed'}`);
+      if (results.pricefeed[0]) Logger.log('', `PriceFeed: ${results.pricefeed[1] ? 'Passed' : 'Failed'}`);
+      if (results.light_api[0]) Logger.log('', `Light API: ${results.light_api[1] ? 'Passed' : 'Failed'}`);
+      if (results.ipfs[0]) Logger.log('', `IPFS: ${results.ipfs[1] ? 'Passed' : 'Failed'}`);
+      Logger.log('', `Timestamp: ${timestamp}`);
+    } catch (error) {
+      console.error(`Error testing producer ${row.name}:`, error.message);
+      Logger.log('', `Test Results for: ${row.name}`);
+      Logger.log('', `Error: ${error.message}`);
+    }
+    
     Logger.log('', '----------------------------------------');
   }
   console.log(`Completed tests for ${chain}${producerName ? ` (Producer: ${producerName})` : ''}`);

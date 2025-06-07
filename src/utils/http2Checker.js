@@ -9,6 +9,31 @@ import { URL } from 'url';
 export const checkHttp2 = async (http2Endpoint) => {
   return new Promise((resolve) => {
     let client;
+    let resolved = false;
+    let timeoutId;
+
+    const cleanup = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (client && !client.destroyed) {
+        client.destroy();
+      }
+    };
+
+    const resolveOnce = (result) => {
+      if (!resolved) {
+        resolved = true;
+        cleanup();
+        resolve(result);
+      }
+    };
+
+    // Set timeout
+    timeoutId = setTimeout(() => {
+      resolveOnce({ success: false, error: 'HTTP/2 connection timeout after 15 seconds' });
+    }, 15000);
+
     try {
       const parsedUrl = new URL(http2Endpoint);
 
@@ -21,62 +46,63 @@ export const checkHttp2 = async (http2Endpoint) => {
 
       client.on('error', (err) => {
         console.error(`Client connection error: ${err.message}`);
-        resolve({ success: false, error: `HTTP/2 connection error: ${err.message}` });
+        resolveOnce({ success: false, error: `HTTP/2 connection error: ${err.message}` });
       });
 
-      // Create the HTTP/2 request
-      const headers = {
-        ':method': 'GET',
-        ':path': parsedUrl.pathname + parsedUrl.search, // Include query params if any
-        ':scheme': parsedUrl.protocol.replace(':', ''), // 'https' or 'http'
-        ':authority': parsedUrl.hostname, // Required for HTTP/2
-        'User-Agent': 'curl/8.4.0', // Mimic curl User-Agent
-        'Accept': '*/*',
-      };
+      client.on('connect', () => {
+        // Create the HTTP/2 request
+        const headers = {
+          ':method': 'GET',
+          ':path': parsedUrl.pathname + parsedUrl.search, // Include query params if any
+          ':scheme': parsedUrl.protocol.replace(':', ''), // 'https' or 'http'
+          ':authority': parsedUrl.hostname, // Required for HTTP/2
+          'User-Agent': 'curl/8.4.0', // Mimic curl User-Agent
+          'Accept': '*/*',
+        };
 
-      console.log('Sending headers:', headers);
+        console.log('Sending headers:', headers);
 
-      const req = client.request(headers);
+        const req = client.request(headers);
 
-      req.setEncoding('utf8');
+        req.setEncoding('utf8');
 
-      let body = '';
+        let body = '';
 
-      req.on('response', (headers) => {
-        //console.log('Response headers:', headers);
-        if (headers[':status'] === 200) {
-          console.log('HTTP/2 request succeeded with status 200');
-        } else {
-          console.error(`HTTP/2 request failed with status ${headers[':status']}`);
-          resolve({ success: false, error: `HTTP/2 request failed with status ${headers[':status']}` });
-        }
+        req.on('response', (headers) => {
+          //console.log('Response headers:', headers);
+          if (headers[':status'] === 200) {
+            console.log('HTTP/2 request succeeded with status 200');
+          } else {
+            console.error(`HTTP/2 request failed with status ${headers[':status']}`);
+            resolveOnce({ success: false, error: `HTTP/2 request failed with status ${headers[':status']}` });
+            return;
+          }
+        });
+
+        req.on('data', (chunk) => {
+          body += chunk;
+        });
+
+        req.on('end', () => {
+          //console.log('Response body:', body);
+          resolveOnce({ success: true });
+        });
+
+        req.on('error', (err) => {
+          console.error(`Request error: ${err.message}`);
+          resolveOnce({ success: false, error: `HTTP/2 request error: ${err.message}` });
+        });
+
+        req.end();
       });
 
-      req.on('data', (chunk) => {
-        body += chunk;
+      client.on('close', () => {
+        console.log('Client connection closed');
       });
 
-      req.on('end', () => {
-        //console.log('Response body:', body);
-        resolve({ success: true });
-      });
-
-      req.on('error', (err) => {
-        console.error(`Request error: ${err.message}`);
-        resolve({ success: false, error: `HTTP/2 request error: ${err.message}` });
-      });
-
-      req.end();
     } catch (err) {
       console.error(`Error while setting up the HTTP/2 check: ${err.message}`);
-      resolve({ success: false, error: `HTTP/2 check error: ${err.message}` });
-    } finally {
-      if (client) {
-        client.on('close', () => {
-          console.log('Client connection closed');
-          client.destroy();
-        });
-      }
+      resolveOnce({ success: false, error: `HTTP/2 check error: ${err.message}` });
     }
   });
 };
