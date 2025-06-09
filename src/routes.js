@@ -171,15 +171,20 @@ fastify.get('/latest-results', async (request, reply) => {
   if (chain) queryParams.push(chain);
   if (producer) queryParams.push(producer);
 
+  console.time('latest-results-query');
   const { rows } = await db.query(query, queryParams);
+  console.timeEnd('latest-results-query');
 
-  // Convert the timestamp to ISO format
-  rows.forEach(row => {
-    row.timestamp = row.utc_timestamp.toISOString();
-    delete row.utc_timestamp;
-  });
+  console.time('latest-results-processing');
+  // Convert the timestamp to ISO format in single pass
+  const results = rows.map(row => ({
+    ...row,
+    timestamp: row.utc_timestamp.toISOString(),
+    utc_timestamp: undefined
+  }));
+  console.timeEnd('latest-results-processing');
 
-  return rows;
+  return results;
 });
 
 
@@ -202,22 +207,27 @@ fastify.get('/latest-results', async (request, reply) => {
       LEFT JOIN producer_services ps ON vs.producer_service_id = ps.id
       WHERE vr.id = $1
     `;
+    
+    console.time('validate-services-query');
     const { rows } = await db.query(query, [resultId]);
+    console.timeEnd('validate-services-query');
 
-    // Categorize results by type and endpoint
-    const categorizedResults = rows.reduce((acc, row) => {
-      if (!acc[row.type]) {
-        acc[row.type] = {};
+    console.time('validate-services-processing');
+    // Categorize results by type and endpoint in single pass
+    const categorizedResults = {};
+    for (const row of rows) {
+      if (!categorizedResults[row.type]) {
+        categorizedResults[row.type] = {};
       }
       
       const endpoint = row.ssl_endpoint || row.p2p_endpoint;
-      if (!acc[row.type][endpoint]) {
-        acc[row.type][endpoint] = [];
+      if (!categorizedResults[row.type][endpoint]) {
+        categorizedResults[row.type][endpoint] = [];
       }
       
-      acc[row.type][endpoint].push(row);
-      return acc;
-    }, {});
+      categorizedResults[row.type][endpoint].push(row);
+    }
+    console.timeEnd('validate-services-processing');
 
     return categorizedResults;
   });
@@ -253,13 +263,16 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
   const queryParams = [start_date, end_date, chain];
   if (producerId) queryParams.push(producerId);
 
+  console.time('db-query');
   const { rows } = await db.query(query, queryParams);
+  console.timeEnd('db-query');
   
   if (rows.length === 0) {
     reply.code(404).send({ error: 'No results available for the given parameters' });
     return;
   }
   
+  console.time('processing');
   const groupedResults = rows.reduce((acc, row) => {
     if (!acc[row.producer_id]) {
       acc[row.producer_id] = {
@@ -289,18 +302,29 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
   ];
 
   const results = Object.values(groupedResults).map(producer => {
-    services.forEach(service => {
-      const totalTests = producer.rows.length;
+    const totalTests = producer.rows.length;
+    const cpuSum = producer.rows.reduce((sum, row) => sum + row.cpu, 0);
+    
+    // Calculate all service stats in single pass through rows
+    const serviceStats = {};
+    for (const service of services) {
       const passedTests = producer.rows.filter(row => row[`${service}_ok`]).length;
-      producer[service] = producer.rows[0][service];
-      producer[`${service}_ok`] = Math.round((passedTests / totalTests) * 100);
-    });
-
-    producer.cpu = Math.round(producer.rows.reduce((sum, row) => sum + row.cpu, 0) / producer.rows.length);
-
-    delete producer.rows;
-    return producer;
+      serviceStats[service] = producer.rows[0][service];
+      serviceStats[`${service}_ok`] = Math.round((passedTests / totalTests) * 100);
+    }
+    
+    return {
+      id: producer.id,
+      producer_id: producer.producer_id,
+      producer_name: producer.producer_name,
+      chain: producer.chain,
+      start_timestamp: start_date,
+      end_timestamp: end_date,
+      cpu: Math.round(cpuSum / totalTests),
+      ...serviceStats
+    };
   });
+  console.timeEnd('processing');
 
   return producerId ? results[0] : results;
 });
@@ -359,7 +383,8 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
   ];
   const dailyResults = {};
 
-  rows.forEach(row => {
+  // Single pass through rows to build daily stats
+  for (const row of rows) {
     const date = row.date.toISOString().split('T')[0];
     if (!dailyResults[date]) {
       dailyResults[date] = {
@@ -367,21 +392,23 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
         total_tests: 0,
         ids: [],
       };
-      services.forEach(service => {
+      // Initialize service counters once
+      for (const service of services) {
         dailyResults[date][service] = { passed: 0, total: 0 };
-      });
+      }
     }
 
     dailyResults[date].total_tests++;
     dailyResults[date].ids.push(row.id);
 
-    services.forEach(service => {
+    // Update all service counters in one loop
+    for (const service of services) {
       dailyResults[date][service].total++;
       if (row[`${service}_ok`]) {
         dailyResults[date][service].passed++;
       }
-    });
-  });
+    }
+  }
 
   const results = Object.values(dailyResults).map(day => {
     const dayResult = {
@@ -389,9 +416,10 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
       total_tests: day.total_tests,
       ids: day.ids
     };
-    services.forEach(service => {
+    // Calculate percentages for all services at once
+    for (const service of services) {
       dayResult[service] = Math.round((day[service].passed / day[service].total) * 100);
-    });
+    }
     return dayResult;
   });
 
@@ -487,44 +515,66 @@ fastify.post('/services-stats', async (request, reply) => {
   `;
   
   try {
+    console.time('services-stats-query');
     const { rows } = await db.query(query, [idArray, dbType]);
-    console.log('Query result:', rows);
+    console.timeEnd('services-stats-query');
+    console.log('Query result count:', rows.length);
 
     if (rows.length === 0) {
       reply.code(404).send({ error: 'No results available for the given parameters' });
       return;
     }
 
-    // Calculate daily uptime percentages
-    const dailyUptime = rows.reduce((acc, row) => {
+    console.time('services-stats-processing');
+    
+    // Process daily uptime and categorized results in single pass
+    const dailyUptime = {};
+    const categorizedResults = {};
+    const dateSet = new Set();
+    
+    for (const row of rows) {
       const date = new Date(row.test_timestamp).toISOString().split('T')[0];
-      if (!acc[date]) {
-        acc[date] = {};
+      dateSet.add(date);
+      
+      // Build daily uptime stats
+      if (!dailyUptime[date]) {
+        dailyUptime[date] = {};
       }
-      if (!acc[date][row.test_type]) {
-        acc[date][row.test_type] = { total: 0, success: 0 };
+      if (!dailyUptime[date][row.test_type]) {
+        dailyUptime[date][row.test_type] = { total: 0, success: 0 };
       }
-      acc[date][row.test_type].total++;
+      dailyUptime[date][row.test_type].total++;
       if (row.is_successful) {
-        acc[date][row.test_type].success++;
+        dailyUptime[date][row.test_type].success++;
       }
-      return acc;
-    }, {});
+      
+      // Build categorized results
+      const endpoint = row.ssl_endpoint || row.p2p_endpoint || 'unknown';
+      if (!categorizedResults[endpoint]) {
+        categorizedResults[endpoint] = {};
+      }
+      if (!categorizedResults[endpoint][row.test_type]) {
+        categorizedResults[endpoint][row.test_type] = [];
+      }
+      categorizedResults[endpoint][row.test_type].push(row);
+    }
 
+    // Fill in missing dates
+    const dates = Array.from(dateSet).sort();
+    if (dates.length > 0) {
+      const startDate = new Date(dates[0]);
+      const endDate = new Date(dates[dates.length - 1]);
+      console.log('Date range:', startDate, 'to', endDate);
 
-    // Ensure all dates in the range are included
-    const dates = [...new Set(rows.map(row => new Date(row.test_timestamp).toISOString().split('T')[0]))].sort();
-    const startDate = new Date(dates[0]);
-    const endDate = new Date(dates[dates.length - 1]);
-    console.log('Date range:', startDate, 'to', endDate);
-
-    for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-      const dateStr = d.toISOString().split('T')[0];
-      if (!dailyUptime[dateStr]) {
-        dailyUptime[dateStr] = {};
+      for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        const dateStr = d.toISOString().split('T')[0];
+        if (!dailyUptime[dateStr]) {
+          dailyUptime[dateStr] = {};
+        }
       }
     }
 
+    // Calculate uptime percentages
     const uptimePercentages = Object.entries(dailyUptime).map(([date, types]) => {
       const percentages = {};
       for (const [testType, counts] of Object.entries(types)) {
@@ -533,20 +583,7 @@ fastify.post('/services-stats', async (request, reply) => {
       return { date, percentages };
     });
 
-    // Categorize results by endpoint and test_type
-    const categorizedResults = rows.reduce((acc, row) => {
-      const endpoint = row.ssl_endpoint || row.p2p_endpoint || 'unknown';
-      if (!acc[endpoint]) {
-        acc[endpoint] = {};
-      }
-      
-      if (!acc[endpoint][row.test_type]) {
-        acc[endpoint][row.test_type] = [];
-      }
-      
-      acc[endpoint][row.test_type].push(row);
-      return acc;
-    }, {});
+    console.timeEnd('services-stats-processing');
 
     return { 
       [type]: {
