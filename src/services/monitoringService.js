@@ -133,12 +133,14 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
   const validationData = await getValidationData(chain, options);
 
   const db = getDatabase();
-  let query = "SELECT id, chain, json_url, name FROM producers WHERE chain = $1 AND disabled = false";
+  let query = "SELECT id, chain, json_url, name FROM producers WHERE chain = $1";
   let params = [chain];
 
   if (producerName) {
     query += " AND name = $2";
     params.push(producerName);
+  } else {
+    query += " AND disabled = false";
   }
 
   const { rows } = await db.query(query, params);
@@ -185,7 +187,7 @@ const runAllTests = async (chain, producerName = null, options = {}) => {
 // StartMonitoring
 // To skip cpu and pricefeed tests, use options: { skipCpu: true } 
 // To validate a single producer set prodcuerName = 'producername'
-export const startMonitoring = async (options = { skipCpu: false }, producerName = null  ) => {
+export const startMonitoring = async (options = { skipCpu: true }, producerName = 'waxmadrid111' ) => {
   const updateAllProducers = async () => {
     await updateProducers('mainnet');
     await updateProducers('testnet');
