@@ -256,6 +256,20 @@ export const saveTestResult = async (
   producerServiceId  // This parameter name is correct
 ) => {
   const db = getDatabase();
+  // Ensure boolean is passed correctly to Postgres (avoid "" -> boolean cast error)
+  const normalizeBoolean = (value) => {
+    if (typeof value === 'boolean') return value;
+    if (value === null || value === undefined) return false;
+    if (typeof value === 'number') return value !== 0;
+    if (typeof value === 'string') {
+      const v = value.trim().toLowerCase();
+      if (v === '' || v === 'false' || v === '0' || v === 'no' || v === 'n') return false;
+      if (v === 'true' || v === '1' || v === 'yes' || v === 'y') return true;
+      return false;
+    }
+    return Boolean(value);
+  };
+  const isSuccessfulBool = normalizeBoolean(isSuccessful);
   const query = `
     INSERT INTO validate_services (
       producer_id,
@@ -278,10 +292,10 @@ export const saveTestResult = async (
   `;
   await db.query(query, [
     producerId,
-    producerServiceId,  
+    producerServiceId ?? null,  
     chain,
     testType,
-    isSuccessful,
+    isSuccessfulBool,
     urlCalled,
     responseTime,
     statusCode,

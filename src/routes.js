@@ -133,6 +133,7 @@ fastify.get('/cpu/:producerId', async (request, reply) => {
       AND chain = $2
       AND timestamp BETWEEN $3::timestamp AND $4::timestamp
     ORDER BY timestamp ASC
+    LIMIT 1000
   `;
 
   const { rows } = await db.query(query, [producerId, chain, start_date, end_date]);
@@ -172,7 +173,7 @@ fastify.get('/latest-results', async (request, reply) => {
   if (producer) queryParams.push(producer);
 
   console.time('latest-results-query');
-  const { rows } = await db.query(query, queryParams);
+  const { rows } = await db.query(query, queryParams, { timeout: 30000 }); // 30 second timeout
   console.timeEnd('latest-results-query');
 
   console.time('latest-results-processing');
@@ -209,7 +210,7 @@ fastify.get('/latest-results', async (request, reply) => {
     `;
     
     console.time('validate-services-query');
-    const { rows } = await db.query(query, [resultId]);
+    const { rows } = await db.query(query, [resultId], { timeout: 30000 }); // 30 second timeout
     console.timeEnd('validate-services-query');
 
     console.time('validate-services-processing');
@@ -254,17 +255,18 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
       p.name AS producer_name
     FROM validate_results vr
     JOIN producers p ON vr.producer_id = p.id
-    WHERE vr.timestamp BETWEEN $1::timestamp AND $2::timestamp
-      AND vr.chain = $3
+    WHERE vr.chain = $3
+      AND vr.timestamp BETWEEN $1::timestamp AND $2::timestamp
       ${producerId ? 'AND vr.producer_id = $4' : ''}
     ORDER BY vr.producer_id, vr.timestamp DESC
+    LIMIT 10000
   `;
   
   const queryParams = [start_date, end_date, chain];
   if (producerId) queryParams.push(producerId);
 
   console.time('db-query');
-  const { rows } = await db.query(query, queryParams);
+  const { rows } = await db.query(query, queryParams, { timeout: 30000 }); // 30 second timeout
   console.timeEnd('db-query');
   
   if (rows.length === 0) {
@@ -361,6 +363,7 @@ fastify.get('/producer-stats/:producerId', async (request, reply) => {
       AND vr.timestamp >= $3::timestamp
       AND vr.timestamp < ($4::timestamp + INTERVAL '1 day')
     ORDER BY vr.timestamp
+    LIMIT 1000
   `;
 
   const { rows } = await db.query(query, [producerId, chain, start_date, end_date]);
@@ -516,7 +519,7 @@ fastify.post('/services-stats', async (request, reply) => {
   
   try {
     console.time('services-stats-query');
-    const { rows } = await db.query(query, [idArray, dbType]);
+    const { rows } = await db.query(query, [idArray, dbType], { timeout: 30000 }); // 30 second timeout
     console.timeEnd('services-stats-query');
     console.log('Query result count:', rows.length);
 
@@ -703,6 +706,47 @@ fastify.get('/nodes/:nodeType', async (request, reply) => {
     });
   }
 });
+
+  // Maintenance route to clean up old data
+  fastify.post('/maintenance/cleanup', async (request, reply) => {
+    const { days = 30 } = request.body;
+    const db = getDatabase();
+    
+    try {
+      // Delete old validate_results (keep last 30 days by default)
+      const deleteResultsQuery = `
+        DELETE FROM validate_results 
+        WHERE timestamp < NOW() - INTERVAL '${days} days'
+      `;
+      
+      // Delete old validate_services
+      const deleteServicesQuery = `
+        DELETE FROM validate_services 
+        WHERE timestamp < NOW() - INTERVAL '${days} days'
+      `;
+      
+      console.time('cleanup-validate-results');
+      const result1 = await db.query(deleteResultsQuery, [], { timeout: 60000 });
+      console.timeEnd('cleanup-validate-results');
+      
+      console.time('cleanup-validate-services');
+      const result2 = await db.query(deleteServicesQuery, [], { timeout: 60000 });
+      console.timeEnd('cleanup-validate-services');
+      
+      // Vacuum to reclaim space
+      await db.query('VACUUM ANALYZE', [], { timeout: 300000 });
+      
+      return {
+        success: true,
+        deletedResults: result1.rowCount,
+        deletedServices: result2.rowCount,
+        message: `Cleaned up data older than ${days} days`
+      };
+    } catch (error) {
+      console.error('Cleanup error:', error);
+      reply.code(500).send({ error: error.message });
+    }
+  });
 
 };
 

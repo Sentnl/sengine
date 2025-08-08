@@ -6,7 +6,13 @@ const { Pool } = pg;
 let pool;
 
 export const setupDatabase = async () => {
-  pool = new Pool(config.database);
+  pool = new Pool({
+    ...config.database,
+    max: 20, // Maximum number of clients in the pool
+    idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
+    connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
+    maxUses: 7500, // Close (and replace) a connection after it has been used 7500 times
+  });
 
   // Create tables if they don't exist
   await pool.query(`
@@ -125,6 +131,11 @@ export const setupDatabase = async () => {
       
       -- Indexes for /validate-producer/:producerId route
       CREATE INDEX IF NOT EXISTS idx_validate_results_chain_timestamp_producer ON validate_results(chain, timestamp, producer_id);
+      
+      -- Additional indexes for better query performance
+      CREATE INDEX IF NOT EXISTS idx_validate_results_chain_timestamp ON validate_results(chain, timestamp);
+      CREATE INDEX IF NOT EXISTS idx_validate_results_timestamp_chain ON validate_results(timestamp, chain);
+      CREATE INDEX IF NOT EXISTS idx_validate_results_producer_id_timestamp ON validate_results(producer_id, timestamp DESC);
       
       -- Indexes for /producer-stats/:producerId route
       CREATE INDEX IF NOT EXISTS idx_validate_results_producer_chain_timestamp ON validate_results(producer_id, chain, timestamp);
