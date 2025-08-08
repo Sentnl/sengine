@@ -6,13 +6,22 @@ const { Pool } = pg;
 let pool;
 
 export const setupDatabase = async () => {
-  pool = new Pool({
-    ...config.database,
-    max: 20, // Maximum number of clients in the pool
-    idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-    connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
-    maxUses: 7500, // Close (and replace) a connection after it has been used 7500 times
-  });
+  try {
+    pool = new Pool({
+      ...config.database,
+      max: 20, // Maximum number of clients in the pool
+      idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
+      connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
+      maxUses: 7500, // Close (and replace) a connection after it has been used 7500 times
+    });
+
+    // Test the connection
+    await pool.query('SELECT NOW()');
+    console.log('Database connection established successfully');
+  } catch (error) {
+    console.error('Failed to connect to database:', error);
+    throw error;
+  }
 
   // Create tables if they don't exist
   await pool.query(`
