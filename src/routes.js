@@ -173,7 +173,7 @@ fastify.get('/latest-results', async (request, reply) => {
   if (producer) queryParams.push(producer);
 
   console.time('latest-results-query');
-  const { rows } = await db.query(query, queryParams, { timeout: 30000 }); // 30 second timeout
+  const { rows } = await db.query(query, queryParams);
   console.timeEnd('latest-results-query');
 
   console.time('latest-results-processing');
@@ -210,7 +210,7 @@ fastify.get('/latest-results', async (request, reply) => {
     `;
     
     console.time('validate-services-query');
-    const { rows } = await db.query(query, [resultId], { timeout: 30000 }); // 30 second timeout
+    const { rows } = await db.query(query, [resultId]);
     console.timeEnd('validate-services-query');
 
     console.time('validate-services-processing');
@@ -266,7 +266,7 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
   if (producerId) queryParams.push(producerId);
 
   console.time('db-query');
-  const { rows } = await db.query(query, queryParams, { timeout: 30000 }); // 30 second timeout
+  const { rows } = await db.query(query, queryParams);
   console.timeEnd('db-query');
   
   if (rows.length === 0) {
@@ -519,7 +519,7 @@ fastify.post('/services-stats', async (request, reply) => {
   
   try {
     console.time('services-stats-query');
-    const { rows } = await db.query(query, [idArray, dbType], { timeout: 30000 }); // 30 second timeout
+    const { rows } = await db.query(query, [idArray, dbType]);
     console.timeEnd('services-stats-query');
     console.log('Query result count:', rows.length);
 
@@ -726,15 +726,15 @@ fastify.get('/nodes/:nodeType', async (request, reply) => {
       `;
       
       console.time('cleanup-validate-results');
-      const result1 = await db.query(deleteResultsQuery, [], { timeout: 60000 });
+      const result1 = await db.query(deleteResultsQuery, []);
       console.timeEnd('cleanup-validate-results');
       
       console.time('cleanup-validate-services');
-      const result2 = await db.query(deleteServicesQuery, [], { timeout: 60000 });
+      const result2 = await db.query(deleteServicesQuery, []);
       console.timeEnd('cleanup-validate-services');
       
       // Vacuum to reclaim space
-      await db.query('VACUUM ANALYZE', [], { timeout: 300000 });
+      await db.query('VACUUM ANALYZE', []);
       
       return {
         success: true,
