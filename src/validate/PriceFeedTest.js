@@ -60,7 +60,7 @@ const testPriceFeedProvided = async (producerId, chain, priceFeedData, validateR
       if (!producerEntry) {
         return [false, "Producer is not publishing a pricefeed."];
       }
-      if (producerEntry.quoteCount < 5) {
+      if (producerEntry.quoteCount < 3) {
         return [false, `Producer is only publishing ${producerEntry.quoteCount} pairs.`];
       }
       return [true, null];
