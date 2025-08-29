@@ -7,6 +7,7 @@ import { getDatabase } from '../models/db.js';
 import { Logger } from '../helpers/Logger.js';
 import { httpRequest } from '../helpers/performanceHelper.js';
 import { ignoredUrls } from '../config/ignoredUrls.js';
+import ky from 'ky';
 
 
 const isAbsoluteUrl = (url) => /^https?:\/\//i.test(url);
@@ -17,6 +18,39 @@ const formatCountdown = (milliseconds) => {
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+};
+
+// Function to get retired guilds from on-chain table
+const getRetiredGuilds = async (chain) => {
+  try {
+    // Use Hyperion API to get the guilds table
+    const hyperionUrl = chain === 'mainnet' 
+      ? 'https://wax.greymass.com' 
+      : 'https://waxtest.greymass.com';
+    
+    const response = await ky.get(`${hyperionUrl}/v2/state/get_table_rows`, {
+      searchParams: {
+        code: 'guilds.oig',
+        scope: 'guilds.oig',
+        table: 'guilds',
+        limit: 200,
+        json: true
+      },
+      timeout: 10000
+    }).json();
+    
+    if (response.rows) {
+      // Filter for retired guilds (retired = 1)
+      return response.rows
+        .filter(guild => guild.retired === 1)
+        .map(guild => guild.producer);
+    }
+    
+    return [];
+  } catch (error) {
+    console.warn(`Failed to fetch retired guilds from on-chain table for ${chain}:`, error.message);
+    return []; // Return empty array if we can't connect, don't disable any guilds
+  }
 };
 
 // Updating producers and services
@@ -48,15 +82,24 @@ const updateProducers = async (chain) => {
   // Create a set of active producers from the chain
   const activeProducers = new Set(producers.map(p => p.owner));
   
-  // Disable producers not found in the chain or with ignored domains
-  for (const [domain, producers] of currentProducerMap) {
-    const hasActiveProducer = producers.some(p => activeProducers.has(p.name));
-    const isIgnoredDomain = ignoredUrls.includes(domain);
+  // Get retired guilds from on-chain table
+  const retiredGuilds = await getRetiredGuilds(chain);
+  console.log(`Found ${retiredGuilds.length} retired guilds on-chain for ${chain}`);
+  
+  // Disable producers with ignored domains or retired on-chain
+  for (const producer of currentProducers) {
+    const isIgnoredDomain = producer.website && ignoredUrls.includes(new URL(producer.website).hostname);
+    const isRetiredOnChain = retiredGuilds.includes(producer.name);
     
-    if (!hasActiveProducer || isIgnoredDomain) {
-      console.log(`Disabling all producers with domain ${domain} as ${isIgnoredDomain ? 'domain is ignored' : 'none are found in the chain'}`);
-      const producerIds = producers.map(p => p.id);
-      await db.query('UPDATE producers SET disabled = true WHERE id = ANY($1)', [producerIds]);
+    if (isIgnoredDomain) {
+      console.log(`Disabling producer ${producer.name} as domain is in ignored URLs list`);
+      await db.query('UPDATE producers SET disabled = true WHERE id = $1', [producer.id]);
+    } else if (isRetiredOnChain) {
+      console.log(`Disabling producer ${producer.name} as it is retired on-chain`);
+      await db.query('UPDATE producers SET disabled = true WHERE id = $1', [producer.id]);
+    } else {
+      // Re-enable producers that are not in ignored URLs and not retired
+      await db.query('UPDATE producers SET disabled = false WHERE id = $1', [producer.id]);
     }
   }
 
