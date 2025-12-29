@@ -84,6 +84,7 @@ export const setupDatabase = async () => {
       request_type VARCHAR(10),
       payload TEXT,
       version VARCHAR(20),
+      server_full_version_string TEXT,
       validate_result_id INTEGER REFERENCES validate_results(id)
     );
 

@@ -252,6 +252,7 @@ export const saveTestResult = async (
   requestType,
   payload,
   version = null,
+  serverFullVersionString = null,
   validateResultId,
   producerServiceId  // This parameter name is correct
 ) => {
@@ -272,9 +273,10 @@ export const saveTestResult = async (
       request_type,
       payload,
       version,
+      server_full_version_string,
       validate_result_id
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
   `;
   await db.query(query, [
     producerId,
@@ -291,6 +293,7 @@ export const saveTestResult = async (
     requestType,
     payload,
     version,
+    serverFullVersionString,
     validateResultId
   ]);
 };
@@ -310,6 +313,7 @@ export const saveTestResultWrapper = async (
   requestType = 'GET', // Default to GET
   payload = null,      // Default to null
   version = null,       // Added version parameter with default null
+  serverFullVersionString = null, // Added server_full_version_string parameter
   validateResultId,
   producerServiceId  // Add this new parameter
 ) => {
@@ -328,6 +332,7 @@ export const saveTestResultWrapper = async (
     requestType,
     payload,
     version, // Pass version
+    serverFullVersionString, // Pass server_full_version_string
     validateResultId,
     producerServiceId  // Pass the new parameter
   );

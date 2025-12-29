@@ -69,6 +69,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       existingResult: response,
       existingResponseTime: responseTime,
       version: response.body.server_version_string,
+      serverFullVersionString: response.body.server_full_version_string,
       successCondition: (result) => 
         result.status === 200 && 
         typeof result.body === 'object' && 

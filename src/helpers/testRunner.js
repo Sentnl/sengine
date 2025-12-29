@@ -22,6 +22,7 @@ export async function runTest({
   expectedStatusCode = 200,
   saveErrorMessageOnSuccess = false,
   version = null,
+  serverFullVersionString = null,
   validateResultId,
   producerServiceId
 }) {
@@ -79,6 +80,7 @@ export async function runTest({
       method,
       payload ? JSON.stringify(payload) : null,
       version,
+      serverFullVersionString,
       validateResultId,
       producerServiceId
     );
@@ -102,6 +104,7 @@ export async function runTest({
       method,
       payload ? JSON.stringify(payload) : null,
       version,
+      null,
       validateResultId,
       producerServiceId
     );
@@ -126,6 +129,7 @@ export async function saveMultipleFailedResults({
   method,
   payload = null,
   version = null,
+  serverFullVersionString = null,
   validateResultId,
   producerServiceId
 }) {
@@ -148,6 +152,7 @@ export async function saveMultipleFailedResults({
       method,
       payload ? JSON.stringify(payload) : null,
       version,
+      serverFullVersionString,
       validateResultId,
       producerServiceId
     );
