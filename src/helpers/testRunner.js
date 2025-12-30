@@ -129,7 +129,7 @@ export async function saveMultipleFailedResults({
   method,
   payload = null,
   version = null,
-  serverFullVersionString = null,
+  serverFullVersionString = "unknown",
   validateResultId,
   producerServiceId
 }) {
