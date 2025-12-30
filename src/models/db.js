@@ -64,6 +64,7 @@ export const setupDatabase = async () => {
       ipfs_ok BOOLEAN DEFAULT FALSE,
       cpu INTEGER,
       chain VARCHAR(50) NOT NULL,
+      server_full_version_string TEXT,
       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -84,7 +85,6 @@ export const setupDatabase = async () => {
       request_type VARCHAR(10),
       payload TEXT,
       version VARCHAR(20),
-      server_full_version_string TEXT,
       validate_result_id INTEGER REFERENCES validate_results(id)
     );
 

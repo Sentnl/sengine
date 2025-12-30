@@ -18,6 +18,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
   const importantTests = [];
   let totalTests = 0;
   let passedTests = 0;
+  let serverFullVersionString = null;
 
 
   // TLS security test
@@ -57,6 +58,11 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       }))
     );
 
+    // Extract server_full_version_string from the response
+    if (response.body && response.body.server_full_version_string) {
+      serverFullVersionString = response.body.server_full_version_string;
+    }
+
     // HTTP check
     const httpResult = await runTest({
       producerId,
@@ -69,7 +75,6 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
       existingResult: response,
       existingResponseTime: responseTime,
       version: response.body.server_version_string,
-      serverFullVersionString: response.body.server_full_version_string,
       successCondition: (result) => 
         result.status === 200 && 
         typeof result.body === 'object' && 
@@ -329,7 +334,7 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
 
   const testsPassed = evaluateTestResults(passedTests, totalTests, importantTests);
   console.log(`${nodeType} Tests: ${passedTests}/${totalTests}`);
-  return testsPassed;
+  return { testsPassed, serverFullVersionString };
 
 };
 
@@ -341,23 +346,30 @@ export const runAllApiTests = async (producerId, chain, validationData, validate
 
   if (Endpoints.length === 0) {
     Logger.log(`No ${nodeType} nodes found for this producer', 'Passed`);
-    return [runningApiNodes, false];
+    return [runningApiNodes, false, null];
   }
   
   runningApiNodes = true;
   let anyTestPassed = false;
+  let serverFullVersionString = null;
+  
   for (let { producerServiceId, endpoint } of Endpoints) {
     // Remove trailing slash if present
     endpoint = endpoint.replace(/\/$/, '');
     
     Logger.log('', `${nodeType}: ${endpoint}`);
-    const endpointTestsPassed = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId);
-    console.log(`${nodeType} Endpoint test passed: ${endpointTestsPassed}`);
-    anyTestPassed = anyTestPassed || endpointTestsPassed;
+    const { testsPassed, serverFullVersionString: endpointVersion } = await runNodeTest(producerId, chain, endpoint, validationData, nodeType, validateResultId, producerServiceId);
+    console.log(`${nodeType} Endpoint test passed: ${testsPassed}`);
+    anyTestPassed = anyTestPassed || testsPassed;
+    
+    // Collect the first non-null server_full_version_string we find
+    if (!serverFullVersionString && endpointVersion) {
+      serverFullVersionString = endpointVersion;
+    }
   }
   Logger.log('', '----------------------------------------');
   console.log(`Is one endpoint working: ${anyTestPassed}`);
   Logger.log('', '----------------------------------------');
   console.log(`Running API nodes: ${runningApiNodes}, Any test passed: ${anyTestPassed}`);
-  return [runningApiNodes, anyTestPassed];
+  return [runningApiNodes, anyTestPassed, serverFullVersionString];
 };

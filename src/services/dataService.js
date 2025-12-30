@@ -118,7 +118,7 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue, chai
     return rows[0].id;
 }
   
-async function updateValidateResult(id, results) {
+async function updateValidateResult(id, results, serverFullVersionString = null) {
     const db = getDatabase();
     const query = `
       UPDATE validate_results
@@ -130,8 +130,9 @@ async function updateValidateResult(id, results) {
           p2p = $11, p2p_ok = $12,
           pricefeed = $13, pricefeed_ok = $14,
           light_api = $15, light_api_ok = $16,
-          ipfs = $17, ipfs_ok = $18
-      WHERE id = $19
+          ipfs = $17, ipfs_ok = $18,
+          server_full_version_string = $19
+      WHERE id = $20
     `;
     const values = [
       results.guild[0], results.guild[1],
@@ -143,6 +144,7 @@ async function updateValidateResult(id, results) {
       results.pricefeed[0], results.pricefeed[1],
       results.light_api[0], results.light_api[1],
       results.ipfs[0], results.ipfs[1],
+      serverFullVersionString,
       id
     ];
   

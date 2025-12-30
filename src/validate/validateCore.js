@@ -217,10 +217,13 @@ export async function validateProducer(producerId, chain, validationData) {
     ? await runPriceFeedTests(producerId, chain, validationData, validateResultId)
     : [false, false];
 
-  // Update results
+  // Extract server_full_version_string from API test results
+  const serverFullVersionString = testResults.api[2] || null;
+
+  // Update results (extract just the [running, passed] tuples for each test)
   const results = {
     guild: testResults.guild,
-    api: testResults.api,
+    api: [testResults.api[0], testResults.api[1]],
     history: testResults.history,
     hyperion: testResults.hyperion,
     atomicassets: testResults.atomicassets,
@@ -230,8 +233,8 @@ export async function validateProducer(producerId, chain, validationData) {
     ipfs: testResults.ipfs,
   };
   
-  // Update the validate_results row with the final results
-  await updateValidateResult(validateResultId, results);
+  // Update the validate_results row with the final results and server_full_version_string
+  await updateValidateResult(validateResultId, results, serverFullVersionString);
 
   return { results: testResults, timestamp, validateResultId };
 }
@@ -252,7 +255,6 @@ export const saveTestResult = async (
   requestType,
   payload,
   version = null,
-  serverFullVersionString = "unknown",
   validateResultId,
   producerServiceId  // This parameter name is correct
 ) => {
@@ -273,10 +275,9 @@ export const saveTestResult = async (
       request_type,
       payload,
       version,
-      server_full_version_string,
       validate_result_id
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
   `;
   await db.query(query, [
     producerId,
@@ -293,7 +294,6 @@ export const saveTestResult = async (
     requestType,
     payload,
     version,
-    serverFullVersionString,
     validateResultId
   ]);
 };
@@ -313,7 +313,6 @@ export const saveTestResultWrapper = async (
   requestType = 'GET', // Default to GET
   payload = null,      // Default to null
   version = null,       // Added version parameter with default null
-  serverFullVersionString = null, // Added server_full_version_string parameter
   validateResultId,
   producerServiceId  // Add this new parameter
 ) => {
@@ -332,7 +331,6 @@ export const saveTestResultWrapper = async (
     requestType,
     payload,
     version, // Pass version
-    serverFullVersionString, // Pass server_full_version_string
     validateResultId,
     producerServiceId  // Pass the new parameter
   );
