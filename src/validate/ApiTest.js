@@ -346,12 +346,12 @@ export const runAllApiTests = async (producerId, chain, validationData, validate
 
   if (Endpoints.length === 0) {
     Logger.log(`No ${nodeType} nodes found for this producer', 'Passed`);
-    return [runningApiNodes, false, null];
+    return [runningApiNodes, false, "unknown"];
   }
   
   runningApiNodes = true;
   let anyTestPassed = false;
-  let serverFullVersionString = null;
+  let serverFullVersionString = "unknown";
   
   for (let { producerServiceId, endpoint } of Endpoints) {
     // Remove trailing slash if present

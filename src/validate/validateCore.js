@@ -217,8 +217,8 @@ export async function validateProducer(producerId, chain, validationData) {
     ? await runPriceFeedTests(producerId, chain, validationData, validateResultId)
     : [false, false];
 
-  // Extract server_full_version_string from API test results
-  const serverFullVersionString = testResults.api[2] || null;
+  // Extract server_full_version_string from API test results, default to "unknown" if not found
+  const serverFullVersionString = testResults.api[2] || "unknown";
 
   // Update results (extract just the [running, passed] tuples for each test)
   const results = {

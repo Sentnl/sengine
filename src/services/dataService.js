@@ -118,7 +118,7 @@ async function saveValidateResult(producerId, results, timestamp, cpuValue, chai
     return rows[0].id;
 }
   
-async function updateValidateResult(id, results, serverFullVersionString = null) {
+async function updateValidateResult(id, results, serverFullVersionString = "unknown") {
     const db = getDatabase();
     const query = `
       UPDATE validate_results

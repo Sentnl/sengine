@@ -22,7 +22,6 @@ export async function runTest({
   expectedStatusCode = 200,
   saveErrorMessageOnSuccess = false,
   version = null,
-  serverFullVersionString = "unknown",
   validateResultId,
   producerServiceId
 }) {
