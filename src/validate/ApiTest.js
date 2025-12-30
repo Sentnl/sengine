@@ -59,8 +59,11 @@ const runNodeTest = async (producerId, chain, endpoint, validationData, nodeType
     );
 
     // Extract server_full_version_string from the response
-    if (response.body && response.body.server_full_version_string) {
+    if (response.status === 200 && response.body && response.body.server_full_version_string) {
       serverFullVersionString = response.body.server_full_version_string;
+      console.log(`Extracted server_full_version_string: ${serverFullVersionString}`);
+    } else {
+      console.log(`Failed to extract server_full_version_string. Status: ${response.status}, Body:`, response.body);
     }
 
     // HTTP check
@@ -346,12 +349,12 @@ export const runAllApiTests = async (producerId, chain, validationData, validate
 
   if (Endpoints.length === 0) {
     Logger.log(`No ${nodeType} nodes found for this producer', 'Passed`);
-    return [runningApiNodes, false, "unknown"];
+    return [runningApiNodes, false, null];
   }
   
   runningApiNodes = true;
   let anyTestPassed = false;
-  let serverFullVersionString = "unknown";
+  let serverFullVersionString = null;
   
   for (let { producerServiceId, endpoint } of Endpoints) {
     // Remove trailing slash if present
@@ -366,6 +369,11 @@ export const runAllApiTests = async (producerId, chain, validationData, validate
     if (!serverFullVersionString && endpointVersion) {
       serverFullVersionString = endpointVersion;
     }
+  }
+  
+  // Default to "unknown" if we didn't find any value
+  if (!serverFullVersionString) {
+    serverFullVersionString = "unknown";
   }
   Logger.log('', '----------------------------------------');
   console.log(`Is one endpoint working: ${anyTestPassed}`);
