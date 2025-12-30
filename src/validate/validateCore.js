@@ -252,7 +252,7 @@ export const saveTestResult = async (
   requestType,
   payload,
   version = null,
-  serverFullVersionString = null,
+  serverFullVersionString = "unknown",
   validateResultId,
   producerServiceId  // This parameter name is correct
 ) => {
