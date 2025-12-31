@@ -217,10 +217,13 @@ export async function validateProducer(producerId, chain, validationData) {
     ? await runPriceFeedTests(producerId, chain, validationData, validateResultId)
     : [false, false];
 
-  // Update results
+  // Extract server_full_version_string from API test results, default to "unknown" if not found
+  const serverFullVersionString = testResults.api[2] || "unknown";
+
+  // Update results (extract just the [running, passed] tuples for each test)
   const results = {
     guild: testResults.guild,
-    api: testResults.api,
+    api: [testResults.api[0], testResults.api[1]],
     history: testResults.history,
     hyperion: testResults.hyperion,
     atomicassets: testResults.atomicassets,
@@ -230,8 +233,8 @@ export async function validateProducer(producerId, chain, validationData) {
     ipfs: testResults.ipfs,
   };
   
-  // Update the validate_results row with the final results
-  await updateValidateResult(validateResultId, results);
+  // Update the validate_results row with the final results and server_full_version_string
+  await updateValidateResult(validateResultId, results, serverFullVersionString);
 
   return { results: testResults, timestamp, validateResultId };
 }

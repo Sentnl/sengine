@@ -323,6 +323,7 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
       start_timestamp: start_date,
       end_timestamp: end_date,
       cpu: Math.round(cpuSum / totalTests),
+      server_full_version_string: producer.rows[0]?.server_full_version_string || 'unknown',
       ...serviceStats
     };
   });

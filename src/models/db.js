@@ -79,6 +79,7 @@ export const setupDatabase = async () => {
       ipfs_ok BOOLEAN DEFAULT FALSE,
       cpu INTEGER,
       chain VARCHAR(50) NOT NULL,
+      server_full_version_string TEXT,
       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 

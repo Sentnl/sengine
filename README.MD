@@ -1,10 +1,7 @@
 ## Wax Sengine
 
 
-
-
 ### Docker compose
-
 
 `DB_USER=your_username DB_PASSWORD=your_secure_password DB_NAME=wax_sengine DB_HOST=sengine-db docker-compose up --build`
 
@@ -30,3 +27,7 @@ ADD COLUMN IF NOT EXISTS light_api_ok BOOLEAN DEFAULT FALSE;
 ALTER TABLE validate_results 
 ADD COLUMN IF NOT EXISTS ipfs BOOLEAN DEFAULT FALSE,
 ADD COLUMN IF NOT EXISTS ipfs_ok BOOLEAN DEFAULT FALSE;
+
+
+
+
