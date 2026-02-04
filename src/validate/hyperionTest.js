@@ -156,7 +156,7 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
         nodeType,
         existingResponseTime: responseTime,
         testFunction: () => Promise.resolve(),
-        successCondition: () => missingBlocks === 0,
+        successCondition: () => missingBlocks < 6,
         onErrorMessage: `Missing blocks: ${missingBlocks}`,
         validateResultId,
         producerServiceId
