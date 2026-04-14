@@ -52,6 +52,7 @@ export const TEST_TYPES = {
     },
     PRICEFEED: {
       HEALTH: 'Pricefeeds being supplied',
+      PRICE_NEAR_MEDIAN: 'Price feed values near network median',
     },
     P2P: {
       CONNECTION_POSSIBLE: 'P2P Connection was possible',
