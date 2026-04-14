@@ -60,7 +60,7 @@ export default {
     request_retry_count: 2, // Number of retries for HTTP requests
     retry_delay_ms: 1000, // Delay between retries in milliseconds
     // Max allowed gap between NodeosRPC head_block_num and ES last_indexed_block in /v2/health
-    hyperion_max_indexer_lag_blocks: 50,
+    hyperion_max_indexer_lag_blocks: 20,
   },
   p2p: {
     seedBlockCount: 10, 
