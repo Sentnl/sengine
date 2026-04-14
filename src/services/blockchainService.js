@@ -134,20 +134,20 @@ const getPriceFeedData = async (chain, nodePulse, count = 100, maxRetries = 3) =
 
       console.log(`Received ${response.actions.length} actions`);
       const guilds = response.actions;
-      const producerFinal = [];
+      const byOwner = new Map();
 
       for (const guild of guilds) {
-        if (guild.act.data.quotes && guild.act.data.quotes.length > 0) {
-          producerFinal.push({
-            owner: guild.act.data.owner,
-            quoteCount: guild.act.data.quotes.length
-          });
-        }
+        if (!guild.act?.data?.quotes || guild.act.data.quotes.length === 0) continue;
+        const owner = guild.act.data.owner;
+        if (byOwner.has(owner)) continue;
+        byOwner.set(owner, {
+          owner,
+          quoteCount: guild.act.data.quotes.length,
+          quotes: guild.act.data.quotes
+        });
       }
-      // Remove duplicates
-      const uniqueProducers = [...new Set(producerFinal)];
 
-      return uniqueProducers;
+      return [...byOwner.values()];
     } catch (error) {
       console.error(`Error in getPriceFeedData for ${chain}:`, error);
       retries++;
