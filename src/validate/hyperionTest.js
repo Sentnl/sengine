@@ -164,6 +164,45 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       totalTests++;
       if (missingBlocksResult) passedTests++;
       importantTests.push(missingBlocksResult);
+
+      const nodeosService = healthResponse.health.find((service) => service.service === 'NodeosRPC');
+      const headBlockNum = Number(nodeosService?.service_data?.head_block_num);
+      const lastIndexedBlock = Number(elasticsearchService?.service_data?.last_indexed_block);
+      const maxLag = config.validation.hyperion_max_indexer_lag_blocks ?? 50;
+
+      const indexerLagOk =
+        Number.isFinite(headBlockNum) &&
+        Number.isFinite(lastIndexedBlock) &&
+        lastIndexedBlock <= headBlockNum &&
+        headBlockNum - lastIndexedBlock <= maxLag;
+
+      const indexerLagResult = await runTest({
+        producerId,
+        chain,
+        testType: TEST_TYPES.HYPERION.INDEXER_TIP_LAG,
+        url: healthUrl,
+        method: 'GET',
+        curlCmd: healthCurl,
+        nodeType,
+        existingResponseTime: responseTime,
+        testFunction: () => Promise.resolve(),
+        successCondition: () => indexerLagOk,
+        onErrorMessage: () => {
+          if (!Number.isFinite(headBlockNum) || !Number.isFinite(lastIndexedBlock)) {
+            return `Missing head_block_num or last_indexed_block in /v2/health (head=${nodeosService?.service_data?.head_block_num}, last=${elasticsearchService?.service_data?.last_indexed_block})`;
+          }
+          if (lastIndexedBlock > headBlockNum) {
+            return `last_indexed_block (${lastIndexedBlock}) ahead of head_block_num (${headBlockNum})`;
+          }
+          const lag = headBlockNum - lastIndexedBlock;
+          return `Indexer lag ${lag} blocks (max ${maxLag}); head=${headBlockNum}, last_indexed=${lastIndexedBlock}`;
+        },
+        validateResultId,
+        producerServiceId
+      });
+      totalTests++;
+      if (indexerLagResult) passedTests++;
+      importantTests.push(indexerLagResult);
     }
   } catch (error) {
     await saveMultipleFailedResults({
