@@ -45,15 +45,38 @@ export const getNodeAndRpc = async (nodePulse) => {
   return { endpoint, rpc: new JsonRpc(endpoint, { fetch }) };
 };
 
+/** Stable public chain APIs for reference head only (not Hyperion). */
+const GREYMASS_CHAIN_API = {
+  mainnet: 'https://wax.greymass.com',
+  testnet: 'https://waxtestnet.greymass.com',
+};
+
+const getHeadBlockNumFromChainApi = async (endpoint) => {
+  const rpc = new JsonRpc(endpoint, { fetch });
+  const info = await rpc.get_info();
+  return info.head_block_num;
+};
+
 /** Fresh head for indexer-lag checks; batch validationData head can be very stale for late producers. */
 const getFreshReferenceHeadBlock = async (chain) => {
+  const greymassUrl = GREYMASS_CHAIN_API[chain];
+  if (greymassUrl) {
+    try {
+      return await getHeadBlockNumFromChainApi(greymassUrl);
+    } catch (e) {
+      console.warn(
+        `getFreshReferenceHeadBlock: Greymass (${greymassUrl}) failed for ${chain}, using NodePulse:`,
+        e.message,
+      );
+    }
+  }
   const nodePulse = chain === 'mainnet' ? mainnetNodePulse : testnetNodePulse;
   try {
     const { rpc } = await getNodeAndRpc(nodePulse);
     const info = await rpc.get_info();
     return info.head_block_num;
   } catch (e) {
-    console.error(`getFreshReferenceHeadBlock failed for ${chain}:`, e);
+    console.error(`getFreshReferenceHeadBlock: NodePulse fallback failed for ${chain}:`, e);
     return null;
   }
 };
