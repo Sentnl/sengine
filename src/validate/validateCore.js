@@ -45,6 +45,19 @@ export const getNodeAndRpc = async (nodePulse) => {
   return { endpoint, rpc: new JsonRpc(endpoint, { fetch }) };
 };
 
+/** Fresh head for indexer-lag checks; batch validationData head can be very stale for late producers. */
+const getFreshReferenceHeadBlock = async (chain) => {
+  const nodePulse = chain === 'mainnet' ? mainnetNodePulse : testnetNodePulse;
+  try {
+    const { rpc } = await getNodeAndRpc(nodePulse);
+    const info = await rpc.get_info();
+    return info.head_block_num;
+  } catch (e) {
+    console.error(`getFreshReferenceHeadBlock failed for ${chain}:`, e);
+    return null;
+  }
+};
+
 
 export const getAllTop21Producers = async (chain) => {
   const nodePulse = chain === 'mainnet' ? mainnetNodePulse : testnetNodePulse;
@@ -201,11 +214,17 @@ export async function validateProducer(producerId, chain, validationData) {
   // Create initial entry in validate_results with timestamp, producerID, CPU, and chain
   const validateResultId = await saveValidateResult(producerId, {}, timestamp, cpuValue, chain);
 
+  const refHead = await getFreshReferenceHeadBlock(chain);
+  const validationDataForHyperion =
+    refHead != null
+      ? { ...validationData, head_block_num: refHead, latestHeadBlock: refHead }
+      : validationData;
+
   const testResults = {
     guild: await runGuildTests(producerId, chain, validationData, validateResultId),
     api: await runAllApiTests(producerId, chain, validationData, validateResultId),
     history: await runAllHistoryTests(producerId, chain, validationData, validateResultId),
-    hyperion: await runAllHyperionTests(producerId, chain, validationData, validateResultId),
+    hyperion: await runAllHyperionTests(producerId, chain, validationDataForHyperion, validateResultId),
     atomicassets: await runAllAtomicTests(producerId, chain, validationData, validateResultId),
     p2p: await runAllP2PTests(producerId, chain, validationData, validateResultId),
     light_api: await runAllLightApiTests(producerId, chain, validateResultId),
