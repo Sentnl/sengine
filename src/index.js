@@ -8,7 +8,8 @@ import { startMonitoring } from './services/monitoringService.js';
 dotenv.config();
 
 const fastify = Fastify({
-  logger: true
+  logger: process.env.LOG_LEVEL ? { level: process.env.LOG_LEVEL } : true,
+  disableRequestLogging: true,
 });
 
 fastify.register(cors, {
