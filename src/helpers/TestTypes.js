@@ -12,6 +12,7 @@ export const TEST_TYPES = {
       HEALTH: 'Hyperion Health was found',
       SERVICES: 'Hyperion services are ok',
       MISSING_BLOCKS: 'No missing blocks',
+      INDEXER_TIP_LAG: 'Hyperion indexer is near chain head',
       GET_TRANSACTION: 'Get transaction test',
       GET_ACTIONS: 'Get actions test',
       GET_KEY_ACCOUNTS: 'Get key accounts test',

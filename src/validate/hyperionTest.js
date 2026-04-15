@@ -164,6 +164,59 @@ const runHyperionTest = async (producerId, chain, { endpoint, isFull }, validati
       totalTests++;
       if (missingBlocksResult) passedTests++;
       importantTests.push(missingBlocksResult);
+
+      // Indexer tip: compare ES last_indexed_block to (1) independent chain head from validationData
+      // (NodePulse RPC), not only NodeosRPC in /v2/health — if SHIP/RPC behind chain is stuck low, ES
+      // can match that stale head and still look "fine" vs network reality. (2) When health exposes
+      // NodeosRPC head, also require ES to be consistent with it.
+      const nodeosService = healthResponse.health.find((service) => service.service === 'NodeosRPC');
+      const headBlockNum = Number(nodeosService?.service_data?.head_block_num);
+      const lastIndexedBlock = Number(elasticsearchService?.service_data?.last_indexed_block);
+      const maxLag = config.validation.hyperion_max_indexer_lag_blocks ?? 50;
+      const refHead = Number(validationData?.head_block_num ?? validationData?.latestHeadBlock);
+      const headSlack = maxLag;
+
+      let indexerLagDetail = '';
+      const indexerLagOk = (() => {
+        if (!Number.isFinite(lastIndexedBlock)) {
+          indexerLagDetail = `Missing last_indexed_block in /v2/health (got ${elasticsearchService?.service_data?.last_indexed_block})`;
+          return false;
+        }
+        if (!Number.isFinite(refHead)) {
+          indexerLagDetail = 'Missing reference head from validation sweep (head_block_num / latestHeadBlock)';
+          return false;
+        }
+        if (lastIndexedBlock > refHead + headSlack || refHead - lastIndexedBlock > maxLag) {
+          indexerLagDetail = `Vs network ref head ${refHead}: lag ${refHead - lastIndexedBlock} blocks (max ${maxLag}); last_indexed=${lastIndexedBlock}`;
+          return false;
+        }
+        if (Number.isFinite(headBlockNum)) {
+          if (lastIndexedBlock > headBlockNum + headSlack || headBlockNum - lastIndexedBlock > maxLag) {
+            indexerLagDetail = `Vs NodeosRPC head ${headBlockNum} in /v2/health: lag ${headBlockNum - lastIndexedBlock} blocks (max ${maxLag}); last_indexed=${lastIndexedBlock}`;
+            return false;
+          }
+        }
+        return true;
+      })();
+
+      const indexerLagResult = await runTest({
+        producerId,
+        chain,
+        testType: TEST_TYPES.HYPERION.INDEXER_TIP_LAG,
+        url: healthUrl,
+        method: 'GET',
+        curlCmd: healthCurl,
+        nodeType,
+        existingResponseTime: responseTime,
+        testFunction: () => Promise.resolve(),
+        successCondition: () => indexerLagOk,
+        onErrorMessage: () => indexerLagDetail || 'Indexer tip lag check failed',
+        validateResultId,
+        producerServiceId
+      });
+      totalTests++;
+      if (indexerLagResult) passedTests++;
+      importantTests.push(indexerLagResult);
     }
   } catch (error) {
     await saveMultipleFailedResults({

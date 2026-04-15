@@ -78,8 +78,6 @@ fastify.get('/missing-blocks', async (req, reply) => {
 
   const baseURL = config.chains[chain].missingBlocksUrl;
   const externalURL = `${baseURL}/missing-blocks?ownerName=${encodeURIComponent(ownerName)}&startDate=${startDate}&endDate=${endDate}`;
-  
-  console.log('Calling external URL:', externalURL);
 
   try {
     const response = await ky.get(externalURL, {
@@ -172,18 +170,14 @@ fastify.get('/latest-results', async (request, reply) => {
   if (chain) queryParams.push(chain);
   if (producer) queryParams.push(producer);
 
-  console.time('latest-results-query');
   const { rows } = await db.query(query, queryParams);
-  console.timeEnd('latest-results-query');
 
-  console.time('latest-results-processing');
   // Convert the timestamp to ISO format in single pass
   const results = rows.map(row => ({
     ...row,
     timestamp: row.utc_timestamp.toISOString(),
     utc_timestamp: undefined
   }));
-  console.timeEnd('latest-results-processing');
 
   return results;
 });
@@ -208,12 +202,9 @@ fastify.get('/latest-results', async (request, reply) => {
       LEFT JOIN producer_services ps ON vs.producer_service_id = ps.id
       WHERE vr.id = $1
     `;
-    
-    console.time('validate-services-query');
-    const { rows } = await db.query(query, [resultId]);
-    console.timeEnd('validate-services-query');
 
-    console.time('validate-services-processing');
+    const { rows } = await db.query(query, [resultId]);
+
     // Categorize results by type and endpoint in single pass
     const categorizedResults = {};
     for (const row of rows) {
@@ -228,7 +219,6 @@ fastify.get('/latest-results', async (request, reply) => {
       
       categorizedResults[row.type][endpoint].push(row);
     }
-    console.timeEnd('validate-services-processing');
 
     return categorizedResults;
   });
@@ -265,16 +255,13 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
   const queryParams = [start_date, end_date, chain];
   if (producerId) queryParams.push(producerId);
 
-  console.time('db-query');
   const { rows } = await db.query(query, queryParams);
-  console.timeEnd('db-query');
-  
+
   if (rows.length === 0) {
     reply.code(404).send({ error: 'No results available for the given parameters' });
     return;
   }
   
-  console.time('processing');
   const groupedResults = rows.reduce((acc, row) => {
     if (!acc[row.producer_id]) {
       acc[row.producer_id] = {
@@ -327,7 +314,6 @@ fastify.get('/validate-producer/:producerId?', async (request, reply) => {
       ...serviceStats
     };
   });
-  console.timeEnd('processing');
 
   return producerId ? results[0] : results;
 });
@@ -458,8 +444,6 @@ fastify.post('/services-stats', async (request, reply) => {
   const db = getDatabase();
   const { ids, type } = request.body;
 
-  console.log('Received body:', { ids, type });
-
   if (!ids || !type) {
     reply.code(400).send({ error: 'ids and type are required in request body' });
     return;
@@ -468,8 +452,6 @@ fastify.post('/services-stats', async (request, reply) => {
   const idArray = Array.isArray(ids) 
     ? ids.map(id => parseInt(id, 10)).filter(id => !isNaN(id))
     : ids.split(',').map(id => parseInt(id.trim(), 10)).filter(id => !isNaN(id));
-
-  console.log('Parsed ID array:', idArray);
 
   if (idArray.length === 0) {
     reply.code(400).send({ error: 'No valid IDs provided' });
@@ -500,8 +482,6 @@ fastify.post('/services-stats', async (request, reply) => {
       dbType = type;
   }
 
-  console.log('Transformed type:', dbType);
-
   const query = `
     SELECT 
       vs.*, 
@@ -519,18 +499,13 @@ fastify.post('/services-stats', async (request, reply) => {
   `;
   
   try {
-    console.time('services-stats-query');
     const { rows } = await db.query(query, [idArray, dbType]);
-    console.timeEnd('services-stats-query');
-    console.log('Query result count:', rows.length);
 
     if (rows.length === 0) {
       reply.code(404).send({ error: 'No results available for the given parameters' });
       return;
     }
 
-    console.time('services-stats-processing');
-    
     // Process daily uptime and categorized results in single pass
     const dailyUptime = {};
     const categorizedResults = {};
@@ -568,7 +543,6 @@ fastify.post('/services-stats', async (request, reply) => {
     if (dates.length > 0) {
       const startDate = new Date(dates[0]);
       const endDate = new Date(dates[dates.length - 1]);
-      console.log('Date range:', startDate, 'to', endDate);
 
       for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
         const dateStr = d.toISOString().split('T')[0];
@@ -586,8 +560,6 @@ fastify.post('/services-stats', async (request, reply) => {
       }
       return { date, percentages };
     });
-
-    console.timeEnd('services-stats-processing');
 
     return { 
       [type]: {
@@ -725,15 +697,10 @@ fastify.get('/nodes/:nodeType', async (request, reply) => {
         DELETE FROM validate_services 
         WHERE timestamp < NOW() - INTERVAL '${days} days'
       `;
-      
-      console.time('cleanup-validate-results');
+
       const result1 = await db.query(deleteResultsQuery, []);
-      console.timeEnd('cleanup-validate-results');
-      
-      console.time('cleanup-validate-services');
       const result2 = await db.query(deleteServicesQuery, []);
-      console.timeEnd('cleanup-validate-services');
-      
+
       // Vacuum to reclaim space
       await db.query('VACUUM ANALYZE', []);
       
